@@ -166,6 +166,7 @@
 
   **$ scrapy startproject kuaidaili**
   工程目录：
+
   <img src="https://github.com/cbj0304/StudyNotes/blob/master/images/scrapy/dir.jpg" height="300" width="150" />
 
 
