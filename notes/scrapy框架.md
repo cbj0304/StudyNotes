@@ -89,7 +89,7 @@
 
 *   **框架**: scrapy组件及架构如下图：
 
-    <img src="https://github.com/cbj0304/StudyNotes/blob/master/images/scrapy/scrapy.jpg" height="500" width="450" />
+    <img src="https://github.com/cbj0304/StudyNotes/blob/master/images/scrapy/scrapy.jpg" height="400" width="450" />
 
     * spider（产出Request，处理Response）
     * Pipeline：管道，爬虫产生的item数据，做过滤和持久化。
@@ -166,7 +166,7 @@
 
   **$ scrapy startproject kuaidaili**
 工程目录：
-<img src="https://github.com/cbj0304/StudyNotes/blob/master/images/scrapy/dir.jpg" />
+<img src="https://github.com/cbj0304/StudyNotes/blob/master/images/scrapy/dir.jpg" height="400" width="200" />
 
 
 * **第二步：写item.py文件，定义要提取的结构化数据**<br>
