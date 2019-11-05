@@ -7,30 +7,30 @@
 1. 安装vscode。
 2. 创建空的工程文件夹，选中文件夹右击"Open With Code"打开。
 3. 安装vscode插件： C/C++ 和C++ Intellisense。
-   <img src="./images/vscode/c_c++_plugin.jpg" height="180" width="300" />
+   <img src="https://github.com/cbj0304/StudyNotes/raw/master/images/vscode/c_c++_plugin.jpg" height="180" width="300" />
 
 4. 创建工程目录。
-   <img src="./images/vscode/c_c++_dir.jpg" height="140" width="300" />
+   <img src="https://github.com/cbj0304/StudyNotes/raw/master/images/vscode/c_c++_dir.jpg" height="140" width="300" />
 
 5. 配置启动及调试参数： launch.json。
-   <img src="./images/vscode/c_c++_launch.jpg" height="150" width="300" />
+   <img src="https://github.com/cbj0304/StudyNotes/raw/master/images/vscode/c_c++_launch.jpg" height="150" width="300" />
 
    配置项改动点如下：
-   <img src="./images/vscode/launch_json.jpg" height="160" width="300" />
+   <img src="https://github.com/cbj0304/StudyNotes/raw/master/images/vscode/launch_json.jpg" height="160" width="300" />
 
 6. Ctrl+Shift+P打开命令面板，配置当前任务项： tasks.json。
-   <img src="./images/vscode/c_c++tasks1.jpg" height="140" width="300" />
+   <img src="https://github.com/cbj0304/StudyNotes/raw/master/images/vscode/c_c++tasks1.jpg" height="140" width="300" />
 
-   <img src="./images/vscode/c_c++tasks2.jpg" height="140" width="300" />
+   <img src="https://github.com/cbj0304/StudyNotes/raw/master/images/vscode/c_c++tasks2.jpg" height="140" width="300" />
 
    配置项改动点如下：
-   <img src="./images/vscode/tasks_json.jpg" height="180" width="300" />
+   <img src="https://github.com/cbj0304/StudyNotes/raw/master/images/vscode/tasks_json.jpg" height="180" width="300" />
 
 7. Ctrl+Shift+P打开命令面板，配置c/c++参数： c_cpp_properties.json。
-   <img src="./images/vscode/c_c++_properties.jpg" height="130" width="300" />
+   <img src="https://github.com/cbj0304/StudyNotes/raw/master/images/vscode/c_c++_properties.jpg" height="130" width="300" />
 
    配置项改动点如下：
-   <img src="./images/vscode/ccpp_properties_json.jpg" height="180" width="300" />
+   <img src="https://github.com/cbj0304/StudyNotes/raw/master/images/vscode/ccpp_properties_json.jpg" height="180" width="300" />
 
 8. 打开cpp文件，Ctrl+F5执行验证
 
@@ -58,9 +58,9 @@
 ## 配置python环境
 1. 安装vscode、python、安装python插件（在插件中搜索python选第一个即可）。
 2. 设置启动配置项launch.json（同上），配置项如下：
-   <img src="./images/vscode/python_launch_json.jpg" height="150" width="300" />
+   <img src="https://github.com/cbj0304/StudyNotes/raw/master/images/vscode/python_launch_json.jpg" height="150" width="300" />
 3. 添加用户设置。写一个python文件，当执行的时候，会提示选择python解释器'Select Python Interpreter',点击选择后，会生成一个settings.json文件，如下：
-   <img src="./images/vscode/python_settings_json.jpg" height="70" width="300" />
+   <img src="https://github.com/cbj0304/StudyNotes/raw/master/images/vscode/python_settings_json.jpg" height="70" width="300" />
 
 
 ## vscode快捷键
