@@ -43,12 +43,13 @@ printf "%5s %-10s %-8.2f\n" 1 Sarath 80.3456
 
 ## 字符串比较
 * 字符串的比较最好用双括号，不会出错
-  [[ $str1 == $str2 ]] 等价于 [[ $str1 = $str2 ]] (注意=两边的空格，没有空格就是赋值了)  
-  [[ $str1 != $str2 ]] 
-  [[ $str1 > $str2 ]] 
-  [[ $str1 < $str2 ]]
-  [[ -z $str1 ]] --字符串空返回真
-  [[ -n $str1 ]] --字符串非空返回真
+
+  [[ $str1 == $str2 ]] 等价于 [[ $str1 = $str2 ]] (注意=两边的空格，没有空格就是赋值了) <br> 
+  [[ $str1 != $str2 ]]  <br>
+  [[ $str1 > $str2 ]]  <br>
+  [[ $str1 < $str2 ]]  <br>
+  [[ -z $str1 ]] --字符串空返回真  <br>
+  [[ -n $str1 ]] --字符串非空返回真  <br>
 
 
 ## 通配符与正则  
@@ -283,7 +284,7 @@ echo "ibase=10;obase=2;1024" | bc
 
 
 # 逻辑控制
-## case
+## case...in
 
 ```shell
 :<<'
@@ -420,13 +421,12 @@ fi
 
 
 
-#　常用命令
+# 常用命令
 
 ## tee
 tee命令从stdin中读取，然后将输入数据重定向到stdout以及一个或多个文件中（-a表示追加）。  
 
 `cat a* | tee -a out.txt | cat –n`
-
 
 
 ## $? / $@ / $* / shift 
@@ -456,6 +456,7 @@ tee命令从stdin中读取，然后将输入数据重定向到stdout以及一个
 
   # 执行：sh a.sh a1 a2 a3  
   ```
+
 
 ## tput / stty  
 * 终端处理工具
@@ -487,6 +488,7 @@ tee命令从stdin中读取，然后将输入数据重定向到stdout以及一个
   done  
   ```
 
+
 ## read
 * **read**:从stdin接收输入保存到变量。
   **-p**打印提示信息 
@@ -502,6 +504,7 @@ tee命令从stdin中读取，然后将输入数据重定向到stdout以及一个
   read -t 2 info 
   read -d ':' info
   ```
+
 
 ## IFS
 * 读取CSV格式数据：
@@ -523,7 +526,6 @@ tee命令从stdin中读取，然后将输入数据重定向到stdout以及一个
 
   ```
 
-  ​
 
 ## find 
 ```shell
@@ -549,7 +551,6 @@ find . -iregex '.*(.py|.sh)$'       # 正则匹配
 
 find /home/work/ilog/as -type f -mtime +3 -exec rm -rf {} \;
 ```
-
 
 
 ## xargs
@@ -579,7 +580,6 @@ find /home/work/ilog/as -type f -mtime +3 -exec rm -rf {} \;
   find /smbMount -iname '*.docx' -print0 | xargs -0 rm -f 
   ```
 
-   
 
 * xargs把stdin的参数进行打散，每次把一个参数（-n参数也可以控制多个）传给指定的命令去执行，分批多次执行该命令，
   默认参数是放在命令末尾的，如果需要把参数放置在任意指定位置，需要用到-I {}[这个等效于-i，小写的i默认就是用{}做替换，不需指定],然后参数位置用{}占位。  
@@ -652,20 +652,20 @@ find /home/work/ilog/as -type f -mtime +3 -exec rm -rf {} \;
   [:cntrl:]	# 键盘上的控制按键(CR LF TAB DEL)
   ```
 
-  ​
 
 ## MD5 / base64
 * **MD5校验和算法**
   md5sum是一个长度为32个字符的十六进制串。  
 
-  生成MD5：md5sum a.txt > file.md5
-  根据MD5文件核验数据完整性：md5sum -c file.md5
-  递归计算校验和：find . -type f -name '*.cpp' -print0 | xargs -0 md5sum > dir.md5  
+  生成MD5：md5sum a.txt > file.md5 <br>
+  根据MD5文件核验数据完整性：md5sum -c file.md5 <br>
+  递归计算校验和：find . -type f -name '*.cpp' -print0 | xargs -0 md5sum > dir.md5
 
 * **base64加密算法**（可以无损重构原始数据）  
 
-  base64编码：echo "hello lili" | base64
+  base64编码：echo "hello lili" | base64 <br>
   base64解码：echo "aGVsbG8gbGlsaQo=" | base64 -d
+
 
 ## sort
 * sort用法：
@@ -689,7 +689,6 @@ find /home/work/ilog/as -type f -mtime +3 -exec rm -rf {} \;
   fi
   ```
 
-  ​
 
 ## uniq
 **uniq**（uniq只能作用于排序后的数据，和sort结合使用）  
@@ -707,10 +706,12 @@ find /home/work/ilog/as -type f -mtime +3 -exec rm -rf {} \;
 ## mktemp
 **mktemp**:为临时文件或目录创建唯一名字，保存在/tmp下。  
 
+    ```shell
 	filename=`mktemp`
 	dirname=`mktemp -d`
 	tmpfile=`mktemp -u`  ->生成名称，不实际创建
 	mktemp test.XXX -> 根据模板创建，X代表一个随机字符
+    ```
 
 ## split
 split分隔文件：  
@@ -757,20 +758,19 @@ split分隔文件：
    # 以上输出文件：server01.log server02.log  
    ```
 
-   ​
 
 ## expect
 * expect实现自动化登陆和操作
 
-* spawn：需要自动化运行的程序和参数。
+  * spawn：需要自动化运行的程序和参数。
 
-* expect/send: 实现交互过程。  
+  * expect/send: 实现交互过程。  
 
-* interact:执行完成后保持交互状态，把控制权交给控制台，方便手动操作，否则命令完成后即退出。  
+  * interact:执行完成后保持交互状态，把控制权交给控制台，方便手动操作，否则命令完成后即退出。  
 
-* exp_continue：附加于某个expect之后，使得该项被匹配后，还能继续匹配该expect判断语句内的其他项。  
+  * exp_continue：附加于某个expect之后，使得该项被匹配后，还能继续匹配该expect判断语句内的其他项。  
 
-* expect eof 这个一定要加，与spawn对应表示捕获终端输出信息终止。expect脚本必须以interact或expect eof结束。
+  * expect eof 这个一定要加，与spawn对应表示捕获终端输出信息终止。expect脚本必须以interact或expect eof结束。
 
   ```shell
   #!/usr/bin/expect
@@ -889,7 +889,8 @@ cat a.txt | tail -n +3        # 不打印前3行
 
 * **按行切割：**  
 
-  xargs -d参数可以实现按行切割：echo -n "a1%a2%a3" | xargs -d '%'。  
+  xargs -d参数可以实现按行切割：
+  `echo -n "a1%a2%a3" | xargs -d '%'`
   自定义IFS，然后for循环遍历。  
 
 * **按列切割：**  
@@ -899,12 +900,14 @@ cat a.txt | tail -n +3        # 不打印前3行
   -c：字符  
   -f：字段  
   -d自定义分隔符  
-  1,3 --第1列和第3列  
-  1-3,6-9 --第1到3列和第6到9列  
+    1,3 --第1列和第3列  
+    1-3,6-9 --第1到3列和第6到9列  
   操作于文件名和标准输入流  
-  cat a.txt | cut -f1,3  
-  echo "aaa%dd" | cut -d '%' -f1  
-  echo "abc321" | cut -c4-6  
+    ```shell
+    cat a.txt | cut -f1,3  
+    echo "aaa%dd" | cut -d '%' -f1  
+    echo "abc321" | cut -c4-6
+    ``` 
 
 
 ## sed
