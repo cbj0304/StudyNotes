@@ -1,5 +1,5 @@
 # 语言类
-* [c++11新特性](/cbj0304/StudyNotes/c++11新特性.md)
+* [c++11新特性](./notes/c++11新特性.md)
 * [python语言](/cbj0304/StudyNotes/python语言.md)
 * [R语言](/cbj0304/StudyNotes/R语言.md)
 * [libc函数库](/cbj0304/StudyNotes/libc函数库.md)
