@@ -706,12 +706,12 @@ find /home/work/ilog/as -type f -mtime +3 -exec rm -rf {} \;
 ## mktemp
 **mktemp**:为临时文件或目录创建唯一名字，保存在/tmp下。  
 
-    ```shell
+
 	filename=`mktemp`
 	dirname=`mktemp -d`
 	tmpfile=`mktemp -u`  ->生成名称，不实际创建
 	mktemp test.XXX -> 根据模板创建，X代表一个随机字符
-    ```
+
 
 ## split
 split分隔文件：  
