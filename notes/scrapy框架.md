@@ -13,7 +13,6 @@
 
   聚焦爬虫：面向特定需求的爬虫，只提取对自己有价值的信息。
 
-  ​
 
 ## python写爬虫程序的优势
 　　代码简洁，开发效率高，支持的模块、框架多（http请求模块，xml/html解析模块、scrapy框架等等）。
@@ -67,7 +66,6 @@
 
      500：服务器内部错误。（服务器的问题）
 
-    ​
 
 ## urllib库
 
@@ -91,7 +89,7 @@
 
 *   **框架**: scrapy组件及架构如下图：
 
-    <img src="https://github.com/cbj0304/StudyNotes/blob/master/images/scrapy/scrapy.jpg" />
+    <img src="https://github.com/cbj0304/StudyNotes/blob/master/images/scrapy/scrapy.jpg" height="500" width="450" />
 
     * spider（产出Request，处理Response）
     * Pipeline：管道，爬虫产生的item数据，做过滤和持久化。
@@ -101,11 +99,9 @@
     * Spider Middlewares（Spider中间件）：可以自定义request请求和过滤Response响应。
     * Downloader Middlewares（下载中间件）：自定义下载组件（请求任务和响应结果都会经过下载中间件）代理中间件，如cookies中间件，User-Agent中间件，selenium中间件。
 
-    ​
 
 *   **中文学习网站**
     https://scrapy-chs.readthedocs.io/zh_CN/1.0/intro/overview.html
-    ​
 
 *   **知识点**
     1. 熟悉scrapy的架构和运行流程。
@@ -114,14 +110,12 @@
        创建scrapy项目（scrapy startproject xxx）
        定义提取的结构化数据（Item类）
        编写爬取网站的spider并提取出结构化数据（xpath、正则等）
-       ​
 
 *   **robots协议**
 
     也叫爬虫协议、机器人协议，通常写在服务器的robots.txt文件中，用来限定爬虫程序可以爬取的内容范围，
     告知爬虫本网站哪些网页不希望你进行爬取收录。在Scrapy启动后，会访问网站的robots.txt 文件，然后决定该网站的爬取范围。
     如果网站不希望我们爬取我们仍要访问，就将ROBOTSTXT_OBEY设置为False，不遵守爬虫协议。
-    ​
 
 *   **Item Pipeline**
 
@@ -129,11 +123,9 @@
     * 验证item中某些字段；
     * 查重并丢弃（url请求去重在调度器里实现的，数据去重在管道实现）；
     * 爬取结果保存到文件或数据库等；
-      ​
 
 *   **xpath语法**
     参考：https://www.w3school.com.cn/xpath/xpath_syntax.asp
-    ​
 
 *   **scrapy shell**
     常用语模拟代码发送请求，调试代码。
@@ -146,7 +138,6 @@
     $ print(response.head)      # 响应头
     $ print(response.body)      # 响应体
     ```
-    ​
 
 *   **selector响应器**
      使用Selector对象提取结构化数据效果和response.xpath()这种快捷方式查询一样，基本方法有4个：
