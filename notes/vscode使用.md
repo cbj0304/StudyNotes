@@ -43,7 +43,6 @@
 8. 打开cpp文件，Ctrl+F5执行验证
 
 
-
 ## c++自动提示功能
 * c++自动提示功能需要安装插件：
 
@@ -58,11 +57,12 @@
   1. 删除该文件夹
 
   2. 在settings.json中增加配置：
+
      "C_Cpp.intelliSenseCacheSize": 0,
+
      "C_Cpp.intelliSenseEngineFallback": "Disabled"
 
      ​
-
 ## 配置python环境
 1. 安装vscode、python、安装python插件（在插件中搜索python选第一个即可）。
 2. 设置启动配置项launch.json（同上），配置项如下：
@@ -75,29 +75,29 @@
 
 ## vscode快捷键
 
-```shell
-Ctrl + Shift + P           # 打开全局命令面板
-Ctrl + P                   # 打开最近打开的文件
-Ctrl + `                   # 打开终端
+    ```shell
+    Ctrl + Shift + P           # 打开全局命令面板
+    Ctrl + P                   # 打开最近打开的文件
+    Ctrl + `                   # 打开终端
 
-选中 + tab键                  # 向右缩进4格
-选中 + shift + tab            # 向左缩进4格
+    选中 + tab键                  # 向右缩进4格
+    选中 + shift + tab            # 向左缩进4格
 
-选中 + Ctrl +　\             # 多行注释
-选中 + Ctrl + \              # 取消多行注释
+    选中 + Ctrl +　\             # 多行注释
+    选中 + Ctrl + \              # 取消多行注释
 
-Ctrl + 鼠标单击             # 跳转到函数定义处
-Ctrl + Alt + Backspace      # 回退到上一个位置：设置->键盘快捷方式，自定义快捷键
+    Ctrl + 鼠标单击             # 跳转到函数定义处
+    Ctrl + Alt + Backspace      # 回退到上一个位置：设置->键盘快捷方式，自定义快捷键
 
-```
+    ```
 
 
 
 ## 设置flake8最大字符限制
 
-* 自定义flake8语法检验时每行最大字符限制
-  1. 命令行输入 flake8 --help，查看flake8的参数设置，其中有一项是--max-line-length=n 每行最大字符数
-  2. 修改vscode的配置 setting.json，增加："python.linting.flake8Args": ["--max-line-length=248"]
+    自定义flake8语法检验时每行最大字符限制
+     1. 命令行输入 flake8 --help，查看flake8的参数设置，其中有一项是--max-line-length=n 每行最大字符数
+     2. 修改vscode的配置 setting.json，增加："python.linting.flake8Args": ["--max-line-length=248"]
 
 
 ## win7下搭建git环境
@@ -172,25 +172,25 @@ Ctrl + Alt + Backspace      # 回退到上一个位置：设置->键盘快捷方
     `git fetch origin master`
 
 ## 终端shell
-vscode可配置的终端：cmd、powershell、bash，这里我用的是powershell。
+    vscode可配置的终端：cmd、powershell、bash，这里我用的是powershell。
 
-```shell
-# powershell别名设置：
-# 查看别名：
-$ Get-Alias
-# 设置永久生效的别名：
-$ profile
-# D:\用户目录\我的文档\WindowsPowerShell\Microsoft.PowerShell_profile.ps1
+    ```shell
+    # powershell别名设置：
+    # 查看别名：
+    $ Get-Alias
+    # 设置永久生效的别名：
+    $ profile
+    # D:\用户目录\我的文档\WindowsPowerShell\Microsoft.PowerShell_profile.ps1
 
-$ vim Microsoft.PowerShell_profile.ps1
-# 编辑以下内容：ls已经是别名了，先删除再设置；设置ll别名。
-function getFileName{
-	Get-ChildItem -Name
-}
-Remove-Item alias:\ls
-Set-Alias ls getFileName
-Set-Alias ll Get-ChildItem
-```
+    $ vim Microsoft.PowerShell_profile.ps1
+    # 编辑以下内容：ls已经是别名了，先删除再设置；设置ll别名。
+    function getFileName{
+        Get-ChildItem -Name
+    }
+    Remove-Item alias:\ls
+    Set-Alias ls getFileName
+    Set-Alias ll Get-ChildItem
+    ```
 
 
 
