@@ -176,7 +176,7 @@
 
 vscode可配置的终端：cmd、powershell、bash，这里我用的是powershell。
 
-    ```shell
+```shell
     # powershell别名设置：
     # 查看别名：
     $ Get-Alias
@@ -192,7 +192,7 @@ vscode可配置的终端：cmd、powershell、bash，这里我用的是powershel
     Remove-Item alias:\ls
     Set-Alias ls getFileName
     Set-Alias ll Get-ChildItem
-    ```
+```
 
 # 其他
 
