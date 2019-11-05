@@ -110,7 +110,15 @@ Ctrl + Alt + Backspace      # 回退到上一个位置：设置->键盘快捷方
     git config --global user.email "cbj@163.com"
     说明：配置用户名和密码主要是用于记录每次提交
 
-3. **接下来就可以用git下载提交了**
+3. **接下来就可以用git进行版本控制了**
+   首次提交，进入本地代码目录：
+   ```shell
+    git init       # 建立git仓库
+    git add .      # .表示将当前目录所有文件、文件夹添加到仓库，也可以指定文件或者文件夹
+    git commit -m "first commit"       # 提交
+    git remote add origin https://github.com/cbj0304/StudyNotes.git  # 将本地仓库关联到github上
+    git push -u origin master    # 上传代码
+    ```
 
 ### 2.常用Git命令
 
