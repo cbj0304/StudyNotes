@@ -2,12 +2,12 @@
 
 # vscode使用相关
 
-
 ## 配置c/c++环境
+
 1. 安装vscode。
 2. 创建空的工程文件夹，选中文件夹右击"Open With Code"打开。
 3. 安装vscode插件： C/C++ 和C++ Intellisense。
-   
+
    <img src="../images/vscode/c_c++_plugin.jpg" height="180" width="300" />
 
 4. 创建工程目录。
@@ -42,8 +42,8 @@
 
 8. 打开cpp文件，Ctrl+F5执行验证
 
-
 ## c++自动提示功能
+
 * c++自动提示功能需要安装插件：
 
   C/C++ 和C++ Intellisense
@@ -62,16 +62,16 @@
 
      "C_Cpp.intelliSenseEngineFallback": "Disabled"
 
-     ​
 ## 配置python环境
+
 1. 安装vscode、python、安装python插件（在插件中搜索python选第一个即可）。
 2. 设置启动配置项launch.json（同上），配置项如下：
 
    <img src="../images/vscode/python_launch_json.jpg" height="150" width="300" />
+
 3. 添加用户设置。写一个python文件，当执行的时候，会提示选择python解释器'Select Python Interpreter',点击选择后，会生成一个settings.json文件，如下：
 
    <img src="../images/vscode/python_settings_json.jpg" height="70" width="300" />
-
 
 ## vscode快捷键
 
@@ -91,16 +91,14 @@
 
     ```
 
-
-
 ## 设置flake8最大字符限制
 
     自定义flake8语法检验时每行最大字符限制
      1. 命令行输入 flake8 --help，查看flake8的参数设置，其中有一项是--max-line-length=n 每行最大字符数
      2. 修改vscode的配置 setting.json，增加："python.linting.flake8Args": ["--max-line-length=248"]
 
-
 ## win7下搭建git环境
+
 前提：本地已安装git客户端。
 
 ### 1.信任关系、全局配置
@@ -116,6 +114,7 @@
 2. **配置全局的name和email**
 
     打开vscode终端，输入如下命令：
+
     ```shell
     git config --help
     git config --global user.name "cbj"
@@ -125,6 +124,7 @@
 
 3. **接下来就可以用git进行版本控制了**
    首次提交，进入本地代码目录：
+
    ```shell
     git init       # 建立git仓库
     git add .      # 本地文件添加到仓库
@@ -172,6 +172,7 @@
     `git fetch origin master`
 
 ## 终端shell
+
     vscode可配置的终端：cmd、powershell、bash，这里我用的是powershell。
 
     ```shell
@@ -192,8 +193,6 @@
     Set-Alias ll Get-ChildItem
     ```
 
-
-
 # 其他
-* 代码路径中有中文时，经常编译不过，这时候需要把代码放到没有中文的路径中。
 
+* 代码路径中有中文时，经常编译不过，这时候需要把代码放到没有中文的路径中。
