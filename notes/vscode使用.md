@@ -14,7 +14,7 @@
 
    <img src="../images/vscode/c_c++_dir.jpg" height="140" width="300" />
 
-5. 配置启动及调试参数： launch.json。
+5. 配置启动参数： launch.json。
 
    <img src="../images/vscode/c_c++_launch.jpg" height="150" width="300" />
 
@@ -40,7 +40,7 @@
 
    <img src="../images/vscode/ccpp_properties_json.jpg" height="180" width="300" />
 
-8. 打开cpp文件，Ctrl+F5执行验证
+8. 编辑并打开.cpp文件，Ctrl+F5执行验证。
 
 ## c++自动提示功能
 
@@ -48,7 +48,7 @@
 
   C/C++ 和C++ Intellisense
 
-* 遇到的问题：但是安装C++ Intellisense进行函数跳转，会导致c盘空间暴涨
+* 问题：安装C++ Intellisense执行若干次函数跳转，会导致c盘空间暴涨
 
   C:\Users\Administrator\AppData\Local\Microsoft\vscode-cpptools\ipch占很大空间，
 
@@ -64,18 +64,18 @@
 
 ## 配置python环境
 
-1. 安装vscode、python、安装python插件（在插件中搜索python选第一个即可）。
-2. 设置启动配置项launch.json（同上），配置项如下：
+1. 安装vscode、python、python插件（在插件列表中搜索python选第一个安装）。
+2. 设置启动配置项launch.json（同上），参照下图修改：
 
    <img src="../images/vscode/python_launch_json.jpg" height="150" width="300" />
 
-3. 添加用户设置。写一个python文件，当执行的时候，会提示选择python解释器'Select Python Interpreter',点击选择后，会生成一个settings.json文件，如下：
+3. 添加用户设置。写一个python文件，当执行的时候，会提示选择python解释器'Select Python Interpreter',点击选择后，会生成一个settings.json文件，参照下图修改：
 
    <img src="../images/vscode/python_settings_json.jpg" height="70" width="300" />
 
 ## vscode快捷键
 
-    ```shell
+```shell
     Ctrl + Shift + P           # 打开全局命令面板
     Ctrl + P                   # 打开最近打开的文件
     Ctrl + `                   # 打开终端
@@ -88,14 +88,14 @@
 
     Ctrl + 鼠标单击             # 跳转到函数定义处
     Ctrl + Alt + Backspace      # 回退到上一个位置：设置->键盘快捷方式，自定义快捷键
-
-    ```
+```
 
 ## 设置flake8最大字符限制
 
-    自定义flake8语法检验时每行最大字符限制
+* 自定义flake8语法检验时每行最大字符限制
      1. 命令行输入 flake8 --help，查看flake8的参数设置，其中有一项是--max-line-length=n 每行最大字符数
-     2. 修改vscode的配置 setting.json，增加："python.linting.flake8Args": ["--max-line-length=248"]
+     2. 修改vscode的配置 setting.json，增加：
+        "python.linting.flake8Args": ["--max-line-length=248"]
 
 ## win7下搭建git环境
 
@@ -123,15 +123,16 @@
     ```
 
 3. **接下来就可以用git进行版本控制了**
-   首次提交，进入本地代码目录：
 
-   ```shell
+    首次提交，进入本地代码目录：
+
+```shell
     git init       # 建立git仓库
     git add .      # 本地文件添加到仓库
     git commit -m "first commit"       # 提交到本地仓库
     git remote add origin https://github.com/cbj0304/StudyNotes.git  # 将本地仓库关联到github上
     git push -u origin master    # 上传到远端仓库
-    ```
+```
 
 ### 2.常用Git命令
 
@@ -175,7 +176,7 @@
 
     vscode可配置的终端：cmd、powershell、bash，这里我用的是powershell。
 
-    ```shell
+```shell
     # powershell别名设置：
     # 查看别名：
     $ Get-Alias
@@ -191,7 +192,7 @@
     Remove-Item alias:\ls
     Set-Alias ls getFileName
     Set-Alias ll Get-ChildItem
-    ```
+```
 
 # 其他
 
