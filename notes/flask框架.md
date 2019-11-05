@@ -8,36 +8,31 @@
 
 ## flask简介
 
-* flask是一个轻量级的web开发框架。自带的核心功能：路由模块、模板引擎。其他功能如邮件扩展、用户认证、数据库操作等都需要第三方扩展来实现。
+* flask是一个轻量级的web开发框架。自带的核心功能：路由模块、模板引擎。其他功能如邮件扩展、用户认证、数据库操作等都需要第三方扩展来实现。  
 * flask中文文档：<https://dormousehole.readthedocs.io/en/latest/>
 * 推荐测试工具：安装软件postman，模拟收发http请求。
 
 ## 配置python+flask开发环境
 
 * 安装虚拟环境
-  虚拟环境主要是为了避免包的混乱和版本的冲突， 它是Python解释器的一个私有的副本，在这个环境中你可以安装私有包（pip安装包都会装到该python副本的lib>site-packages中，查看所有包依赖可以用pip freeze命令），而且不会影响系统中安装的全局或者其他的Python解释器。使用虚拟环境还有个好处是不需要管理员权限。
-
+  虚拟环境主要是为了避免包的混乱和版本的冲突， 它是Python解释器的一个私有的副本，在这个环境中你可以安装私有包（pip安装包都会装到该python副本的lib>site-packages中，查看所有包依赖可以用pip freeze命令），而且不会影响系统中安装的全局或者其他的Python解释器。使用虚拟环境还有个好处是不需要管理员权限。  
 * 安装flask
-  pip install flask (flask安装到虚拟环境文件夹中)
-
-* 在新环境中部署依赖：
-
-  虚拟环境中依赖包及版本号生成至文件中：pip freeze > requirements.txt
-
+  pip install flask (flask安装到虚拟环境文件夹中)  
+* 在新环境中部署依赖：  
+  虚拟环境中依赖包及版本号生成至文件中：pip freeze > requirements.txt  
   按照文件中的依赖包依次下载并安装：pip install -r requirements.txt
 
 ## jinja2模板引擎
 
-* jinja2模板引擎是flask内置的模板语言，用于把一些变量数据动态传入网页模板中。
-* jinja2 语法
-
+* jinja2模板引擎是flask内置的模板语言，用于把一些变量数据动态传入网页模板中。  
+* jinja2 语法  
   * 注释
-
+  
   ```jinja2
   {# 这是一行注释 #}
   ```
 
-  * 变量代码块
+  * 变量代码块  
 
   ```jinja2
   str {{ var }}  
@@ -45,14 +40,14 @@
   dict {{my_dict }} {{ my_dict['name'] }}  {{my_dict.name}}
   ```
 
-  * 控制代码块
+  * 控制代码块  
 
   ```jinja2
   {% if flag %} ... {% endif %}
   {% for v in varlist %} ... {% endfor %}
   ```
 
-  * 内置过滤器（通过管道符后跟过滤器，可以链式操作）
+  * 内置过滤器（通过管道符后跟过滤器，可以链式操作）  
 
   ```jinja2
   1. 字符串操作
@@ -77,8 +72,8 @@
   ```
 
 * 表单
-  表单是html页面中负责数据采集的部件，通过表单把用户输入的数据提交给服务器。
-  包括三部分：标签、域、按钮，举例：
+  表单是html页面中负责数据采集的部件，通过表单把用户输入的数据提交给服务器。  
+  包括三部分：标签、域、按钮，举例：  
 
   ```html
     <form method="post">
@@ -91,22 +86,19 @@
 
 ## 其他
 
-* vscode生成html模板文件
-
-  文件->新建文件->右下角点击'纯文本',选择文件类型为html->命令提示框输入英文的i，会自动补全一个html模板页面。
-
-* B站学习视频
-
+* vscode生成html模板文件  
+  文件->新建文件->右下角点击'纯文本',选择文件类型为html->命令提示框输入英文的i，会自动补全一个html模板页面。  
+* B站学习视频  
   ​<https://www.bilibili.com/video/av19817183>
 
 # Flask实战
 
-* 简单的Falsk项目构建：
-* 目录结构：
-  * **static文件夹**：用于存放静态文件，如js,css，img等。
-  * **templates文件夹**：用于保存jinjia2模板。如果不想把模板放在视图文件同级的templates中，需要在app初始化时指定：app = Flask(__name__,template_folder="cxxoo")
-  * **视图文件**,如view.py。
-  * 其他第三方文件和依赖...
+* 简单的Falsk项目构建：  
+* 目录结构：  
+  * **static文件夹**：用于存放静态文件，如js,css，img等。  
+  * **templates文件夹**：用于保存jinjia2模板。如果不想把模板放在视图文件同级的templates中，需要在app初始化时指定：app = Flask(__name__,template_folder="cxxoo")  
+  * **视图文件**,如view.py。  
+  * 其他第三方文件和依赖...  
 
 ## 案例1：jinja2模板语言
 
@@ -205,10 +197,9 @@
 
 ## 案例2：原生form表单
 
-* 原生form表单操作：
-
-    表单是html页面中负责数据采集的部件，通过表单把用户输入的数据提交给服务器。
-    包括三部分：标签、域、按钮，举例：
+* 原生form表单操作：  
+    表单是html页面中负责数据采集的部件，通过表单把用户输入的数据提交给服务器。  
+    包括三部分：标签、域、按钮，举例：  
 
     ```html
     <form method="post">
@@ -219,16 +210,14 @@
     </form>
     ```
 
-* vscode生成html模板文件：
-
-    文件->新建文件->右下角点击'纯文本',选择文件类型为html->命令提示框输入英文的i，会自动补全一个html模板页面。
-
-* flash - 给模板传递消息
-    需要对消息内容进行加密，设置secret_key，做消息加密混淆
-    在模板里遍历获取闪现消息
-* 案例：
-    实现一个基础的表单（本例）
-    使用Flask-WTF实现表单（下例）
+* vscode生成html模板文件：  
+    文件->新建文件->右下角点击'纯文本',选择文件类型为html->命令提示框输入英文的i，会自动补全一个html模板页面。  
+* flash - 给模板传递消息  
+    需要对消息内容进行加密，设置secret_key，做消息加密混淆  
+    在模板里遍历获取闪现消息  
+* 案例：  
+    实现一个基础的表单（本例）  
+    使用Flask-WTF实现表单（下例）  
 
 * **视图文件**
 
@@ -293,13 +282,11 @@
 
 ## 案例3：Flask-WTF表单
 
-* **flask-WTF**
-
-  flask_wtf是对wtforms组件的封装，是flask框架的表单验证模块，可以很方便生成表单，也可以当做json数据交互的验证工具，支持热插拔。
-
-* **安装**
-    pip install Flask-WTF
-* **常用字段说明**
+* **flask-WTF**  
+  flask_wtf是对wtforms组件的封装，是flask框架的表单验证模块，可以很方便生成表单，也可以当做json数据交互的验证工具，支持热插拔。  
+* **安装**  
+    pip install Flask-WTF  
+* **常用字段说明**  
 
   | 字段                  | 说明                                       |
   | :------------------ | ---------------------------------------- |
@@ -348,12 +335,9 @@
   | NoneOf/none_of                           | 将传入的数据和无效的比较，是抛出异常；Noneof(values)        |
   | Anyof/any_of                             | 将传入的数据和预设的数据比较，不是异常。Anyof(values)        |
 
-* 使用WTF实现一个表单：
-
-  * 自定义表单类，使用现成的控件和验证方式
-
-  * 在模板的表单标签下添加csrf token： {{ form.csrf_token }}
-
+* 使用WTF实现一个表单：  
+  * 自定义表单类，使用现成的控件和验证方式  
+  * 在模板的表单标签下添加csrf token： {{ form.csrf_token }}  
      CSRF（Cross Site Request Forgery, 跨站域请求伪造）是一种网络的攻击方式
 
 * **视图文件**
@@ -444,14 +428,14 @@
 
 * **Flask-SQLAlchmey**
 
-  Flask-SQLAlchmey是一个操作关系型数据库的flask扩展，
-  让开发者不用直接和sql语句打交道，而是通过python对象来操作数据库。
-  Flask-SQLAlchmey中，数据库使用url指定，而且程序使用的数据库必须保存到flask配置对象的FLASKALCHEMY_DATABASE_URI键中
+  Flask-SQLAlchmey是一个操作关系型数据库的flask扩展，  
+  让开发者不用直接和sql语句打交道，而是通过python对象来操作数据库。  
+  Flask-SQLAlchmey中，数据库使用url指定，而且程序使用的数据库必须保存到flask配置对象的  FLASKALCHEMY_DATABASE_URI键中  
   ​
 
 * **安装flask扩展**
-  pip install flask-sqlalchemy
-  如果连接的是mysql数据库，还需要安装mysqldb：pip install flask-mysqldb
+  pip install flask-sqlalchemy  
+  如果连接的是mysql数据库，还需要安装mysqldb：pip install flask-mysqldb  
   ​
 * **创建数据库模型**
   sqlalchemy数据类型和python、mysql数据类型的对应关系：
@@ -472,22 +456,22 @@
   |     Enum     |        str        |     ENUM      |
   | LargeBinary  |        str        | VARBINARY查询操作 |
 * **常用查询过滤器（写条件的）**
-    filter()
-    filter_by()
-    limit
-    offset()
-    order_by()
-    group_by()
+    filter()  
+    filter_by()  
+    limit  
+    offset()  
+    order_by()  
+    group_by()  
 
 * **常用查询执行器（开始执行的）**
 
-  all()
-  first()
-  first_or_404() 返回查询的第一个结果，如未查到返回404
-  get()
-  get_or_404()  返回指定主键对应的行，如不存在返回404
-  count()
-  paginate() 返回一个paginate对象，它包含指定范围的结果
+  all()  
+  first()  
+  first_or_404() 返回查询的第一个结果，如未查到返回404  
+  get()  
+  get_or_404()  返回指定主键对应的行，如不存在返回404  
+  count()  
+  paginate() 返回一个paginate对象，它包含指定范围的结果  
 
 * **视图文件**
 
@@ -642,53 +626,39 @@
 
 ## 案例5：图书管理系统
 
-1. 配置数据库
+1. 配置数据库  
+   导入SQLAlchemy扩展  
+   创建db对象  
+   在终端创建数据库(db对象只是增删表，以及增删改查操作,需先行创建database)  
 
-   导入SQLAlchemy扩展
+2. 添加书和作者模型  
+   模型继承db.Model  
+   ​    作者模型：字段->id，name  (一)  
+   ​    书籍模型：字段->id，name，author_id   (多)  
+   表名 \_\_tablename__  
+   字段名 db.Column  
+   添加关系引用：db.relationship  
 
-   创建db对象
-
-   在终端创建数据库(db对象只是增删表，以及增删改查操作,需先行创建database)
-
-2. 添加书和作者模型
-
-   模型继承db.Model
-
-   ​    作者模型：字段->id，name  (一)
-   ​    书籍模型：字段->id，name，author_id   (多)
-
-   表名 \_\_tablename__
-
-   字段名 db.Column
-
-   添加关系引用：db.relationship
-
-3. 添加数据
-
+3. 添加数据  
    main函数中初始化数据表中的数据
 
-4. 使用模板显示数据库查询的数据
+4. 使用模板显示数据库查询的数据  
+   查询所有作者的信息，传给模板  
+   模板中两重for循环，取出作者，作者的书籍(此处用的关系引用)  
 
-   查询所有作者的信息，传给模板
+5. 使用wtf显示表单  
+   自定义表单类  
+   模板中显示  
+   secret_key / csrf_token 等问题  
 
-   模板中两重for循环，取出作者，作者的书籍(此处用的关系引用)
-
-5. 使用wtf显示表单
-
-   自定义表单类
-
-   模板中显示
-
-   secret_key / csrf_token 等问题
-
-6. 实现相关的增删的逻辑
-      验证逻辑：
-   1. 调用wtf的函数实现验证
-   2. 验证通过获取数据
-   3. 判断作者是否存在
-   4. 如果作者存在，判断书籍书否存在，没有重复书籍，则添加数据，如果重复，提示错误
-   5. 如果作者不存在，则添加作者和书籍
-   6. 验证不通过提示错误
+6. 实现相关的增删的逻辑  
+      验证逻辑：  
+   1. 调用wtf的函数实现验证  
+   2. 验证通过获取数据  
+   3. 判断作者是否存在  
+   4. 如果作者存在，判断书籍书否存在，没有重复书籍，则添加数据，如果重复，提示错误  
+   5. 如果作者不存在，则添加作者和书籍  
+   6. 验证不通过提示错误  
 
 * **视图文件**
 

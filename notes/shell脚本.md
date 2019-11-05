@@ -181,10 +181,10 @@ echo "456abcdefg" > a.txt   # 覆盖写
 ```shell
 # comm求两个已经排序的文件的交集、差集。  
 > comm A.txt B.txt  
-第一列：只在A.txt中出现的行  
-第二列：只在B.txt中出现的行  
-第三列：两文件同时出现的行，三列用\t分隔  
-两文件交集：comm A.txt B.txt -1 -2  
+第一列：只在A.txt中出现的行
+第二列：只在B.txt中出现的行
+第三列：两文件同时出现的行，三列用\t分隔
+两文件交集：comm A.txt B.txt -1 -2
 两文件互不相同的行：comm A.txt B.txt -3 | tr -d '\t'  
 
 # 查找名字重复的文件：  
@@ -409,19 +409,14 @@ tee命令从stdin中读取，然后将输入数据重定向到stdout以及一个
 
 ## $? / $@ / $* / shift
 
-* $?表示shell脚本执行退出状态
-
+* $?表示shell脚本执行退出状态  
   * 0-成功  
-  * 1-失败
-
-* $@ $*用来表示shell的脚本参数
-
+  * 1-失败  
+* $@ $*用来表示shell的脚本参数  
 * $@代表参数列表"a1" "a2" "a3"  
-
-* $*代表参数列表"a1 a2 a3"
-
-* shift命令移动参数
-  可以将参数依次向左移动一个位置，让脚本能够使用$1来访问到每一个参数。
+* $*代表参数列表"a1 a2 a3"  
+* shift命令移动参数  
+  可以将参数依次向左移动一个位置，让脚本能够使用$1来访问到每一个参数。  
 
   ```shell
     # 功能：打印所有参数  
@@ -438,10 +433,9 @@ tee命令从stdin中读取，然后将输入数据重定向到stdout以及一个
 
 ## tput / stty
 
-* 终端处理工具
-
-  * tput:获取终端的行数、列数、终端名称、光标移动、设置背景色/前景色。
-  * stty -echo禁止将命令发送到终端。  
+* 终端处理工具  
+  * tput:获取终端的行数、列数、终端名称、光标移动、设置背景色/前景色。  
+  * stty -echo禁止将命令发送到终端。    
 
   ```shell
     # 功能：隐藏密码
@@ -533,9 +527,9 @@ find /home/work/ilog/as -type f -mtime +3 -exec rm -rf {} \;
 
 ## xargs
 
-* xargs单行变多行、多行变单行
-  xargs命令接受来自stdin的输入，将数据解析成单个元素，然后调用指定命令并将这些元素作为该命令的参数。
-  -print0和xargs -0配合，\0(NULL)分隔，每次作用于一个参数，放在命令的结尾。
+* xargs单行变多行、多行变单行  
+  xargs命令接受来自stdin的输入，将数据解析成单个元素，然后调用指定命令并将这些元素作为该命令的参数。  
+  -print0和xargs -0配合，\0(NULL)分隔，每次作用于一个参数，放在命令的结尾。  
 
   ```shell
   > cat a
@@ -559,13 +553,13 @@ find /home/work/ilog/as -type f -mtime +3 -exec rm -rf {} \;
   find /smbMount -iname '*.docx' -print0 | xargs -0 rm -f
   ```
 
-* xargs把stdin的参数进行打散，每次把一个参数（-n参数也可以控制多个）传给指定的命令去执行，分批多次执行该命令，
-  默认参数是放在命令末尾的，如果需要把参数放置在任意指定位置，需要用到-I {} [ 这个等效于-i，小写的i默认就是用{}做替换，不需指定 ] ,然后参数位置用{}占位。  
+* xargs把stdin的参数进行打散，每次把一个参数（-n参数也可以控制多个）传给指定的命令去执行，分批多次执行该命令，  
+  默认参数是放在命令末尾的，如果需要把参数放置在任意指定位置，需要用到-I {} [ 这个等效于-i，小写的i默认就是用{}做替换，不需指定 ] ,然后参数位置用{}占位。    
 
-* xargs对stdin分隔时默认的分隔符是空格或者换行。
-  xargs -0：\0(NULL)作为分隔符。
-  xargs -d:可以指定分隔符。
-  cat args.txt | xargs -I {} ./cecho.sh -p {} -l  
+* xargs对stdin分隔时默认的分隔符是空格或者换行。  
+  xargs -0：\0(NULL)作为分隔符。  
+  xargs -d:可以指定分隔符。  
+  cat args.txt | xargs -I {} ./cecho.sh -p {} -l    
 
   ```shell
   # 功能：执行任意多个参数
@@ -632,16 +626,16 @@ find /home/work/ilog/as -type f -mtime +3 -exec rm -rf {} \;
 ## MD5 / base64
 
 * **MD5校验和算法**
-  md5sum是一个长度为32个字符的十六进制串。  
+  md5sum是一个长度为32个字符的十六进制串。    
 
-  生成MD5：md5sum a.txt > file.md5 <br>
-  根据MD5文件核验数据完整性：md5sum -c file.md5 <br>
-  递归计算校验和：find . -type f -name '*.cpp' -print0 | xargs -0 md5sum > dir.md5
+  生成MD5：md5sum a.txt > file.md5   
+  根据MD5文件核验数据完整性：md5sum -c file.md5   
+  递归计算校验和：find . -type f -name '*.cpp' -print0 | xargs -0 md5sum > dir.md5  
 
 * **base64加密算法**（可以无损重构原始数据）  
 
-  base64编码：echo "hello lili" | base64 <br>
-  base64解码：echo "aGVsbG8gbGlsaQo=" | base64 -d
+  base64编码：echo "hello lili" | base64   
+  base64解码：echo "aGVsbG8gbGlsaQo=" | base64 -d  
 
 ## sort
 
@@ -683,29 +677,29 @@ find /home/work/ilog/as -type f -mtime +3 -exec rm -rf {} \;
 
 **mktemp**:为临时文件或目录创建唯一名字，保存在/tmp下。  
 
-filename=`mktemp`
+filename=`mktemp`  
 dirname=`mktemp -d`
-tmpfile=`mktemp -u`  ->生成名称，不实际创建
-mktemp test.XXX -> 根据模板创建，X代表一个随机字符
+tmpfile=`mktemp -u`  ->生成名称，不实际创建  
+mktemp test.XXX -> 根据模板创建，X代表一个随机字符  
 
 ## split
 
 split分隔文件：
 
-1. 根据数据块大小分隔
+1. 根据数据块大小分隔  
 
    ```shell
    split -b 10k data.file   # 将100kB的文件分隔成10个大小10KB的文件。  
    split -b 10k data.file -d -a 4   # -d使用数字后缀，-a指定后缀长度。  
    ```
 
-2. 根据行数分隔  
+2. 根据行数分隔    
 
    ```shell
    split -l 10 data.file      # 分割后每个文件包含10行  
    ```
 
-3. 根据上下文分隔  
+3. 根据上下文分隔    
 
    ```shell
    $ cat server.log
@@ -735,17 +729,12 @@ split分隔文件：
 
 ## expect
 
-* expect实现自动化登陆和操作
-
-  * spawn：需要自动化运行的程序和参数。
-
-  * expect/send: 实现交互过程。  
-
+* expect实现自动化登陆和操作  
+  * spawn：需要自动化运行的程序和参数。  
+  * expect/send: 实现交互过程。    
   * interact:执行完成后保持交互状态，把控制权交给控制台，方便手动操作，否则命令完成后即退出。  
-
   * exp_continue：附加于某个expect之后，使得该项被匹配后，还能继续匹配该expect判断语句内的其他项。  
-
-  * expect eof 这个一定要加，与spawn对应表示捕获终端输出信息终止。expect脚本必须以interact或expect eof结束。
+  * expect eof 这个一定要加，与spawn对应表示捕获终端输出信息终止。expect脚本必须以interact或expect eof结束。  
 
   ```shell
   #!/usr/bin/expect
@@ -834,19 +823,19 @@ cat a.txt | tail -n +3        # 不打印前3行
 ## egrep / grep
 
 * -E可以使用扩展正则表达式。
-    -o:只输出匹配到的文本
-    -c：统计匹配的文本行数
-    -n：打印匹配字符串所在的行号
-    -l：打印匹配模式所在的文件
-    -i：忽略大小写
-    -r：递归搜索
-    -e：指定多个匹配模式
-    -f:可以将多个模式定义在文件中。选项-f可以读取文件并使用其中的模式（一个模式一行）
-    -P:支持perl正则表达式语法
-    -q：静默
-    -A：打印检索结果及后边n行（after）
-    -B：打印检索结果及前边n行（before）
-    -C：打印检索结果及前后各n行
+    -o:只输出匹配到的文本  
+    -c：统计匹配的文本行数  
+    -n：打印匹配字符串所在的行号  
+    -l：打印匹配模式所在的文件  
+    -i：忽略大小写  
+    -r：递归搜索  
+    -e：指定多个匹配模式  
+    -f:可以将多个模式定义在文件中。选项-f可以读取文件并使用其中的模式（一个模式一行）  
+    -P:支持perl正则表达式语法  
+    -q：静默  
+    -A：打印检索结果及后边n行（after）  
+    -B：打印检索结果及前边n行（before）  
+    -C：打印检索结果及前后各n行  
 
   ```shell
    echo this is a line. | egrep -o "[a-z]+."
@@ -861,20 +850,20 @@ cat a.txt | tail -n +3        # 不打印前3行
 
 * **按行切割：**  
 
-  xargs -d参数可以实现按行切割：
-  `echo -n "a1%a2%a3" | xargs -d '%'`
-  自定义IFS，然后for循环遍历。  
+  xargs -d参数可以实现按行切割：  
+  `echo -n "a1%a2%a3" | xargs -d '%'`  
+  自定义IFS，然后for循环遍历。    
 
 * **按列切割：**  
 
-  cut（默认分隔符是\t）  
-  -b：字节  
+  cut（默认分隔符是\t）    
+  -b：字节    
   -c：字符  
   -f：字段  
   -d自定义分隔符  
     1,3 --第1列和第3列  
     1-3,6-9 --第1到3列和第6到9列  
-  操作于文件名和标准输入流
+  操作于文件名和标准输入流  
 
   ```shell
     cat a.txt | cut -f1,3  
@@ -884,14 +873,14 @@ cat a.txt | tail -n +3        # 不打印前3行
 
 ## sed
 
-* sed = stream editor = 流编辑器
-* 字段替换、删除、打印
-  -i: 修改后的数据替换原文件
-  -d：删除
-  g-全部替换，3g-替换第三次及以后的出现
-  &：替换模式中已匹配的字符串
-  \1：替换模式中匹配到的第1个；\n：替换模式中匹配到的第n个
-  使用shell变量，需要扩展$符号，这时候不能用单引号，只能用双引号
+* sed = stream editor = 流编辑器  
+* 字段替换、删除、打印  
+  -i: 修改后的数据替换原文件  
+  -d：删除  
+  g-全部替换，3g-替换第三次及以后的出现  
+  &：替换模式中已匹配的字符串  
+  \1：替换模式中匹配到的第1个；\n：替换模式中匹配到的第n个  
+  使用shell变量，需要扩展$符号，这时候不能用单引号，只能用双引号  
 
   ```shell
     sed -i 's/hello/HELLO/g' a.txt
@@ -1045,31 +1034,27 @@ func param1 param2； echo $#
 ## 重定向
 
 * <  --- 输入重定向
-  << --- 输入来自一对分隔符中间的内容（如EOF,也可以自定义，看下边的例子）
-
+  << --- 输入来自一对分隔符中间的内容（如EOF,也可以自定义，看下边的例子）  
 * \>  --- 输出重定向（覆盖）
   \>\> --- 输出重定向（追加）
 
   ```shell
   # 标准输出和错误输出定向到不同文件
+  cmd 2>stderr.txt 1>stdout.txt    
 
-  cmd 2>stderr.txt 1>stdout.txt
+  # 标准输出和错误输出都定向到同一个文件
+  cmd 2>&1 1>alloutput.txt  
 
-  标准输出和错误输出都定向到同一个文件
+  # 把脚本中大段文本（EOF和EOF之间的）重定向到文件中
 
-  cmd 2>&1 1>alloutput.txt
+  !/bin/bash  
+  cat>log.txt <<EOF    
 
-  把脚本中大段文本（EOF和EOF之间的）重定向到文件中
+  ...   
 
-  !/bin/bash
+  ...    
 
-  cat>log.txt <<EOF  
-
-  ...  
-
-  ...  
-
-  EOF  
+  EOF    
   ```
 
 ## shell调试
