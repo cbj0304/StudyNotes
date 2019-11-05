@@ -137,19 +137,19 @@ Ctrl + Alt + Backspace      # 回退到上一个位置：设置->键盘快捷方
 
 1. 查看本地分支和远程分支
 
-   `git branch -a`
+    `git branch -a`
 
 2. 创建名称为test的分支，并切换到这个分支  
 
- `git checkout -b test` == `git branch test && git checkout test`
+    `git checkout -b test` == `git branch test && git checkout test`
 
 3. 把分支推到远端
 
-   `git push origin test`
+    `git push origin test`
 
 4. 删除本地分支test
 
-   `git branch -d test`
+    `git branch -d test`
 
 5. 删除远程分支
 
@@ -165,11 +165,11 @@ Ctrl + Alt + Backspace      # 回退到上一个位置：设置->键盘快捷方
 
 7. 从远端获取master最新版本并merge到本地
 
-   `git pull origin master`
+    `git pull origin master`
 
 8. 从远端拉取最新master版本，不会自动merge
 
-   `git fetch origin master`
+    `git fetch origin master`
 
 ## 终端shell
 vscode可配置的终端：cmd、powershell、bash，这里我用的是powershell。
