@@ -74,13 +74,13 @@
 * 简单静态页面抓取可以用python3自带的网络请求库，如urllib。在python3中urllib库所有和网络请求相关的方法都被集到了urllib.request模块下边了，用法示例：
 
 ```python
-		from urllib import request
-		resp = request.urlopen('https://www.baidu.com')
-		print(type(resp))          # <class 'http.client.HTTPResponse'> 类文件句柄对象
-		# print(resp.read(10))
-		# print(resp.read())
-		# print(resp.readline())
-		print(resp.readlines())  # 返回多行存到list中
+    from urllib import request
+    resp = request.urlopen('https://www.baidu.com')
+    print(type(resp))          # <class 'http.client.HTTPResponse'> 类文件句柄对象
+    # print(resp.read(10))
+    # print(resp.read())
+    # print(resp.readline())
+    print(resp.readlines())  # 返回多行存到list中
 ```
 
 
@@ -91,7 +91,7 @@
 
 *   **框架**: scrapy组件及架构如下图：
 
-    <img src="https://github.com/cbj0304/StudyNotes/blob/master/images/scrapy/scrapy.jpg" style="width:350;height:240;" />
+    <img src="https://github.com/cbj0304/StudyNotes/blob/master/images/scrapy/scrapy.jpg" style="width:200;height:160;" />
 
     * spider（产出Request，处理Response）
     * Pipeline：管道，爬虫产生的item数据，做过滤和持久化。
@@ -290,8 +290,10 @@ class KuaidailiItem(scrapy.Item):
 
 * **第六步：启动爬虫**
 
-  **$ cd kuaidaili/kuaidaili/spiders**
-  **$ scrapy crawl myspider(爬虫名称)**
+```shell
+  $ cd kuaidaili/kuaidaili/spiders
+  $ scrapy crawl myspider(爬虫名称)
+```
 
 
 ## 案例2：图片抓取和分类
