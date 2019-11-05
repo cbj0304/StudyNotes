@@ -20,9 +20,9 @@
   * 命令行执行R
 
     ```R
-    $ R
-    $ install.packages('ggplot2')
-    $ q()
+    > R
+    > install.packages('ggplot2')
+    > q()
     ```
 
   * 脚本执行R,编辑.R脚本
@@ -31,13 +31,15 @@
     或者 R CMD BATCH --args test.R
 
 # 容器
+
 ## 向量vector
+
 ```R
 v = c(1,2,3,4,5,6,7)
 v[c(2,3,4)]
-v[2:4] 
+v[2:4]
 v[c(2,4,3)]
-v[-2] 
+v[-2]
 v[-2:-4]
 v[v<3]
 which(v==3)
@@ -46,7 +48,6 @@ c = c(TRUE, TRUE, TRUE, FALSE, TRUE, FALSE)
 d = seq(1,20,by=3)    # 等差vector
 e = rep(d,times=3)    # 重复3次
 ```
-
 
 ## 矩阵matrix
 
@@ -70,7 +71,6 @@ rownames(x)=rnames
 colnames(x)=cnames
 ```
 
-
 ## 多维数组array
 
 ```R
@@ -82,7 +82,6 @@ z = array(1:72, c(2, 3, 4, 3), dimnames=list(dim1, dim2, dim3, dim4))
 z
 z[1,2,3,]
 ```
-
 
 ## 数据框data.frame
 
@@ -100,7 +99,6 @@ patientdata[1:3]
 patientdata[1,1:3]
 patientdata[c(1,3),1:3]
 ```
-
 
 ## 列表list
 
@@ -120,6 +118,7 @@ mylist2[[6]][1:2,3]
 ```
 
 # 绘图
+
 * 查看绘图函数及参数，在Rstudio中执行 => ?boxplot
 
 ## 基本图形
@@ -139,7 +138,6 @@ plot(x)
 # 箱线图
 boxplot(x,y)
 ```
-
 
 ## 条形图（Bar Chart）
 
@@ -181,7 +179,6 @@ barplot(counts,
         legend=rownames(counts), beside=TRUE)
 ```
 
-
 ## 饼图(Pie Chart)
 
 ```R
@@ -207,7 +204,6 @@ pie(mytable,labels=lbls3,
     edges=300,radius=1)
 ```
 
-
 ## 扇形图(Fan Plot)
 
 ```R
@@ -216,21 +212,19 @@ lbls <- c("US", "UK", "Australia", "Germany", "France")
 fan.plot(slices, labels = lbls, main="Fan Plot")
 ```
 
-
-
 ## 点图(Dot Chart)
 
 ```R
-dotchart(mtcars$mpg, 
+dotchart(mtcars$mpg,
          labels=row.names(mtcars),cex=0.7,
          main="Gas Mileage for Car Models",
          xlab="Miles Per Gallon")
 ```
-​		 
+
 ## 散点图(plot)
 
 ```R
-# lty = linetype 
+# lty = linetype
 # lwd = linewidth
 # pch = 点的样式
 # cex = 点增大的倍数
@@ -242,8 +236,6 @@ plot(rnorm(50),cex=0.5)
 plot(rnorm(50),lwd=2)
 ```
 
-
-
 ## 直方图(hist)
 
 ```R
@@ -252,10 +244,11 @@ plot(rnorm(50),lwd=2)
 # 2. 通过attach绑定搜索路径后，可以直接用u v w访问,和detach配对使用
 attach(mtcars)
 # layout布局函数，0代表空缺不绘图，重复代表占据多个坑位
-layout(matrix(c(1,1,2,3), 2, 2, byrow = TRUE)) 
+layout(matrix(c(1,1,2,3), 2, 2, byrow = TRUE))
 hist(wt)
 detach(mtcars)
 ```
+
 * 条形图(barplot)和直方图(hist)的区别：
 
   * 条形图中间有间隔 多用于分类数据作图
@@ -369,7 +362,7 @@ barplot(data$age,
         col=c("red","green","yellow","blue"),
         legend=data$name)
 ```
-​		
+
 * 读取txt/csv文件绘图
 
 ```R
