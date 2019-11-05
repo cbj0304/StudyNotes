@@ -204,7 +204,7 @@ echo "456abcdefg" > a.txt   # 覆盖写
 > file a.txt  
 
 # 功能：统计各种文件类型(-b选项不打印文件名)
->f ind . -type f | xargs -I {} file -b {} | awk 'BEGIN{n=0}{arr[$0]++}END{for(i in arr){print i"=>"arr[i]}}'
+>find . -type f | xargs -I {} file -b {} | awk 'BEGIN{n=0}{arr[$0]++}END{for(i in arr){print i"=>"arr[i]}}'
 
 # 打印文件差异：  
 > diff -u version1.txt version2.txt  
