@@ -2,16 +2,15 @@
 
 # Flask知识点
 
-
 ## 为什么要用web框架
-​	web框架提供稳定性、安全性、高并发性的支持，避免重复造轮子, 使程序员专注于核心业务逻辑的处理, 提高工作效率。
+
+​web框架提供稳定性、安全性、高并发性的支持，避免重复造轮子, 使程序员专注于核心业务逻辑的处理, 提高工作效率。
 
 ## flask简介
 
 * flask是一个轻量级的web开发框架。自带的核心功能：路由模块、模板引擎。其他功能如邮件扩展、用户认证、数据库操作等都需要第三方扩展来实现。
-* flask中文文档：https://dormousehole.readthedocs.io/en/latest/
+* flask中文文档：<https://dormousehole.readthedocs.io/en/latest/>
 * 推荐测试工具：安装软件postman，模拟收发http请求。
-
 
 ## 配置python+flask开发环境
 
@@ -90,7 +89,6 @@
     </form>
     ```
 
-
 ## 其他
 
 * vscode生成html模板文件
@@ -99,9 +97,10 @@
 
 * B站学习视频
 
-  ​https://www.bilibili.com/video/av19817183
+  ​<https://www.bilibili.com/video/av19817183>
 
 # Flask实战
+
 * 简单的Falsk项目构建：
 * 目录结构：
   * **static文件夹**：用于存放静态文件，如js,css，img等。
@@ -109,19 +108,17 @@
   * **视图文件**,如view.py。
   * 其他第三方文件和依赖...
 
-
-
-
 ## 案例1：jinja2模板语言
+
 * jinja2模板引擎
   * 注释
   * 变量代码块
   * 控制代码块
   * 内置过滤器
 
-**视图文件**
+* **视图文件**
 
-```python
+  ```python
     # -*- coding: utf-8 -*-
     from flask import Flask
     from flask import render_template
@@ -137,7 +134,6 @@
     def hello_world():
         return 'hello world!'
 
-
     # 通过methods参数指明请求类型，默认是get请求
     @app.route('/deal_request', methods=['GET', 'POST'])
     def deal_request():
@@ -150,13 +146,11 @@
             post_q = request.form['q']
             return render_template('result.html', result=post_q)
 
-
     # <>定义路由的参数, 并在视图函数括号内填入参数名
     # 参数类型默认是str, 限定类型，如int: float:
     @app.route('/orders/<int:order_id>')
     def get_order_id(order_id):
         return 'order={}'.format(order_id)
-
 
     @app.route('/')
     def test_data():
@@ -166,16 +160,14 @@
         mydict = {"name": "cbj", "age": 18}
         return render_template('jinja2_tp.html', mystr=mystr, mylist=mylist, mydict=mydict)
 
-
     # 启动程序
     if __name__ == '__main__':
         app.run(host='127.0.0.1', port=8080, debug=False)
-```
+  ```
 
+* **模板文件(jinja2_tp.html)**
 
-**模板文件(jinja2_tp.html)**
-
-```jinja2
+  ```jinja2
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -209,15 +201,11 @@
         {{ mylist | sum }} <br />
     </body>
     </html>
-```
-
-
+  ```
 
 ## 案例2：原生form表单
 
 * 原生form表单操作：
-
-  * 表单
 
     表单是html页面中负责数据采集的部件，通过表单把用户输入的数据提交给服务器。
     包括三部分：标签、域、按钮，举例：
@@ -233,7 +221,7 @@
 
 * vscode生成html模板文件：
 
-   	文件->新建文件->右下角点击'纯文本',选择文件类型为html->命令提示框输入英文的i，会自动补全一个html模板页面。
+    文件->新建文件->右下角点击'纯文本',选择文件类型为html->命令提示框输入英文的i，会自动补全一个html模板页面。
 
 * flash - 给模板传递消息
     需要对消息内容进行加密，设置secret_key，做消息加密混淆
@@ -242,9 +230,9 @@
     实现一个基础的表单（本例）
     使用Flask-WTF实现表单（下例）
 
-**视图文件**
+* **视图文件**
 
-```python
+  ```python
     # -*- coding: utf-8 -*-
     from flask import Flask, render_template, request, flash
 
@@ -272,16 +260,14 @@
                 return "success"
         return render_template('form_tp.html')
 
-
     # 启动程序
     if __name__ == '__main__':
         app.run(host='127.0.0.1', port=8080, debug=False)
-```
+  ```
 
+* **模板文件(form_tp.html)**
 
- **模板文件(form_tp.html)**
-
-```jinja2
+  ```jinja2
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -303,13 +289,13 @@
             </form>
     </body>
     </html>
-```
+  ```
 
 ## 案例3：Flask-WTF表单
+
 * **flask-WTF**
 
   flask_wtf是对wtforms组件的封装，是flask框架的表单验证模块，可以很方便生成表单，也可以当做json数据交互的验证工具，支持热插拔。
-
 
 * **安装**
     pip install Flask-WTF
@@ -322,7 +308,7 @@
   | DecimalField        | 小数点文本字段，如：‘1.23’                         |
   | DateField           | 日期字段，格式：'%Y-%m-%d'                       |
   | DateTimeField       | 日期字段，格式：'%Y-%m-%d %H:%M:%S'              |
-  | FieldList           | 统一字段类型组成列表，如：FieldList(StringField('Name', [validators.required()])) |
+  | FieldList           | 统一字段类型组成列表，如：FieldList(StringField('Name', [ validators.required() ])) |
   | FloatField          | 浮点数类型                                    |
   | IntegerField        | 整形                                       |
   | SelectMultipleField | 多选框                                      |
@@ -342,7 +328,6 @@
   | validators  | 字段的验证序列 [DataRequired(), Length(4,20)]->必填字段，长度在4-20， 见下边 |
   | description | 字段的描述                                    |
   | choices     | SelectField和他的子类有的字段，选择框，多选一             |
-
 
 * **字段验证序列**
 
@@ -371,12 +356,9 @@
 
      CSRF（Cross Site Request Forgery, 跨站域请求伪造）是一种网络的攻击方式
 
-    ​
+* **视图文件**
 
-
-**视图文件**
-
-```python
+  ```python
     # -*- coding: utf-8 -*-
     from flask import Flask, render_template, request, flash
     from flask_wtf import FlaskForm
@@ -388,14 +370,12 @@
     app = Flask(__name__)
     app.secret_key = "cbjtestform"
 
-
     # 自定义表单类
     class LoginForm(FlaskForm):
         username = StringField(label='用户名', validators=[DataRequired()])     # '用户名' 是label, validators验证函数列表
         password = PasswordField('密码', validators=[DataRequired()])
         password2 = PasswordField('确认密码', validators=[DataRequired(), EqualTo('password', '密码输入不一致')])
         submit = SubmitField('提交')
-
 
     @app.route('/', methods=['GET', 'POST'])
     def login():
@@ -421,24 +401,20 @@
 
         return render_template('wtf_tp.html', form=login_form)
 
-
     # 定义路由与视图函数
     # Flask定义路由是通过装饰器实现的
     @app.route('/helloworld')
     def hello_world():
         return 'hello world!'
 
-
     # 启动程序
     if __name__ == '__main__':
         app.run(host='127.0.0.1', port=8080, debug=False)
-```
+  ```
 
+* **模板文件(wtf_tp.html)**
 
-
-**模板文件(wtf_tp.html)**
-
-```jinja2
+  ```jinja2
             <!DOCTYPE html>
             <html lang="en">
             <head>
@@ -460,12 +436,12 @@
                     {{ f }}
                     {% endfor %}
                 </form>
-                
             </body>
             </html>
-```
+  ```
 
 ## 案例4：Flask-SQLAlchmey数据库操作
+
 * **Flask-SQLAlchmey**
 
   Flask-SQLAlchmey是一个操作关系型数据库的flask扩展，
@@ -513,9 +489,9 @@
   count()
   paginate() 返回一个paginate对象，它包含指定范围的结果
 
-**视图文件**
+* **视图文件**
 
-```python
+  ```python
     # -*- coding: utf-8 -*-
     from flask import Flask
     from flask_sqlalchemy import SQLAlchemy
@@ -532,14 +508,9 @@
 
     '''
     一对多关系的两张表：
-        角色
-            - 角色id
-            - 角色名称（管理员、普通用户）
-        用户
-            - 用户id、用户名、邮箱、密码
-            - 角色id（外键，关联角色表的角色id）
+        角色 (角色id,角色名称)
+        用户(用户id、用户名、邮箱、密码、角色id)
     '''
-
 
     # 数据库模型
     class Role(db.Model):
@@ -556,7 +527,6 @@
         # 支持可读字符串打印
         def __repr__(self):
             return '<Role: {} {}>'.format(self.name, self.id)
-
 
     class User(db.Model):
         __tablename__ = 'users'
@@ -581,13 +551,11 @@
             return '<User: name={} id={} email={} pswd={} rid={}>'.format(
                 self.name, self.id, self.email, self.password, self.role_id)
 
-
     # 定义路由与视图函数
     # Flask定义路由是通过装饰器实现的
     @app.route('/helloworld')
     def hello_world():
         return 'hello world!'
-
 
     # 启动程序
     if __name__ == '__main__':
@@ -670,10 +638,10 @@
         print("user1={}, user1.roles.name={}".format(user1, user1.myroles.name))
 
         app.run(host='127.0.0.1', port=8080, debug=False)
-```
-
+  ```
 
 ## 案例5：图书管理系统
+
 1. 配置数据库
 
    导入SQLAlchemy扩展
@@ -686,8 +654,8 @@
 
    模型继承db.Model
 
-   ​	作者模型：字段->id，name  (一)
-   ​	书籍模型：字段->id，name，author_id   (多)
+   ​    作者模型：字段->id，name  (一)
+   ​    书籍模型：字段->id，name，author_id   (多)
 
    表名 \_\_tablename__
 
@@ -722,17 +690,15 @@
    5. 如果作者不存在，则添加作者和书籍
    6. 验证不通过提示错误
 
+* **视图文件**
 
-**视图文件**
-
-```python
+  ```python
     # -*- coding: utf-8 -*-
     from flask import Flask, render_template, request, redirect, url_for, flash
     from flask_sqlalchemy import SQLAlchemy
     from flask_wtf import FlaskForm
     from wtforms import StringField, SubmitField
     from wtforms.validators import DataRequired
-
 
     # 创建flask应用程序实例
     # 需要传入__name__,作用是为了确定资源所在的路径
@@ -762,19 +728,16 @@
         # 一对多关系(books和author是自定义的名字，Book是另一个模型的类名)
         books = db.relationship('Book', backref='author')
 
-
     class Book(db.Model):
         __tablename__ = 'books'
         id = db.Column(db.Integer, primary_key=True)
         name = db.Column(db.String(48), unique=True)
         author_id = db.Column(db.Integer, db.ForeignKey('authors.id'))
 
-
     class AddForm(FlaskForm):
         author_name = StringField(label='作者', validators=[DataRequired()])
         book_name = StringField(label='书籍', validators=[DataRequired()])
         submit = SubmitField('添加')
-
 
     # 定义路由与视图函数
     # Flask定义路由是通过装饰器实现的
@@ -782,7 +745,7 @@
     def show_page():
 
         add_form = AddForm()
-        # 提交时进行表单参数验证   
+        # 提交时进行表单参数验证
         if not add_form.validate_on_submit():
             if request.method == 'POST':
                 flash('参数不完整！')
@@ -829,7 +792,6 @@
         # 渲染到页面
         return render_template('booklist.html', authors=authors, form=add_form)
 
-
     # 删除书籍，删除完毕， 更新数据库后重定向到显示面展示
     @app.route('/delete_book/<int:book_id>')
     def delete_book(book_id):
@@ -846,7 +808,6 @@
             db.session.rollback()
 
         return redirect(url_for('show_page'))
-
 
     # 删除作者，删除完毕更新数据库，并重定向到显示页面
     @app.route('/delete_author/<int:author_id>')
@@ -869,7 +830,6 @@
             db.session.rollback()
 
         return redirect(url_for('show_page'))
-
 
     # 启动程序
     if __name__ == '__main__':
@@ -898,12 +858,11 @@
         db.session.commit()
 
         app.run(host='127.0.0.1', port=8080, debug=False)
-```
+  ```
 
+* **模板文件(booklist.html)**
 
-**模板文件(booklist.html)**
-
-```jinja2
+  ```jinja2
             <!DOCTYPE html>
             <html lang="en">
             <head>
@@ -924,7 +883,7 @@
                 <font style='color:red'>{{ m }}</font>
                 {% endfor %}
             </form>
-            
+
             <hr>
             {# 书籍展示 #}
             {# 先遍历作者，在作者里遍历书籍，填充无序列表ur li标签 #}
@@ -942,7 +901,6 @@
                 </ul>
                 {% endfor %}
             </ul>
-                
             </body>
             </html>
-```
+  ```
