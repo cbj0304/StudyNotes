@@ -8,11 +8,11 @@
 2. 创建空的工程文件夹，选中文件夹右击"Open With Code"打开。
 3. 安装vscode插件： C/C++ 和C++ Intellisense。
    
-   <img src="https://github.com/cbj0304/StudyNotes/raw/master/images/vscode/c_c++_plugin.jpg" height="180" width="300" />
+   <img src="../images/vscode/c_c++_plugin.jpg" height="180" width="300" />
 
 4. 创建工程目录。
 
-   <img src="https://github.com/cbj0304/StudyNotes/raw/master/images/vscode/c_c++_dir.jpg" height="140" width="300" />
+   <img src="../images/vscode/c_c++_dir.jpg" height="140" width="300" />
 
 5. 配置启动及调试参数： launch.json。
 
