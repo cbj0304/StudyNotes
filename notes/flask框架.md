@@ -38,19 +38,21 @@
   {# 这是一行注释 #}
   ```
 
-  * 变量代码块   
+  * 变量代码块
 
   ```jinja2
   str {{ var }}  
   list {{ my_list }}  {{ my_list.2 }}  {{ my_list[2] }}  
   dict {{my_dict }} {{ my_dict['name'] }}  {{my_dict.name}}
   ```
+
   * 控制代码块
 
   ```jinja2
   {% if flag %} ... {% endif %}
   {% for v in varlist %} ... {% endfor %}
   ```
+
   * 内置过滤器（通过管道符后跟过滤器，可以链式操作）
 
   ```jinja2
@@ -65,6 +67,7 @@
   去掉html标签  {{ '<em>hello</em>' | striptags }}
   字符串截断  {{ 'hello every one' | truncate(9)}}列表操作
   ```
+
   ```jinja2
   2. 列表操作
   取第一个元素 {{ [1, 2, 3, 5] | first }}
@@ -73,15 +76,19 @@
   列表求和 {{ [1, 2, 3, 4] | sum }}
   列表排序  {{ [3, 7, 2, 1] | sort }}
   ```
+
 * 表单
   表单是html页面中负责数据采集的部件，通过表单把用户输入的数据提交给服务器。
   包括三部分：标签、域、按钮，举例：
-  	<form method="post">
-  	    <label>用户名：</label><input type="text" name="username" /><br />
-  	    <label>密码：</label><input type="text" name="password" /><br />
-  	    <label>确认密码：</label><input type="text" name="password2" /><br />
-  	    <input type="submit" value="提交" /><br />
-  	</form>
+
+  ```html
+    <form method="post">
+        <label>用户名：</label><input type="text" name="username" /><br />
+        <label>密码：</label><input type="text" name="password" /><br />
+        <label>确认密码：</label><input type="text" name="password2" /><br />
+        <input type="submit" value="提交" /><br />
+    </form>
+    ```
 
 
 ## 其他
@@ -114,7 +121,7 @@
 
 **视图文件**
 
-    ```python
+```python
     # -*- coding: utf-8 -*-
     from flask import Flask
     from flask import render_template
@@ -163,12 +170,12 @@
     # 启动程序
     if __name__ == '__main__':
         app.run(host='127.0.0.1', port=8080, debug=False)
-    ```
+```
 
 
 **模板文件(jinja2_tp.html)**
 
-    ```jinja2
+```jinja2
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -202,7 +209,7 @@
         {{ mylist | sum }} <br />
     </body>
     </html>
-    ```
+```
 
 
 
@@ -237,7 +244,7 @@
 
 **视图文件**
 
-    ```python
+```python
     # -*- coding: utf-8 -*-
     from flask import Flask, render_template, request, flash
 
@@ -269,13 +276,12 @@
     # 启动程序
     if __name__ == '__main__':
         app.run(host='127.0.0.1', port=8080, debug=False)
-    ```
+```
 
 
+ **模板文件(form_tp.html)**
 
-    **模板文件(form_tp.html)**
-
-    ```jinja2
+```jinja2
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -297,7 +303,7 @@
             </form>
     </body>
     </html>
-    ```
+```
 
 ## 案例3：Flask-WTF表单
 * **flask-WTF**
@@ -370,7 +376,7 @@
 
 **视图文件**
 
-    ```python
+```python
     # -*- coding: utf-8 -*-
     from flask import Flask, render_template, request, flash
     from flask_wtf import FlaskForm
@@ -426,13 +432,13 @@
     # 启动程序
     if __name__ == '__main__':
         app.run(host='127.0.0.1', port=8080, debug=False)
-    ```
+```
 
 
 
 **模板文件(wtf_tp.html)**
 
-    ```jinja2
+```jinja2
             <!DOCTYPE html>
             <html lang="en">
             <head>
@@ -457,7 +463,7 @@
                 
             </body>
             </html>
-    ```
+```
 
 ## 案例4：Flask-SQLAlchmey数据库操作
 * **Flask-SQLAlchmey**
@@ -509,7 +515,7 @@
 
 **视图文件**
 
-    ```python
+```python
     # -*- coding: utf-8 -*-
     from flask import Flask
     from flask_sqlalchemy import SQLAlchemy
@@ -664,8 +670,7 @@
         print("user1={}, user1.roles.name={}".format(user1, user1.myroles.name))
 
         app.run(host='127.0.0.1', port=8080, debug=False)
-    ```
-
+```
 
 
 ## 案例5：图书管理系统
@@ -720,7 +725,7 @@
 
 **视图文件**
 
-    ```python
+```python
     # -*- coding: utf-8 -*-
     from flask import Flask, render_template, request, redirect, url_for, flash
     from flask_sqlalchemy import SQLAlchemy
@@ -893,12 +898,12 @@
         db.session.commit()
 
         app.run(host='127.0.0.1', port=8080, debug=False)
-    ```
+```
 
 
 **模板文件(booklist.html)**
 
-    ```jinja2
+```jinja2
             <!DOCTYPE html>
             <html lang="en">
             <head>
@@ -940,4 +945,4 @@
                 
             </body>
             </html>
-    ```
+```
