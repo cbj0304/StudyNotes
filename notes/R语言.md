@@ -351,11 +351,12 @@ myfeeling(feelings)
 # 使用案例
 
 * 读取excel文件绘图，excel中内容如下：
-  name	age
-  a1	10
-  a2	20
-  a3	30
-  a4	40
+
+  name	age <br>
+  a1	10 <br>
+  a2	20 <br>
+  a3	30 <br>
+  a4	40 <br>
 
 ```R
 install.packages("openxlsx")
