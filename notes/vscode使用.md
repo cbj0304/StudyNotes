@@ -126,13 +126,13 @@
 
     首次提交，进入本地代码目录：
 
-```shell
+    ```shell
     git init       # 建立git仓库
     git add .      # 本地文件添加到仓库
     git commit -m "first commit"       # 提交到本地仓库
     git remote add origin https://github.com/cbj0304/StudyNotes.git  # 将本地仓库关联到github上
     git push -u origin master    # 上传到远端仓库
-```
+    ```
 
 ### 2.常用Git命令
 
@@ -174,9 +174,9 @@
 
 ## 终端shell
 
-    vscode可配置的终端：cmd、powershell、bash，这里我用的是powershell。
+vscode可配置的终端：cmd、powershell、bash，这里我用的是powershell。
 
-```shell
+    ```shell
     # powershell别名设置：
     # 查看别名：
     $ Get-Alias
@@ -192,7 +192,7 @@
     Remove-Item alias:\ls
     Set-Alias ls getFileName
     Set-Alias ll Get-ChildItem
-```
+    ```
 
 # 其他
 
