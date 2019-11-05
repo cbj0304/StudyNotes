@@ -166,7 +166,7 @@
 
   **$ scrapy startproject kuaidaili**
 工程目录：
-<img src="https://github.com/cbj0304/StudyNotes/blob/master/images/scrapy/dir.jpg" height="150" width="50" />
+<img src="../images/scrapy/dir.jpg" height="150" width="50" />
 
 
 * **第二步：写item.py文件，定义要提取的结构化数据**<br>
