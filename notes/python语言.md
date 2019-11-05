@@ -52,15 +52,15 @@
 
   方法：join/split/find/strip/upper/lower/replace/len/索引/切片
 
-**可迭代对象：**
+* **可迭代对象：**
 
-​	以上都是可迭代对象（Iterable），内部实现了__iter__方法，可以通过for...in...循环遍历/迭代。
+​   以上都是可迭代对象（Iterable），内部实现了__iter__方法，可以通过for...in...循环遍历/迭代。
 
-​	通过isinstance()函数可以判断一个对象是否是 iterable 对象。
+​   通过isinstance()函数可以判断一个对象是否是 iterable 对象。
 
-​	isinstance(a, Iterable) -> 如果a是可迭代类型，返回True
+​   isinstance(a, Iterable) -> 如果a是可迭代类型，返回True
 
-**函数示例：**
+**代码示例：**
 
 ```python
 # encoding: utf-8
@@ -229,20 +229,20 @@ if __name__ == '__main__':
 
 ## 数值类型
 
-* python3内置数值类型(Numeric)：
+* **python3内置数值类型(Numeric)：**
   * 整数（int）：python3中的整型只有一种 long 类型
   * 浮点数（float）:
   * 定点数（decimal.Decimal）：固定的小数点位置，固定位数的整数部分和小数部分，更精确。
   * 复数（complex）：用指数达到了浮动小数点的效果，更灵活。
   * 分数（fractions.Fraction）：有理数。
   * 布尔类型（bool）： True/False本质上是1/0。
-* python中的数学模块math/cmath：
+* **python中的数学模块math/cmath：**
   * math模块：提供对实数的计算支持
   * cmath模块：供对于复数运算的支持(a=3+4j)
 
           具体函数查看： dir(math)  dir(cmath)
 
-* 无穷大于非数字：
+* **无穷大于非数字：**
 
   * 正无穷：float('inf')
 
@@ -252,13 +252,13 @@ if __name__ == '__main__':
 
     得到inf时就查看是否有溢出或者除以0，得到nan时就查看是否有非法操作（如对负数开平方）。
 
-* numPy模块
+* **numPy模块**
 
       第三方库安装 pip install numpy
 
       向量和矩阵的线性代数运算
 
-* random模块
+* **random模块**
 
       随机数生成模块
 
@@ -494,7 +494,7 @@ if __name__ == '__main__':
 
 ## 字符串类型
 
-* 字符串处理函数汇总：
+* **字符串处理函数汇总：**
 
   * 切割：
 
@@ -544,19 +544,19 @@ if __name__ == '__main__':
 
   * 格式化：
 
-      文本标准化：unicodedata.normalize()
+        文本标准化：unicodedata.normalize()
 
-      清空左右指定字符：str.lstrip()/str.rstrip()/str.strip()
+        清空左右指定字符：str.lstrip()/str.rstrip()/str.strip()
 
-      替换：str.translate()/str.replace()
+        替换：str.translate()/str.replace()
 
-      对齐：str.ljust()/str.rjust()/str.center()/format
+        对齐：str.ljust()/str.rjust()/str.center()/format
 
-      拼接：join/+/print(..., sep=':')
+        拼接：join/+/print(..., sep=':')
 
-      字符串中插入变量: format()/format_map()+vars()
+        字符串中插入变量: format()/format_map()+vars()
 
-      指定列宽格式化字符串: testwrap.fill()
+        指定列宽格式化字符串: testwrap.fill()
 
   * 其他：
 
@@ -732,27 +732,25 @@ look into my eyes, you're under"""
 
 * **python字符串类型：**
 
-  参考：python中的str和bytes类型 https://www.cnblogs.com/chownjy/p/6625299.html
+    * 参考：python中的str和bytes类型 https://www.cnblogs.com/chownjy/p/6625299.html
 
-  * **python3字符串的两种类型：**
+    * **python3字符串的两种类型：**
 
-      -- str(unicode)   ->  <class 'str'>          # 普通字符串
+        -- str(unicode)   ->  <class 'str'>          # 普通字符串
 
-      -- byte码            ->  <class 'bytes'>        # 二进制数据流
+        -- byte码            ->  <class 'bytes'>        # 二进制数据流
 
-      [可以简单理解为: 
+      *[可以简单理解为: 
 
-  ​	python2 中的<class 'unicode'> 变成了 python3 的<class 'str'>，
+            python2 中的<class 'unicode'> 变成了 python3 的<class 'str'>，
 
-        	python2 中的<class 'str'> 变成了 python3 的<class 'bytes'>，
+            python2 中的<class 'str'> 变成了 python3 的<class 'bytes'>，
 
-  ​	python2中默认的编码方式是ascii码，中文会乱码，
+            python2中默认的编码方式是ascii码，中文会乱码，
 
-  ​	python3默认编码是utf8编码，中文不会乱码。
+            python3默认编码是utf8编码，中文不会乱码。
 
-  ​	解决中文乱码，在第一行加“-*-coding:utf-8-*- 或  #encoding=utf-8”。
-
-   ]
+            解决中文乱码，在第一行加“-*-coding:utf-8-*- 或  #encoding=utf-8”。]*
 
   * **str(unicode)对象和bytes对象转换：**
 
@@ -821,7 +819,7 @@ if __name__ == '__main__':
 
     uct时间转北京时间： uct + 时区差 = 本地时间。
 
-* ime模块
+* **ime模块**
 
   时间戳 timestamp
 
@@ -939,19 +937,19 @@ if __name__ == '__main__':
 
 ## 可迭代对象
 
-**“实现了\_\_iter\_\_方法的对象就叫做可迭代对象”，\_\_iter__方法的作用就是返回一个迭代器对象"**
+    **实现了\_\_iter\_\_方法的对象就叫做可迭代对象”，\_\_iter__方法的作用就是返回一个迭代器对象**
 
 * **可迭代对象：**
 
-      内部实现了__iter__方法，如str/list/tuple/set/dict
+      * 内部实现了__iter__方法，如str/list/tuple/set/dict
 
-      可迭代对象的优势：
+      * 可迭代对象的优势：
 
           1. 可以用for循环遍历
 
           2. 可用一些现成的算法，如sum、list等
 
-      如何产生可迭代对象：
+      * 如何产生可迭代对象：
 
           1. 内建可迭代对象（list、set、tuple、dict、str）
 
@@ -2189,7 +2187,7 @@ a(?=bbb)   # 表示a后边必须紧跟三个b。
   * utf8是互联网上使用广泛的一种unicode实现方式。它是一种变长编码，可以用1-4个字节表示一个符号，比如英文字母用1个字节表示，utf8和ascii码是相同的；比如汉字就需要用3个字节表示。
 
 
-## python3数据类型
+## 小结：python3数据类型
 * 数值类型（参考 test_numeric.py）
 
   * 整数（Integer）：python3中的整型只有一种 long 类型
@@ -2205,13 +2203,9 @@ a(?=bbb)   # 表示a后边必须紧跟三个b。
 
 *  容器类型（参考 test_container.py）
 
-  * 列表（list）
-
-  * 元组（tuple）
-
-  * 集合（set）
-
-  * 词典（dict）
-
+    * 列表（list）
+    * 元组（tuple）
+    * 集合（set）
+    * 词典（dict）
     说明：字符串也可以看作是字符的集合。
 
