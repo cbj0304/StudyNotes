@@ -54,7 +54,7 @@
 
   * 3xx -- 重定向
 
-     301：永久重定向，如输入“www.jingdong.com”会重定向到“www.jd.com”。
+     301：永久重定向，如输入"www.jingdong.com" 会重定向到 "www.jd.com"。
      302：临时重定向，比如访问一个需要登录的页面的时候，而此时没有登录，就会重定向到登录页面。
 
   * 4xx -- 客户端错误，请求语法错误
@@ -70,7 +70,8 @@
     ​
 
 ## urllib库
- 	简单静态页面抓取可以用python3自带的网络请求库，如urllib。在python3中urllib库所有和网络请求相关的方法都被集到了urllib.request模块下边了，用法示例：
+
+* 简单静态页面抓取可以用python3自带的网络请求库，如urllib。在python3中urllib库所有和网络请求相关的方法都被集到了urllib.request模块下边了，用法示例：
 
 ```python
 		from urllib import request
@@ -90,7 +91,7 @@
 
 *   **框架**: scrapy组件及架构如下图：
 
-    <img src="https://github.com/cbj0304/StudyNotes/raw/master/images/scrapy/scrapy.jpg" style="width:350;height:240;" />
+    <img src="https://github.com/cbj0304/StudyNotes/blob/master/images/scrapy/scrapy.jpg" style="width:350;height:240;" />
 
     * spider（产出Request，处理Response）
     * Pipeline：管道，爬虫产生的item数据，做过滤和持久化。
@@ -174,7 +175,7 @@
 
   **$ scrapy startproject kuaidaili**
 工程目录：
-<img src="https://github.com/cbj0304/StudyNotes/raw/master/images/scrapy/dir.jpg" style="width:150;height:250;" />
+<img src="https://github.com/cbj0304/StudyNotes/blob/master/images/scrapy/dir.jpg" style="width:150;height:250;" />
 
 
 * **第二步：写item.py文件，定义要提取的结构化数据**<br>
@@ -377,6 +378,8 @@ class KuaidailiItem(scrapy.Item):
 ## 思考
 
 scrapy用于**大批量的抓取静态页面**,非常高效。
+
 问题：如何抓取动态页面？
+
 ​	网络抓包？
 ​	selenium + chrome（PhantomJS）模拟浏览器？
