@@ -44,7 +44,7 @@
           原因：是Mysql服务没有启动 ；解决：启动服务：   
 
         1. 每次使用前手动启动服务 /etc/init.d/mysql start     
-           1. 开机自启  chkconfig mysql on,chkconfig mysql off， 检查开机是否自动启动： ntsysv	
+        2. 开机自启  chkconfig mysql on,chkconfig mysql off，检查开机是否自动启动： ntsysv	
 
       * 给mysql 的超级管理员root 增加密码：/usr/bin/mysqladmin -u root password root   
 
@@ -121,10 +121,8 @@
 
 * **数据库引擎层**  
 
-  * InnoDB(默认)：事务优先 （适合高并发操作；行锁）。    
-
-  * MyISAM：性能优先（表锁）。    
-
+  * InnoDB(默认)：事务优先 （适合高并发操作；行锁）。
+  * MyISAM：性能优先（表锁）。 
   * 指定数据库对象的引擎：
 
     ```mysql
@@ -142,11 +140,11 @@
 
 # SQL优化
 
-* **原因：** 
+* **原因** 
  
   性能低、执行时间太长、等待时间太长、SQL语句欠佳（连接查询）、索引失效、服务器参数设置不合理（缓冲、线程数）  
 
-* **SQL语句：** 
+* **SQL语句执行过程** 
  
   编写过程：  
   ```mysql
@@ -167,24 +165,24 @@
 * **索引的利弊**
   
   弊端：  
-  1. 索引本身很大，可以存放在内存/硬盘（通常为硬盘）  
-  2. 索引不是所有情况均适用： a.少量数据  b.频繁更新的字段  c.很少使用的字段  
-  3. 索引会降低增删改的效率（一般提高 查 的效率）  
+  * 索引本身很大，可以存放在内存/硬盘（通常为硬盘）  
+  * 索引不是所有情况均适用： a.少量数据  b.频繁更新的字段  c.很少使用的字段  
+  * 索引会降低增删改的效率（一般提高 查 的效率）  
 
   优势：  
-  4. 提高查询效率（降低IO使用率）  
-  5. 降低CPU使用率 （...order by age desc,因为B树索引本身就是一个好排序的结构，因此在排序时可以直接使用）  
+  * 提高查询效率（降低IO使用率）  
+  * 降低CPU使用率 （...order by age desc,因为B树索引本身就是一个好排序的结构，因此在排序时可以直接使用）  
 
 * **索引分类** 
  
-  * 分类：
+  * 分类
   
     主键索引：不能重复。id不能是null  
     唯一索引：不能重复。id可以是null  
     单值索引：单列；一个表可以多个单值索引,如 age 和 name。  
     复合索引：多个列构成的索引（相当于二级目录）如：(name,age)  
 
-  * 创建索引： 
+  * 创建索引
 
     ```mysql
     -- 方式一：  
@@ -208,14 +206,14 @@
     -- 注意：如果一个字段是primary key，则该字段默认就是主键索引。
     ```
 
-  * 删除索引： 
+  * 删除索引
 
     ```mysql
     drop index 索引名 on 表名 ;  
     drop index name_index on tb ; 
     ``` 
 
-  * 查询索引：
+  * 查询索引
     ```mysql
     show index from 表名 ;  
     show index from 表名 \G
@@ -233,7 +231,7 @@
 
   <https://dev.mysql.com/doc/refman/5.5/en/optimization.html>   
 
-* 举例：
+* SQL执行计划各字段说明
 
   ```mysql
 
@@ -372,40 +370,35 @@
 ### @  select_type
 
 查询类型:  
-
 PRIMARY:  包含子查询SQL中的 主查询 （最外层）  
 SUBQUERY：包含子查询SQL中的 子查询 （非最外层）  
 simple:  简单查询（不包含子查询、union）  
 derived:  衍生查询(使用到了临时表)      
-
-union result :告知开发人员，那些表之间存在union查询       
-
-a. 在from子查询中只有一张表  
+union result :告知开发人员，那些表之间存在union查询
 
 ```mysql
+-- 在from子查询中只有一张表
 explain select  cr.cname from ( select * from course where tid in (1,2) ) cr ;
-```
 
-b. 在from子查询中， 如果有table1 union table2 ，则table1 就是derived,table2就是union  
-
-```mysql
+-- 在from子查询中， 如果有table1 union table2 ，则table1 就是derived,table2就是union
 explain select  cr.cname from ( select * from course where tid = 1  union select * from course where tid = 2 ) cr ;
 ```
 
 ### @  type
 
-索引类型: 越往前性能越优。
-
+索引类型: 越往前性能越优。  
 全部的：system > const > eq_ref > ref > fulltext > ref_or_null > index_merge > unique_subquery >  index_subquery > range > index > ALL  
-
 常用的：system>const>eq_ref>**ref>range**>index>all  
-
 要对type进行优化的前提：有索引  
-
 其中：system,const只是理想情况；实际能达到 ref>range  
 
-**system（忽略）:** 只有一条数据的系统表 ；或 衍生表只有一条数据的主查询  
-
+* **system（忽略）:** 只有一条数据的系统表 ；或 衍生表只有一条数据的主查询。    
+* **const**: 仅仅能查到一条数据的SQL ,用于Primary key 或unique索引。  
+* **eq_ref**:唯一性索引：对于每个索引键的查询，返回匹配唯一行数据（有且只有1个，不能多 、不能0）。
+* **ref**：非唯一性索引，对于每个索引键的查询，返回匹配的所有行（0，多）  
+* **range**：检索指定范围的行 ,where后面是一个范围查询(between  ,> < >=,  特殊:in有时候会失效 ，从而转为 无索引all)。  
+* **index**：查询全部索引中数据。  
+* **all**：查询全部表中的数据  
 
 ```mysql
 -- **************************  system  **************************
@@ -488,9 +481,7 @@ explain select cid from course ;  -- cid不是索引，需要全表扫描，即�
 ### @  key_len
 
 索引的长度,单位字节   
-
 作用：用于判断复合索引是否被完全使用  （a,b,c）  
-
 key_len是索引列类型的字节长度。int--4byte， bigint--8byte，char(30)-如果是utf8编码，则为3*30=90byte，如果该列允许为NULL则再增加1byte标识，如果是varchar类型，则再增加2byte标识变长。
 
 ```mysql
