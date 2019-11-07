@@ -23,44 +23,34 @@
              -v ：可视化  
              -h ：显示安装进度  
 
-  3.  验证：   
+  3.  验证：
              mysqladmin --version  
 
   4.  启停：  
-             启动mysql应用： service mysql start   
-             关闭： service mysql stop   
-             重启： service mysql restart  
+             启动mysql应用： service mysql start  
+             关闭： service mysql stop  
+             重启： service mysql restart   
 
   5.  问题及注意点：  
 
       * 如果安装时与某个软件xxx冲突，则需要将冲突的软件卸载掉：yun -y remove xxx  
-
       * 如果提示"GPG keys..."安装失败，解决方案：rpm -ivh rpm软件名  --force --nodoeps  
-
-      * 安装时有日志提示我们可以修改密码：/usr/bin/mysqladmin -u root password 'new-password'
-
-      * 在计算机reboot后登陆MySQL，可能会报错：   "/var/lib/mysql/mysql.sock不存在"    
-
-          原因：是Mysql服务没有启动 ；解决：启动服务：   
-
-        1. 每次使用前手动启动服务 /etc/init.d/mysql start     
-        2. 开机自启  chkconfig mysql on,chkconfig mysql off，检查开机是否自动启动： ntsysv	
-
-      * 给mysql 的超级管理员root 增加密码：/usr/bin/mysqladmin -u root password root   
-
+      * 安装时有日志提示我们可以修改密码：/usr/bin/mysqladmin -u root password 'new-password'  
+      * 在计算机reboot后登陆MySQL，可能会报错：   "/var/lib/mysql/mysql.sock不存在"  
+          原因：是Mysql服务没有启动 ；解决：启动服务:  
+        1. 每次使用前手动启动服务 /etc/init.d/mysql start  
+        2. 开机自启  chkconfig mysql on,chkconfig mysql off，检查开机是否自动启动： ntsysv  
+      * 给mysql 的超级管理员root 增加密码：/usr/bin/mysqladmin -u root password root  
       * 客户端登陆：  
-
         mysql -h{host} -P{port} -uroot -p{password}  -D{database} -e{sql}  # 默认端口3306  
         解决中文乱码：  
-
-        show variables like "character%";          # 查看当前字符集    
-
-        set names utf8;                            # 统一编码为utf8    
+        show variables like "character%";          # 查看当前字符集  
+        set names utf8;                            # 统一编码为utf8  
 
   6.  重要文件和目录  
       * 数据目录：  
         ps -ef|grep mysql  可以看到：  
-        数据库目录：     datadir=/var/lib/mysql   
+        数据库目录：     datadir=/var/lib/mysql  
         pid文件目录： --pid-file=/var/lib/mysql/bigdata01.pid  
       * MySQL核心目录：  
         /var/lib/mysql:  mysql安装目录  
@@ -75,7 +65,7 @@
         但是，以上配置文件mysql默认不能识别，默认只能识别 /etc/my.cnf  
         采用 my-huge.cnf ：  
         cp /usr/share/mysql/my-huge.cnf /etc/my.cnf  
-        注意：mysql5.5默认配置文件/etc/my.cnf；Mysql5.6 默认配置文件/etc/mysql-default.cnf    
+        注意：mysql5.5默认配置文件/etc/my.cnf；Mysql5.6 默认配置文件/etc/mysql-default.cnf  
 
   7.  设置字符编码：  
 
@@ -99,10 +89,10 @@
       > service mysql restart
       > show variables like '%char%' ;
 
-      # 注意事项：修改编码 只对"之后"创建的数据库生效，因此建议在mysql安装完毕后，第一时间统一编码。    
+      # 注意事项：修改编码 只对"之后"创建的数据库生效，因此建议在mysql安装完毕后，第一时间统一编码。  
 
       # 其他命令
-      # 清屏(ctrl+L):    
+      # 清屏(ctrl+L):  
       > system clear
 
       # 单引号和双引号：单独使用时，单引号和双引号没有区别；需要嵌套使用时，双引号和单引号可以互相嵌套。使用的结果是把内部的内容当做整体一个字符串变量。
@@ -111,8 +101,9 @@
       # 多行注释，用/* ... */
       ```
 
-# 原理  
-* **MYSQL逻辑分层(从上到下)** 
+# 原理
+
+* **MYSQL逻辑分层(从上到下)**
      
   * 连接层：提供与客户端连接的服务。  
   * 服务层：提供各种用户使用的接口（如select查询api等），提供sql优化器（MySQL Query Optimizer）。  
@@ -173,8 +164,8 @@
   * 提高查询效率（降低IO使用率）  
   * 降低CPU使用率 （...order by age desc,因为B树索引本身就是一个好排序的结构，因此在排序时可以直接使用）  
 
-* **索引分类** 
- 
+* **索引分类**
+
   * 分类
   
     主键索引：不能重复。id不能是null  
@@ -202,7 +193,7 @@
     alter table tb add unique index name_index(name);  
     -- 复合索引：
     alter table tb add index dept_name_index(dept,name);  
-    
+
     -- 注意：如果一个字段是primary key，则该字段默认就是主键索引。
     ```
 
@@ -214,6 +205,7 @@
     ``` 
 
   * 查询索引
+
     ```mysql
     show index from 表名 ;  
     show index from 表名 \G
@@ -223,13 +215,11 @@
 
 ## **SQL执行计划**
 
-* 分析SQL的执行计划(explain + SQL语句)，可以模拟SQL优化器执行SQL语句，让开发者了解自己编写的SQL状况。   
-
-  MySQL查询优化器会干扰我们的优化。   
+* 分析SQL的执行计划(explain + SQL语句)，可以模拟SQL优化器执行SQL语句，让开发者了解自己编写的SQL状况。  
+  MySQL查询优化器会干扰我们的优化。  
 
 * 优化方法，参考官网：
-
-  <https://dev.mysql.com/doc/refman/5.5/en/optimization.html>   
+  <https://dev.mysql.com/doc/refman/5.5/en/optimization.html>  
 
 * SQL执行计划各字段说明
 
@@ -373,7 +363,7 @@
 PRIMARY:  包含子查询SQL中的 主查询 （最外层）  
 SUBQUERY：包含子查询SQL中的 子查询 （非最外层）  
 simple:  简单查询（不包含子查询、union）  
-derived:  衍生查询(使用到了临时表)      
+derived:  衍生查询(使用到了临时表)  
 union result :告知开发人员，那些表之间存在union查询
 
 ```mysql
@@ -392,7 +382,7 @@ explain select  cr.cname from ( select * from course where tid = 1  union select
 要对type进行优化的前提：有索引  
 其中：system,const只是理想情况；实际能达到 ref>range  
 
-* **system（忽略）:** 只有一条数据的系统表 ；或 衍生表只有一条数据的主查询。    
+* **system（忽略）:** 只有一条数据的系统表 ；或 衍生表只有一条数据的主查询。  
 * **const**: 仅仅能查到一条数据的SQL ,用于Primary key 或unique索引。  
 * **eq_ref**:唯一性索引：对于每个索引键的查询，返回匹配唯一行数据（有且只有1个，不能多 、不能0）。
 * **ref**：非唯一性索引，对于每个索引键的查询，返回匹配的所有行（0，多）  
@@ -480,7 +470,7 @@ explain select cid from course ;  -- cid不是索引，需要全表扫描，即�
 
 ### @  key_len
 
-索引的长度,单位字节   
+索引的长度,单位字节  
 作用：用于判断复合索引是否被完全使用  （a,b,c）  
 key_len是索引列类型的字节长度。int--4byte， bigint--8byte，char(30)-如果是utf8编码，则为3*30=90byte，如果该列允许为NULL则再增加1byte标识，如果是varchar类型，则再增加2byte标识变长。
 
@@ -537,6 +527,7 @@ explain select * from course c,teacher t where c.tid = t.tid  and t.tname ='tw' 
 ```
 
 ### @  rows
+
 被索引优化查询的 数据个数 (实际通过索引而查询到的 数据个数)  
 
 ```mysql
@@ -549,7 +540,7 @@ explain select * from course c,teacher t  where c.tid = t.tid and t.tname = 'tz'
 * **using temporary**: 性能损耗大 ，用到了临时表。一般出现在group by 语句中。  
 * **using index**: 性能提升; 索引覆盖（覆盖索引）。  
 * **using where**: 需要回表查询  
-* **impossible where**: where子句永远为false    
+* **impossible where**: where子句永远为false
 
 ```mysql
 -- **************************  using filesort  **************************
@@ -814,8 +805,8 @@ b. explain select * from test03 where a2=2 and a4=4 group by a3 ;
 # 避免索引失效的一些原则 
 
 1. 复合索引  
-   a. 复合索引，不要跨列或无序使用（最佳左前缀）   
-   b. 复合索引，尽量使用全索引匹配    
+   a. 复合索引，不要跨列或无序使用（最佳左前缀）  
+   b. 复合索引，尽量使用全索引匹配  
 2. 不要在索引上进行任何操作（计算、函数、类型转换），否则索引失效  
 
    ```mysql
@@ -857,7 +848,8 @@ b. explain select * from test03 where a2=2 and a4=4 group by a3 ;
    -- 一般而言，范围查询（> <  in），之后的索引失效。
    ```
 
-4. 补救。  
+4. 补救。
+  
    ```mysql
    -- 尽量使用索引覆盖（using index）
    -- 复合索引（a,b,c）
@@ -873,13 +865,15 @@ b. explain select * from test03 where a2=2 and a4=4 group by a3 ;
    explain select tname from teacher  where tname like '%x%'; -- 如果必须使用like '%x%'进行模糊查询，可以使用索引覆盖 挽救一部分。
    ```
 
-6. 尽量不要使用类型转换（显示、隐式），否则索引失效  
+6. 尽量不要使用类型转换（显示、隐式），否则索引失效
+  
    ```mysql
    explain select * from teacher where tname = 'abc' ;
    explain select * from teacher where tname = 123 ;  -- 程序底层将 123 -> '123'，即进行了类型转换，因此索引失效
    ```
 
-7. 尽量不要使用or，否则索引失效  
+7. 尽量不要使用or，否则索引失效
+  
    ```mysql
    explain select * from teacher where tname ='' or tcid > 1 ; -- 将or左侧的tname失效。
    ```
@@ -890,13 +884,10 @@ b. explain select * from test03 where a2=2 and a4=4 group by a3 ;
 
   * **exist语法**：  
 
-  ​       select .. from table where exist (子查询) ;    
-
-  ​      将主查询的结果，放到子查询结果中进行条件校验（看子查询是否有数据，如果有数据则校验成功），如果复合校验，则保留数据；    
-
-  ​       select tname from teacher where exists (select * from teacher) ;   
+  ​       select .. from table where exist (子查询) ;  
+  ​      将主查询的结果，放到子查询结果中进行条件校验（看子查询是否有数据，如果有数据则校验成功），如果复合校验，则保留数据；  
+  ​       select tname from teacher where exists (select * from teacher) ;  
   ​       -- 等价于select tname from teacher  
-
   ​      select tname from teacher where exists (select * from teacher where tid =9999) ;  
 
   *  **in语法: ** 
@@ -930,7 +921,8 @@ b. explain select * from test03 where a2=2 and a4=4 group by a3 ;
 * 慢查询日志:  
   MySQL提供的一种日志记录，用于记录MySQL中响应时间超过阀值的SQL语句 （long_query_time，默认10秒）  
   慢查询日志默认是关闭的；建议：开发调优时打开，而最终部署时关闭。  
-  慢查询日志的相关操作：  
+  慢查询日志的相关操作：
+  
   ```mysql
   -- 检查是否开启了慢查询日志
   show variables like '%slow_query_log%' ;
@@ -991,7 +983,8 @@ b. explain select * from test03 where a2=2 and a4=4 group by a3 ;
 
 * 模拟海量数据
   * 存储过程（无return）  
-  * 存储函数（有return）  
+  * 存储函数（有return）
+  
   ```mysql
   create database testdata ;
   use testdata
@@ -1082,7 +1075,8 @@ b. explain select * from test03 where a2=2 and a4=4 group by a3 ;
   call insert_dept(10,30) ;
   ```
 
-* 分析海量数据:  
+* 分析海量数据:
+  
   ```mysql
   # profiles
   -- 会记录所有profiling打开之后的全部SQL查询语句所花费的时间。
@@ -1189,8 +1183,8 @@ b. explain select * from test03 where a2=2 and a4=4 group by a3 ;
       -- Table_locks_waited：需要等待的表锁数(如果该值越大，说明存在越大的锁竞争)  
       -- 一般建议：Table_locks_immediate/Table_locks_waited > 5000， 建议采用InnoDB引擎，否则MyISAM引擎  
 
-
 * **行锁（InnoDB）**
+
   ```mysql
   create table linelock
   (
@@ -1210,10 +1204,10 @@ b. explain select * from test03 where a2=2 and a4=4 group by a3 ;
   -- **************写操作（行锁 操作同一条记录）
   -- 会话0： 写操作
   insert into linelock values('a6') ;
-  	   
+
   -- 会话1： 写操作 同样的数据
   update linelock set name='ax' where id = 6;
-  	
+
   -- 对行锁情况：
   -- 1.如果会话x对某条数据a进行 DML(增删改)操作（研究时：关闭了自动commit的情况下），则其他会话必须等待会话x结束事务(commit/rollback)后才能对数据a进行操作。
   -- 2.表锁 是通过unlock tables，也可以通过事务解锁 ; 行锁 是通过事务(commit/rollback)解锁。
@@ -1238,12 +1232,12 @@ b. explain select * from test03 where a2=2 and a4=4 group by a3 ;
 
   -- 会话0： 写操作
   update linelock set name = 'ai' where name = 3 ;
-  		
+
   -- 会话1： 写操作， 不同的数据
   update linelock set name = 'aiX' where name = 4 ;
   -- 可以发现，数据被阻塞了（加锁）
   -- 原因：如果索引类 发生了类型转换，则索引失效。 因此 此次操作，会从行锁 转为表锁。
-  	
+
   -- *********** 行锁的一种特殊情况（间隙锁）
   -- 间隙锁：值在范围内，但却不存在
   -- 此时linelock表中 没有id=7的数据
@@ -1272,45 +1266,38 @@ b. explain select * from test03 where a2=2 and a4=4 group by a3 ;
       Innodb_row_lock_time_max  ：最大等待时长。从系统启到现在最大一次等待的时间  
       Innodb_row_lock_waits ：等待次数。从系统启到现在一共等待的次数  
 
-# 主从复制  
+# 主从复制
+
 * 集群在数据库的一种实现  
 * 环境搭建  
   windows: mysql主  
   linux: mysql从  
-
+  linux系统下安装在第一节有介绍，这里说明windows系统下mysql的安装。
   * 卸载原来版本  
-
-  ​       如果之前计算机中安装过Mysql，要重新再安装则需要：先卸载 再安装。通过电脑自带卸载工具卸载Mysql (电脑管家也可以)；删除一个mysql缓存文件C:\ProgramData\MySQL；删除注册表regedit中所有mysql相关配置；重启计算机。  
+  ​  如果之前计算机中安装过Mysql，要重新再安装则需要：先卸载 再安装。通过电脑自带卸载工具卸载Mysql (电脑管家也可以)；删除一个mysql缓存文件C:\ProgramData\MySQL；删除注册表regedit中所有mysql相关配置；重启计算机。  
 
   * 安装  
-
-  ​       安装时，如果出现未响应：则重新打开D:\MySQL\MySQL Server 5.5\bin\MySQLInstanceConfig.exe，可以安装图形化客户端： SQLyog / Navicat；如果要远程连接数据库，则需要授权远程访问。   
+  ​  安装时，如果出现未响应：则重新打开D:\MySQL\MySQL Server 5.5\bin\MySQLInstanceConfig.exe，可以安装图形化客户端： SQLyog / Navicat；如果要远程连接数据库，则需要授权远程访问。   
    授权远程访问 :(A->B,则再B计算机的Mysql中执行以下命令)  
 
   ```mysql
    GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root' WITH GRANT OPTION;
    FLUSH PRIVILEGES;
   ```
-   如果仍然报错：可能是防火墙没关闭 ： 在B关闭防火墙  service iptables stop   
 
+    如果仍然报错：可能是防火墙没关闭 ： 在B关闭防火墙  service iptables stop  
   * mysql主从同步原理  
-
-    1. master将改变的数据 记录在本地的 二进制日志中（binary log） ；-- 二进制日志事件 。 
-
+    1. master将改变的数据 记录在本地的 二进制日志中（binary log） ；-- 二进制日志事件 。  
     2. slave将master的binary log拷贝到自己的 relay log（中继日志文件）中。  
-
     3. 中继日志事件 将数据读取到自己的数据库之中。  
-
        MYSQL主从复制 是异步的，串行化的， 有延迟 。 
-
        master:slave = 1:n  
 
   * 修改配置，开启主从同步
-
-  ​        windows配置文件 --  **my.ini**
-  ​        linux配置文件  --    **my.cnf**
-
-  ​	配置前，为了无误，先将权限(远程访问)、防火墙等处理：关闭windows/linux防火墙： windows：右键“网络”；关闭linux防火墙: service iptables stop； Mysql允许远程连接(windowos/linux)：  
+  ​  windows配置文件 --  **my.ini**  
+  ​  linux配置文件  --    **my.cnf**  
+  ​	 配置前，为了无误，先将权限(远程访问)、防火墙等处理：关闭windows/linux防火墙： windows：右键“网络”；关闭linux防火墙: service iptables stop； Mysql允许远程连接(windowos/linux)：
+  
   ```mysql
   GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root' WITH GRANT OPTION;
   FLUSH PRIVILEGES;
@@ -1372,7 +1359,8 @@ b. explain select * from test03 where a2=2 and a4=4 group by a3 ;
     本次 通过 Last_IO_Error发现错误的原因是 主从使用了相同的server-id
     -- 检查:在主从中分别查看serverid:  
     show variables like 'server_id' ;
-    -- 可以发现，在Linux中的my.cnf中设置了server-id=2，但实际执行时 确实server-id=1，原因：可能是 linux版Mysql的一个bug，也可能是 windows和Linux版本不一致造成的兼容性问题。
+    -- 可以发现，在Linux中的my.cnf中设置了server-id=2，但实际执行时 确实server-id=1，
+    -- 原因：可能是 linux版Mysql的一个bug，也可能是 windows和Linux版本不一致造成的兼容性问题。
     -- 解决改bug： 
     set global server_id =2 ;
 
@@ -1386,5 +1374,6 @@ b. explain select * from test03 where a2=2 and a4=4 group by a3 ;
     ```
 
 # 其他
+
 b站学习视频：  
 颜群 https://www.bilibili.com/video/av29072634
