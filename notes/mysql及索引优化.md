@@ -95,7 +95,9 @@
       # 清屏(ctrl+L):  
       > system clear
 
-      # 单引号和双引号：单独使用时，单引号和双引号没有区别；需要嵌套使用时，双引号和单引号可以互相嵌套。使用的结果是把内部的内容当做整体一个字符串变量。
+      # 单引号和双引号：
+      -- 单独使用时，单引号和双引号没有区别；
+      -- 嵌套使用时，双引号和单引号可以互相嵌套。把内部的内容当做整体一个字符串变量。
 
       # 单行注释可以用--(后边加一个空格)，或者#
       # 多行注释，用/* ... */
@@ -324,10 +326,11 @@
 
 ### @  id
 
-  案例1：查询课程编号为2  或 教师证编号为3  的老师信息。  
+  案例1：查询课程编号为2 或 教师证编号为3 的老师信息。  
 
 ```mysql
-  explain SELECT * FROM course as c, teacher as t, teacherCard as tc WHERE c.tid=t.tid AND t.tcid=tc.tcid AND (c.cid=2 OR t.tcid=3);
+  explain SELECT * FROM course as c, teacher as t, teacherCard as tc WHERE c.tid=t.tid 
+  AND t.tcid=tc.tcid AND (c.cid=2 OR t.tcid=3);
 ```
 
   案例2：查询教授SQL课程的老师的描述（desc）。  
@@ -371,7 +374,8 @@ union result :告知开发人员，那些表之间存在union查询
 explain select  cr.cname from ( select * from course where tid in (1,2) ) cr ;
 
 -- 在from子查询中， 如果有table1 union table2 ，则table1 就是derived,table2就是union
-explain select  cr.cname from ( select * from course where tid = 1  union select * from course where tid = 2 ) cr ;
+explain select  cr.cname from ( 
+select * from course where tid = 1  union select * from course where tid = 2 ) cr ;
 ```
 
 ### @  type
@@ -458,10 +462,12 @@ explain select cid from course ;  -- cid不是索引，需要全表扫描，即�
 ​      如果 possible_key/key是NULL，则说明没用索引   
 
 ```mysql
- alter table course add index cname_index (cname);
- explain select t.tname ,tc.tcdesc from teacher t,teacherCard tc where t.tcid= tc.tcid and t.tid = (select c.tid from course c where cname = 'sql') ;
+alter table course add index cname_index (cname);
+explain select t.tname ,tc.tcdesc from teacher t,teacherCard tc 
+where t.tcid= tc.tcid and t.tid = (select c.tid from course c where cname = 'sql') ;
 
- explain select tc.tcdesc from teacherCard tc,course c,teacher t where c.tid = t.tid and t.tcid = tc.tcid and c.cname = 'sql' ;
+explain select tc.tcdesc from teacherCard tc,course c,teacher t 
+where c.tid = t.tid and t.tcid = tc.tcid and c.cname = 'sql' ;
 ```
 
 ### @  key 
@@ -501,7 +507,11 @@ create table test_kl
  -- 增加一个复合索引 
  alter table test_kl add index name_name1_index (name,name1) ; 
 
- -- 测试3：复合索引：一级一级的查找，根据name查找，如果结果只有一个或者没有，直接返回，不用 name1了；如果name查找的结果不唯一，则继续用name1查找
+ -- 测试3：
+ -- 复合索引：一级一级的查找，根据name查找，如果结果中没有，直接返回，不用 name1了；
+ -- 如果name查找的结果不唯一，则继续用name1查找，
+ -- 跨列查找会使复合索引失效。
+
  explain select * from test_kl where name='a' and name1 = '' ; -- 121
  explain select * from test_kl where name = '' ; -- 60
 
@@ -569,8 +579,12 @@ explain select * from course c,teacher t  where c.tid = t.tid and t.tname = 'tz'
  -- using where, using filesort
  explain select * from test02 where a1 = 'b' order by a2 ; 
 
- -- 小结：对于单索引， 如果排序和查找是同一个字段，则不会出现using filesort；如果排序和查找不是同一个字段，则会出现using filesort；
- -- 避免： where哪些字段，就order by那些字段2
+ -- 小结：
+ -- 对于单索引， 如果排序和查找是同一个字段，则不会出现using filesort；
+ -- 如果排序和查找不是同一个字段，则会出现using filesort；
+
+ -- 避免： 
+ -- where哪些字段，就order by那些字段2
 
  -- 复合索引：不能跨列（最佳左前缀）
  drop index idx_a1 on test02;
@@ -657,7 +671,8 @@ alter table book add index idx_bta (bid,typeid,authorid);
 drop index idx_bta on book;
 
 # 根据SQL实际解析的顺序，调整索引的顺序：
-alter table book add index idx_tab (typeid,authorid,bid); --虽然可以回表查询bid，但是将bid放到索引中可以提升使用using index ;
+alter table book add index idx_tab (typeid,authorid,bid); 
+--虽然可以回表查询bid，但是将bid放到索引中可以提升使用using index ;
 
 # 再次优化（之前是index级别）：思路。因为范围查询in有时会失效，因此交换索引的顺序，将typeid in(2,3) 放到最后。
 drop index idx_tab on book;
@@ -669,7 +684,11 @@ explain select bid from book where  authorid=1 and  typeid in(2,3) order by type
 -- b.索引需要逐步优化  
 -- c.将含In的范围查询 放到where条件的最后，防止失效。
 
--- 本例中同时出现了Using where（需要回原表）; Using index（不需要回原表）：原因，where  authorid=1 and  typeid in(2,3)中authorid在索引(authorid,typeid,bid)中，因此不需要回原表（直接在索引表中能查到）；而typeid虽然也在索引(authorid,typeid,bid)中，但是含in的范围查询已经使该typeid索引失效，因此相当于没有typeid这个索引，所以需要回原表（using where）；
+/*
+本例中同时出现了Using where（需要回原表）; Using index（不需要回原表）：
+原因，where  authorid=1 and  typeid in(2,3)中authorid在索引(authorid,typeid,bid)中，因此不需要回原表（直接在索引表中能查到）；
+而typeid虽然也在索引(authorid,typeid,bid)中，但是含in的范围查询已经使该typeid索引失效，因此相当于没有typeid这个索引，所以需要回原表（using where）；
+*/
 -- 例如以下没有了In，则不会出现using where
 explain select bid from book where  authorid=1 and  typeid =3 order by typeid desc ;
 
@@ -779,18 +798,21 @@ explain select a1,a2,a3,a4 from test03 where a4=1 and a3=2 and a2=3 and a1 =4 ;
 
 -- 以上2个SQL，使用了全部的复合索引
 
--- 以上SQL用到了a1 a2两个索引，该两个字段不需要回表查询using index ;而a4因为跨列使用，造成了该索引失效，需要回表查询 因此是using where；以上可以通过 key_len进行验证
+-- 以下SQL用到了a1 a2两个索引，该两个字段不需要回表查询using index ;
+-- 而a4因为跨列使用，造成了该索引失效，需要回表查询 因此是using where；可以通过 key_len进行验证
 explain select a1,a2,a3,a4 from test03 where a1=1 and a2=2 and a4=4 order by a3; 
 
 
--- 以上SQL出现了 using filesort(文件内排序，“多了一次额外的查找/排序”) ：不要跨列使用( where和order by 拼起来，不要跨列使用)
+-- 以下SQL出现了 using filesort(文件内排序，“多了一次额外的查找/排序”) ：
+-- 不要跨列使用( where和order by 拼起来，不要跨列使用)
 explain select a1,a2,a3,a4 from test03 where a1=1 and a4=4 order by a3; 
 
 -- 不会using filesort
 explain select a1,a2,a3,a4 from test03 where a1=1 and a4=4 order by a2 , a3; 
 
 -- 总结：
--- i.如果(a,b,c,d)复合索引和使用的顺序全部一致(且不跨列使用)，则复合索引全部使用。如果部分一致(且不跨列使用)，则使用部分索引。
+-- i.如果(a,b,c,d)复合索引和使用的顺序全部一致(且不跨列使用)，则复合索引全部使用。
+-- 如果部分一致(且不跨列使用)，则使用部分索引。
 select a,c where  a = and b= and d=
 -- ii.where和order by 拼起来，不要跨列使用 
 
@@ -815,7 +837,8 @@ b. explain select * from test03 where a2=2 and a4=4 group by a3 ;
    explain select * from book where authorid = 1 and typeid = 2 ;  -- 用到了at2个索引
    explain select * from book where authorid = 1 and typeid*2 = 2 ; -- 用到了a1个索引
    explain select * from book where authorid*2 = 1 and typeid*2 = 2 ; -- 用到了0个索引
-   explain select * from book where authorid*2 = 1 and typeid = 2 ; -- 用到了0个索引,原因：对于复合索引，如果左边失效，右侧全部失效。(a,b,c)，例如如果 b失效，则b c同时失效。
+   explain select * from book where authorid*2 = 1 and typeid = 2 ; -- 用到了0个索引,
+   -- 原因：对于复合索引，如果左边失效，右侧全部失效。(a,b,c)，例如如果 b失效，则b c同时失效。
 
    drop index idx_atb on book ; 
    alter table book add index idx_authroid (authorid) ;
@@ -862,7 +885,8 @@ b. explain select * from test03 where a2=2 and a4=4 group by a3 ;
    select * from xx where name like '%x%' ; -- name索引失效
    explain select * from teacher  where tname like '%x%'; -- tname索引失效
    explain select * from teacher  where tname like 'x%';
-   explain select tname from teacher  where tname like '%x%'; -- 如果必须使用like '%x%'进行模糊查询，可以使用索引覆盖 挽救一部分。
+   explain select tname from teacher  where tname like '%x%'; 
+   -- 如果必须使用like '%x%'进行模糊查询，可以使用索引覆盖 挽救一部分。
    ```
 
 6. 尽量不要使用类型转换（显示、隐式），否则索引失效
@@ -1025,7 +1049,8 @@ b. explain select * from test03 where a2=2 and a4=4 group by a3 ;
   end $ 
 
   -- 如果报错：You have an error in your SQL syntax，说明SQL语句语法有错，需要修改SQL语句；
-  -- 如果报错：This function has none of DETERMINISTIC, NO SQL, or READS SQL DATA in its declaration and binary logging is enabled (you *might* want to use the less safe log_bin_trust_function_creators variable)是因为 存储过程/存储函数在创建时 与之前的 开启慢查询日志冲突了，解决冲突：
+  -- 如果报错：This function has none of DETERMINISTIC, NO SQL, ...(you *might* want to use the less safe log_bin_trust_function_creators variable)
+  -- 是因为 存储过程/存储函数在创建时 与之前的 开启慢查询日志冲突了，解决冲突：
   -- 临时解决(开启log_bin_trust_function_creators)
   show variables like '%log_bin_trust_function_creators%';
   set global log_bin_trust_function_creators = 1;
