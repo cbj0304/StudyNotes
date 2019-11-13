@@ -5,6 +5,8 @@
 
 * [c++11新特性](./notes/c++11新特性.md)
 
+* [STL标准模板库](./notes/STL.md)
+
 * [python语言](./notes/python语言.md)
 
 * [shell脚本](./notes/shell脚本.md)
