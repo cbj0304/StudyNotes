@@ -1846,6 +1846,6 @@ int main()
      ​
 # 其他
 
-* B站学习视频
-  https://www.bilibili.com/video/av59131050
+* B站学习视频  
+  https://www.bilibili.com/video/av59131050  
   https://www.bilibili.com/video/av45108908（c++11新增容器）
