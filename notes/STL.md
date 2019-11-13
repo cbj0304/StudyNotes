@@ -254,7 +254,7 @@
   1. sizeof和strlen的区别：
   （1）sizeof是运算符，strlen是函数。 
   （2）strlen只能用char*做参数，且必须是以'\0'结尾的。->计算字符串首地址到\0之前的字节数。
-  （3）sizeofsizeof的本质是得到某个类型的大小，也就是当创建这个类型的一个对象（或变量）的时候，需要为它分配的空间的大小。
+  （3）sizeof的本质是得到某个类型的大小，也就是当创建这个类型的一个对象（或变量）的时候，需要为它分配的空间的大小。
       char str[20]="0123456789";
       int a=strlen(str);  // a=10;
       int b=sizeof(str);  // b=20;
@@ -485,7 +485,9 @@ int main()
   3. 在任意位置插入删除（需要大量移动元素，不如list高效）：
     insert()
     erase()  // erase和insert配对，通过游标操作，彻底的擦除元素
-    remove() // 移除指定值的节点，并释放资源。在vector中是移动到vector的尾部并不减少vector的size。
+    remove() // 算法库中的remove是将指定元素移动到容器的尾部并不减少vector的size,
+    	       // vector需要用remove和erase配合使用彻底的擦除指定元素,
+    	       // 为什么这样？因为不同元素的删除方式不一样，不能做出通用性的删除动作。
 
   访问：
     随机访问迭代器可以访问任意位置的元素：
@@ -550,6 +552,13 @@ int main()
       // 交换
       vector<string> c2 {"hello", "china"};
       c.swap(c2);
+    
+      // remove/erase配合彻底删除指定元素
+      vector<int> vi {23, 100, 5, 100, 33, -10};          // size=6
+      std::vector<int>::iterator it = remove(vi.begin(), vi.end(), 100);  
+      // 此时size=6, it指向有效元素的下一个元素的位置，即指向第5个位置
+      vi.erase(it, vi.end());                // 删除无效数据区间
+      copy(vi.begin(), vi.end(), ostream_iterator<int>(cout, " ")); // 23 5 33 -10 size=4
 
       system("pause");
       return 0;
@@ -586,7 +595,8 @@ int main()
         pop_front()
         insert()
         erase()  // erase和insert配对，通过游标操作，彻底的擦除元素
-        remove() // 移除指定值的节点，并释放资源。在vector中是移动到vector的尾部并不减少vector的size。
+        remove() // list成员函数中的remove可以移除指定值的节点，并释放资源。
+           // vector没有remove成员函数，调用的是算法库中的remove，不会真正删除，见vector示例代码。
 
       访问：
         双向迭代器只能访问收尾元素，或者双向顺序访问,不支持随机访问。
@@ -654,6 +664,11 @@ int main()
       c.unique();      // 去重
       for_each(c.begin(), c.end(), show_item<string>);
       cout << endl;
+      
+      c.remove("like");   // 删除
+      c.remove("me");
+      for_each(c.begin(), c.end(), show_item<string>);
+      cout << endl;
 
       system("pause");
       return 0;
@@ -662,7 +677,7 @@ int main()
 
 *   list的内存结构
 
-    <img src="../images/stl/list.jpg" height="400" width="650" />
+      <img src="../images/stl/list.jpg" height="400" width="650" />
 
 *   list的迭代器结构
 
@@ -805,11 +820,11 @@ int main()
 
 *    deque内存结构
 
-     <img src="../images/stl/deque.jpg" height="400" width="650" />
+        <img src="../images/stl/deque.jpg" height="400" width="650" />
 
 *    deque迭代器结构
 
-     <img src="../images/stl/deque_iterator.jpg" height="400" width="650" />
+        <img src="../images/stl/deque_iterator.jpg" height="400" width="650" />
 
 ## queue/priority_queue
 
@@ -1769,78 +1784,79 @@ int main()
 *    sort方法示例
 
      ```c++
-     #include <iostream>
-       #include <vector>
-       #include <string>
-       #include <algorithm>
-       #include <cstdlib>
+        #include <iostream>
+          #include <vector>
+          #include <string>
+          #include <algorithm>
+          #include <cstdlib>
 
-       using namespace std;
+          using namespace std;
 
-       /*
-       c++标准库的sort方法：
-       1. 使用：
-           #include <algorithm>
-           using namespace std;
-       2. 使用的排序方法类似于快速排序，时间复杂度为 logN。
-       3. 默认采用从小到大排序，也支持自定义排序函数（仿函数、函数指针、模板函数指针、匿名函数）。
-           (1) 如果待排序元素本身支持<运算符，或者重载的<运算符，不传第三个参数的情况下，采用从小到大排序。
-           (2) 自定义比较函数，控制排序：
-               比较函数两个参数(a, b), 如果a < b， 则返回true；->  从小到大排序（同默认情况）
-               比较函数两个参数(a, b), 如果a > b， 则返回true；->  从大到小排序
-       4. 只有支持RandomAccessIterator的容器才能用此方法，所以list的排序不能使用该算法。
-       */
+          /*
+          c++标准库的sort方法：
+     1. 使用：
+         #include <algorithm>
+         using namespace std;
+     2. 使用的排序方法类似于快速排序，时间复杂度为 logN。
+     3. 默认采用从小到大排序，也支持自定义排序函数（仿函数、函数指针、模板函数指针、匿名函数）。
+         (1) 如果待排序元素本身支持<运算符，或者重载的<运算符，不传第三个参数的情况下，采用从小到大排序。
+         (2) 自定义比较函数，控制排序：
+             比较函数两个参数(a, b), 如果a < b， 则返回true；->  从小到大排序（同默认情况）
+             比较函数两个参数(a, b), 如果a > b， 则返回true；->  从大到小排序
+     4. 只有支持RandomAccessIterator的容器才能用此方法，所以list的排序不能使用该算法。
+     */
 
-       // 自定义类
-       struct Student
-       {
-           Student(string n, int s):name(n), score(s) {}
-           string name;
-           int score;
+     // 自定义类
+     struct Student
+     {
+         Student(string n, int s):name(n), score(s) {}
+         string name;
+         int score;
 
-           // 重载小于运算符
-           bool operator < (Student other) const {
-               return this->score < other.score;
-           }
+         // 重载小于运算符
+         bool operator < (Student other) const {
+             return this->score < other.score;
+         }
 
-           // 重载标准输出
-           friend ostream& operator<<(ostream &out, Student &s) {
-               out << "name=" << s.name << " score=" << s.score;
-               return out;
-           }
-       };
+         // 重载标准输出
+         friend ostream& operator<<(ostream &out, Student &s) {
+             out << "name=" << s.name << " score=" << s.score;
+             return out;
+         }
+     };
 
-       // 自定义比较函数
-       struct myCompStu
-       {
-           bool operator() (const Student &a, const Student &b) const {
-               return a.score > b.score;
-           }
-       };
+     // 自定义比较函数
+     struct myCompStu
+     {
+         bool operator() (const Student &a, const Student &b) const {
+             return a.score > b.score;
+         }
+     };
 
-       int main()
-       {
-           cout << "TEST INNER CLASS..." << endl;
-           // 容器使用sort，从小到大排序
-           vector<int> vi = { 23, 45, 12, 6, 200};
-           std::sort(vi.begin(), vi.end());       // 默认使用的是小于
-           for (auto v : vi) { cout << v << endl; }
-           // 可以直接使用内置仿函数，实现从大到小排序
-           std::sort(vi.begin(), vi.end(), greater<int>());
-           for (auto v : vi) { cout << v << endl; }
+     int main()
+     {
+         cout << "TEST INNER CLASS..." << endl;
+         // 容器使用sort，从小到大排序
+         vector<int> vi = { 23, 45, 12, 6, 200};
+         std::sort(vi.begin(), vi.end());       // 默认使用的是小于
+         for (auto v : vi) { cout << v << endl; }
+         // 可以直接使用内置仿函数，实现从大到小排序
+         std::sort(vi.begin(), vi.end(), greater<int>());
+         for (auto v : vi) { cout << v << endl; }
 
-           cout << "TEST CUSTOMIZED CLASS..." << endl;
-           // 自定义仿函数
-           vector<Student> ss = {Student("zs", 80), Student("ls", 78), Student("ww", 100)};
-           std::sort(begin(ss), end(ss));          // 重载了<, 就可以支持从小到大排序了。
-           for(auto s : ss) { cout << s << endl; }
-           // 自定义比较函数，实现从大到小排序
-           std::sort(begin(ss), end(ss), myCompStu());
-           for(auto s : ss) { cout << s << endl; }
+         cout << "TEST CUSTOMIZED CLASS..." << endl;
+         // 自定义仿函数
+         vector<Student> ss = {Student("zs", 80), Student("ls", 78), Student("ww", 100)};
+         std::sort(begin(ss), end(ss));          // 重载了<, 就可以支持从小到大排序了。
+         for(auto s : ss) { cout << s << endl; }
+         // 自定义比较函数，实现从大到小排序
+         std::sort(begin(ss), end(ss), myCompStu());
+         for(auto s : ss) { cout << s << endl; }
 
-           system("pause");
-           return 0;
-       }
+         system("pause");
+         return 0;
+     }
+     ```
      ```
 
      ​
