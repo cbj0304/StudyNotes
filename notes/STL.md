@@ -309,7 +309,7 @@
   }
   ```
 
-  ​
+  
 
 ## 容器的各种遍历方式
 
@@ -1263,6 +1263,44 @@ int main()
 
 * tuple的实现 （见c++11新特性的笔记）
 
+## bitset
+
+```c++
+#include <bitset>
+#include <iostream>
+
+using namespace std;
+
+// 应用： https://blog.csdn.net/The_sam/article/details/70982091
+int main()
+{
+    bitset<32> bitvec;            // 32个bit位，全为0
+    bitset<10> bitvec2("1100");   // 第2，3位置为1，其余位置为0
+    int data = 100;
+    bitset<20> bitvec3(data);     // 二进制表示为 1100100
+
+    cout << "bitvec2.count()=" << bitvec2.count() << endl;        // 2
+    cout << "bitvec3.count()=" << bitvec3.count() << endl;        // 3
+    cout << "sizeof(bitvec3)=" << sizeof(bitvec3) << endl;        // 4byte 
+    bitvec2.reset();        // 全部置0， set是全部置1  
+    cout << "bitvec2.any()=" << bitvec2.any() << endl;            // 测试是否有一个bit位为1
+
+    // 十进制转二进制
+    bool flag = false;
+    for(int i=19; i>=0; i--) {
+        if (bitvec3.test(i)) flag = true;     // 从第一个非0开始输出（测试某一个bit是否为1）
+        if (flag) {
+            cout << bitvec3[i];
+        }
+    }
+    cout << endl;
+    system("pause");
+    return 0;
+}
+```
+
+
+
 
 
 # 友元、模板、运算符重载
@@ -1484,7 +1522,7 @@ int main()
 
 <img src="../images/stl/iterator_traits3.jpg" height="380" width="650" />
 
-​
+
 # 常见算法
 
 *    STL常见算法示例
@@ -1857,9 +1895,6 @@ int main()
          return 0;
      }
      ```
-     ```
-
-     ​
 # 其他
 
 * B站学习视频  
