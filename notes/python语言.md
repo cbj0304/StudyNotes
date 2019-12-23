@@ -720,7 +720,7 @@ look into my eyes, you're under"""
 
     3. utf8：是编码规则，是互联网上使用广泛的一种unicode实现方式。它是一种变长编码，可以用1-4个字节表示一个符号，
 
-      比如英文字母用1个字节表示，utf8和ascii码是相同的；比如汉字就需要用3个字节表示。
+        比如英文字母用1个字节表示，utf8和ascii码是相同的；比如汉字就需要用3个字节表示。
 
 * **python字符串类型：**
 
@@ -782,13 +782,13 @@ if __name__ == '__main__':
 
      timedelta: 时间差对象
 
-     datetime: 时间对象
+       datetime: 时间对象
 
 * **dateutil库**
 
     第三方库安装 pip install python-dateutil
 
-    处理较复杂的时间日期操作（时区， 模糊时间范围， 节假日等）
+      处理较复杂的时间日期操作（时区， 模糊时间范围， 节假日等）
 
 * **calendar库**
 
@@ -798,15 +798,15 @@ if __name__ == '__main__':
 
     第三方库安装 pip install pytz
 
-    处理时区操作
+      处理时区操作
 
-    整个地球被划分为二十四时区，每个时区都有自己的本地时间。
+      整个地球被划分为二十四时区，每个时区都有自己的本地时间。
 
-    为统一而普遍使用一个标准时间，称为通用协调时UTC。
+      为统一而普遍使用一个标准时间，称为通用协调时UTC。
 
-   北京时区是东八区，领先UTC 8个小时,标记为 Date: Sun, 13 June 2010 09:45:28 +0800。
+     北京时区是东八区，领先UTC 8个小时,标记为 Date: Sun, 13 June 2010 09:45:28 +0800。
 
-    uct时间转北京时间： uct + 时区差 = 本地时间。
+      uct时间转北京时间： uct + 时区差 = 本地时间。
 
 * **ime模块**
 
@@ -933,7 +933,7 @@ if __name__ == '__main__':
   * 可迭代对象的优势：
 
         1. 可以用for循环遍历
-
+    
         2. 可用一些现成的算法，如sum、list等
 
   * 如何产生可迭代对象：
@@ -1447,13 +1447,13 @@ python中的*和**
 
        * 会把接收到的参数存入一个元组 （另一种描述：表示函数能接受任意数量的位置参数）
 
-       ** 会把接收到的参数存入一个字典（另一种描述：表示函数能接受任意数量的关键字参数）
+         ** 会把接收到的参数存入一个字典（另一种描述：表示函数能接受任意数量的关键字参数）
 
 * **用作运算符号**
 
        * 乘法
 
-       ** 平方
+         ** 平方
 
 **代码示例：**
 
@@ -1688,7 +1688,7 @@ if __name__ == '__main__':
 
   生成器、yield关键字、next()、send()函数
 
-  next()、send()函数作用类似，区别是send()可以传参数，c.next()和c.send(None)作用一样。
+  next()、send()函数作用类似，区别是send()可以传参数，这个参数可以被yeild接收，c.next()和c.send(None)作用一样。
 
 **代码示例：**
 
@@ -1696,179 +1696,150 @@ if __name__ == '__main__':
 # -*- coding: utf-8 -*-
 
 # 理解 生成器、yield关键字、next()、send()函数 运行
-def func():
+import time
+
+def task_1():
     while True:
-        a = yield 10
-        print(a)
+        print("task 1 is runing...")
+        time.sleep(0.1)
+        yield
 
+def task_2():
+    while True:
+        print("task 2 is runing...")
+        time.sleep(0.1)
+        yield
 
-def generatorTest():
-    c = func()                # 生成可迭代对象
-    m = next(c)               # 首次调用，启动生成器，进入while第1次循环，遇到yield中断
-    n1 = c.send('hello')      # 从中断处开始执行，yield收到参数'hello'，并把hello赋值给a，打印a, 第二次while循环，遇到yield中断
-    n2 = c.send('world')      # 同上
-    print('m={} n1={} n2={}'.format(m, n1, n2))
+def main():
+    t1 = task_1()     # 生成器（可迭代对象），调用next()时，遇到yeild返回
+    t2 = task_2()
 
-
-# 协程操作
-def A():
-    yield
-    print('1')
-    yield
-    print('2')
-    yield
-    print('3')
-    yield
-    print('4')
-
-
-def B():
-    yield
-    print('a')
-    yield
-    print('b')
-    yield
-    print('c')
-    yield
-    print('d')
-
-
-def coroutineTest():
-    a = A()
-    next(a)
-    b = B()
-    next(b)
-
-    next(a)
-    next(a)
-
-    next(b)
-    next(b)
-
-    next(a)
-
-
-if __name__ == '__main__':
-    # 生成器机制
-    generatorTest()
-    # 协程
-    coroutineTest()
+    # 先让t1执行一会儿，t1遇到yeild的时候，会返回位置T1，
+    # 然后next(t2)会运行t2,t2遇到yeild时，会再次切换到t1中，
+    # 这样 t1/t2/t1/t2...交替执行，最终实现了多任务...协程
+    # greenlet是对yeild的封装，实现功能和此函数类似。
+    # gevent
+    while True:
+        next(t1)         # 位置T1
+        next(t2)         # 位置T2
 ```
 
-## 闭包
+## 闭包与装饰器
 
-* **python中的闭包：**
+* 闭包
 
-  在一个外函数中定义了一个内函数，内函数里运用外函数的临时变量，并且外函数的返回值是内函数的引用。“闭包”的本质就是函数的嵌套定义，即在函数内部再定义函数。
+  函数内的属性都是有生命周期的，函数执行完毕，生命周期结束。
 
-  "闭包"有两种不同的方式，第一种是在函数内部就“直接调用了”；第二种是“返回一个函数名称”。
+  闭包的本质就是一个函数嵌套另一个函数，内部函数通过返回值，延长了生命周期。
 
-* **闭包中引用的自由变量有如下性质：**
+  ```python
+  def fun1():
+  	def fun2():
+  		print("hello")
+  ```
 
-  1. 闭包的每个实例引用的自由变量互不干扰；
+  上边的内部函数fun2生命周期随着fun1执行完毕就结束了，外部不能调用fun2，但是可以通过返回值使得外部继续调用它，如下。
 
-  2. 一个闭包实例对其自由变量的修改会被传递到下一次该闭包实例的调用。
+  ```python
+  def fun1():
+  	def fun2():
+  		print("hello")
+  	return fun2     # 返回函数对象，fun1生命周期结束了，但是fun2作用域没有结束
+  	
+  var = fun1()
+  del var              # 手动结束其生命周期
+  ```
 
-* **闭包的作用：**
+  另外，闭包的内层函数私有化了变量，完成了数据封装，类似于面向对象。
 
-  一般函数，内部声明的局部变量、函数参数等在函数调用结束之后函数里面保存的信息就被销毁了。
+  ```python
+  def fun1(obj):
+      print("fun1:", obj)
+      def fun2():
+      	obj[0] += 10
+      	print("fun2:", obj)
+      return fun2             # 通过返回值，将fun2以及func1的变量生命保存下来
+  
+  lst = [1, 2, 3]
+  var = fun1(lst)     # 执行函数，返回fun2(并没有执行fun2)，保存lst生命   -> fun1: [1, 2, 3]
+  var()               # 调用fun2()  -> fun2: [11, 2, 3]
+  var()               # 调用fun2()  -> fun2: [21, 2, 3]	
+  ```
 
-  闭包的作用是保存函数的状态信息，使函数的局部变量信息依然可以保存下来。
+* 装饰器
 
-**代码示例：**
+  装饰器是闭包的一个应用。
 
-```python
-# -*- coding: utf-8 -*-
-from functools import partial
-import math
+  装饰器可以在不改变原有函数功能的前提下，增加新功能。通过@修饰。
 
-def outer_func():      # 定义闭包
-    lst = []
-    def inner_func(name):
-        lst.append(len(lst) + 1)
-        print(name, lst)
-    return inner_func
+  ```python
+  def echoHelloName(func):
+      name = "world"
+      def hello():
+          print(name)
+          return func()
+      return hello
+  
+  
+  @echoHelloName
+  def echoHello():
+      print("hello")
+  
+  # 装饰器echoHelloName，将下边函数作为参数（返回一个闭包函数对象），再执行一次函数调用,下边调用等价于：
+  #   echoHelloName(echoHello)()
+  #  等价于 var = echoHelloName(echoHello);  var();
+  echoHello()    # 先输出world，再输出hello
+  ```
 
+  带参数的装饰器需要两层封装。
 
-if __name__ == '__main__':
-    # *参数　**参数，参考test_param.py
-    def avg(first, *rest):
-        return (first + sum(rest)) / (1 + len(rest))
+  ```python
+  def arg_func(sex):
+      def fun1(func):
+          def fun2():
+              if sex == 'boy':
+                  print("我是boy")
+              if sex == 'girl':
+                  print("我是girl")       # 内部函数私有化外部变量
+              return func()               # 调用被装饰的函数    func--函数对象   func()--函数调用
+          return fun2
+      return fun1
+  
+  @arg_func(sex='boy')
+  def boy():
+      print('好好工作')
+  
+  @arg_func(sex='girl')
+  def girl():
+      print('好好工作')
+  
+  # 被@装饰器修饰后，等价调用如下
+  # arg_func(sex='boy')()()  -> 返回fun1
+  # fun1(boy)()         -> 返回fun2
+  # fun2()
+  boy()         
+  # 输出 
+  # 我是boy
+  # 好好工作
+  girl()
+  ```
 
-    print(avg(1, 2, 3, 4))
+  如果被装饰的函数带参数，闭包的内层函数直接私有化这些参数。
 
-    # 函数返回多个值，实际上是先创建一个元组，然后返回的
-    def test_ret_value():
-        return 1, 2, "hello"
-
-    ret1, ret2, ret3 = test_ret_value()      # 用多个变量接收返回值
-    print('ret1={} type={}, re2={} type={}, ret3={} type={}'.format(
-        ret1, type(ret1),
-        ret2, type(ret2),
-        ret3, type(ret3)
-    ))
-    ret = test_ret_value()                  # 用单个变量接收返回值 tuple
-    print('ret={} type={}'.format(ret, type(ret)))
-
-    # 以下两种赋值是等价的
-    x = "hello", 1.2, 45
-    y = ("hello", 1.2, 45)
-    print('type(x)={} type(y)={}'.format(type(x), type(y)))
-
-    # lambda中自由变量的值是运行时绑定，不是定义时绑定的
-    x = 10
-    a = lambda y: x + y         # 定义时
-    x = 20
-    b = lambda y: x + y         # 定义时
-    assert(a(10) == 30)                # 执行时，输出30
-    assert(b(10) == 30)                # 执行时，输出30
-
-    # 使匿名函数在定义时就捕获到值 -- 将参数定义成默认参数
-    x = 10
-    a = lambda y, x=x: x + y
-    x = 20
-    b = lambda y, x=x: x + y
-    assert(a(10) == 20)              # 输出 20
-    assert(b(10) == 30)
-
-    # 匿名函数列表
-    func = [lambda x, n=n: x+n for n in range(5)]
-    for i in func:
-        print(i(0))
-
-    # partial固定某些参数的值
-    def test_partial(a, b, c, d):
-        print(a, b, c, d)
-
-    s1 = partial(test_partial, 1, d=42)  # 设置了默认参数值 a=1, d=42,只需要在给b、c赋值即可
-    s1('bb', 'cc')
-
-    # list的排序方法可以接受一个key关键字参数作为排序规则
-    # 以下按照距离点(4, 3)的远近排序
-    # partial用于微调其他库函数所使用的回调函数的参数
-    points = [(1, 2), (3, 4), (5, 6), (7, 8)]
-
-    def distance(p1, p2):
-        x1, y1 = p1
-        x2, y2 = p2
-        return math.hypot(x2-x1, y2-y1)
-
-    points.sort(key=partial(distance, (4, 3)))
-    print('points sort ->', points)
-
-    # 测试闭包
-    f1 = outer_func()
-    f1("bb1")
-    f1("bb1")
-    f2 = outer_func()
-    f2("bb2")
-    f1("bb1")
-    f2("bb2")
-```
-
-// todo
-python多线程
-装饰器
+  ```python
+  def decfun(func):
+      def dec_mysum(x, y):     # 装饰器内部函数直接私有化被修饰的函数的参数
+          x = x * 10
+          y = y * 10
+          return func(x, y)
+      return dec_mysum
+  
+  @decfun
+  def mysum(a, b):
+      print(a+b)
+  
+  mysum(2, 3)  # 输出50
+  ```
 
 ## 文件与IO
 
@@ -2165,3 +2136,86 @@ a(?=bbb)   # 表示a后边必须紧跟三个b。
   * 集合（set）
   * 词典（dict）
     说明：字符串也可以看作是字符的集合。
+
+# gunicore和gevent
+
+```python
+# encoding: utf-8
+
+import gevent
+import time
+
+def f(n):
+    for i in range(n):
+        print(gevent.getcurrent(), i)
+        # time.sleep(0.5)    # 必须是gevent里的time，才可以
+        gevent.sleep(0.5)
+
+# greenlet封装了原生态的yeild实现的协程
+# gevent封装了greenlet, gevent遇到延时操作就会切换，从而实现了真正的多任务
+# 只要遇到延时操作（如time/join/sockect/connect/accept等），就会停止当前的gevent对象，去执行下一个gevent的任务，这就是协程的核心
+# 切换资源的耗时：进程 > 线程 > 协程
+g1 = gevent.spawn(f, 5)  # 产生一个greenlet任务，并未执行
+g2 = gevent.spawn(f, 5)
+g3 = gevent.spawn(f, 5)
+
+g1.join()   # 等待g1执行完毕
+g2.join()
+g3.join()   # 此处可以简写成 gevent.joinall([g1, g2, g3])
+
+输出：
+(<Greenlet at 0xcf1af0: f(5)>, 0)
+(<Greenlet at 0xcf1f50: f(5)>, 0)
+(<Greenlet at 0xcf1eb0: f(5)>, 0)
+(<Greenlet at 0xcf1af0: f(5)>, 1)
+(<Greenlet at 0xcf1f50: f(5)>, 1)
+(<Greenlet at 0xcf1eb0: f(5)>, 1)
+(<Greenlet at 0xcf1af0: f(5)>, 2)
+(<Greenlet at 0xcf1f50: f(5)>, 2)
+(<Greenlet at 0xcf1eb0: f(5)>, 2)
+(<Greenlet at 0xcf1af0: f(5)>, 3)
+(<Greenlet at 0xcf1f50: f(5)>, 3)
+(<Greenlet at 0xcf1eb0: f(5)>, 3)
+(<Greenlet at 0xcf1af0: f(5)>, 4)
+(<Greenlet at 0xcf1f50: f(5)>, 4)
+(<Greenlet at 0xcf1eb0: f(5)>, 4)
+```
+
+```python
+from  gevent import monkey
+monkey.patch_all()           #  打补丁
+```
+
+代码中定义这一行，就能将程序中的耗时操作的代码，转换为gevent中自己实现的模块。从而不用重构就可以实现真正的多并发（协程）。比如上边的time.sleep(0.5)就可以使用了。
+
+* gunicorn
+
+  gunicore的作用是使用命令行来启动web服务。
+
+  ```python
+  # myapp.py
+  from flask import Flask
+  app = Flask(__name__)
+  @app.route('/')
+  def index():
+      return 'hello world'
+  if __name__ == '__main__':
+      app.debug = True
+      app.run()
+  ```
+
+  启动方式：
+
+  ```shell
+  gunicore myapp:app     # 默认监听一个127.0.0.1:8000的web server,
+  
+  gunicorn -b 0.0.0.0:8080 myapp:app    # 设置0.0.0.0可以监听所有的ip请求
+  
+  # 在多核服务器上，为了支持更多的并发访问并充分利用资源, -w 表示开启多少个线程
+  gunicorn -w 4 -b 0.0.0.0:8080 myapp:app  
+  
+  # 使用gevent
+  gunicorn -k gevent --daemon --max-requests=300 --conf=conf/server_cfg.py bin.myapp:app
+  ```
+
+  
