@@ -1,0 +1,2084 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>libc函数库 · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="R语言.html" />
+    
+    
+    <link rel="prev" href="shell脚本.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    学习笔记
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    第一章
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="c++11新特性.html">
+            
+                <a href="c++11新特性.html">
+            
+                    
+                    c++11新特性
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="STL.html">
+            
+                <a href="STL.html">
+            
+                    
+                    STL标准模板库
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="python语言.html">
+            
+                <a href="python语言.html">
+            
+                    
+                    python语言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="shell脚本.html">
+            
+                <a href="shell脚本.html">
+            
+                    
+                    shell脚本
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3.5" data-path="libc函数库.html">
+            
+                <a href="libc函数库.html">
+            
+                    
+                    libc函数库
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="R语言.html">
+            
+                <a href="R语言.html">
+            
+                    
+                    R语言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.7" data-path="mysql及索引优化.html">
+            
+                <a href="mysql及索引优化.html">
+            
+                    
+                    mysql及索引优化
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../2框架类/">
+            
+                <a href="../2框架类/">
+            
+                    
+                    第二章
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../2框架类/flask框架.html">
+            
+                <a href="../2框架类/flask框架.html">
+            
+                    
+                    flask框架
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../2框架类/scrapy框架.html">
+            
+                <a href="../2框架类/scrapy框架.html">
+            
+                    
+                    scrapy框架
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../2框架类/brpc框架.html">
+            
+                <a href="../2框架类/brpc框架.html">
+            
+                    
+                    brpc框架
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../2框架类/IO多路复用.html">
+            
+                <a href="../2框架类/IO多路复用.html">
+            
+                    
+                    IO多路复用
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../3算法类/">
+            
+                <a href="../3算法类/">
+            
+                    
+                    第三章
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../3算法类/排序算法.html">
+            
+                <a href="../3算法类/排序算法.html">
+            
+                    
+                    排序算法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../3算法类/数据结构_树.html">
+            
+                <a href="../3算法类/数据结构_树.html">
+            
+                    
+                    数据结构_二叉树
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../3算法类/数据结构_链表.html">
+            
+                <a href="../3算法类/数据结构_链表.html">
+            
+                    
+                    数据结构_链表
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../3算法类/数据结构_图.html">
+            
+                <a href="../3算法类/数据结构_图.html">
+            
+                    
+                    数据结构_链表
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="../3算法类/正则表达式.html">
+            
+                <a href="../3算法类/正则表达式.html">
+            
+                    
+                    正则表达式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="../3算法类/动态规划.html">
+            
+                <a href="../3算法类/动态规划.html">
+            
+                    
+                    动态规划
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7" data-path="../3算法类/设计模式.html">
+            
+                <a href="../3算法类/设计模式.html">
+            
+                    
+                    设计模式
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../4工具类/">
+            
+                <a href="../4工具类/">
+            
+                    
+                    第四章
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../4工具类/vscode使用.html">
+            
+                <a href="../4工具类/vscode使用.html">
+            
+                    
+                    vscode使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../4工具类/markdown语法.html">
+            
+                <a href="../4工具类/markdown语法.html">
+            
+                    
+                    markdown语法
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../5其他/">
+            
+                <a href="../5其他/">
+            
+                    
+                    第五章
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../5其他/学习代码.html">
+            
+                <a href="../5其他/学习代码.html">
+            
+                    
+                    学习代码
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../5其他/学习网站.html">
+            
+                <a href="../5其他/学习网站.html">
+            
+                    
+                    学习网站
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >libc函数库</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <p>[TOC]</p>
+<h1 id="&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x4F53;&#x7CFB;&#x7ED3;&#x6784;">&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x4F53;&#x7CFB;&#x7ED3;&#x6784;</h1>
+<p>&#x200B;        Linux&#x662F;&#x4E00;&#x5957;&#x514D;&#x8D39;&#x4F7F;&#x7528;&#x548C;&#x81EA;&#x7531;&#x4F20;&#x64AD;&#x7684;&#x7C7B;Unix&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#xFF0C;&#x662F;GNU&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x7684;&#x5185;&#x6838;&#x3002;Linux&#x548C;UNIX&#x7684;&#x6700;&#x5927;&#x7684;&#x533A;&#x522B;&#x662F;&#xFF0C;&#x524D;&#x8005;&#x662F;&#x5F00;&#x53D1;&#x6E90;&#x4EE3;&#x7801;&#x7684;&#x81EA;&#x7531;&#x8F6F;&#x4EF6;&#xFF0C;&#x800C;&#x540E;&#x8005;&#x662F;&#x5BF9;&#x6E90;&#x4EE3;&#x7801;&#x5B9E;&#x884C;&#x77E5;&#x8BC6;&#x4EA7;&#x6743;&#x4FDD;&#x62A4;&#x7684;&#x4F20;&#x7EDF;&#x5546;&#x4E1A;&#x8F6F;&#x4EF6;&#x3002;&#x72ED;&#x4E49;&#x7684;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x4EC5;&#x6307;&#x5185;&#x6838;&#xFF0C;&#x5E7F;&#x4E49;&#x7684;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x5982;&#x4E0B;&#x56FE;&#x6240;&#x793A;&#x3002;</p>
+<ul>
+<li>&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#xFF1A;&#x5185;&#x6838;&#x7684;&#x63A5;&#x53E3;&#x3002;</li>
+<li>&#x516C;&#x5171;&#x51FD;&#x6570;&#x5E93;&#xFF1A;&#x6784;&#x5EFA;&#x5728;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x63A5;&#x53E3;&#x4E4B;&#x4E0A;&#x3002;</li>
+<li>shell&#x89E3;&#x6790;&#x5668;&#xFF1A;&#x547D;&#x4EE4;&#x89E3;&#x91CA;&#x5668;&#xFF0C;&#x8BFB;&#x53D6;&#x7528;&#x6237;&#x8F93;&#x5165;&#xFF0C;&#x8C03;&#x7528;&#x5185;&#x6838;&#x63A5;&#x53E3;&#x6267;&#x884C;&#x547D;&#x4EE4;&#x3002;</li>
+</ul>
+<p><img src="../images/linux_c/unix.jpg" height="180" width="200"></p>
+<ul>
+<li>glibc&#x5B98;&#x7F51;&#xFF1A;<a href="http://www.gnu.org/software/libc/" target="_blank">http://www.gnu.org/software/libc/</a></li>
+<li>glibc&#x6E90;&#x7801;&#x4E0B;&#x8F7D;&#xFF1A;git clone git://sourceware.org/git/glibc.git</li>
+</ul>
+<h1 id="&#x6587;&#x4EF6;&#x64CD;&#x4F5C;">&#x6587;&#x4EF6;&#x64CD;&#x4F5C;</h1>
+<ul>
+<li><p>&#x7CFB;&#x7EDF;&#x8C03;&#x7528;io  </p>
+<p>&#x4E0D;&#x5E26;&#x7F13;&#x51B2;(&#x6BCF;&#x6B21;read&#x3001;write&#x90FD;&#x89E6;&#x53D1;&#x4E00;&#x6B21;&#x5185;&#x6838;&#x8C03;&#x7528;)&#xFF0C;&#x51FD;&#x6570;&#x540D;&#x79F0;&#x4E2D;&#x4E0D;&#x5E26;f(&#x5982;open&#x3001;read&#x3001;write&#x3001;lseek&#x3001;close)&#xFF0C;&#x51FD;&#x6570;&#x53C2;&#x6570;&#x662F;&#x6587;&#x4EF6;&#x53E5;&#x67C4;(&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26; int)&#xFF0C;&#x5934;&#x6587;&#x4EF6; <code>#include &lt;fcntl.h&gt;</code></p>
+</li>
+</ul>
+<ul>
+<li><p>&#x6807;&#x51C6;io&#x5E93;</p>
+<p>&#x5E26;&#x7F13;&#x51B2;(&#x5168;&#x7F13;&#x5B58;&#x3001;&#x884C;&#x7F13;&#x5B58;&#x3001;&#x4E0D;&#x5E26;&#x7F13;&#x5B58;)&#xFF0C;&#x51FD;&#x6570;&#x540D;&#x79F0;&#x5E26;f(&#x5982;fopen&#x3001;fread&#x3001;fwrite&#x3001;fgets&#x3001;fclose&#x7B49;)&#xFF0C;&#x51FD;&#x6570;&#x7684;&#x53C2;&#x6570;&#x662F;&#x6587;&#x4EF6;&#x6307;&#x9488;(&#x6587;&#x4EF6;&#x6D41; FILE*)&#xFF0C;&#x5934;&#x6587;&#x4EF6;<code>#include &lt;stdio.h&gt;</code></p>
+</li>
+</ul>
+<ul>
+<li><p>fd&#x548C;FILE*&#x7684;&#x533A;&#x522B;</p>
+<p>FILE&#x7ED3;&#x6784;&#x51FD;&#x6570;&#x53EF;&#x4EE5;&#x770B;&#x4F5C;&#x662F;&#x5BF9;fd&#x76F4;&#x63A5;&#x64CD;&#x4F5C;&#x7684;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x7684;&#x5C01;&#x88C5;, &#x5B83;&#x7684;&#x4F18;&#x70B9;&#x662F;&#x5E26;&#x6709;&#x7528;&#x6237;&#x6001;&#x7F13;&#x5B58;&#x7684;IO&#x3002;FILE&#x5728;&quot;stdio.h&quot;&#x4E2D;&#x6709;&#x5B9A;&#x4E49;&#x3002;</p>
+</li>
+</ul>
+<pre><code class="lang-c"><span class="hljs-keyword">struct</span> _iobuf {
+    <span class="hljs-keyword">char</span> *_ptr;        <span class="hljs-comment">// &#x7F13;&#x51B2;&#x533A;&#x5F53;&#x524D;&#x6307;&#x9488;</span>
+    <span class="hljs-keyword">int</span> _cnt;          <span class="hljs-comment">// &#x5F53;&#x524D;&#x7F13;&#x51B2;&#x533A;&#x7684;&#x76F8;&#x5BF9;&#x4F4D;&#x7F6E;</span>
+    <span class="hljs-keyword">char</span> *_base;       <span class="hljs-comment">// &#x7F13;&#x51B2;&#x533A;&#x8D77;&#x59CB;&#x4F4D;&#x7F6E;</span>
+    <span class="hljs-keyword">int</span> _flag;         <span class="hljs-comment">// &#x6587;&#x4EF6;&#x8BFB;&#x5199;&#x6A21;&#x5F0F;</span>
+    <span class="hljs-keyword">int</span> _file;         <span class="hljs-comment">// &#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26;&#xFF01;&#xFF01;&#xFF01;</span>
+    <span class="hljs-keyword">int</span> _charbuf;      <span class="hljs-comment">// &#x7F13;&#x51B2;&#x533A;&#x5269;&#x4F59;&#x5B57;&#x8282;&#x4E2A;&#x6570;</span>
+    <span class="hljs-keyword">int</span> _bufsiz;       <span class="hljs-comment">// &#x7F13;&#x51B2;&#x533A;&#x5927;&#x5C0F;</span>
+    <span class="hljs-keyword">char</span> *_tmpfname;   <span class="hljs-comment">// &#x4E34;&#x65F6;&#x6587;&#x4EF6;&#x540D;</span>
+};
+<span class="hljs-keyword">typedef</span> <span class="hljs-keyword">struct</span> _iobuf FILE;
+</code></pre>
+<ul>
+<li><p>&#x4E09;&#x4E2A;&#x7279;&#x6B8A;&#x7684;&#x6587;&#x4EF6;</p>
+<p> &#x63CF;&#x8FF0;&#x7B26;int(POSIX&#x540D;&#x79F0;)---STDIN_FILENO(0)/STDOUT_FILENO(1)/STDERR_FILENO(2)   </p>
+<p>&#x6587;&#x4EF6;&#x6307;&#x9488;FILE*---stdin/stdout/stderr   </p>
+<p>&#x901A;&#x5E38;&#x8FD9;&#x4E09;&#x4E2A;&#x6587;&#x4EF6;&#x90FD;&#x4E0E;&#x7EC8;&#x7AEF;&#x8054;&#x7CFB;&#xFF0C;&#x5982;fprintf(stderr,&quot;error message&quot;)&#xFF0C;&#x6587;&#x4EF6;&#x8F93;&#x51FA;&#x5230;&#x7EC8;&#x7AEF;  </p>
+</li>
+</ul>
+<h2 id="&#x7CFB;&#x7EDF;&#x8C03;&#x7528;io">&#x7CFB;&#x7EDF;&#x8C03;&#x7528;IO</h2>
+<pre><code class="lang-c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;fcntl.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;unistd.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;assert.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/stat.h&gt;</span></span>
+
+<span class="hljs-comment">/*
+&#x4E3B;&#x9898;&#xFF1A;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x6587;&#x4EF6;&#x64CD;&#x4F5C;&#x3002;
+&#x5934;&#x6587;&#x4EF6;&#xFF1A; &lt;fcntl.h&gt;
+
+&#x7279;&#x6B8A;&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26;&#xFF1A;
+&#x6807;&#x51C6;&#x8F93;&#x5165;0 (POSIX&#x7B26;&#x53F7;&#x5E38;&#x91CF;- STDIN_FILENO) 
+&#x6807;&#x51C6;&#x8F93;&#x51FA;1 (STDOUT_FILENO)
+&#x6807;&#x51C6;&#x9519;&#x8BEF;&#x8F93;&#x51FA;2 (STDERR_FILENO)
+
+&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x6587;&#x4EF6;&#x64CD;&#x4F5C;&#xFF1A;
+int open(const char *pathname, int flags, mode_t mode)
+openflags&#xFF1A;
+    O_RDONLY
+    O_WRONLY
+    O_RDWR
+    O_APPEND
+    O_CREAT
+    O_TRUNC
+int creat(const char *pathname, mode_t mode);  -- &#x53EA;&#x5199;&#x65B9;&#x5F0F;&#x521B;&#x5EFA;&#x5E76;&#x6253;&#x5F00;&#x65B0;&#x6587;&#x4EF6;
+int close(int fd)  -- &#x8FDB;&#x7A0B;&#x7EC8;&#x6B62;&#x65F6;&#xFF0C;&#x5185;&#x6838;&#x4F1A;&#x81EA;&#x52A8;&#x5173;&#x95ED;&#x6240;&#x521B;&#x5EFA;&#x7684;&#x6587;&#x4EF6;
+off_t lseek(int fd, off_t offset, int whence)  -- &#x4E3A;&#x6253;&#x5F00;&#x7684;&#x6587;&#x4EF6;&#x8BBE;&#x7F6E;&#x504F;&#x79FB;&#x91CF;&#xFF08;&#x7A7A;&#x6D1E;&#x6587;&#x4EF6;&#x4E0D;&#x5360;&#x5B58;&#x50A8;&#x533A;&#xFF09;
+ssize_t read(int fd&#xFF0C;void* buf, size_t count)
+&#x5B9E;&#x9645;&#x8BFB;&#x53D6;&#x7684;&#x6570;&#x636E;&#x91CF;(ssize_t)&#x53EF;&#x80FD;&#x5C0F;&#x4E8E;&#x671F;&#x671B;&#x8BFB;&#x53D6;&#x7684;&#x6570;&#x636E;&#x91CF;(count),&#x6BD4;&#x5982;&#xFF1A;
+1. &#x666E;&#x901A;&#x6587;&#x4EF6;&#x7763;&#x5BFC;&#x671F;&#x671B;&#x5B57;&#x8282;&#x6570;&#x4E4B;&#x524D;&#x5DF2;&#x7ECF;&#x5230;&#x4E86;&#x6587;&#x4EF6;&#x5C3E;&#x90E8;&#xFF1B;
+2. &#x4ECE;&#x7F51;&#x7EDC;&#x8BFB;&#x53D6;&#x65F6;&#xFF0C;&#x7F51;&#x7EDC;&#x7684;&#x7F13;&#x51B2;&#x673A;&#x6784;&#x53EF;&#x80FD;&#x9020;&#x6210;&#x8FD4;&#x56DE;&#x503C;&#x5C0F;&#x4E8E;&#x6240;&#x8981;&#x6C42;&#x7684;&#x5B57;&#x8282;&#x6570;&#x3002;
+ssize_t write(int fd, const void *buf, size_t count)
+
+&#x539F;&#x5B50;&#x64CD;&#x4F5C;&#xFF1A;
+1. &#x8FFD;&#x52A0;&#x5199;&#x6587;&#x4EF6;&#xFF1A;&#x4F7F;&#x7528;open&#x51FD;&#x6570;&#x7684;O_APPEND&#x9009;&#x9879;
+2. pread/pwrite
+#include &lt;unistd.h&gt;
+ssize_t pread(int fd, void *buf, size_t count, off_t offset);    -- &#x5728;offset&#x4F4D;&#x7F6E;&#x5F00;&#x59CB;&#x8BFB;&#x53D6;count&#x5B57;&#x8282;
+ssize_t pwrite(int fd, const void *buf, size_t count, off_t offset);   -- &#x5728;offset&#x4F4D;&#x7F6E;&#x5F00;&#x59CB;&#x5199;&#x5165;count&#x5B57;&#x8282;
+
+fsync&#x548C;fflush&#x7684;&#x533A;&#x522B;&#xFF1A;
+1. &#x6E90;&#xFF1A;fflush&#x662F;C&#x51FD;&#x6570;&#x5E93;(libc.a)&#x4E2D;&#x63D0;&#x4F9B;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;fsync&#x662F;&#x7CFB;&#x7EDF;&#x63D0;&#x4F9B;&#x7684;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x3002;
+2. &#x51FD;&#x6570;&#x539F;&#x578B;&#xFF1A;fflush&#x53C2;&#x6570;&#x662F;FILE*&#x6587;&#x4EF6;&#x6307;&#x9488;, fsync&#x53C2;&#x6570;&#x662F;&#x6587;&#x4EF6;int&#x63CF;&#x8FF0;&#x7B26;&#x3002;
+    int fflush(FILE *_File)
+    int fsync(int fd);
+3. &#x529F;&#x80FD;&#xFF1A;
+    fflush:&#x662F;&#x628A;C&#x5E93;&#x4E2D;&#x7684;&#x7F13;&#x51B2;&#xFF08;&#x7528;&#x6237;&#x7F13;&#x51B2;&#xFF09;&#x8C03;&#x7528;write&#x51FD;&#x6570;&#x5199;&#x5230;&#x78C1;&#x76D8;[&#x5176;&#x5B9E;&#x662F;&#x5199;&#x5230;&#x5185;&#x6838;&#x7684;&#x7F13;&#x51B2;&#x533A;]&#x3002;
+    fsync&#xFF1A;&#x662F;&#x628A;&#x5185;&#x6838;&#x7F13;&#x51B2;&#x5237;&#x5230;&#x78C1;&#x76D8;&#x4E0A;&#x3002;
+
+&#x6587;&#x4EF6;&#x6301;&#x4E45;&#x5316;&#x5230;&#x78C1;&#x76D8;&#x7684;&#x987A;&#x5E8F;&#xFF1A;
+C&#x5E93;&#x7F13;&#x51B2; -- fflush -- &#x5185;&#x6838;&#x7F13;&#x51B2;&#x533A; -- fsync -- &#x78C1;&#x76D8;
+
+
+&#x83B7;&#x53D6;&#x6587;&#x4EF6;&#x76F8;&#x5173;&#x7684;&#x4FE1;&#x606F;&#xFF1A;
+int fstat(int fd, struct stat *buf);
+int stat(const char *path, struct stat *buf);
+int lstat(const char *path, struct stat *buf);
+&#x53EF;&#x4EE5;&#x83B7;&#x53D6;&#x7684;&#x4FE1;&#x606F;&#x5982;&#xFF1A;&#x6587;&#x4EF6;&#x7684;&#x7528;&#x6237;id&#x3001;&#x7EC4;id&#x3001;&#x6587;&#x4EF6;&#x7C7B;&#x578B;&#x3001;&#x8BBF;&#x95EE;&#x6743;&#x9650;&#x3001;
+&#x6700;&#x540E;&#x4E00;&#x6B21;&#x8BBF;&#x95EE;&#x65F6;&#x95F4;&#x3001;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#x3001;&#x5BF9;&#x6587;&#x4EF6;io&#x8F83;&#x5408;&#x9002;&#x7684;&#x957F;&#x5EA6;&#x3001;&#x4E3A;&#x6587;&#x4EF6;&#x5206;&#x914D;&#x7684;512&#x5B57;&#x8282;&#x5757;&#x7684;&#x6570;&#x91CF;&#x3002;
+
+*/</span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+
+    <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *filename = <span class="hljs-string">&quot;D:\\gcctool\\code\\libc_learn\\data\\open.txt&quot;</span>;
+    <span class="hljs-comment">// &#x4EE5;&#x8BFB;&#x5199;&#x3001;&#x8FFD;&#x52A0;&#x7684;&#x65B9;&#x5F0F;&#x6253;&#x5F00;,&#x8FD4;&#x56DE;&#x5F53;&#x524D;&#x6700;&#x5C0F;&#x672A;&#x7528;&#x7684;&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26;&#x3002;</span>
+    <span class="hljs-keyword">int</span> fd = open(filename, O_RDWR|O_APPEND);      
+
+    <span class="hljs-keyword">if</span> (fd &lt; <span class="hljs-number">0</span>) {
+        perror(<span class="hljs-string">&quot;open failed&quot;</span>);
+        <span class="hljs-built_in">exit</span>(<span class="hljs-number">1</span>);
+    }
+
+    <span class="hljs-comment">// lseek&#x7528;&#x4E8E;&#x663E;&#x793A;&#x7684;&#x8BBE;&#x7F6E;&#x504F;&#x79FB;&#x91CF;&#xFF0C;&#x6210;&#x529F;&#x8FD4;&#x56DE;&#x65B0;&#x7684;&#x6587;&#x4EF6;&#x504F;&#x79FB;&#x91CF;&#xFF0C;&#x9519;&#x8BEF;&#x8FD4;&#x56DE;-1</span>
+    <span class="hljs-comment">// &#x6253;&#x5F00;&#x4E00;&#x4E2A;&#x6587;&#x4EF6;&#xFF0C;&#x5982;&#x679C;&#x672A;&#x8BBE;&#x7F6E;O_APPEND&#x9009;&#x9879;&#x65F6;&#xFF0C;&#x6587;&#x4EF6;&#x504F;&#x79FB;&#x91CF;&#x4F1A;&#x88AB;&#x8BBE;&#x7F6E;&#x4E3A;0</span>
+    <span class="hljs-comment">// SEEK_CUR-&gt;&#x8DDD;&#x5F53;&#x524D;&#x503C;&#x52A0;offset, offset&#x53EF;&#x6B63;&#x53EF;&#x8D1F;&#x3002;SEEK_END-&gt;&#x8DDD;&#x6587;&#x4EF6;&#x5C3E;&#x52A0;offset, offset&#x53EF;&#x6B63;&#x53EF;&#x8D1F;&#x3002;</span>
+    <span class="hljs-keyword">off_t</span> start = lseek(fd, <span class="hljs-number">0</span>, SEEK_SET);              <span class="hljs-comment">// 0</span>
+    <span class="hljs-keyword">off_t</span> cur = lseek(fd, <span class="hljs-number">12</span>, SEEK_CUR);               <span class="hljs-comment">// 12</span>
+    <span class="hljs-keyword">if</span> ((start == <span class="hljs-number">-1</span> || cur == <span class="hljs-number">-1</span>) &amp;&amp; errno) {
+        perror(<span class="hljs-string">&quot;leek error&quot;</span>);
+        <span class="hljs-built_in">exit</span>(<span class="hljs-number">1</span>);
+    }
+
+    <span class="hljs-comment">// ssize_t write(int fd, void *buf, size_t nbytes);</span>
+    <span class="hljs-comment">// &#x8FD4;&#x56DE;&#x503C;&#x901A;&#x5E38;&#x4E0E;nbyte&#x76F8;&#x540C;&#xFF0C;&#x5426;&#x5219;&#x8868;&#x793A;&#x51FA;&#x9519;&#x3002;</span>
+    <span class="hljs-keyword">char</span> *wbuf = <span class="hljs-string">&quot;I am learning linux c&quot;</span>;
+    <span class="hljs-comment">// strlen&#x662F;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x771F;&#x5B9E;&#x957F;&#x5EA6;&#xFF0C;sizeof&#x4F1A;&#x8BA1;&#x7B97;&#x51FA;char*&#x7684;&#x957F;&#x5EA6;8</span>
+    <span class="hljs-keyword">ssize_t</span> w_cnt = write(fd, (<span class="hljs-keyword">void</span> *)wbuf, <span class="hljs-built_in">strlen</span>(wbuf));  
+    assert(w_cnt == <span class="hljs-built_in">strlen</span>(wbuf));
+
+    <span class="hljs-comment">// ssize_t read (int fd, void *buf, size_t nbytes);</span>
+    <span class="hljs-comment">// read&#x6210;&#x529F;&#x8FD4;&#x56DE;&#x8BFB;&#x5230;&#x7684;&#x5B57;&#x8282;&#x6570;&#xFF0C;&#x5982;&#x5DF2;&#x5230;&#x6587;&#x4EF6;&#x7ED3;&#x5C3E;&#xFF0C;&#x5219;&#x8FD4;&#x56DE;0&#x3002;</span>
+    <span class="hljs-keyword">if</span> (lseek(fd, <span class="hljs-number">0</span>, SEEK_SET) != <span class="hljs-number">-1</span>) {
+        <span class="hljs-keyword">char</span> buf[<span class="hljs-number">100</span>];
+        <span class="hljs-keyword">ssize_t</span> r_cnt = read(fd, (<span class="hljs-keyword">void</span> *)buf, <span class="hljs-number">100</span>);
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;count=%d, buf=%s&quot;</span>, r_cnt, buf);
+    } 
+
+    <span class="hljs-comment">// fstat &#x83B7;&#x53D6;&#x6587;&#x4EF6;&#x6307;&#x9488;&#x7684;&#x8BE6;&#x60C5;</span>
+    <span class="hljs-keyword">struct</span> stat file_stat;
+    <span class="hljs-comment">// fstat(fd, &amp;file_stat);</span>
+    stat(<span class="hljs-string">&quot;.\\src\\fopen_t.c&quot;</span>, &amp;file_stat);
+    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">short</span> st_mode = file_stat.st_mode;<span class="hljs-comment">// &#x6587;&#x4EF6;&#x7684;&#x7C7B;&#x578B;&#x548C;&#x5B58;&#x53D6;&#x7684;&#x6743;&#x9650;&#xFF0C;&#x6309;&#x4F4D;&#x89E3;&#x6790;</span>
+    <span class="hljs-keyword">long</span> st_size = file_stat.st_size;          <span class="hljs-comment">// &#x6587;&#x4EF6;&#x5927;&#x5C0F;</span>
+    <span class="hljs-keyword">time_t</span> st_atime = file_stat.st_atime;      <span class="hljs-comment">// &#x6700;&#x8FD1;&#x4E00;&#x6B21;&#x88AB;&#x8BBF;&#x95EE;&#x7684;&#x65F6;&#x95F4;(access)</span>
+    <span class="hljs-keyword">time_t</span> st_mtime = file_stat.st_mtime;      <span class="hljs-comment">// &#x6587;&#x4EF6;&#x5185;&#x5BB9;&#x4E0A;&#x4E00;&#x6B21;&#x88AB;&#x4FEE;&#x6539;&#x7684;&#x65F6;&#x95F4;(modify)</span>
+    <span class="hljs-keyword">time_t</span> st_ctime = file_stat.st_ctime;      <span class="hljs-comment">// &#x6587;&#x4EF6;&#x5C5E;&#x6027;(i&#x8282;&#x70B9;&#x72B6;&#x6001;)&#x6216;&#x8005;&#x5185;&#x5BB9;&#x4E0A;&#x4E00;&#x6B21;&#x88AB;&#x4FEE;&#x6539;&#x7684;&#x65F6;&#x95F4;&#xFF08;change)</span>
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;stat=&gt; st_mode=%d, \nst_size=%ld, \nst_atime=%ld, \nst_ctime=%ld, \nst_mtime=%ld \n&quot;</span>,
+            st_mode, st_size, st_atime, st_ctime, st_mtime);
+    <span class="hljs-comment">// &#x5224;&#x65AD;&#x6587;&#x4EF6;&#x7C7B;&#x578B;</span>
+    <span class="hljs-keyword">if</span> (S_ISDIR(file_stat.st_mode)) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;it is a directory.\n&quot;</span>);
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (S_ISREG(file_stat.st_mode)) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;it is a regular file\n&quot;</span>);
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">short</span> mode = file_stat.st_mode;
+        <span class="hljs-keyword">char</span> s[<span class="hljs-number">10</span>];
+        itoa(mode, s, <span class="hljs-number">2</span>);  <span class="hljs-comment">// &#x8F6C;&#x4E3A;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x8FDB;&#x5236;&#x57FA;&#x6570;&#x4E3A;2</span>
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;unknown %s \n&quot;</span>,  s);
+    }
+
+    close(fd);
+
+    <span class="hljs-comment">// &#x4E09;&#x4E2A;&#x7279;&#x6B8A;&#x7684;&#x6587;&#x4EF6;&#x6D41;&#x6307;&#x9488;</span>
+    <span class="hljs-comment">// &#x6587;&#x4EF6;&#x53E5;&#x67C4;&#x53C2;&#x6570;&#x6362;&#x6210;STDIN_FILENO&#x3001;STDOUT_FILENO&#x3001;STDERR_FILENO&#xFF0C;&#x53EF;&#x4EE5;&#x5BF9;&#x6807;&#x51C6;&#x8F93;&#x5165;&#x8F93;&#x51FA;&#x64CD;&#x4F5C;&#x3002;</span>
+
+    system(<span class="hljs-string">&quot;pause&quot;</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h2 id="&#x6807;&#x51C6;io&#x5E93;">&#x6807;&#x51C6;IO&#x5E93;</h2>
+<pre><code class="lang-c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;assert.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;math.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/stat.h&gt;</span></span>
+
+<span class="hljs-comment">/*
+&#x4E3B;&#x9898;&#xFF1A;&#x6807;&#x51C6;IO&#x5E93;&#x6587;&#x4EF6;&#x64CD;&#x4F5C;&#x3002;
+
+&#x5934;&#x6587;&#x4EF6;&#xFF1A;
+#include &lt;stdio.h&gt;
+FILE *fopen(const char *path, const char *mode);
+
+mode&#x4ECB;&#x7ECD;&#xFF1A;
+&quot;r&quot;&#xFF1A; &#x53EA;&#x8BFB;&#x6A21;&#x5F0F;&#x6253;&#x5F00;
+&quot;r+&quot;&#xFF1A; &#x8BFB;&#x5199;&#x6A21;&#x5F0F;&#x6253;&#x5F00;
+&quot;w&quot;&#xFF1A; &#x53EA;&#x5199;&#x6A21;&#x5F0F;&#x6253;&#x5F00;&#xFF0C;&#x5982;&#x679C;&#x4E0D;&#x5B58;&#x5728;&#x4F1A;&#x65B0;&#x5EFA;&#xFF0C;&#x5982;&#x679C;&#x6709;&#x4F1A;&#x5185;&#x5BB9;&#x6E05;&#x96F6;
+&quot;w+&quot;&#xFF1A;&#x8BFB;&#x5199;&#x6A21;&#x5F0F;&#x6253;&#x5F00;&#xFF0C;&#x5982;&#x679C;&#x4E0D;&#x5B58;&#x5728;&#x4F1A;&#x65B0;&#x5EFA;&#xFF0C;&#x5982;&#x679C;&#x6709;&#x4F1A;&#x5185;&#x5BB9;&#x6E05;&#x96F6;
+&quot;a&quot;&#xFF1A; &#x8FFD;&#x52A0;&#x6A21;&#x5F0F;&#x53EA;&#x5199;
+&quot;a+&quot;&#xFF1A; &#x8FFD;&#x52A0;&#x6A21;&#x5F0F;&#x8BFB;&#x5199;
+&quot;b&quot;&#xFF1A; &#x4E8C;&#x8FDB;&#x5236;&#x6587;&#x4EF6;&#x6253;&#x5F00;&#xFF0C;&#x5728;Linux&#x52A0;&#x4E0D;&#x52A0;&#x6B64;&#x6A21;&#x5F0F;&#x65E0;&#x533A;&#x522B;
+
+&#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x7528;fflush&#xFF1F;
+fflush&#x5373;&#x6E05;&#x7A7A;&#x7F13;&#x5B58;&#xFF0C;
+&#x5982;&#x679C;&#x7ED9;&#x5B9A;&#x7684;&#x6587;&#x4EF6;&#x6D41;&#x662F;&#x4E00;&#x4E2A;&#x8F93;&#x51FA;&#x6D41;&#xFF08;&#x5185;&#x5B58;-&gt;&#x78C1;&#x76D8;&#x6587;&#x4EF6;&#xFF09;&#xFF0C;fflush&#x628A;&#x8F93;&#x51FA;&#x5230;&#x7F13;&#x51B2;&#x533A;&#x7684;&#x5185;&#x5BB9;&#x5199;&#x5165;&#x6587;&#x4EF6;&#xFF1B;
+&#x5982;&#x679C;&#x7ED9;&#x5B9A;&#x7684;&#x6587;&#x4EF6;&#x6D41;&#x662F;&#x4E00;&#x4E2A;&#x8F93;&#x5165;&#x6D41;&#xFF08;&#x6587;&#x4EF6;-&gt;&#x5185;&#x5B58;&#xFF09;&#xFF0C;fflush&#x4F1A;&#x6E05;&#x7A7A;&#x8F93;&#x5165;&#x7F13;&#x51B2;&#x533A;&#x3002;
+&#x51E0;&#x5904;&#x5E94;&#x7528;&#xFF1A;
+(1) flush(stdin) &#x5237;&#x65B0;&#x6807;&#x51C6;&#x8F93;&#x5165;&#x7F13;&#x51B2;&#x533A;&#xFF0C;&#x628A;&#x8F93;&#x5165;&#x7F13;&#x51B2;&#x533A;&#x91CC;&#x7684;&#x4E1C;&#x897F;&#x4E22;&#x5F03;&#x3002;
+    int main() {
+        printf(&quot;input a char\n&quot;);
+        char a = getchar();
+        fflush(stdin);  // getchar&#x4E4B;&#x540E;&#xFF0C;&#x8F93;&#x5165;n&#xFF0C;&#x6309;&#x4E0B;&#x56DE;&#x8F66;&#x5C31;&#x4F1A;&#x88AB;getchar&#x63A5;&#x6536;&#x5230;&#x5E76;&#x4FDD;&#x5B58;&#x5230;a&#x4E2D;
+        char b = getchar(); // &#x4F46;&#x662F;&#x56DE;&#x8F66;&#x952E;&apos;\n&apos;&#x5728;&#x7F13;&#x51B2;&#x533A;&#x4E2D;&#x4F1A;&#x88AB;b&#x63A5;&#x6536;&#xFF0C;fflush&#x53EF;&#x4EE5;&#x6E05;&#x7A7A;&#x7F13;&#x51B2;&#x533A;&#x4E2D;&#x7684;&apos;\n&apos;
+        fflush(stdin);
+        printf(&quot;you have put a=%c, b=%c\n&quot;, a, b);
+        system(&quot;pause&quot;);
+    }
+(2) fflush(stdout) &#x5237;&#x65B0;&#x6807;&#x51C6;&#x8F93;&#x51FA;&#x7F13;&#x51B2;&#x533A;&#xFF0C;&#x628A;&#x8F93;&#x51FA;&#x7F13;&#x51B2;&#x533A;&#x91CC;&#x7684;&#x4E1C;&#x897F;&#x6253;&#x5370;&#x5230;&#x6807;&#x51C6;&#x8F93;&#x51FA;&#x8BBE;&#x5907;&#x4E0A;&#x3002;
+    &#x5982;&#x7A0B;&#x5E8F;&#x5728;&#x8F93;&#x51FA;&#x5230;&#x5C4F;&#x5E55;&#x524D;&#x53D1;&#x751F;&#x4E86;&#x9519;&#x8BEF;&#xFF0C;&#x8C03;&#x7528;&#x6B64;&#x51FD;&#x6570;&#x53EF;&#x4EE5;&#x4FDD;&#x8BC1;&#x4EFB;&#x610F;&#x65F6;&#x95F4;&#x628A;&#x8C03;&#x8BD5;&#x8F93;&#x51FA;&#x6253;&#x5370;&#x5230;&#x5C4F;&#x5E55;&#x3002;
+(3) &#x4E00;&#x822C;fflush&#x4E0D;&#x5E94;&#x8BE5;&#x5728;&#x8BFB;&#x53D6;&#x6587;&#x4EF6;&#x7684;&#x65F6;&#x5019;&#x7528;&#xFF0C;&#x800C;&#x5E94;&#x8BE5;&#x5728;&#x5199;&#x5165;&#x6587;&#x4EF6;&#x65F6;&#x7528;&#x3002;
+    &#x53E6;&#x5916;&#xFF0C;fclose&#x5173;&#x95ED;&#x6587;&#x4EF6;&#x65F6;&#x4F1A;&#x6E05;&#x7A7A;&#x7F13;&#x51B2;&#x533A;&#xFF1B;
+    exit&#x3001;return&#x9000;&#x51FA;&#x7A0B;&#x5E8F;&#x65F6;&#xFF0C;&#x6240;&#x6709;&#x6253;&#x5F00;&#x6587;&#x4EF6;&#x90FD;&#x4F1A;&#x81EA;&#x52A8;&#x5173;&#x95ED;&#xFF0C;&#x6587;&#x4EF6;&#x5173;&#x95ED;&#x65F6;&#x4F1A;&#x6E05;&#x7A7A;&#x7F13;&#x51B2;&#x533A;&#x3002;
+
+&#x6D41;&#x7684;&#x5206;&#x7C7B;&#xFF1A;
+&#x5168;&#x7F13;&#x51B2;&#xFF1A;&#x5728;&#x586B;&#x6EE1;&#x6807;&#x51C6;IO&#x7F13;&#x51B2;&#x533A;&#x540E;&#x624D;&#x8FDB;&#x884C;&#x5B9E;&#x9645;&#x7684;IO&#x64CD;&#x4F5C;&#x3002;
+&#x884C;&#x7F13;&#x51B2;&#xFF1A;&#x5728;&#x8F93;&#x5165;&#x8F93;&#x51FA;&#x4E2D;&#x9047;&#x5230;&#x6362;&#x884C;&#x7B26;&#x65F6;&#xFF0C;&#x6807;&#x51C6;IO&#x5E93;&#x6267;&#x884C;IO&#x64CD;&#x4F5C;&#x3002;&#xFF08;&#x8BF4;&#x660E;&#xFF1A;&#x7F13;&#x51B2;&#x533A;&#x6EE1;&#x5373;&#x4F7F;&#x6CA1;&#x6709;&#x9047;&#x5230;&#x6362;&#x884C;&#x7B26;&#xFF0C;&#x4E5F;&#x8FDB;&#x884C;IO&#xFF09;
+&#x4E0D;&#x5E26;&#x7F13;&#x51B2;&#xFF1A;&#x76F4;&#x63A5;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#xFF0C;&#x7ACB;&#x5373;&#x6267;&#x884C;IO&#x3002;
+&#x9ED8;&#x8BA4;&#x503C;&#xFF1A;&#x6807;&#x51C6;&#x51FA;&#x9519;&#x6D41;&#x9ED8;&#x8BA4;&#x662F;&#x4E0D;&#x5E26;&#x7F13;&#x51B2;&#x7684;&#xFF1B;&#x6D89;&#x53CA;&#x7EC8;&#x7AEF;&#x8BBE;&#x5907;&#x7684;&#x6D41;&#x9ED8;&#x8BA4;&#x662F;&#x884C;&#x7F13;&#x51B2;&#x7684;&#xFF1B;&#x5426;&#x5219;&#x662F;&#x5168;&#x7F13;&#x51B2;&#x7684;&#x3002;
+&#x53EF;&#x4EE5;&#x8C03;&#x7528;setbuf&#x51FD;&#x6570;&#x66F4;&#x6539;&#x7F13;&#x51B2;&#x7C7B;&#x578B;&#x548C;&#x7F13;&#x51B2;&#x533A;&#x5927;&#x5C0F;&#x3002;
+&#x4EFB;&#x4F55;&#x65F6;&#x5019;&#x6211;&#x4EEC;&#x90FD;&#x53EF;&#x4EE5;&#x8C03;&#x7528;fflush&#x51B2;&#x6D17;&#x4E00;&#x4E2A;&#x6D41;&#xFF0C;&#x662F;&#x672A;&#x5199;&#x6570;&#x636E;&#x90FD;&#x4F20;&#x9001;&#x81F3;&#x5185;&#x6838;&#x3002;
+
+&#x591A;&#x7EBF;&#x7A0B;&#x901A;&#x8FC7;fwrite&#x5199;&#x4E00;&#x4E2A;&#x6587;&#x4EF6;&#x53EF;&#x80FD;&#x4F1A;&#x5B58;&#x5728;&#x7EBF;&#x7A0B;&#x4E0D;&#x5B89;&#x5168;&#x7684;&#x95EE;&#x9898;&#xFF0C;&#x89E3;&#x51B3;&#x529E;&#x6CD5;&#xFF1A;
+1&#x3001; &#x5728;&#x6253;&#x5F00;&#x6587;&#x4EF6;&#x65F6;&#xFF0C;&#x52A0;&#x9501;&#xFF0C;fwrite&#x4E4B;&#x540E;fclose,&#x5E76;&#x91CA;&#x653E;&#x9501;&#x3002;
+2&#x3001; &#x4FEE;&#x6539;&#x6587;&#x4EF6;&#x6253;&#x5F00;&#x7684;&#x6743;&#x9650;&#x4E3A;fopen(fileName, &quot;a+&quot;),&#x5E76;&#x5728;fwrite&#x540E;&#x4F7F;&#x7528;fflush(fp)&#x5237;&#x51FA;&#x6D41;&#x3002;
+
+*/</span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *filename = <span class="hljs-string">&quot;data\\fopen.txt&quot;</span>;
+
+    FILE *pFile;
+    pFile = fopen(filename, <span class="hljs-string">&quot;w+&quot;</span>);   <span class="hljs-comment">// &#x4EE5;&#x8BFB;&#x5199;&#x65B9;&#x5F0F;&#x6253;&#x5F00;&#xFF0C;&#x6587;&#x4EF6;&#x4E0D;&#x5B58;&#x5728;&#x5219;&#x521B;&#x5EFA;</span>
+
+    <span class="hljs-keyword">if</span> (pFile == <span class="hljs-literal">NULL</span>) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;open failed, filename=%s\n&quot;</span>, filename);
+        <span class="hljs-built_in">exit</span>(<span class="hljs-number">0</span>);           <span class="hljs-comment">// &#x6253;&#x5F00;&#x6587;&#x4EF6;&#x9519;&#x8BEF;&#x9000;&#x51FA;&#x7A0B;&#x5E8F;</span>
+    }
+
+    <span class="hljs-comment">// ********************&#x6BCF;&#x6B21;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x7684;I/O</span>
+    <span class="hljs-comment">// fputc &#x6210;&#x529F;&#x8FD4;&#x56DE;&#x5199;&#x5165;&#x7684;&#x5B57;&#x7B26;&#xFF0C;&#x5931;&#x8D25;&#x8FD4;&#x56DE;-1(EOF)</span>
+    <span class="hljs-keyword">char</span> ch = <span class="hljs-string">&apos;y&apos;</span>;
+    <span class="hljs-keyword">char</span> rch1 = fputc(ch, pFile);
+    <span class="hljs-keyword">if</span> (rch1 == EOF) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;fputc failed\n&quot;</span>);
+        <span class="hljs-built_in">exit</span>(<span class="hljs-number">0</span>);
+    }
+    assert(rch1 == ch);
+
+    <span class="hljs-comment">// fgetc &#x6210;&#x529F;&#x8FD4;&#x56DE;&#x8BFB;&#x53D6;&#x7684;&#x5B57;&#x7B26;&#xFF0C;&#x5931;&#x8D25;&#x8FD4;&#x56DE;-1(EOF)</span>
+    fseek(pFile, <span class="hljs-number">0</span>, SEEK_SET);
+    <span class="hljs-keyword">char</span> rch2 = fgetc(pFile);
+    <span class="hljs-keyword">if</span> (rch2 == EOF) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;fgetc failed\n&quot;</span>);
+        <span class="hljs-built_in">exit</span>(<span class="hljs-number">0</span>);
+    }
+    assert(rch2 == <span class="hljs-string">&apos;y&apos;</span>);
+
+    <span class="hljs-comment">// ******************** &#x6BCF;&#x6B21;&#x4E00;&#x884C;&#x7684;I/O</span>
+    <span class="hljs-comment">// &#x529F;&#x80FD;&#x7B49;&#x540C;&#x4E8E; fseek(pFile, 0, SEEK_SET);</span>
+    rewind(pFile); 
+
+    <span class="hljs-comment">// fputs &#x4E00;&#x6B21;&#x5199;&#x5165;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x9047;&#x5230;null&#x5C31;&#x505C;&#x6B62;</span>
+    <span class="hljs-comment">// &#x6210;&#x529F;&#x8FD4;&#x56DE;&#x975E;&#x8D1F;&#x503C;&#xFF0C;&#x5931;&#x8D25;&#x8FD4;&#x56DE;-1(EOF)</span>
+    <span class="hljs-keyword">char</span> *buf = <span class="hljs-string">&quot;I love China&quot;</span>;
+    <span class="hljs-keyword">if</span>(<span class="hljs-built_in">fputs</span>(buf, pFile) == EOF) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;fputs failed\n&quot;</span>);
+        <span class="hljs-built_in">exit</span>(<span class="hljs-number">0</span>);
+    }
+
+    rewind(pFile);
+    <span class="hljs-comment">// fgets &#x6210;&#x529F;&#x8FD4;&#x56DE;buf&#xFF0C;&#x5931;&#x8D25;&#x6216;&#x5230;&#x8FBE;&#x6587;&#x4EF6;&#x5C3E;&#x8FD4;&#x56DE;NULL</span>
+    <span class="hljs-keyword">char</span> r_buf[<span class="hljs-number">100</span>];
+    <span class="hljs-keyword">char</span> *r_buf2 = fgets(r_buf, <span class="hljs-number">100</span>, pFile);
+    <span class="hljs-keyword">if</span> (r_buf2 == <span class="hljs-literal">NULL</span>) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;fgets failed\n&quot;</span>);
+        <span class="hljs-built_in">exit</span>(<span class="hljs-number">0</span>);
+    }
+    assert(<span class="hljs-built_in">strcmp</span>(r_buf2, r_buf) == <span class="hljs-number">0</span>);
+
+    <span class="hljs-comment">// ******************** &#x76F4;&#x63A5;I/O&#xFF08;&#x4E8C;&#x8FDB;&#x5236;IO&#xFF09;</span>
+    rewind(pFile);
+    <span class="hljs-comment">// fwrite/fread &#x8FD4;&#x56DE;&#x5EA6;&#x6216;&#x8005;&#x5199;&#x7684;&#x5BF9;&#x8C61;&#x6570;&#x91CF;</span>
+    <span class="hljs-comment">// &#x8BFB;&#x5199;&#x4E00;&#x4E2A;&#x4E8C;&#x8FDB;&#x5236;&#x6570;&#x7EC4;</span>
+    <span class="hljs-keyword">float</span> data[<span class="hljs-number">10</span>] = {<span class="hljs-number">1.2</span>, <span class="hljs-number">3.4</span>, <span class="hljs-number">5.6</span>, <span class="hljs-number">6.6</span>, <span class="hljs-number">7.7</span>, <span class="hljs-number">8.8</span>};
+    <span class="hljs-keyword">size_t</span> fw_cnt = fwrite(&amp;data[<span class="hljs-number">2</span>], <span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">float</span>), <span class="hljs-number">3</span>, pFile);     <span class="hljs-comment">// 5.6, 6.6, 7.7</span>
+    assert(fw_cnt == <span class="hljs-number">3</span>);
+
+    rewind(pFile);
+    <span class="hljs-keyword">float</span> rdata[<span class="hljs-number">10</span>];
+    <span class="hljs-keyword">size_t</span> fr_cnt = fread(rdata, <span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">float</span>), <span class="hljs-number">2</span>, pFile);     <span class="hljs-comment">// &#x8BFB;&#x51FA;&#x6765; 5.6 6.6</span>
+    assert(fr_cnt == <span class="hljs-number">2</span>);
+    assert(<span class="hljs-built_in">fabs</span>(rdata[<span class="hljs-number">0</span>] - <span class="hljs-number">5.6</span>) &lt; <span class="hljs-number">1e-6</span>);         <span class="hljs-comment">// 1e-6&#x8868;&#x793A;10&#x7684;&#x8D1F;6&#x6B21;&#x5E42;&#xFF0C;&#x8868;&#x793A;&#x4E00;&#x4E2A;&#x5F88;&#x5C0F;&#x7684;&#x6570;</span>
+    assert(<span class="hljs-built_in">fabs</span>(rdata[<span class="hljs-number">1</span>] - <span class="hljs-number">6.6</span>) &lt; <span class="hljs-number">1e-6</span>);
+
+    <span class="hljs-comment">// &#x8BFB;&#x5199;&#x4E00;&#x4E2A;&#x7ED3;&#x6784;&#x4F53;</span>
+    rewind(pFile);
+    <span class="hljs-keyword">struct</span> Item
+    {
+        <span class="hljs-keyword">char</span> name[<span class="hljs-number">20</span>];
+        <span class="hljs-keyword">short</span> age;
+    };
+    <span class="hljs-keyword">struct</span> Item item = {<span class="hljs-string">&quot;Lily&quot;</span>, <span class="hljs-number">18</span>};
+    <span class="hljs-keyword">size_t</span> n = fwrite(&amp;item, <span class="hljs-keyword">sizeof</span>(item), <span class="hljs-number">1</span>, pFile);
+    assert(n == <span class="hljs-number">1</span>);      <span class="hljs-comment">// &#x5199;&#x5165;&#x5BF9;&#x8C61;&#x4E2A;&#x6570;</span>
+
+    rewind(pFile);
+    <span class="hljs-keyword">struct</span> Item ritem;
+    <span class="hljs-keyword">if</span> (<span class="hljs-number">1</span> != fread(&amp;ritem, <span class="hljs-keyword">sizeof</span>(ritem), <span class="hljs-number">1</span>, pFile)) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;fread failed\n&quot;</span>);
+        <span class="hljs-comment">// fread &#x8BFB;&#x53D6;&#x7684;&#x5BF9;&#x8C61;&#x6570;&#x91CF;&#x5C11;&#x4E8E;&#x9884;&#x671F;&#xFF0C;&#x5982;&#x4F55;&#x5224;&#x65AD;&#x662F;&#x8BFB;&#x5230;&#x4E86;&#x6587;&#x4EF6;&#x5C3E;&#x90E8;&#xFF0C;&#x8FD8;&#x662F;&#x51FA;&#x9519;&#x4E86;&#xFF1F;</span>
+        <span class="hljs-comment">// feof&#x5224;&#x65AD;&#x6587;&#x4EF6;&#x7ED3;&#x675F;&#x662F;&#x901A;&#x8FC7;&#x8BFB;&#x53D6;&#x51FD;&#x6570;fread/fscanf&#x7B49;&#x8FD4;&#x56DE;&#x9519;&#x8BEF;&#x6765;&#x8BC6;&#x522B;&#x7684;&#xFF0C;</span>
+        <span class="hljs-comment">// &#x6545;&#x800C;&#x5224;&#x65AD;&#x6587;&#x4EF6;&#x662F;&#x5426;&#x7ED3;&#x675F;&#x5E94;&#x8BE5;&#x662F;&#x5728;&#x8BFB;&#x53D6;&#x51FD;&#x6570;&#x4E4B;&#x540E;&#x8FDB;&#x884C;&#x5224;&#x65AD;&#x3002;</span>
+        <span class="hljs-keyword">if</span>(feof(pFile)) {                          <span class="hljs-comment">// &#x5230;&#x4E86;&#x6587;&#x4EF6;&#x5C3E;&#x90E8;</span>
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;has reached end of file&quot;</span>);
+        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (ferror(pFile)) {                <span class="hljs-comment">// &#x5176;&#x4ED6;&#x9519;&#x8BEF;</span>
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;fail to read file&quot;</span>);           
+        }
+        <span class="hljs-built_in">exit</span>(<span class="hljs-number">0</span>);
+    }
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;name=%s, age=%d\n&quot;</span>, ritem.name, ritem.age);
+
+    <span class="hljs-comment">// &#x4E8C;&#x8FDB;&#x5236;IO&#x5B58;&#x5728;&#x7684;&#x4E0D;&#x517C;&#x5BB9;&#x3001;&#x4E0D;&#x53EF;&#x8DE8;&#x5E73;&#x53F0;&#x7684;&#x95EE;&#x9898;&#xFF1A;</span>
+    <span class="hljs-comment">// &#x5BF9;&#x4E8E;&#x540C;&#x4E00;&#x4E2A;&#x7ED3;&#x6784;&#x4F53;&#xFF0C;&#x4E0D;&#x540C;&#x7F16;&#x8BD1;&#x5668;&#x548C;&#x7CFB;&#x7EDF;&#x53EF;&#x80FD;&#x6709;&#x4E0D;&#x540C;&#x7684;&#x5BF9;&#x9F50;&#x89C4;&#x5219;</span>
+    <span class="hljs-comment">// &#x5BF9;&#x4E8E;&#x591A;&#x5B57;&#x8282;&#x6574;&#x6570;&#x3001;&#x6D6E;&#x70B9;&#x6570;&#xFF0C;&#x4E0D;&#x540C;&#x673A;&#x5668;&#x4F53;&#x7CFB;&#x7ED3;&#x6784;&#x95F4;&#x4E5F;&#x5360;&#x4E0D;&#x540C;&#x5B57;&#x8282;&#x6570;</span>
+
+    <span class="hljs-comment">// &#x83B7;&#x53D6;&#x6587;&#x4EF6;&#x76F8;&#x5173;&#x4FE1;&#x606F;</span>
+    <span class="hljs-keyword">long</span> fsize = ftell(pFile);
+    <span class="hljs-keyword">if</span>( <span class="hljs-number">-1</span> == fsize) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;ftell failed\n&quot;</span>);
+        <span class="hljs-built_in">exit</span>(<span class="hljs-number">0</span>);
+    }
+    assert(fsize == <span class="hljs-number">22</span>);                               <span class="hljs-comment">// 22&#x5B57;&#x8282;</span>
+
+    <span class="hljs-comment">// fstat &#x83B7;&#x53D6;&#x6587;&#x4EF6;&#x6307;&#x9488;&#x7684;&#x8BE6;&#x60C5;</span>
+    <span class="hljs-comment">// &#x4ECE;&#x6587;&#x4EF6;&#x6307;&#x9488;FILE*&#x4E2D;&#x83B7;&#x53D6;&#x6587;&#x4EF6;&#x7684;&#x63CF;&#x8FF0;&#x7B26;(&#x53E5;&#x67C4;)&#xFF0C;&#x4EE5;&#x6587;&#x4EF6;&#x53E5;&#x67C4;&#x4E3A;&#x53C2;&#x6570;&#x8FDB;&#x884C;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;</span>
+    <span class="hljs-keyword">int</span> fd = fileno(pFile);
+    <span class="hljs-keyword">struct</span> stat file_stat;
+    fstat(fd, &amp;file_stat);
+    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">short</span> st_mode = file_stat.st_mode;<span class="hljs-comment">// &#x6587;&#x4EF6;&#x7684;&#x7C7B;&#x578B;&#x548C;&#x5B58;&#x53D6;&#x7684;&#x6743;&#x9650;&#xFF0C;&#x6309;&#x4F4D;&#x89E3;&#x6790;</span>
+    <span class="hljs-keyword">long</span> st_size = file_stat.st_size;          <span class="hljs-comment">// &#x6587;&#x4EF6;&#x5927;&#x5C0F;</span>
+    <span class="hljs-keyword">time_t</span> st_atime = file_stat.st_atime;      <span class="hljs-comment">// &#x8BBF;&#x95EE;&#x65F6;&#x95F4;</span>
+    <span class="hljs-keyword">time_t</span> st_ctime = file_stat.st_ctime;      <span class="hljs-comment">// &#x521B;&#x5EFA;&#x65F6;&#x95F4;</span>
+    <span class="hljs-keyword">time_t</span> st_mtime = file_stat.st_mtime;      <span class="hljs-comment">// &#x4FEE;&#x6539;&#x65F6;&#x95F4;</span>
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;stat=&gt; st_mode=%d, \nst_size=%ld, \nst_atime=%ld, \nst_ctime=%ld, \nst_mtime=%ld&quot;</span>,
+                st_mode, st_size, st_atime, st_ctime, st_mtime);
+
+    fclose(pFile);
+
+    system(<span class="hljs-string">&quot;pause&quot;</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<p>c&#x6807;&#x51C6;IO&#x5E93;&#xFF0C;&#x5B57;&#x7B26;&#x3001;&#x5B57;&#x7B26;&#x4E32;&#x64CD;&#x4F5C;</p>
+<pre><code class="lang-c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string.h&gt;</span></span>
+
+<span class="hljs-comment">/*
+#include&lt;stdio.h&gt;
+
+&#x6807;&#x51C6;&#x8F93;&#x5165;&#x8F93;&#x51FA;&#x6D41;--&#x5B57;&#x7B26;&#x3001;&#x5B57;&#x7B26;&#x4E32;&#x64CD;&#x4F5C;
+    int getc(FILE *stream);
+    int getchar(void);                     // &#x7B49;&#x4EF7;&#x4E8E; getc(stdin)
+    int ungetc(int c, FILE *stream);       // &#x5C06;&#x5B57;&#x7B26;&#x538B;&#x56DE;&#x6D41;&#x4E2D;&#xFF0C;&#x6210;&#x529F;&#x8FD4;&#x56DE;c&#xFF0C;&#x5931;&#x8D25;&#x8FD4;&#x56DE;EOF
+    char* gets(char *buf);
+
+    int putc(int c, FILE *stream);
+    int putchar(int c);                   // &#x6210;&#x529F;&#x8FD4;&#x56DE;c&#xFF0C;&#x5931;&#x8D25;&#x8FD4;&#x56DE;EOF
+    int puts(const char *s);
+
+&#x6587;&#x4EF6;--&#x5B57;&#x7B26;&#x3001;&#x5B57;&#x7B26;&#x4E32;&#x64CD;&#x4F5C;
+    int fgetc(FILE *stream);
+    char* fgets(char *buf, int size, FILE *stream);      // &#x6210;&#x529F;&#x8FD4;&#x56DE;buf&#xFF0C;&#x5931;&#x8D25;&#x8FD4;&#x56DE;NULL
+
+    int fputc(int c, FILE *stream);
+    int fputs(const char *s, FILE *stream);         // &#x6210;&#x529F;&#x8FD4;&#x56DE;&#x975E;&#x8D1F;&#x6570;&#xFF0C;&#x5931;&#x8D25;&#x8FD4;&#x56DE;EOF
+*/</span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+
+    <span class="hljs-comment">// ************************* getchar/putchar &#x6807;&#x51C6;&#x8F93;&#x5165;&#x8F93;&#x51FA;&#xFF0C;&#x5B57;&#x7B26;IO</span>
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;getchar/putchar: Enter 2 char\n&quot;</span>);
+
+    <span class="hljs-keyword">char</span> c1 = getchar();
+    fflush(<span class="hljs-built_in">stdin</span>);         <span class="hljs-comment">// &#x51B2;&#x6D17;&#x6389;&#x7F13;&#x51B2;&#x533A;&#x4E2D;&#x7684;&#x6362;&#x884C;&#x7B26;</span>
+    <span class="hljs-keyword">char</span> c2 = getchar();
+    fflush(<span class="hljs-built_in">stdin</span>);         <span class="hljs-comment">// &#x51B2;&#x6D17;&#x6389;&#x7F13;&#x51B2;&#x533A;&#x4E2D;&#x7684;&#x6362;&#x884C;&#x7B26;</span>
+
+    <span class="hljs-keyword">if</span> (c1 != EOF) { <span class="hljs-built_in">putchar</span>(c1);  <span class="hljs-built_in">putchar</span>(<span class="hljs-string">&apos;\n&apos;</span>); }
+    <span class="hljs-keyword">if</span> (c2 != EOF) { <span class="hljs-built_in">putchar</span>(c2);  <span class="hljs-built_in">putchar</span>(<span class="hljs-string">&apos;\n&apos;</span>); }
+
+    <span class="hljs-comment">// ************************* fgetc/fputc &#x6587;&#x4EF6;&#xFF0C;&#x5B57;&#x7B26;IO</span>
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\n\n\nfgetc/fputc: \n&quot;</span>);
+
+    FILE *fp = fopen(<span class="hljs-string">&quot;.\\data\\stdio.txt&quot;</span>, <span class="hljs-string">&quot;w+&quot;</span>);
+    fseek(fp, <span class="hljs-number">0</span>, SEEK_SET);
+    <span class="hljs-keyword">char</span> charset[] = <span class="hljs-string">&quot;testfgetcfputc&quot;</span>;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">char</span> *p = charset; *p != <span class="hljs-string">&apos;\0&apos;</span>; p++) {
+        fputc(*p, fp);
+    }
+
+    fseek(fp, <span class="hljs-number">0</span>, SEEK_SET);
+    <span class="hljs-keyword">char</span> c;
+    <span class="hljs-keyword">while</span>((c = fgetc(fp)) != EOF) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%c &quot;</span>, c);
+    }
+
+    <span class="hljs-comment">// ************************* gets/puts &#x6807;&#x51C6;&#x8F93;&#x5165;&#x8F93;&#x51FA;&#xFF0C;&#x884C;IO</span>
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\n\n\ngets/puts: \n&quot;</span>);
+
+    <span class="hljs-keyword">char</span> sbuf[<span class="hljs-number">100</span>];
+    gets(sbuf); 
+
+    <span class="hljs-keyword">char</span> sbuf2[<span class="hljs-number">200</span>] = <span class="hljs-string">&quot;testgetsputs&quot;</span>;
+    <span class="hljs-built_in">strcat</span>(sbuf2, sbuf);
+    <span class="hljs-comment">// sprintf(sbuf2, &quot;%s%s&quot;, sbuf2, sbuf);</span>
+    <span class="hljs-built_in">puts</span>(sbuf2);
+
+    <span class="hljs-comment">// ************************* fgets/fputs &#x6587;&#x4EF6;&#xFF0C;&#x884C;IO</span>
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;\n\n\nfgets/fputs: \n&quot;</span>);
+    fseek(fp, <span class="hljs-number">0</span>, SEEK_SET);
+    <span class="hljs-keyword">char</span> buf[<span class="hljs-number">100</span>] = <span class="hljs-string">&quot;testfgetsfputs&quot;</span>;
+      <span class="hljs-comment">// &#x9047;&#x5230;&#x6362;&#x884C;&#x7B26;&#x3001;&#x884C;&#x7F13;&#x51B2;&#x533A;&#x6EE1;&#x3001;&#x6216;&#x8005;&#x5B57;&#x7B26;&#x4E32;&#x7ED3;&#x675F;&#x6807;&#x8BC6;&apos;\0&apos;&#xFF0C;&#x5219;&#x5199;&#x5165;&#x7ED3;&#x675F;</span>
+    <span class="hljs-built_in">fputs</span>(buf, fp);           
+
+    fseek(fp, <span class="hljs-number">0</span>, SEEK_SET);
+    <span class="hljs-keyword">char</span> buf2[<span class="hljs-number">100</span>];
+    fgets(buf2, <span class="hljs-number">100</span>, fp);
+    <span class="hljs-comment">// &#x8BFB;&#x53D6;&#x7684;&#x6570;&#x636E;&#x4E0D;&#x8D85;&#x8FC7;100&#xFF0C; &#x9047;&#x5230;&#x6362;&#x884C;&#x7B26;&#x53F7;&#x6216;&#x8005;&#x6587;&#x4EF6;&#x7ED3;&#x675F;&#x6807;&#x8BC6;EOF(-1)&#xFF0C;&#x5219;&#x8BFB;&#x53D6;&#x7ED3;&#x675F;&#x3002;</span>
+    <span class="hljs-built_in">puts</span>(buf2);   
+    system(<span class="hljs-string">&quot;pause&quot;</span>);    
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h2 id="c-io">c++ IO</h2>
+<pre><code class="lang-c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstdlib&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstring&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iomanip&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bitset&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;fstream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string&gt;</span></span>
+
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-comment">/*
+&#x4E3B;&#x9898;&#xFF1A;c++ IO
+c++&#x7684;IO&#x662F;&#x56F4;&#x7ED5;&#x6D41;&#x5BF9;&#x8C61;&#x8FDB;&#x884C;&#x7684;
+&#x5934;&#x6587;&#x4EF6;
+#include &lt;ostream&gt;
+#include &lt;istream&gt;
+#include &lt;iostream&gt;
+#inlcude &lt;ifstream&gt;
+#include &lt;ofstream&gt;
+#include &lt;fstream&gt;
+
+&#x6807;&#x51C6;&#x8F93;&#x5165;&#x8F93;&#x51FA;&#x6D41;&#x5BF9;&#x8C61;&#xFF1A;
+cin
+cout
+cerr
+
+&#x521B;&#x5EFA;&#x6587;&#x4EF6;&#x6D41;&#x5BF9;&#x8C61;&#xFF1A;
+fstream f(&quot;a.txt&quot;, ios::in | ios::out);
+&#x6216;&#x8005;
+ofstream fout;
+fout.open(&quot;a.txt&quot;, ios::out);
+
+&#x5B9A;&#x4E49;&#x6587;&#x4EF6;&#x6D41;&#x5BF9;&#x8C61;&#x65F6;&#xFF0C;&#x6253;&#x5F00;&#x65B9;&#x5F0F;&#x5982;&#x4E0B;&#xFF1A;
+ios::in      : &#x4EE5;&#x8F93;&#x5165;&#x65B9;&#x5F0F;&#x6253;&#x5F00;&#x6587;&#x4EF6;&#x6D41;
+ios::out     &#xFF1A;&#x8F93;&#x51FA;
+ios::app     &#xFF1A; &#x8FFD;&#x52A0;
+ios::binary  &#xFF1A; &#x4E8C;&#x8FDB;&#x5236;
+
+&#x6587;&#x4EF6;&#x6D41;&#x5BF9;&#x8C61;&#x8F93;&#x5165;&#x8F93;&#x51FA;&#x65B9;&#x5F0F;&#xFF1A;
+1. &#x901A;&#x8FC7;&#x6D41;&#x63D2;&#x5165;&#x548C;&#x63D0;&#x53D6;&#x8FD0;&#x7B97;&#x7B26;&#xFF1A; &lt;&lt;  &gt;&gt;
+2. &#x901A;&#x8FC7;&#x6210;&#x5458;&#x51FD;&#x6570;&#xFF1A; put/get/getline&#x7B49;
+*/</span>
+
+<span class="hljs-keyword">class</span> Student
+{
+<span class="hljs-keyword">private</span>:
+    <span class="hljs-built_in">string</span> _name;
+    <span class="hljs-keyword">int</span> _age;
+<span class="hljs-keyword">public</span>:
+    Student(<span class="hljs-built_in">string</span> name=<span class="hljs-string">&quot;&quot;</span>, <span class="hljs-keyword">int</span> age=<span class="hljs-number">-1</span>):_name(name), _age(age) {}
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">show</span><span class="hljs-params">()</span> </span>{
+        <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;&lt;name=&quot;</span> &lt;&lt; <span class="hljs-keyword">this</span>-&gt;_name &lt;&lt; <span class="hljs-string">&quot;, age=&quot;</span> &lt;&lt; <span class="hljs-keyword">this</span>-&gt;_age &lt;&lt; <span class="hljs-string">&quot;&gt;&quot;</span> &lt;&lt; <span class="hljs-built_in">endl</span>;  
+    }
+};
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>{
+    <span class="hljs-comment">// ****************cin &#x6807;&#x51C6;&#x8F93;&#x5165;&#x6D41;&#x5BF9;&#x8C61;&#xFF0C;&#x548C;&#x7EC8;&#x7AEF;&#x5173;&#x8054;</span>
+    <span class="hljs-keyword">char</span> ch1 = <span class="hljs-built_in">cin</span>.get();
+    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;get a char from stdin stream: &quot;</span> &lt;&lt; ch1 &lt;&lt; <span class="hljs-built_in">endl</span>;
+    <span class="hljs-built_in">cin</span>.putback(ch1);            <span class="hljs-comment">// &#x628A;ch1&#x653E;&#x56DE;&#x5230;&#x8F93;&#x5165;&#x6D41;</span>
+    <span class="hljs-keyword">if</span> (<span class="hljs-built_in">cin</span>.peek() == ch1) {     <span class="hljs-comment">// &#x67E5;&#x770B;&#x4E0B;&#x4E00;&#x4E2A;&#x8F93;&#x5165;&#x6D41;&#x4E2D;&#x7684;&#x5B57;&#x7B26;&#xFF0C;&#x4E0D;&#x79FB;&#x9664;&#x6D41;</span>
+        <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;char in stdin stream = ch1&quot;</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+    }
+    <span class="hljs-built_in">cin</span>.ignore(<span class="hljs-number">5</span>);               <span class="hljs-comment">// &#x5FFD;&#x7565;&#x6389;5&#x4E2A;&#x5B57;&#x7B26;</span>
+    <span class="hljs-keyword">char</span> str[<span class="hljs-number">11</span>];
+    <span class="hljs-built_in">cin</span>.getline(str, <span class="hljs-number">11</span>);       <span class="hljs-comment">// &#x8BFB;&#x53D6;&#x5269;&#x4F59;&#x7684;&#x5B57;&#x7B26;</span>
+    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;str left is: &quot;</span>&lt;&lt; str &lt;&lt; <span class="hljs-built_in">endl</span>;
+
+    <span class="hljs-comment">// ********************cout &#x6807;&#x51C6;&#x8F93;&#x51FA;&#x6D41;&#x5BF9;&#x8C61;&#xFF0C;&#x548C;&#x7EC8;&#x7AEF;&#x5173;&#x8054;</span>
+    <span class="hljs-keyword">char</span> ss[<span class="hljs-number">10</span>] = <span class="hljs-string">&quot;12345&quot;</span>;
+    <span class="hljs-built_in">cout</span>.put(<span class="hljs-string">&apos;a&apos;</span>);                  <span class="hljs-comment">// &#x5411;&#x6807;&#x51C6;&#x8F93;&#x51FA;&#x6253;&#x5370;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;</span>
+    <span class="hljs-built_in">cout</span>.write(ss, <span class="hljs-built_in">strlen</span>(ss));     <span class="hljs-comment">// &#x5411;&#x6807;&#x51C6;&#x8F93;&#x51FA;&#x6253;&#x5370;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;</span>
+    <span class="hljs-built_in">cout</span>.flush();                   <span class="hljs-comment">// &#x6E05;&#x7A7A;&#x7F13;&#x51B2;</span>
+
+    <span class="hljs-comment">// &#x5BBD;&#x5EA6;&#x662F;10&#xFF0C;&#x5DE6;&#x5BF9;&#x9F50;&#xFF0C;x&#x8865;&#x9F50;</span>
+    <span class="hljs-built_in">cout</span> &lt;&lt; setw(<span class="hljs-number">10</span>) &lt;&lt; setfill(<span class="hljs-string">&apos;x&apos;</span>) &lt;&lt; setiosflags(ios::left) &lt;&lt; <span class="hljs-string">&quot;abcd&quot;</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+
+    <span class="hljs-comment">// &#x5BBD;&#x5EA6;&#x662F;10&#xFF0C;&#x5B9A;&#x70B9;&#x65B9;&#x5F0F;&#x8868;&#x793A;&#x5B9E;&#x6570;&#xFF0C;&#x4FDD;&#x7559;3&#x4F4D;&#x5C0F;&#x6570;</span>
+    <span class="hljs-built_in">cout</span> &lt;&lt; setw(<span class="hljs-number">10</span>) &lt;&lt; setiosflags(ios::fixed) &lt;&lt; setprecision(<span class="hljs-number">3</span>) &lt;&lt; setfill(<span class="hljs-string">&apos; &apos;</span>) &lt;&lt; <span class="hljs-string">&quot;12.345215&quot;</span> &lt;&lt; <span class="hljs-built_in">endl</span>; 
+
+    <span class="hljs-keyword">int</span> data = <span class="hljs-number">15</span>;
+    <span class="hljs-built_in">cout</span> &lt;&lt; hex &lt;&lt; data &lt;&lt; <span class="hljs-built_in">endl</span>;                   <span class="hljs-comment">// &#x5341;&#x516D;&#x8FDB;&#x5236;&#x5927;&#x5199;</span>
+    <span class="hljs-built_in">cout</span> &lt;&lt; oct &lt;&lt; data &lt;&lt; <span class="hljs-built_in">endl</span>;                   <span class="hljs-comment">// &#x516B;&#x8FDB;&#x5236;</span>
+    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-built_in">bitset</span>&lt;<span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">int</span>)*8&gt;(data)  &lt;&lt; <span class="hljs-built_in">endl</span>;  <span class="hljs-comment">// &#x4E8C;&#x8FDB;&#x5236;</span>
+
+    <span class="hljs-comment">// *******************fstream</span>
+    <span class="hljs-function">fstream <span class="hljs-title">f1</span><span class="hljs-params">(<span class="hljs-string">&quot;src\\file1.txt&quot;</span>, ios::in | ios::out)</span></span>;    <span class="hljs-comment">// &#x4EE5;&#x53EF;&#x8BFB;&#x53EF;&#x5199;&#x7684;&#x65B9;&#x5F0F;&#x6253;&#x5F00;&#x6587;&#x4EF6;&#x6D41;f1</span>
+    <span class="hljs-keyword">if</span> (!f1) {
+        perror(<span class="hljs-string">&quot;open f1 failed&quot;</span>);
+        system(<span class="hljs-string">&quot;pause&quot;</span>);
+        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+    }
+    <span class="hljs-keyword">if</span> (f1) {
+        f1.put(<span class="hljs-string">&apos;a&apos;</span>);
+        f1.put(<span class="hljs-string">&apos;\n&apos;</span>);              <span class="hljs-comment">// &#x5199;&#x5165;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;</span>
+
+        f1.flush();                <span class="hljs-comment">// &#x51B2;&#x6D17;&#x8F93;&#x5165;&#x6D41;</span>
+
+        f1 &lt;&lt; <span class="hljs-string">&quot;hello world&quot;</span> &lt;&lt; <span class="hljs-built_in">endl</span>;  <span class="hljs-comment">// &#x5199;&#x5165;&#x5B57;&#x7B26;&#x4E32;</span>
+
+        f1.close();
+    }
+
+    ifstream fin;
+    fin.open(<span class="hljs-string">&quot;src\\filein.txt&quot;</span>, ios::in);   <span class="hljs-comment">// &#x4EE5;&#x8BFB;&#x7684;&#x65B9;&#x5F0F;&#x6253;&#x5F00;&#x8F93;&#x5165;&#x6D41;</span>
+    <span class="hljs-keyword">if</span> (fin) {
+        <span class="hljs-keyword">char</span> ch = fin.get();                <span class="hljs-comment">// &#x8BFB;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;</span>
+        <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;get=&quot;</span> &lt;&lt; ch &lt;&lt; <span class="hljs-built_in">endl</span>;
+
+        <span class="hljs-keyword">char</span> str[<span class="hljs-number">100</span>];
+        fin.getline(str, <span class="hljs-keyword">sizeof</span>(str));      <span class="hljs-comment">// &#x8BFB;&#x4E00;&#x884C;&#x5B57;&#x7B26;&#x4E32;</span>
+        <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;getline&quot;</span> &lt;&lt; str &lt;&lt; <span class="hljs-built_in">endl</span>;
+
+        <span class="hljs-keyword">while</span>(!fin.eof()) {                 <span class="hljs-comment">// &#x73AF;&#x5FAA;&#x8BFB;&#x53D6;&#x5404;&#x884C;&#xFF0C;&#x76F4;&#x5230;&#x7ED3;&#x5C3E;</span>
+            <span class="hljs-built_in">memset</span>(str, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span>(str));
+            fin &gt;&gt; str;
+            <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;str=&quot;</span> &lt;&lt; str &lt;&lt; <span class="hljs-built_in">endl</span>;    
+        }
+        fin.close(); 
+    }
+
+    <span class="hljs-comment">// **********************&#x4E8C;&#x8FDB;&#x5236;&#x6587;&#x4EF6;&#x8BFB;&#x5199;</span>
+    <span class="hljs-function">Student <span class="hljs-title">s1</span><span class="hljs-params">(<span class="hljs-string">&quot;zhangsan&quot;</span>, <span class="hljs-number">18</span>)</span></span>;
+    <span class="hljs-function">Student <span class="hljs-title">s2</span><span class="hljs-params">(<span class="hljs-string">&quot;lisi&quot;</span>, <span class="hljs-number">20</span>)</span></span>;
+
+    <span class="hljs-function">fstream <span class="hljs-title">fbi</span><span class="hljs-params">(<span class="hljs-string">&quot;src\\fbi.txt&quot;</span>, ios::in | ios::out | ios::binary)</span></span>;
+    <span class="hljs-keyword">if</span> (!fbi) {
+        perror(<span class="hljs-string">&quot;open fbi failed:&quot;</span>);
+        system(<span class="hljs-string">&quot;pause&quot;</span>);
+        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;
+    }
+    fbi.seekp(ios::beg);      <span class="hljs-comment">// &#x8BBE;&#x7F6E;&#x8F93;&#x51FA;&#x6587;&#x4EF6;&#x6D41;&#x7684;&#x6307;&#x9488;</span>
+    fbi.write((<span class="hljs-keyword">char</span> *)&amp;s1, <span class="hljs-keyword">sizeof</span>(Student));
+    fbi.write((<span class="hljs-keyword">char</span> *)&amp;s2, <span class="hljs-keyword">sizeof</span>(Student));
+    fbi.flush();
+
+    fbi.seekg(<span class="hljs-number">0</span>, ios::beg);     <span class="hljs-comment">// &#x8BBE;&#x7F6E;&#x8F93;&#x5165;&#x6587;&#x4EF6;&#x6D41;&#x7684;&#x6307;&#x9488;</span>
+    Student *stmp = <span class="hljs-keyword">new</span> Student();
+    <span class="hljs-keyword">while</span> (!fbi.eof()) {   
+        fbi.read((<span class="hljs-keyword">char</span> *)stmp, <span class="hljs-keyword">sizeof</span>(Student));
+        fbi.flush();
+        stmp-&gt;show();
+    }
+    fbi.close();
+
+    system(<span class="hljs-string">&quot;pause&quot;</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h1 id="&#x683C;&#x5F0F;&#x5316;io">&#x683C;&#x5F0F;&#x5316;IO</h1>
+<pre><code class="lang-c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;assert.h&gt;</span></span>
+
+<span class="hljs-comment">/*
+&#x683C;&#x5F0F;&#x5316;I/O
+&#x5934;&#x6587;&#x4EF6;&#xFF1A;&lt;stdio.h&gt;
+
+int scanf(const char *format, ...);      // &#x4ECE;&#x6807;&#x51C6;&#x8F93;&#x5165;&#x63A5;&#x6536;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x683C;&#x5F0F;&#x5316;&#x5230;&#x6307;&#x5B9A;&#x53D8;&#x91CF;&#x4E2D;
+int printf (const char *format, ...);    // &#x683C;&#x5F0F;&#x5316;&#x6253;&#x5370;&#x5230;&#x6807;&#x51C6;&#x8F93;&#x51FA;
+
+
+int fscanf(FILE *stream, const char *format, ...)    // &#x4ECE;&#x6587;&#x4EF6;&#x4E2D;&#x8BFB;&#x53D6;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x683C;&#x5F0F;&#x5316;&#x5230;&#x6307;&#x5B9A;&#x53D8;&#x91CF;&#x4E2D;
+int fprintf (FILE *stream, const char *format, ...)  // &#x683C;&#x5F0F;&#x5316;&#x6253;&#x5370;&#x5230;&#x6587;&#x4EF6;   
+
+int sscanf(const char *source, const char *format, ...)           // &#x5B57;&#x7B26;&#x4E32;&#x683C;&#x5F0F;&#x5316;&#x5230;&#x6307;&#x5B9A;&#x53D8;&#x91CF;&#x4E2D;
+int sprintf (char *stream, const char *format, ...)               // &#x683C;&#x5F0F;&#x5316;&#x6253;&#x5370;&#x5230;&#x5B57;&#x7B26;&#x4E32;
+int snprintf (char *stream, size_t n, const char *format, ...)    // &#x683C;&#x5F0F;&#x5316;&#x6253;&#x5370;&#x5230;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x6307;&#x5B9A;&#x622A;&#x65AD;&#x957F;&#x5EA6;
+
+int printf(const char * format&#xFF0C;...);                            // &#x683C;&#x5F0F;&#x5316;&#x5230;&#x6807;&#x51C6;&#x8F93;&#x51FA;
+int sprintf(char *str, const char *format&#xFF0C;...); 
+int snprintf(char *str, size_t size, const char *format, ...);   // &#x683C;&#x5F0F;&#x5316;&#x5230;&#x5B57;&#x7B26;&#x4E32;
+int fprintf(FILE *fptr, const char *format, ...);                // &#x683C;&#x5F0F;&#x5316;&#x5230;&#x6587;&#x4EF6;
+
+&#x8BF4;&#x660E;&#xFF1A;
+*printf&#x7248;&#x672C;&#xFF1A;&#x6210;&#x529F;&#x8FD4;&#x56DE;&#x5B58;&#x5165;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x5B57;&#x7B26;&#x6570;&#xFF0C;&#x5931;&#x8D25;&#x5219;&#x8FD4;&#x56DE;&#x8D1F;&#x6570;&#x3002;
+*scanf&#x7248;&#x672C;&#xFF1A;&#x6210;&#x529F;&#x8FD4;&#x56DE;&#x6307;&#x5B9A;&#x7684;&#x8F93;&#x5165;&#x9879;&#x6570;&#xFF0C;&#x5931;&#x8D25;&#x8FD4;&#x56DE;EOF
+
+int i=43;    
+printf(&quot;%d\n&quot;, printf(&quot;%d\n&quot;, printf(&quot;%d\n&quot;,i)));
+        2\n            3\n    43\n -- 3&#x4E2A;&#x5B57;&#x7B26;
+&#x8F93;&#x51FA;&#xFF1A;
+43
+3
+2 
+
+*/</span>
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">test_scanf_printf</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">char</span> name[<span class="hljs-number">10</span>];
+    <span class="hljs-keyword">char</span> ch;
+    <span class="hljs-keyword">int</span> age;
+
+    <span class="hljs-comment">// scanf &#x901A;&#x8FC7;&#x6807;&#x51C6;&#x8F93;&#x5165;(&#x952E;&#x76D8;)&#x683C;&#x5F0F;&#x5316;&#x5230;&#x6307;&#x5B9A;&#x53D8;&#x91CF;</span>
+    <span class="hljs-comment">// &#x952E;&#x76D8;&#x8F93;&#x5165;&gt; name=zs age=18 flag=y</span>
+    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;name=%s age=%d flag=%c&quot;</span>, name, &amp;age, &amp;ch);
+    <span class="hljs-comment">//printf &#x683C;&#x5F0F;&#x5316;&#x6253;&#x5370;&#x5230;&#x6807;&#x51C6;&#x8F93;&#x51FA;(&#x7EC8;&#x7AEF;)</span>
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;you have input=&gt;name=%s, age=%d, flag=%c\n&quot;</span>, name, age, ch);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">test_fscanf_fprintf</span><span class="hljs-params">()</span> </span>{
+
+    FILE *fp;
+    <span class="hljs-keyword">char</span>* fileName=<span class="hljs-string">&quot;D:\\gcctool\\code\\libc_learn\\data\\scanf.txt&quot;</span>; 
+    fp = fopen(fileName, <span class="hljs-string">&quot;w+&quot;</span>);
+    <span class="hljs-keyword">if</span> (fp == <span class="hljs-literal">NULL</span>) {
+        perror(<span class="hljs-string">&quot;fopen failed&quot;</span>);       <span class="hljs-comment">// &#x6253;&#x5370;errno&#x62A5;&#x9519;&#x8BE6;&#x60C5;</span>
+        <span class="hljs-built_in">exit</span>(<span class="hljs-number">0</span>);
+    }
+
+    <span class="hljs-comment">// fprintf &#x683C;&#x5F0F;&#x5316;&#x6253;&#x5370;&#x5230;&#x6587;&#x4EF6;&#x4E2D;</span>
+    <span class="hljs-keyword">int</span> size1 = <span class="hljs-built_in">fprintf</span>(fp, <span class="hljs-string">&quot;%s %d\n&quot;</span>, <span class="hljs-string">&quot;zs&quot;</span>, <span class="hljs-number">100</span>);
+    <span class="hljs-keyword">int</span> size2 = <span class="hljs-built_in">fprintf</span>(fp, <span class="hljs-string">&quot;%s %d\n&quot;</span>, <span class="hljs-string">&quot;ls&quot;</span>, <span class="hljs-number">200</span>);
+    <span class="hljs-keyword">int</span> size3 = <span class="hljs-built_in">fprintf</span>(fp, <span class="hljs-string">&quot;%s %d\n&quot;</span>, <span class="hljs-string">&quot;ww&quot;</span>, <span class="hljs-number">300</span>);
+    assert(size1 == <span class="hljs-number">7</span> &amp;&amp; size2 == <span class="hljs-number">7</span> &amp;&amp; size3 == <span class="hljs-number">7</span>);   <span class="hljs-comment">// &#x8FD4;&#x56DE;&#x5199;&#x5165;&#x7684;&#x5B57;&#x8282;&#x6570;</span>
+
+    <span class="hljs-comment">// fscanf &#x4ECE;&#x6587;&#x4EF6;&#x4E2D;&#x8BFB;&#x53D6;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x683C;&#x5F0F;&#x5316;&#x5230;n&#x4E2A;&#x53D8;&#x91CF;</span>
+    fseek(fp, <span class="hljs-number">0</span>, SEEK_SET);
+    <span class="hljs-keyword">char</span> name[<span class="hljs-number">10</span>];
+    <span class="hljs-keyword">int</span> age;
+    <span class="hljs-keyword">while</span>(!feof(fp)) {
+        <span class="hljs-built_in">fscanf</span>(fp, <span class="hljs-string">&quot;%s %d&quot;</span>, name, &amp;age);   <span class="hljs-comment">// &#x683C;&#x5F0F;&#x5316;&#x5230;&#x53D8;&#x91CF;</span>
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;&lt;%s %d&gt;\n&quot;</span>, name, age);    <span class="hljs-comment">// &#x8F93;&#x51FA;&#x5230;&#x7EC8;&#x7AEF;</span>
+    }
+
+    fclose(fp);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">test_sscanf_sprintf</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">char</span> name1[<span class="hljs-number">20</span>] = <span class="hljs-string">&quot;Lily&quot;</span>;
+    <span class="hljs-keyword">char</span> name2[<span class="hljs-number">20</span>] = <span class="hljs-string">&quot;Lucy&quot;</span>;
+    <span class="hljs-keyword">int</span>  age = <span class="hljs-number">18</span>;
+
+    <span class="hljs-comment">// sprintf &#x683C;&#x5F0F;&#x5316;&#x6253;&#x5370;&#x5230;&#x5B57;&#x7B26;&#x4E32;</span>
+    <span class="hljs-keyword">char</span> res[<span class="hljs-number">100</span>];
+    <span class="hljs-keyword">int</span> cnt1 = <span class="hljs-built_in">sprintf</span>(res, <span class="hljs-string">&quot;name=%s age=%d&quot;</span>, name1, age);        <span class="hljs-comment">// &#x5E94;&#x7528;1&#xFF1A;&#x683C;&#x5F0F;&#x5316;&#x6570;&#x636E;</span>
+    <span class="hljs-comment">// name=Lily age=18</span>
+    assert(cnt1==<span class="hljs-number">16</span>);
+    assert(<span class="hljs-built_in">strcmp</span>(res, <span class="hljs-string">&quot;name=Lily age=18&quot;</span>) == <span class="hljs-number">0</span>);
+
+    <span class="hljs-keyword">int</span> cnt2 = <span class="hljs-built_in">sprintf</span>(res, <span class="hljs-string">&quot;%s%s&quot;</span>, name1, name2);                 <span class="hljs-comment">// &#x5E94;&#x7528;2&#xFF1A;&#x5B57;&#x7B26;&#x4E32;&#x62FC;&#x63A5;</span>
+    <span class="hljs-comment">// LilyLucy</span>
+    assert(cnt2 == <span class="hljs-number">8</span>);
+    assert(<span class="hljs-built_in">strcmp</span>(res, <span class="hljs-string">&quot;LilyLucy&quot;</span>) == <span class="hljs-number">0</span>);
+
+    <span class="hljs-comment">// snprintf &#x683C;&#x5F0F;&#x5316;&#x6253;&#x5370;&#x5230;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x5E76;&#x6307;&#x5B9A;&#x622A;&#x65AD;&#x957F;&#x5EA6;</span>
+    <span class="hljs-keyword">char</span> nres[<span class="hljs-number">100</span>];
+    <span class="hljs-keyword">int</span> n1 = <span class="hljs-built_in">snprintf</span>(nres, <span class="hljs-number">5</span>, <span class="hljs-string">&quot;%s&quot;</span>, <span class="hljs-string">&quot;hello12345678&quot;</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;cnt=%d res=%s\n&quot;</span>, n1, nres);        <span class="hljs-comment">// cnt=-1, hello</span>
+    <span class="hljs-keyword">int</span> n2 = <span class="hljs-built_in">snprintf</span>(nres, <span class="hljs-number">50</span>, <span class="hljs-string">&quot;%s&quot;</span>, <span class="hljs-string">&quot;hello12345678&quot;</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;cnt=%d res=%s\n&quot;</span>, n2, nres);        <span class="hljs-comment">// cnt=13, hello</span>
+
+    <span class="hljs-comment">// sscanf &#x5B57;&#x7B26;&#x4E32;&#x683C;&#x5F0F;&#x5316;&#x5230;n&#x4E2A;&#x53D8;&#x91CF;</span>
+    <span class="hljs-keyword">int</span> y, m, d, H, M;
+    <span class="hljs-built_in">sscanf</span>(<span class="hljs-string">&quot;2019-10-10 12:45&quot;</span>, <span class="hljs-string">&quot;%d-%d-%d %d:%d&quot;</span>, &amp;y, &amp;m, &amp;d, &amp;H, &amp;M);
+    assert(y == <span class="hljs-number">2019</span> &amp;&amp; m == <span class="hljs-number">10</span> &amp;&amp; d == <span class="hljs-number">10</span> &amp;&amp; H == <span class="hljs-number">12</span> &amp;&amp; M == <span class="hljs-number">45</span>);
+}
+
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;************ test scanf/printf *************\n&quot;</span>);
+    test_scanf_printf();
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;************ test fscanf/fprintf *************\n&quot;</span>);
+    test_fscanf_fprintf();
+
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;************ test sscanf/snprintf/sprintf *************\n&quot;</span>);
+    test_sscanf_sprintf();
+
+    system(<span class="hljs-string">&quot;pause&quot;</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h1 id="&#x65F6;&#x95F4;&#x65E5;&#x671F;&#x64CD;&#x4F5C;">&#x65F6;&#x95F4;&#x65E5;&#x671F;&#x64CD;&#x4F5C;</h1>
+<pre><code class="lang-c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;time.h&gt;</span></span>
+
+<span class="hljs-comment">/*
+whatis time
+man 2 time
+(1) time&#xFF1A;&#x8FD4;&#x56DE;1970-1-1, 00:00:00&#x4EE5;&#x6765;&#x7ECF;&#x8FC7;&#x7684;&#x79D2;&#x6570;&#xFF08;&#x65F6;&#x95F4;&#x6233;&#xFF09;&#x3002;
+#include &lt;time.h&gt;
+time_t time(time_t *t);      // &#x6210;&#x529F;&#x8FD4;&#x56DE;&#x79D2;&#x6570;&#xFF0C;&#x5931;&#x8D25;&#x8FD4;&#x56DE;-1
+&#x4E3E;&#x4F8B;&#xFF1A;&#x7ED3;&#x679C;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x53C2;&#x6570;&#x6216;&#x8005;&#x8FD4;&#x56DE;&#x503C;&#x5F97;&#x5230;
+time_t now;
+time(&amp;now);// &#x7B49;&#x540C;&#x4E8E;now = time(NULL)
+(2) localtime&#xFF1A;&#x5C06;&#x65F6;&#x95F4;&#x6570;&#x503C;&#x53D8;&#x6362;&#x6210;&#x672C;&#x5730;&#x65F6;&#x95F4;&#xFF0C;&#x8003;&#x8651;&#x5230;&#x672C;&#x5730;&#x65F6;&#x533A;&#x548C;&#x590F;&#x4EE4;&#x65F6;&#x6807;&#x5FD7;;
+#include &lt;time.h&gt;
+struct tm *localtime(const time_t * calptr);
+struct tm {
+        int tm_sec;       // &#x79D2; &#x2013; &#x53D6;&#x503C;&#x533A;&#x95F4;&#x4E3A;[0,59]
+        int tm_min;       // &#x5206; - &#x53D6;&#x503C;&#x533A;&#x95F4;&#x4E3A;[0,59]
+        int tm_hour;      // &#x65F6; - &#x53D6;&#x503C;&#x533A;&#x95F4;&#x4E3A;[0,23]
+        int tm_mday;      // &#x4E00;&#x4E2A;&#x6708;&#x4E2D;&#x7684;&#x65E5;&#x671F; - &#x53D6;&#x503C;&#x533A;&#x95F4;&#x4E3A;[1,31]
+        int tm_mon;       // &#x6708;&#x4EFD;&#xFF08;&#x4ECE;&#x4E00;&#x6708;&#x5F00;&#x59CB;&#xFF0C;0&#x4EE3;&#x8868;&#x4E00;&#x6708;&#xFF09; - &#x53D6;&#x503C;&#x533A;&#x95F4;&#x4E3A;[0,11]
+        int tm_year;      // &#x5E74;&#x4EFD;&#xFF0C;&#x5176;&#x503C;&#x7B49;&#x4E8E;&#x5B9E;&#x9645;&#x5E74;&#x4EFD;&#x51CF;&#x53BB;1900
+        int tm_wday;      // &#x661F;&#x671F; &#x2013; &#x53D6;&#x503C;&#x533A;&#x95F4;&#x4E3A;[0,6]&#xFF0C;&#x5176;&#x4E2D;0&#x4EE3;&#x8868;&#x661F;&#x671F;&#x5929;&#xFF0C;1&#x4EE3;&#x8868;&#x661F;&#x671F;&#x4E00;
+        int tm_yday;      // &#x4ECE;&#x6BCF;&#x5E74;1&#x6708;1&#x65E5;&#x5F00;&#x59CB;&#x7684;&#x5929;&#x6570;&#x2013; &#x53D6;&#x503C;&#x533A;&#x95F4;[0,365]&#xFF0C;&#x5176;&#x4E2D;0&#x4EE3;&#x8868;1&#x6708;1&#x65E5;
+        int tm_isdst;     // &#x590F;&#x4EE4;&#x65F6;&#x6807;&#x8BC6;&#x7B26;&#xFF0C;&#x590F;&#x4EE4;&#x65F6;tm_isdst&#x4E3A;&#x6B63;&#xFF1B;&#x4E0D;&#x5B9E;&#x884C;&#x590F;&#x4EE4;&#x65F6;tm_isdst&#x4E3A;0
+};
+(3) &#x65F6;&#x95F4;&#x6233;&#x8F6C;&#x683C;&#x6797;&#x5A01;&#x6CBB;&#x6807;&#x51C6;&#x65F6;&#x95F4;&#xFF0C;&#x5373;&#x672A;&#x7ECF;&#x65F6;&#x533A;&#x8F6C;&#x6362;&#x7684;UTC&#x65F6;&#x95F4;&#x3002;
+struct tm *gmtime(long *clock);
+
+(4) &#x7ED3;&#x6784;&#x4F53;&#x65F6;&#x95F4;&#x8F6C;&#x65F6;&#x95F4;&#x6233;
+time_t mktime(strcut tm * timeptr);
+
+(5) &#x5C06;tm&#x7ED3;&#x6784;&#x7C7B;&#x578B;&#x65F6;&#x95F4;&#x65E5;&#x671F;&#x8F6C;&#x6362;&#x4E3A;ASCII&#x7801;&#x3002;
+char *asctime(const struct tm *tblock);
+
+(6) times: &#x83B7;&#x53D6;&#x8FDB;&#x7A0B;&#x53CA;&#x5176;&#x5B50;&#x8FDB;&#x7A0B;&#x7684;&#x65F6;&#x949F;&#x65F6;&#x95F4;&#x3001;&#x7528;&#x6237;cpu&#x65F6;&#x95F4;&#x3001;&#x7CFB;&#x7EDF;cpu&#x65F6;&#x95F4;
+#include &lt;sys/times.h&gt;
+clock_t times(struct tms *buf);
+struct tms {
+    clock_t tms_utime;      // user time
+    clock_t tms_stime;      // system time
+    clock_t tms_cutime;     // user time of children
+    clock_t tms_cstime;     // system time of children
+};
+int sc_clk_tck = sysconf(_SC_CLK_TCK); // &#x6BCF;&#x79D2;&#x65F6;&#x949F;&#x6EF4;&#x7B54;&#x6570;
+&#x8FD4;&#x56DE;&#x7684;clock_t&#x9664;&#x4EE5;&#x65F6;&#x949F;&#x6EF4;&#x7B54;&#x6570;&#xFF0C;&#x5F97;&#x5230;&#x79D2;&#x6570;&#x3002;
+*/</span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+
+    <span class="hljs-keyword">time_t</span> t;
+    <span class="hljs-keyword">struct</span> tm *gmt, *area;
+    t = time(<span class="hljs-literal">NULL</span>);              <span class="hljs-comment">// &#x65F6;&#x95F4;&#x6233;</span>
+    area = localtime(&amp;t);        <span class="hljs-comment">// &#x672C;&#x5730;&#x65F6;&#x95F4;</span>
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Local time is: %s&quot;</span>, asctime(area));         <span class="hljs-comment">// Mon Nov 18 18:00:39 2019</span>
+    gmt = gmtime(&amp;t);            <span class="hljs-comment">// &#x683C;&#x6797;&#x5A01;&#x6CBB;&#x65F6;&#x95F4;&#xFF08;UTC&#x65F6;&#x95F4;&#xFF09;</span>
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;GMT is: %s&quot;</span>, asctime(gmt));                 <span class="hljs-comment">// Mon Nov 18 10:00:39 2019</span>
+
+    <span class="hljs-comment">// &#x8F6C;&#x65F6;&#x95F4;&#x6233;</span>
+    <span class="hljs-comment">// &#x4ECE;&#x516C;&#x5143;1970&#x5E74;1&#x6708;1&#x65E5;0&#x65F6;0&#x5206;0 &#x79D2;&#x7B97;&#x8D77;&#x81F3;&#x4ECA;&#x7684;UTC&#x65F6;&#x95F4;&#x6240;&#x7ECF;&#x8FC7;&#x7684;&#x79D2;&#x6570;&#x3002;</span>
+    <span class="hljs-keyword">time_t</span> t1 = mktime(area);
+    <span class="hljs-keyword">time_t</span> t2 = mktime(gmt);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;t1=%ld t2=%ld&quot;</span>, t1, t2);
+
+    system(<span class="hljs-string">&quot;pause&quot;</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h1 id="&#x5B57;&#x7B26;&#x4E32;&#x64CD;&#x4F5C;">&#x5B57;&#x7B26;&#x4E32;&#x64CD;&#x4F5C;</h1>
+<pre><code class="lang-c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;assert.h&gt;</span></span>
+
+<span class="hljs-comment">/*
+strcpy_s&#x662F;strcpy&#x7684;&#x5B89;&#x5168;&#x7248;&#x672C;&#xFF1A;
+&#x4E3E;&#x4F8B;&#x8BF4;&#x660E;&#xFF1A;
+char buf[2];
+strcpy(buf, &quot;1234567&quot;):
+&#x4EE5;buf&#x4E3A;&#x8D77;&#x70B9;&#x7684;*(buf+3)&#x4E5F;&#x5C31;&#x662F;buf[3]&#x88AB;&#x5199;&#x5165;&#x503C;, 
+&#x4F46;&#x662F;, &#x6B64;&#x65F6;&#x4E5F;&#x8BB8;&#x8FD9;&#x4E2A;buf+3&#x8FD9;&#x4E2A;&#x4F4D;&#x7F6E;&#x88AB;&#x5176;&#x5B83;&#x7684;&#x7A0B;&#x5E8F;&#x6216;&#x53D8;&#x91CF;&#x4F7F;&#x7528;&#x65F6;, &#x5219;&#x4F1A;&#x6539;&#x53D8;&#x5176;&#x5B83;&#x53D8;&#x91CF;&#x7684;&#x503C;&#x3002;
+
+strcpy_s(buf,2,&quot;1234567&quot;)&#xFF1A;
+&#x544A;&#x8BC9;&#x7A0B;&#x5E8F;&#x5B83;&#x53EA;&#x6709;&#x4E24;&#x4E2A;&#x5B57;&#x8282;, &#x6B64;&#x65F6;, &#x7A0B;&#x5E8F;&#x4E0D;&#x4F1A;&#x5C06;&#x6570;&#x636E;&#x5199;&#x5165;&#x5230; buf+3&#x7684;&#x5730;&#x5740;&#x4E2D;, &#x6240;&#x4EE5;&#x5B83;&#x66F4;&#x5B89;&#x5168;&#x3002;
+
+&#x5B57;&#x7B26;&#x4E32;&#x57FA;&#x672C;&#x64CD;&#x4F5C;&#xFF1A;
+&#x62F7;&#x8D1D;
+strcpy_s
+strncpy
+strncpy_s
+memcpy
+memmove
+
+&#x62FC;&#x63A5;
+strcat
+
+&#x6BD4;&#x8F83;
+strcmp(memcmp)
+stricmp
+strncmp
+
+&#x67E5;&#x627E;
+strchr(memchr)
+strrchr
+strstr
+
+&#x8D4B;&#x503C;(&#x521D;&#x59CB;&#x5316;)
+memset
+
+&#x8BA1;&#x7B97;&#x957F;&#x5EA6;
+strlen(&#x4E0D;&#x5305;&#x62EC;\0&#x5728;&#x5185;)
+
+&#x7C7B;&#x578B;&#x8F6C;&#x6362;
+atoi
+atof
+atol
+*/</span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+
+    {
+        <span class="hljs-keyword">char</span> str1[] = <span class="hljs-string">&quot;123456789&quot;</span>;
+        <span class="hljs-keyword">char</span> str2[] = <span class="hljs-string">&quot;hello&quot;</span>;
+        <span class="hljs-comment">// &#x5B57;&#x7B26;&#x4E32;&#x62F7;&#x8D1D;&#xFF0C;&#x5148;&#x6E05;&#x7A7A; str1&#xFF0C;&#x518D;&#x62F7;&#x8D1D;</span>
+        <span class="hljs-comment">// &#x6CE8;&#x610F;&#xFF1A;strlen(s)&#x8BA1;&#x7B97;&#x7684;&#x957F;&#x5EA6;&#x4E0D;&#x5305;&#x62EC;\0&#xFF0C; &#x8FD9;&#x91CC;&#x9700;&#x8981;+1</span>
+        strcpy_s(str1, <span class="hljs-built_in">strlen</span>(str2)+<span class="hljs-number">1</span>, str2);       <span class="hljs-comment">// assert(strcmp(str1, &quot;hello&quot;) == 0);</span>
+
+    }
+    {
+        <span class="hljs-keyword">char</span> str1[] = <span class="hljs-string">&quot;123456789&quot;</span>;
+        <span class="hljs-keyword">char</span> str2[] = <span class="hljs-string">&quot;hello&quot;</span>;
+        <span class="hljs-comment">// &#x62F7;&#x8D1D;&#x524D;n&#x4E2A;</span>
+        <span class="hljs-built_in">strncpy</span>(str1, str2, <span class="hljs-number">2</span>);   <span class="hljs-comment">// assert(strcmp(str1, &quot;he3456789&quot;) == 0);</span>
+        <span class="hljs-built_in">memcpy</span>(str1, str2, <span class="hljs-number">4</span>);    <span class="hljs-comment">// *** mem&#x7248;&#x672C;  assert(strcmp(str1, &quot;hell56789&quot;) == 0);</span>
+        <span class="hljs-comment">// &#x76EE;&#x6807;&#x533A;&#x57DF;&#x548C;&#x6E90;&#x533A;&#x57DF;&#x6709;&#x91CD;&#x53E0;&#x7684;&#x8BDD;memmove&#x6BD4;&#x4EE5;&#x4E0A;&#x7248;&#x672C;&#x66F4;&#x5B89;&#x5168;&#xFF0C;</span>
+        <span class="hljs-comment">// &#x5B83;&#x80FD;&#x591F;&#x4FDD;&#x8BC1;&#x6E90;&#x4E32;&#x5728;&#x88AB;&#x8986;&#x76D6;&#x4E4B;&#x524D;&#x5C06;&#x91CD;&#x53E0;&#x533A;&#x57DF;&#x7684;&#x5B57;&#x8282;&#x62F7;&#x8D1D;&#x5230;&#x76EE;&#x6807;&#x533A;&#x57DF;&#x4E2D;&#x3002;</span>
+        memmove(str1, str2, <span class="hljs-number">5</span>);   <span class="hljs-comment">// *** mem&#x7248;&#x672C;  assert(strcmp(str1, &quot;hello6789&quot;) == 0);</span>
+
+    }   
+    {
+        <span class="hljs-keyword">char</span> str1[] = <span class="hljs-string">&quot;123456789&quot;</span>;
+        <span class="hljs-keyword">char</span> str2[] = <span class="hljs-string">&quot;hello&quot;</span>;
+        <span class="hljs-comment">// &#x5148;&#x6E05;&#x7A7A;&#x518D;&#x62F7;&#x8D1D;</span>
+        <span class="hljs-comment">// &#x7B2C;&#x4E8C;&#x4E2A;&#x53C2;&#x6570;&#x662F;&#x76EE;&#x6807;&#x7F13;&#x51B2;&#x533A;&#x7684;&#x5927;&#x5C0F;&#xFF0C;&#x9632;&#x6B62;dest&#x4E2D;&#x7A7A;&#x95F4;&#x4E0D;&#x591F;</span>
+        strncpy_s(str1, <span class="hljs-built_in">strlen</span>(str1)+<span class="hljs-number">1</span>, str2, <span class="hljs-number">4</span>);       <span class="hljs-comment">// assert(strcmp(str1, &quot;hell&quot;) == 0);    </span>
+    } 
+    {
+        <span class="hljs-keyword">char</span> str1[<span class="hljs-number">20</span>] = <span class="hljs-string">&quot;123456789&quot;</span>;
+        <span class="hljs-keyword">char</span> str2[] = <span class="hljs-string">&quot;hello&quot;</span>;
+        <span class="hljs-comment">// &#x5B57;&#x7B26;&#x4E32;&#x62FC;&#x63A5; </span>
+        <span class="hljs-comment">// &#x62FC;&#x63A5;&#x540E;&#x7684;&#x957F;&#x5EA6;&#x4E0D;&#x5927;&#x4E8E;str1&#x7684;&#x957F;&#x5EA6;</span>
+        <span class="hljs-built_in">strcat</span>(str1, str2);    <span class="hljs-comment">//  assert(strcmp(str1, &quot;123456789hello&quot;) == 0);</span>
+    }
+    {
+        <span class="hljs-keyword">char</span> str1[<span class="hljs-number">20</span>] = <span class="hljs-string">&quot;123456789&quot;</span>;
+        <span class="hljs-keyword">char</span> str2[] = <span class="hljs-string">&quot;hello&quot;</span>;
+        <span class="hljs-comment">// &#x5B57;&#x7B26;&#x4E32;&#x62FC;&#x63A5;&#xFF0C;&#x62FC;&#x63A5;&#x524D;n&#x4E2A;</span>
+        <span class="hljs-built_in">strncat</span>(str1, str2, <span class="hljs-number">2</span>);     <span class="hljs-comment">// assert(strcmp(str1, &quot;123456789he&quot;) == 0);   </span>
+    }
+    {
+        <span class="hljs-keyword">char</span> str1[] = <span class="hljs-string">&quot;heLLO&quot;</span>;
+        <span class="hljs-keyword">char</span> str2[] = <span class="hljs-string">&quot;hello&quot;</span>;
+        <span class="hljs-comment">// &#x5B57;&#x7B26;&#x4E32;&#x6BD4;&#x8F83;</span>
+        <span class="hljs-keyword">int</span> ret = <span class="hljs-built_in">strcmp</span>(str1, str2);
+        <span class="hljs-keyword">if</span> (ret == <span class="hljs-number">0</span>) {
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;str1=str2&quot;</span>);
+        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (ret &gt; <span class="hljs-number">0</span>) {
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;str1 &gt; str2&quot;</span>);
+        } <span class="hljs-keyword">else</span> {
+            <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;str1 &lt; str2&quot;</span>);
+        }
+
+        <span class="hljs-comment">// &#x6BD4;&#x8F83;&#x524D;n&#x4E2A;</span>
+        assert(<span class="hljs-built_in">strncmp</span>(str1, str2, <span class="hljs-number">2</span>) == <span class="hljs-number">0</span>);
+        assert(<span class="hljs-built_in">memcmp</span>(str1, str2, <span class="hljs-number">2</span>) == <span class="hljs-number">0</span>);    <span class="hljs-comment">//  *** mem&#x7248;&#x672C;</span>
+
+        <span class="hljs-comment">// &#x5FFD;&#x7565;&#x5927;&#x5C0F;&#x5199;</span>
+        assert(stricmp(str1, str2) == <span class="hljs-number">0</span>);
+    }
+    {
+        <span class="hljs-keyword">char</span> str[] = <span class="hljs-string">&quot;Lucy like china&quot;</span>;
+        <span class="hljs-comment">// &#x67E5;&#x627E;&#x9996;&#x6B21;&#x51FA;&#x73B0;&#x5B57;&#x7B26;i&#x7684;&#x4F4D;&#x7F6E;</span>
+        <span class="hljs-keyword">char</span> *p = <span class="hljs-built_in">strchr</span>(str, <span class="hljs-string">&apos;i&apos;</span>);       <span class="hljs-comment">// assert(strcmp(p, &quot;ike china&quot;) == 0);</span>
+        <span class="hljs-comment">//  *** mem&#x7248;&#x672C; &#x5728;&#x524D;10&#x4E2A;&#x5B57;&#x7B26;&#x4E2D;&#x627E;&#x5B57;&#x7B26;&#x9996;&#x6B21;&#x51FA;&#x73B0;&#x7684;&#x4F4D;&#x7F6E;</span>
+        <span class="hljs-keyword">char</span> *mp = <span class="hljs-built_in">memchr</span>(str, <span class="hljs-string">&apos;i&apos;</span>, <span class="hljs-number">10</span>);   <span class="hljs-comment">// assert(strcmp(mp, &quot;ike china&quot;) == 0);</span>
+
+        <span class="hljs-comment">// &#x53CD;&#x5411;&#x67E5;&#x627E;</span>
+        <span class="hljs-keyword">char</span> *rp = <span class="hljs-built_in">strrchr</span>(str, <span class="hljs-string">&apos;i&apos;</span>);      <span class="hljs-comment">// assert(strcmp(rp, &quot;ina&quot;) == 0);</span>
+
+        <span class="hljs-comment">// &#x67E5;&#x627E;&#x5B50;&#x4E32;&quot;chi&quot;&#x51FA;&#x73B0;&#x7684;&#x4F4D;&#x7F6E;</span>
+        <span class="hljs-keyword">char</span> *ps = <span class="hljs-built_in">strstr</span>(str, <span class="hljs-string">&quot;chi&quot;</span>);     <span class="hljs-comment">// assert(strcmp(ps, &quot;china&quot;) == 0);</span>
+    }
+    {
+        <span class="hljs-keyword">char</span> str[<span class="hljs-number">10</span>];
+        <span class="hljs-comment">// &#x8D4B;&#x503C;n&#x4E2A;&#x5B57;&#x7B26;c&#x5230;str&#x6307;&#x5411;&#x7684;&#x4F4D;&#x7F6E; mem&#x7248;&#x672C;&#x4E0D;&#x4EC5;&#x9650;&#x4E8E;&#x5B57;&#x7B26;&#x4E32;&#x5904;&#x7406;</span>
+        <span class="hljs-comment">// void *memset(void *str, int c, size_t n) </span>
+        <span class="hljs-built_in">memset</span>(str, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span>(str));  <span class="hljs-comment">// &#x521D;&#x59CB;&#x5316;</span>
+    }
+    {
+        <span class="hljs-comment">// &#x7C7B;&#x578B;&#x8F6C;&#x6362;</span>
+        <span class="hljs-keyword">char</span> str[] = <span class="hljs-string">&quot;12.34&quot;</span>;
+        <span class="hljs-keyword">int</span> i = atoi(str);          <span class="hljs-comment">// 12</span>
+        <span class="hljs-keyword">double</span> d = atof(str);       <span class="hljs-comment">// 12.340000</span>
+        <span class="hljs-keyword">long</span> l = atol(str);         <span class="hljs-comment">// 12</span>
+    }
+
+    system(<span class="hljs-string">&quot;pause&quot;</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h1 id="&#x591A;&#x7EBF;&#x7A0B;">&#x591A;&#x7EBF;&#x7A0B;</h1>
+<h2 id="c&#x591A;&#x7EBF;&#x7A0B;">c&#x591A;&#x7EBF;&#x7A0B;</h2>
+<pre><code class="lang-c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;unistd.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;pthread.h&gt;</span></span>
+
+<span class="hljs-comment">/*
+1. &#x521B;&#x5EFA;&#x5E76;&#x542F;&#x52A8;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#xFF1A;
+    int pthread_create(pthread_t *th, const pthread_attr_t *attr, 
+                       void *(* func)(void *), void *arg);
+    &#x53C2;&#x6570;&#x8BF4;&#x660E;&#xFF1A;
+    &#x7EBF;&#x7A0B;id&#xFF1B;
+    &#x7EBF;&#x7A0B;&#x5C5E;&#x6027;&#x6307;&#x9488;&#xFF0C;&#x7F3A;&#x7701;&#x4E3A;NULL;
+    &#x7EBF;&#x7A0B;&#x51FD;&#x6570;&#xFF1B;
+    &#x7EBF;&#x7A0B;&#x51FD;&#x6570;&#x7684;&#x53C2;&#x6570;&#xFF1B;
+
+2. &#x7ED3;&#x675F;&#x7EBF;&#x7A0B;
+    void  pthread_exit(void *res);   // res&#x5B58;&#x653E;&#x7EBF;&#x7A0B;&#x7ED3;&#x675F;&#x65F6;&#x7684;&#x9000;&#x51FA;&#x72B6;&#x6001;
+
+3. &#x7B49;&#x5F85;&#x6307;&#x5B9A;&#x7EBF;&#x7A0B;&#x7ED3;&#x675F;
+    &#x8BF4;&#x660E;&#xFF1A;&#x5047;&#x8BBE; A &#x7EBF;&#x7A0B;&#x8C03;&#x7528; pthread_join &#x8BD5;&#x56FE;&#x53BB;&#x64CD;&#x4F5C;B&#x7EBF;&#x7A0B;&#xFF0C;
+    &#x8BE5;&#x51FD;&#x6570;&#x5C06;A&#x7EBF;&#x7A0B;&#x963B;&#x585E;&#xFF0C;&#x76F4;&#x5230;B&#x7EBF;&#x7A0B;&#x9000;&#x51FA;&#xFF0C;&#x5F53;B&#x7EBF;&#x7A0B;&#x9000;&#x51FA;&#x4EE5;&#x540E;&#xFF0C;A&#x7EBF;&#x7A0B;&#x4F1A;&#x6536;&#x96C6;B&#x7EBF;&#x7A0B;&#x7684;&#x8FD4;&#x56DE;&#x7801;&#x3002;
+    int pthread_join(pthread_t t, void **res);
+    &#x53C2;&#x6570;&#x8BF4;&#x660E;&#xFF1A;
+    t &#x8981;&#x7B49;&#x5F85;&#x7ED3;&#x675F;&#x7684;&#x7EBF;&#x7A0B;id&#x3002;
+    res&#x6307;&#x5411;&#x7684;&#x4F4D;&#x7F6E;&#x5B58;&#x653E;&#x7684;&#x662F;&#x7EC8;&#x6B62;&#x7EBF;&#x7A0B;&#x7684;&#x8FD4;&#x56DE;&#x72B6;&#x6001;&#xFF0C;&#x7F3A;&#x7701;&#x4E3A;NULL&#x3002;
+
+// TODO
+&#x7EBF;&#x7A0B;&#x540C;&#x6B65;
+
+*/</span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> *<span class="hljs-title">threadFun</span><span class="hljs-params">(<span class="hljs-keyword">void</span>* args)</span> </span>{
+    <span class="hljs-keyword">int</span> *index = (<span class="hljs-keyword">int</span> *)args;
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;tread=%d, put=%d\n&quot;</span>, *index, i);
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">pthread_t</span> pid1, pid2;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;mian thread id = %d\n&quot;</span>, pthread_self());
+
+    <span class="hljs-keyword">int</span> thread_1 = <span class="hljs-number">100</span>;
+    <span class="hljs-keyword">int</span> ret1 = pthread_create(&amp;pid1, <span class="hljs-literal">NULL</span>, (<span class="hljs-keyword">void</span> *)threadFun, (<span class="hljs-keyword">void</span> *)&amp;thread_1);
+    <span class="hljs-keyword">int</span> thread_2 = <span class="hljs-number">200</span>;
+    <span class="hljs-keyword">int</span> ret2 = pthread_create(&amp;pid2, <span class="hljs-literal">NULL</span>, (<span class="hljs-keyword">void</span> *)threadFun, (<span class="hljs-keyword">void</span> *)&amp;thread_2);
+
+    <span class="hljs-keyword">if</span> (ret1 != <span class="hljs-number">0</span> || ret2 != <span class="hljs-number">0</span>) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;thread create failed\n&quot;</span>);
+        <span class="hljs-built_in">exit</span>(<span class="hljs-number">0</span>);
+    }
+
+    pthread_join(pid1, <span class="hljs-literal">NULL</span>);
+    pthread_join(pid2, <span class="hljs-literal">NULL</span>);
+
+    system(<span class="hljs-string">&quot;pause&quot;</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h2 id="c&#x591A;&#x7EBF;&#x7A0B;">c++&#x591A;&#x7EBF;&#x7A0B;</h2>
+<h1 id="&#x5185;&#x5B58;&#x5206;&#x914D;">&#x5185;&#x5B58;&#x5206;&#x914D;</h1>
+<pre><code class="lang-c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+
+<span class="hljs-comment">/*
+&#x9884;&#x5907;&#x77E5;&#x8BC6;&#xFF1A;
+c/c++&#x7A0B;&#x5E8F;&#x7684;&#x5185;&#x5B58;&#x5206;&#x914D;&#xFF1A;
+    &#x6808;&#x533A;&#xFF1A; &#x7531;&#x7F16;&#x8BD1;&#x5668;&#x81EA;&#x52A8;&#x5206;&#x914D;&#x91CA;&#x653E;&#xFF0C;&#x5B58;&#x653E;&#x51FD;&#x6570;&#x7684;&#x53C2;&#x6570;&#x503C;&#xFF0C;&#x5C40;&#x90E8;&#x53D8;&#x91CF;&#x7684;&#x503C;&#x7B49;&#x3002;
+    &#x5806;&#x533A;&#xFF1A; &#x7531;&#x7A0B;&#x5E8F;&#x5458;&#x5206;&#x914D;&#x91CA;&#x653E;&#x3002;malloc/free&#x3001;new/delete
+    &#x9759;&#x6001;&#x5B58;&#x50A8;&#x533A;&#xFF08;&#x5168;&#x5C40;&#x533A;&#xFF09;&#xFF1A;&#x521D;&#x59CB;&#x5316;&#x5168;&#x5C40;&#x53D8;&#x91CF;&#x548C;&#x9759;&#x6001;&#x53D8;&#x91CF;&#x3002;
+    &#x521D;&#x59CB;&#x5316;&#x7684;&#x5168;&#x5C40;&#x53D8;&#x91CF;&#x548C;&#x9759;&#x6001;&#x53D8;&#x91CF;&#x5728;&#x4E00;&#x5757;&#x533A;&#x57DF;&#xFF0C;&#x672A;&#x521D;&#x59CB;&#x5316;&#x7684;&#x5168;&#x5C40;&#x53D8;&#x91CF;&#x548C;&#x672A;&#x521D;&#x59CB;&#x5316;&#x7684;&#x9759;&#x6001;&#x53D8;&#x91CF;&#x5728;&#x76F8;&#x90BB;&#x7684;&#x53E6;&#x4E00;&#x5757;&#x533A;&#x57DF;&#x3002;
+    &#x7A0B;&#x5E8F;&#x7ED3;&#x675F;&#x540E;&#x7531;&#x7CFB;&#x7EDF;&#x91CA;&#x653E;&#x3002;
+    &#x6587;&#x5B57;&#x5E38;&#x91CF;&#x533A;&#xFF1A;&#x5982;&#x5E38;&#x91CF;&#x5B57;&#x7B26;&#x4E32;&#x5C31;&#x662F;&#x653E;&#x5728;&#x8FD9;&#x91CC;&#x7684;&#xFF0C;&#x7A0B;&#x5E8F;&#x7ED3;&#x675F;&#x540E;&#x7531;&#x7CFB;&#x7EDF;&#x91CA;&#x653E;&#x3002;
+    &#x7A0B;&#x5E8F;&#x4EE3;&#x7801;&#x533A;
+
+char*&#x548C;char[]&#x7684;&#x533A;&#x522B;:
+    char *a1=&quot;hello world&quot;;
+    char a2[]=&quot;123456789&quot;;
+
+    a1&#x662F;&#x5B57;&#x7B26;&#x6307;&#x9488;&#xFF0C;&#x6307;&#x5411;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x5B58;&#x653E;&#x5728;&#x6587;&#x5B57;&#x5E38;&#x91CF;&#x533A;&#xFF0C;&#x65E0;&#x6CD5;&#x4FEE;&#x6539;&#xFF1B;&#x8D4B;&#x503C;&#x5728;&#x7F16;&#x8BD1;&#x65F6;&#x5C31;&#x786E;&#x5B9A;&#x4E86;&#xFF08;&#x5E38;&#x91CF;&#x533A;&#xFF09;&#x3002;
+    a2&#x662F;&#x5B57;&#x7B26;&#x6570;&#x7EC4;&#xFF0C;&#x6570;&#x7EC4;&#x5B58;&#x653E;&#x5728;&#x6808;&#x4E2D;&#xFF0C;&#x53EF;&#x4EE5;&#x88AB;&#x4FEE;&#x6539;&#xFF1B;&#x8D4B;&#x503C;&#x662F;&#x5728;&#x8FD0;&#x884C;&#x65F6;&#x786E;&#x5B9A;&#x7684;&#xFF08;&#x6808;&#x533A;&#xFF09;&#x3002;
+
+*/</span>
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">test_memory</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">int</span> b;            <span class="hljs-comment">// &#x6808;</span>
+    <span class="hljs-keyword">char</span> s[]=<span class="hljs-string">&quot;abc&quot;</span>;   <span class="hljs-comment">// &#x6808;</span>
+    <span class="hljs-keyword">char</span> *p2;         <span class="hljs-comment">// &#x6808;</span>
+    <span class="hljs-keyword">char</span> *p3=<span class="hljs-string">&quot;123456&quot;</span>;   <span class="hljs-comment">// 123456\0&#x5728;&#x5E38;&#x91CF;&#x533A;&#xFF0C;p3&#x5728;&#x6808;&#x4E0A;&#x3002;</span>
+    <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> c = <span class="hljs-number">0</span>;    <span class="hljs-comment">// &#x5168;&#x5C40;&#xFF08;&#x9759;&#x6001;&#xFF09;&#x521D;&#x59CB;&#x5316;&#x533A;</span>
+    p2 = (<span class="hljs-keyword">char</span>*)<span class="hljs-built_in">malloc</span>(<span class="hljs-number">20</span>); <span class="hljs-comment">//&#x5206;&#x914D;&#x5F97;&#x6765;&#x5F97;20&#x5B57;&#x8282;&#x7684;&#x533A;&#x57DF;&#x5C31;&#x5728;&#x5806;&#x533A;&#x3002;</span>
+    <span class="hljs-built_in">strcpy</span>(p2,<span class="hljs-string">&quot;123456&quot;</span>);   <span class="hljs-comment">//123456\0&#x653E;&#x5728;&#x5E38;&#x91CF;&#x533A;&#xFF0C;&#x7F16;&#x8BD1;&#x5668;&#x53EF;&#x80FD;&#x4F1A;&#x5C06;&#x5B83;&#x4E0E;p3&#x6240;&#x5411;&quot;123456&quot;&#x4F18;&#x5316;&#x6210;&#x4E00;&#x4E2A;&#x5730;&#x65B9;&#x3002;</span>
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+
+    <span class="hljs-keyword">char</span> *a1=<span class="hljs-string">&quot;000456789&quot;</span>;
+    <span class="hljs-keyword">char</span> a2[<span class="hljs-number">20</span>]=<span class="hljs-string">&quot;111456789&quot;</span>;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;a1=%s \na2=%s \n&quot;</span>, a1, a2);
+    <span class="hljs-comment">// 8 20 &#x8FD9;&#x4E2A;&#x7C7B;&#x578B;&#x9700;&#x8981;&#x5F00;&#x8F9F;&#x7684;&#x7A7A;&#x95F4;</span>
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;sizeof(a1)=%d  sizeof(a2)=%d \n&quot;</span>, <span class="hljs-keyword">sizeof</span>(a1), <span class="hljs-keyword">sizeof</span>(a2)); 
+    <span class="hljs-comment">// 9 9  &#x5B57;&#x7B26;&#x4E32;&#x957F;&#x5EA6;</span>
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;strlen(a1)=%d  strlen(a2)=%d \n&quot;</span>, <span class="hljs-built_in">strlen</span>(a1), <span class="hljs-built_in">strlen</span>(a2));   
+
+    <span class="hljs-comment">// a1[3] = &apos;m&apos;;        // Error &#x9759;&#x6001;&#x5B58;&#x50A8;&#x533A;(&#x5E38;&#x91CF;&#x533A;) &#x4E0D;&#x53EF;&#x66F4;&#x6539;</span>
+    a2[<span class="hljs-number">3</span>] = <span class="hljs-string">&apos;m&apos;</span>;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;a1=%s \na2=%s \n&quot;</span>, a1, a2);
+
+    <span class="hljs-built_in">strcat</span>(a2, a1);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;a1=%s \na2=%s \n&quot;</span>, a1, a2);  <span class="hljs-comment">// a2 =&gt; 111m56789000456789</span>
+
+    <span class="hljs-comment">// strcat(a1, a2);    // Error &#x9759;&#x6001;&#x5B58;&#x50A8;&#x533A;(&#x5E38;&#x91CF;&#x533A;) &#x4E0D;&#x53EF;&#x66F4;&#x6539;</span>
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;a1=%s \na2=%s \n&quot;</span>, a1, a2);      
+
+    system(<span class="hljs-string">&quot;pause&quot;</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h1 id="&#x76EE;&#x5F55;&#x64CD;&#x4F5C;">&#x76EE;&#x5F55;&#x64CD;&#x4F5C;</h1>
+<pre><code class="lang-c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;unistd.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/stat.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;dirent.h&gt;</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+
+    <span class="hljs-comment">// DIR* opendir (const char*);</span>
+    DIR * dir = opendir(<span class="hljs-string">&quot;.&quot;</span>);         <span class="hljs-comment">// &#x6253;&#x5F00;&#x76EE;&#x5F55;&#x6587;&#x4EF6;&#xFF0C;&#x6210;&#x529F;&#x8FD4;&#x56DE;&#x6307;&#x9488;&#xFF0C;&#x51FA;&#x9519;&#x8FD4;&#x56DE;NULL</span>
+    <span class="hljs-comment">// struct dirent* readdir (DIR*);   </span>
+    <span class="hljs-keyword">struct</span> dirent* ptr;
+    <span class="hljs-comment">// &#x5FAA;&#x73AF;&#x8BFB;&#x53D6;&#x76EE;&#x5F55;&#x4E2D;&#x6240;&#x6709;&#x5B50;&#x76EE;&#x5F55;&#x548C;&#x6587;&#x4EF6;&#xFF0C;&#x6210;&#x529F;&#x8FD4;&#x56DE;&#x6307;&#x9488;&#xFF0C;&#x5230;&#x76EE;&#x5F55;&#x7ED3;&#x5C3E;&#x6216;&#x8005;&#x51FA;&#x9519;&#x8FD4;&#x56DE;NULL</span>
+    <span class="hljs-keyword">while</span> ((ptr = readdir(dir)) != <span class="hljs-literal">NULL</span>) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;dirname: %s\n&quot;</span>, ptr-&gt;d_name);  
+    }
+    closedir(dir);
+
+    system(<span class="hljs-string">&quot;pause&quot;</span>);
+}
+</code></pre>
+<h1 id="errno">errno</h1>
+<p>c&#x8BED;&#x8A00;&#x6CA1;&#x6709;try...catch</p>
+<p>&#x901A;&#x8FC7;errno&#x76D1;&#x63A7;&#x4EE3;&#x7801;&#x5F02;&#x5E38;&#x3002;</p>
+<pre><code class="lang-c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;math.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;error.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string.h&gt;</span></span>
+
+<span class="hljs-comment">/*
+errno: &#x4FDD;&#x7559;&#x6700;&#x540E;&#x4E00;&#x6B21;&#x8C03;&#x7528;c&#x65B9;&#x6CD5;&#x7684;&#x9519;&#x8BEF;&#x4EE3;&#x7801;&#x3002;
+
+#include &lt;stdio.h&gt;
+void perror(const char *s);
+&#x53C2;&#x6570;s&#x662F;&#x7528;&#x6237;&#x63D0;&#x4F9B;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x8F93;&#x51FA;&#x8FD9;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x540E;&#x9762;&#x8DDF;&#x7740;&#x4E00;&#x4E2A;&#x5192;&#x53F7;&#x548C;&#x7A7A;&#x683C;&#xFF0C;
+&#x7136;&#x540E;&#x662F;&#x57FA;&#x4E8E;&#x5F53;&#x524D;errno&#x7684;&#x503C;&#x8FDB;&#x884C;&#x7684;&#x9519;&#x8BEF;&#x7C7B;&#x578B;&#x63CF;&#x8FF0;&#x3002;
+
+#include &lt;string.h&gt;
+char * strerror(int errnum);
+&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x5C06;errno&#x7684;&#x503C;&#x4F5C;&#x4E3A;&#x53C2;&#x6570;&#xFF0C;&#x5E76;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x63CF;&#x8FF0;&#x9519;&#x8BEF;&#x7684;&#x5B57;&#x7B26;&#x4E32;
+
+*/</span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+
+    errno = <span class="hljs-number">0</span>;       <span class="hljs-comment">// &#x4EFB;&#x4F55;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x90FD;&#x4E0D;&#x4F1A;&#x5C06;error&#x7F6E;&#x4E3A;0</span>
+    <span class="hljs-keyword">int</span> s = <span class="hljs-built_in">sqrt</span>(<span class="hljs-number">-1</span>);
+    <span class="hljs-keyword">if</span>(errno) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;error num=%d\n&quot;</span>, errno);                <span class="hljs-comment">// error num=33</span>
+        perror(<span class="hljs-string">&quot;sqrt failed&quot;</span>);                          <span class="hljs-comment">// sqrt failed: Domain error</span>
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;stderr(errno)=%s\n&quot;</span>, strerror(errno));  <span class="hljs-comment">// stderr(errno)=Domain error</span>
+    }
+
+    system(<span class="hljs-string">&quot;pause&quot;</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<h1 id="&#x5176;&#x4ED6;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;">&#x5176;&#x4ED6;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;</h1>
+<pre><code class="lang-c"><span class="hljs-comment">// &#x6D4B;&#x8BD5;&#x6587;&#x4EF6;&#x7684;&#x67D0;&#x79CD;&#x6743;&#x9650;&#x6216;&#x8005;&#x6587;&#x4EF6;&#x662F;&#x5426;&#x5B58;&#x5728;&#xFF1A;</span>
+<span class="hljs-comment">// mode&#xFF1A;F_OK(&#x5B58;&#x5728;)  W_OK/R_OK/X_OK(&#x53EF;&#x4EE5;&#x4F7F;&#x7528;)</span>
+<span class="hljs-comment">// &#x8FD4;&#x56DE;&#x503C;&#xFF1A;0-&#x6210;&#x529F;&#xFF1B;1-&#x5931;&#x8D25;&#xFF1B;</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;unistd.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">access</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* pathname, <span class="hljs-keyword">int</span> mode)</span></span>;
+
+<span class="hljs-comment">// &#x66F4;&#x6539;&#x8BBF;&#x95EE;&#x6743;&#x9650;&#xFF1A;</span>
+<span class="hljs-comment">// &#x6761;&#x4EF6;&#xFF1A;&#x8FDB;&#x7A0B;&#x6709;&#x6548;&#x7528;&#x6237;id&#x5FC5;&#x987B;&#x7B49;&#x4E8E;&#x6587;&#x4EF6;&#x7684;&#x6240;&#x6709;&#x8005;id&#xFF0C;&#x6216;&#x8005;&#x8FDB;&#x7A0B;&#x5177;&#x6709;&#x8D85;&#x7EA7;&#x7528;&#x6237;&#x6743;&#x9650;&#xFF1B;&#x64CD;&#x4F5C;&#x5BF9;&#x8C61;&#x5FC5;&#x987B;&#x662F;&#x6253;&#x5F00;&#x7684;&#x6587;&#x4EF6;&#x3002;</span>
+<span class="hljs-comment">// &#x8FD4;&#x56DE;&#x503C;&#xFF1A;&#x82E5;&#x6210;&#x529F;&#x5219;&#x8FD4;&#x56DE;0&#xFF0C;&#x82E5;&#x51FA;&#x9519;&#x5219;&#x8FD4;&#x56DE;-1&#x3002;</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/stat.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">chmod</span><span class="hljs-params">( <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *pathname, mode_t mode )</span></span>;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">fchmod</span><span class="hljs-params">( <span class="hljs-keyword">int</span> fd, mode_t mode )</span></span>;
+
+<span class="hljs-comment">// &#x4FEE;&#x6539;&#x6587;&#x4EF6;&#x7684;&#x7528;&#x6237;id&#x548C;&#x7EC4;id</span>
+<span class="hljs-comment">// &#x8FD4;&#x56DE;&#x503C;&#xFF1A;&#x82E5;&#x6210;&#x529F;&#x5219;&#x8FD4;&#x56DE;0&#xFF0C;&#x82E5;&#x51FA;&#x9519;&#x5219;&#x8FD4;&#x56DE;-1</span>
+<span class="hljs-comment">// &#x8BF4;&#x660E;&#xFF1A;&#x66F4;&#x6539;&#x6587;&#x4EF6;&#x7684;&#x7528;&#x6237;ID&#x548C;&#x7EC4;ID&#xFF0C;&#x53C2;&#x6570;owner&#x6216;group&#x4E2D;&#x7684;&#x4EFB;&#x610F;&#x4E00;&#x4E2A;&#x662F;-1&#xFF0C;&#x5219;&#x5BF9;&#x5E94;&#x7684;ID&#x4E0D;&#x53D8;&#x3002;</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;unistd.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">chown</span><span class="hljs-params">( <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *pathname, uid_t owner, gid_t group )</span></span>;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">fchown</span><span class="hljs-params">( <span class="hljs-keyword">int</span> filedes, uid_t owner, gid_t group )</span></span>;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">lchown</span><span class="hljs-params">( <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *pathname, uid_t owner, gid_t group )</span></span>;
+
+<span class="hljs-comment">// &#x4FEE;&#x6539;&#x6587;&#x4EF6;&#x7684;&#x957F;&#x5EA6;&#x4E3A;length&#x5B57;&#x8282;&#xFF0C;&#x957F;&#x5219;&#x622A;&#x65AD;&#xFF0C;&#x77ED;&#x5219;&#x4EA7;&#x751F;&#x7A7A;&#x6D1E;&#x3002;</span>
+<span class="hljs-comment">// &#x8FD4;&#x56DE;&#x503C;&#xFF1A;&#x6210;&#x529F;&#x5219;&#x8FD4;&#x56DE;0&#xFF0C;&#x5931;&#x8D25;&#x8FD4;&#x56DE;-1&#xFF0C;&#x9519;&#x8BEF;&#x539F;&#x56E0;&#x5B58;&#x4E8E;errno</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;unistd.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">truncate</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *path, off_t length)</span></span>;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">ftruncate</span><span class="hljs-params">(<span class="hljs-keyword">int</span> fd,off_t length)</span></span>;
+
+
+<span class="hljs-comment">// &#x521B;&#x5EFA;&#x6307;&#x5411;&#x73B0;&#x6709;&#x6587;&#x4EF6;&#x7684;&#x786C;&#x94FE;&#x63A5;</span>
+<span class="hljs-comment">// &#x786C;&#x94FE;&#x63A5;&#x7684;&#x9650;&#x5236;&#xFF1A;1.&#x4E0D;&#x80FD;&#x8DE8;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x3002; 2. &#x53EA;&#x6709;&#x8D85;&#x7EA7;&#x7528;&#x6237;&#x624D;&#x80FD;&#x521B;&#x5EFA;&#x6307;&#x5411;&#x4E00;&#x4E2A;&#x76EE;&#x5F55;&#x7684;&#x786C;&#x94FE;&#x63A5;&#x3002;</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;unistd.h&gt;</span>  </span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">link</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* oldpath, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* newpath)</span></span>;
+
+<span class="hljs-comment">// &#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x7B26;&#x53F7;&#x94FE;&#x63A5;</span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">symlink</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *actualpath, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *sympath)</span></span>;
+
+<span class="hljs-comment">// &#x4E0D;&#x8DDF;&#x968F;&#x7B26;&#x53F7;&#x94FE;&#x63A5;&#xFF0C;&#x6253;&#x5F00;&#x94FE;&#x63A5;&#x6587;&#x4EF6;&#x672C;&#x8EAB;&#xFF0C;&#x5E76;&#x8BFB;&#x53D6;&#x8BE5;&#x94FE;&#x63A5;&#x4E2D;&#x7684;&#x540D;&#x5B57;&#x3002;</span>
+<span class="hljs-comment">// &#x8FD4;&#x56DE;&#x503C; &#xFF1A;&#x6210;&#x529F;&#x8FD4;&#x56DE;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x5B57;&#x7B26;&#x6570;&#xFF0C;&#x5931;&#x8D25;&#x8FD4;&#x56DE;-1&#xFF0C;&#x9519;&#x8BEF;&#x5B58;&#x4E8E;errno</span>
+<span class="hljs-keyword">ssize_t</span> readlink(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *path, <span class="hljs-keyword">char</span> *buf, <span class="hljs-keyword">size_t</span> bufsiz);
+
+<span class="hljs-comment">// &#x539F;&#x5B50;&#x6027;&#x7684;&#x5220;&#x9664;&#x4E00;&#x4E2A;&#x73B0;&#x6709;&#x7684;&#x76EE;&#x5F55;&#x9879;&#x5E76;&#x5C06;&#x7531;&#x53C2;&#x6570; pathname&#x6240;&#x5F15;&#x7528;&#x6587;&#x4EF6;&#x7684;&#x94FE;&#x63A5;&#x8BA1;&#x6570;&#x51CF;1&#x3002;</span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">unlink</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* pathname)</span></span>;
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">remove</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> * pathname)</span></span>;    <span class="hljs-comment">// &#x89E3;&#x9664;&#x8FDE;&#x63A5;&#xFF0C;&#x76F8;&#x5F53;&#x4E8E;&#x6587;&#x4EF6;&#x7684;unlink&#xFF0C;&#x76EE;&#x5F55;&#x7684;rmdir</span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">rename</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *oldname, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *newname)</span></span>;    <span class="hljs-comment">// &#x6587;&#x4EF6;&#x6216;&#x76EE;&#x5F55;&#x66F4;&#x540D;</span>
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;unistd.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">rmdir</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *pathname)</span></span>;
+
+<span class="hljs-comment">// &#x8BF4;&#x660E;&#xFF1A;&#x66F4;&#x6539;&#x6587;&#x4EF6;&#x7684;&#x8BBF;&#x95EE;&#x65F6;&#x95F4;&#x548C;&#x5185;&#x5BB9;&#x4FEE;&#x6539;&#x65F6;&#x95F4;&#x3002;</span>
+<span class="hljs-comment">// &#x8FD4;&#x56DE;&#x503C;&#xFF1A;&#x82E5;&#x6210;&#x529F;&#x5219;&#x8FD4;&#x56DE;0&#xFF0C;&#x82E5;&#x51FA;&#x9519;&#x5219;&#x8FD4;&#x56DE;-1</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;utime.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">utime</span><span class="hljs-params">( <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *pathname, <span class="hljs-keyword">const</span> <span class="hljs-keyword">struct</span> utimbuf *times )</span></span>;
+
+<span class="hljs-keyword">struct</span> utimbuf {
+    <span class="hljs-keyword">time_t</span> actime;    <span class="hljs-comment">/* access time */</span>
+    <span class="hljs-keyword">time_t</span> modtime;    <span class="hljs-comment">/* modification time */</span>
+}
+
+<span class="hljs-comment">// &#x8BF4;&#x660E;&#xFF1A;&#x66F4;&#x6539;&#x8FDB;&#x7A0B;&#x5F53;&#x524D;&#x5DE5;&#x4F5C;&#x76EE;&#x5F55;&#x3002;</span>
+<span class="hljs-comment">// &#x8FD4;&#x56DE;&#x503C;&#xFF1A;&#x82E5;&#x6210;&#x529F;&#x5219;&#x8FD4;&#x56DE;0&#xFF0C;&#x82E5;&#x51FA;&#x9519;&#x5219;&#x8FD4;&#x56DE;-1</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;unistd.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">chdir</span><span class="hljs-params">( <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *pathname )</span></span>;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">fchdir</span><span class="hljs-params">( <span class="hljs-keyword">int</span> fd )</span></span>;            <span class="hljs-comment">// fd&#x6307;&#x5411;&#x4E00;&#x4E2A;&#x76EE;&#x5F55;&#x6587;&#x4EF6;</span>
+
+<span class="hljs-comment">// &#x8FD4;&#x56DE;&#x503C;&#xFF1A;&#x82E5;&#x6210;&#x529F;&#x5219;&#x8FD4;&#x56DE;buf&#xFF0C;&#x82E5;&#x51FA;&#x9519;&#x5219;&#x8FD4;&#x56DE;NULL</span>
+<span class="hljs-function"><span class="hljs-keyword">char</span> *<span class="hljs-title">getcwd</span><span class="hljs-params">( <span class="hljs-keyword">char</span> *buf, szie_t size )</span></span>;
+
+<span class="hljs-comment">// &#x6D41;&#x91CD;&#x5B9A;&#x5411;</span>
+<span class="hljs-comment">// &#x51B3;&#x5B9A;&#x6240;&#x8BFB;&#x5199;&#x7684;&#x5B57;&#x7B26;&#x662F;&#x5355;&#x5B57;&#x8282;&#x8FD8;&#x662F;&#x591A;&#x5B57;&#x8282;&#xFF0C;</span>
+<span class="hljs-comment">// &#x5728;&#x6D41;&#x4E0A;&#x4F7F;&#x7528;&#x5355;&#x5B57;&#x8282;IO&#x51FD;&#x6570;&#xFF0C;&#x5219;&#x6D41;&#x88AB;&#x8BBE;&#x7F6E;&#x4E3A;&#x5B57;&#x8282;&#x5B9A;&#x5411;&#xFF0C;&#x82E5;&#x5BBD;&#x5B57;&#x8282;&#x5219;&#x88AB;&#x8BBE;&#x7F6E;&#x4E3A;&#x591A;&#x5B57;&#x8282;&#x5B9A;&#x5411;&#x3002;</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-function">FILE *<span class="hljs-title">freopen</span><span class="hljs-params">( <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *path, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *mode, FILE *stream )</span></span>;
+<span class="hljs-comment">// &#x529F;&#x80FD;&#xFF1A;&#x5B9E;&#x73B0;&#x91CD;&#x5B9A;&#x5411;&#xFF0C;&#x628A;&#x9884;&#x5B9A;&#x4E49;&#x7684;&#x6807;&#x51C6;&#x6D41;&#x6587;&#x4EF6;(stdin/stdout/stderr)&#x5B9A;&#x5411;&#x5230;&#x7531;path&#x6307;&#x5B9A;&#x7684;&#x6587;&#x4EF6;&#x4E2D;&#x3002;</span>
+<span class="hljs-comment">// &#x9ED8;&#x8BA4;&#x503C;&#xFF1A;stdin&#x952E;&#x76D8;&#xFF1B;stdout&#x5C4F;&#x5E55;&#xFF1B;stderr&#x5C4F;&#x5E55;&#x3002;</span>
+<span class="hljs-comment">// &#x901A;&#x8FC7;&#x8C03;&#x7528;freopen&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x4FEE;&#x6539;&#x6807;&#x51C6;&#x6D41;&#x6587;&#x4EF6;&#x7684;&#x9ED8;&#x8BA4;&#x503C;&#xFF0C;&#x5B9E;&#x73B0;&#x91CD;&#x5B9A;&#x5411;&#x3002;</span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> 
+</span>{ 
+    <span class="hljs-keyword">int</span> a,b; 
+    freopen(<span class="hljs-string">&quot;debug\\in.txt&quot;</span>,<span class="hljs-string">&quot;r&quot;</span>,<span class="hljs-built_in">stdin</span>); <span class="hljs-comment">// &#x8F93;&#x5165;&#x91CD;&#x5B9A;&#x5411;&#xFF0C;&#x8F93;&#x5165;&#x6570;&#x636E;&#x5C06;&#x4ECE;in.txt&#x6587;&#x4EF6;&#x4E2D;&#x8BFB;&#x53D6; </span>
+    freopen(<span class="hljs-string">&quot;debug\\out.txt&quot;</span>,<span class="hljs-string">&quot;w&quot;</span>,<span class="hljs-built_in">stdout</span>); <span class="hljs-comment">// &#x8F93;&#x51FA;&#x91CD;&#x5B9A;&#x5411;&#xFF0C;&#x8F93;&#x51FA;&#x6570;&#x636E;&#x5C06;&#x4FDD;&#x5B58;&#x5728;out.txt&#x6587;&#x4EF6;&#x4E2D; </span>
+    <span class="hljs-keyword">while</span>(<span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d %d&quot;</span>,&amp;a,&amp;b)!=EOF) 
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>,a+b); 
+    fclose(<span class="hljs-built_in">stdin</span>);<span class="hljs-comment">//&#x5173;&#x95ED;&#x6587;&#x4EF6; </span>
+    fclose(<span class="hljs-built_in">stdout</span>);<span class="hljs-comment">//&#x5173;&#x95ED;&#x6587;&#x4EF6; </span>
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; 
+} 
+
+<span class="hljs-comment">// &#x8BBE;&#x7F6E;&#x6D41;&#x5B9A;&#x5411;</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;wchar.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">fwide</span><span class="hljs-params">(FILE *fp, <span class="hljs-keyword">int</span> mode)</span></span>;
+<span class="hljs-comment">// &#x529F;&#x80FD;&#xFF1A;mode&#x8D1F;&#x6570;-&gt;&#x5B57;&#x8282;&#x5B9A;&#x5411;&#xFF1B;mode&#x6B63;&#x503C;-&gt;&#x5BBD;&#x5B9A;&#x5411;(&#x591A;&#x5B57;&#x8282;&#x5B9A;&#x5411;)&#xFF1B;mode&#x4E3A;0-&gt;&#x4E0D;&#x5B9A;&#x5411;&#xFF0C;&#x4F46;&#x8FD4;&#x56DE;&#x6807;&#x8BC6;&#x6D41;&#x5B9A;&#x5411;&#x7684;&#x503C;&#x3002;</span>
+
+<span class="hljs-function">FILE *<span class="hljs-title">fopen</span><span class="hljs-params">(<span class="hljs-keyword">char</span> *filename, <span class="hljs-keyword">char</span> *mode)</span></span>;    <span class="hljs-comment">// &#x6253;&#x5F00;&#x4E00;&#x4E2A;&#x6D41;</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">setbuf</span><span class="hljs-params">(FILE *steam, <span class="hljs-keyword">char</span> *buf)</span></span>;        <span class="hljs-comment">// &#x6253;&#x5F00;&#x548C;&#x5173;&#x95ED;&#xFF08;buf&#x8BBE;&#x7F6E;&#x4E3A;NULL&#xFF09;&#x7F13;&#x51B2;&#x673A;&#x5236;</span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">setvbuf</span><span class="hljs-params">(FILE *stream, <span class="hljs-keyword">char</span> *buf, <span class="hljs-keyword">int</span> type, <span class="hljs-keyword">unsigned</span> size)</span></span>;  <span class="hljs-comment">// &#x8BBE;&#x7F6E;&#x7F13;&#x51B2;&#x7C7B;&#x578B;&#x548C;&#x7F13;&#x51B2;&#x533A;&#x5927;&#x5C0F;</span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">fflush</span><span class="hljs-params">(FILE *stream)</span></span>;                   <span class="hljs-comment">// &#x5F3A;&#x5236;&#x51B2;&#x6D17;&#x4E00;&#x4E2A;&#x6D41;&#xFF0C;&#x672A;&#x5199;&#x6570;&#x636E;&#x4F20;&#x9001;&#x81F3;&#x5185;&#x6838;</span>
+<span class="hljs-function">FILE *<span class="hljs-title">freopen</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *path, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *mode, FILE *stream)</span></span>;  <span class="hljs-comment">// &#x5C06;&#x4E00;&#x4E2A;&#x6307;&#x5B9A;&#x6587;&#x4EF6;&#x6253;&#x5F00;&#x4E3A;&#x4E00;&#x4E2A;&#x9884;&#x5B9A;&#x4E49;&#x7684;&#x6D41;&#xFF08;stdin/stdout/stderr&#xFF09;</span>
+<span class="hljs-function">FILE *<span class="hljs-title">fdopen</span><span class="hljs-params">(<span class="hljs-keyword">int</span> fd, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *mode)</span></span>; <span class="hljs-comment">// &#x662F;&#x4E00;&#x4E2A;&#x6807;&#x51C6;io&#x6D41;&#x4E0E;&#x4E00;&#x4E2A;&#x73B0;&#x6709;&#x7684;&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26;&#x7ED3;&#x5408;&#xFF0C;&#x5E38;&#x7528;&#x4E8E;&#x7BA1;&#x9053;&#x64CD;&#x4F5C;</span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">fclose</span><span class="hljs-params">(FILE *fp)</span></span>;       <span class="hljs-comment">// &#x5173;&#x95ED;&#x4E00;&#x4E2A;&#x6D41;&#xFF0C;&#x91CA;&#x653E;&#x6D41;&#x7F13;&#x51B2;&#x533A;&#xFF0C;&#x51B2;&#x6D17;&#x7F13;&#x51B2;&#x533A;&#x6570;&#x636E;</span>
+
+<span class="hljs-comment">// &#x6253;&#x5F00;&#x6D41;&#x540E;&#xFF0C;&#x5F00;&#x59CB;&#x8FDB;&#x884C;&#x8BFB;&#x5199;&#x64CD;&#x4F5C;...</span>
+
+<span class="hljs-comment">// &#x6BCF;&#x6B21;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x7684;IO</span>
+<span class="hljs-comment">// getc/fgetc/getchar &#x4ECE;&#x6D41;&#x7F13;&#x51B2;&#x533A;&#x4E00;&#x6B21;&#x8BFB;&#x53D6;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#xFF0C;&#x6210;&#x529F;&#x8FD4;&#x56DE;&#x4E0B;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#xFF0C;</span>
+<span class="hljs-comment">// &#x51FA;&#x9519;&#x8FD4;&#x56DE;EOF&#xFF0C;&#x901A;&#x8FC7;ferror&#x548C;feof&#x5224;&#x65AD;&#x662F;&#x51FA;&#x9519;&#x8FD8;&#x662F;&#x5230;&#x8FBE;&#x6587;&#x4EF6;&#x5C3E;&#x7AEF;&#x3002;</span>
+
+<span class="hljs-comment">// &#x6BCF;&#x6B21;&#x4E00;&#x884C;&#x7684;IO</span>
+<span class="hljs-comment">// &#x6BCF;&#x6B21;&#x8BFB;&#x5199;&#x4E00;&#x884C;&#xFF0C;&#x4F7F;&#x7528;fgets/fputs&#xFF0C;&#x6BCF;&#x884C;&#x90FD;&#x4EE5;&#x4E00;&#x4E2A;&#x6362;&#x884C;&#x7B26;&#x7EC8;&#x6B62;&#x3002;</span>
+
+<span class="hljs-comment">// &#x76F4;&#x63A5;IO</span>
+<span class="hljs-comment">// &#x6BCF;&#x6B21;&#x8BFB;&#x6216;&#x5199;&#x4E00;&#x82E5;&#x5E72;&#x4E2A;&#x7ED3;&#x6784;(&#x5BF9;&#x8C61;)&#xFF0C;&#x4F7F;&#x7528;fread/fwrite&#x3002;</span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">feof</span><span class="hljs-params">(FILE *stream)</span></span>;         <span class="hljs-comment">// &#x5230;&#x8FBE;&#x6587;&#x4EF6;&#x7ED3;&#x5C3E;</span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">ferror</span><span class="hljs-params">(FILE *stream)</span></span>;       <span class="hljs-comment">// &#x6D41;&#x51FA;&#x9519;</span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">fileno</span><span class="hljs-params">(FILE *stream)</span></span>;       <span class="hljs-comment">// &#x83B7;&#x53D6;&#x6587;&#x4EF6;&#x6D41;&#x5BF9;&#x5E94;&#x7684;&#x6587;&#x4EF6;&#x6307;&#x9488;</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">clearerr</span><span class="hljs-params">(FILE *stream)</span></span>;    <span class="hljs-comment">// &#x6E05;&#x9664;FILE&#x5BF9;&#x8C61;&#x4E2D; &#x51FA;&#x9519;&#x6807;&#x5FD7;&#x548C;&#x6587;&#x4EF6;&#x7ED3;&#x675F;&#x6807;&#x5FD7;&#x3002;</span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">fseek</span><span class="hljs-params">(FILE *stream, <span class="hljs-keyword">long</span> offset, <span class="hljs-keyword">int</span> whence)</span></span>;     <span class="hljs-comment">// &#x6210;&#x529F;&#x8FD4;&#x56DE;0&#xFF0C;&#x5931;&#x8D25;&#x8FD4;&#x56DE;&#x975E;0</span>
+<span class="hljs-function"><span class="hljs-keyword">long</span> <span class="hljs-title">ftell</span><span class="hljs-params">(FILE *stream)</span></span>;      <span class="hljs-comment">// &#x5F97;&#x5230;&#x5F53;&#x524D;&#x4F4D;&#x7F6E;&#x76F8;&#x5BF9;&#x4E8E;&#x6587;&#x4EF6;&#x9996;&#x7684;&#x5B57;&#x8282;&#x504F;&#x79FB;&#x91CF;&#xFF0C;&#x6210;&#x529F;&#x8FD4;&#x56DE;&#x504F;&#x79FB;&#x91CF;&#xFF0C;&#x5931;&#x8D25;&#x8FD4;&#x56DE;-1</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">rewind</span><span class="hljs-params">(FILE *stream)</span></span>;     <span class="hljs-comment">// &#x6307;&#x5411;&#x6587;&#x4EF6;&#x9996;&#xFF0C;&#x76F8;&#x5F53;&#x4E8E;fseek(fp, 0, SEEK_SET)&#xFF0C;</span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">fgetpos</span><span class="hljs-params">(FILE *stream, fpos_t *pos)</span></span>;  <span class="hljs-comment">// c&#x6807;&#x51C6;&#xFF0C;&#x5C06;&#x6587;&#x4EF6;&#x4F4D;&#x7F6E;&#x5B58;&#x5165;pos&#x6307;&#x5411;&#x7684;&#x5BF9;&#x8C61;&#x4E2D;</span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">fsetpos</span><span class="hljs-params">(FILE *stream, fpos_t *pos)</span></span>;  <span class="hljs-comment">// c&#x6807;&#x51C6;&#xFF0C;&#x5C06;&#x6D41;&#x91CD;&#x65B0;&#x5B9A;&#x4F4D;&#x81F3;pos&#x4FDD;&#x5B58;&#x7684;&#x4F4D;&#x7F6E;&#xFF0C;&#x8981;&#x79FB;&#x690D;&#x5230;&#x975E;UNIX&#x7CFB;&#x7EDF;&#x4E0A;&#x8FD0;&#x884C;&#x7684;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x5E94;&#x5F53;&#x4F7F;&#x7528;&#x8FD9;&#x4E24;&#x4E2A;&#x51FD;&#x6570;</span>
+
+<span class="hljs-comment">// &#x521B;&#x5EFA;&#x4E34;&#x65F6;&#x6587;&#x4EF6;</span>
+<span class="hljs-function"><span class="hljs-keyword">char</span> *<span class="hljs-title">tmpnam</span><span class="hljs-params">(<span class="hljs-keyword">char</span> *s)</span></span>;          <span class="hljs-comment">// &#x8FD4;&#x56DE;&#x6307;&#x5411;&#x552F;&#x4E00;&#x8DEF;&#x5F84;&#x540D;&#x7684;&#x6307;&#x9488;</span>
+<span class="hljs-function">FILE *<span class="hljs-title">tmpfile</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>;            <span class="hljs-comment">// &#x6210;&#x529F;&#x8FD4;&#x56DE;&#x6587;&#x4EF6;&#x6307;&#x9488;&#xFF0C;&#x5931;&#x8D25;&#x8FD4;&#x56DE;NULL</span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">mkstemp</span><span class="hljs-params">(<span class="hljs-keyword">char</span> *<span class="hljs-keyword">template</span>)</span></span>;    <span class="hljs-comment">// template must be &quot;XXXXXX&quot; &#x6210;&#x529F;&#x8FD4;&#x56DE;&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26;&#xFF0C;&#x5931;&#x8D25;&#x8FD4;&#x56DE;-1</span>
+<span class="hljs-function"><span class="hljs-keyword">char</span> *<span class="hljs-title">tempnam</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *dir, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *pfx)</span></span>;         <span class="hljs-comment">// &#x8FD4;&#x56DE;&#x6307;&#x5411;&#x552F;&#x4E00;&#x8DEF;&#x5F84;&#x540D;&#x7684;&#x6307;&#x9488;</span>
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;unistd.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;fcntl.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">fcntl</span><span class="hljs-params">(<span class="hljs-keyword">int</span> fd, <span class="hljs-keyword">int</span> cmd, ... <span class="hljs-comment">/* arg */</span> )</span></span>;
+cmd&#xFF1A;F_DUPFD ---- &#x590D;&#x5236;&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26;&#xFF0C;&#x8C03;&#x7528;&#x6210;&#x529F;&#x540E;&#x8FD4;&#x56DE;&#x65B0;&#x7684;&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26;&#xFF0C;&#x4E0E;&#x65E7;&#x7684;&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26;&#x5171;&#x540C;&#x6307;&#x5411;&#x540C;&#x4E00;&#x4E2A;&#x6587;&#x4EF6;&#x3002;
+     F_GETFD/F_SETFD  --- &#x83B7;&#x53D6;/&#x8BBE;&#x7F6E;&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26;&#x7684;close-on-exec&#x6807;&#x5FD7;
+     F_GETFL/F_SETF   --- &#x83B7;&#x53D6;/&#x8BBE;&#x7F6E;&#x6587;&#x4EF6;&#x7684;&#x6253;&#x5F00;&#x65B9;&#x5F0F;
+     F_SETLK/F_SETLKW/F_GETLK --- &#x8BBE;&#x7F6E;&#x6587;&#x4EF6;&#x8BB0;&#x5F55;&#x9501;&#xFF1A;&#x8BFB;&#x5199;&#x3001;&#x963B;&#x585E;&#x65B9;&#x5F0F;&#xFF0C;&#x7B2C;<span class="hljs-number">3</span>&#x4E2A;&#x53C2;&#x6570;&#x6307;&#x5411;<span class="hljs-keyword">struct</span> flock *lock&#x7684;&#x7ED3;&#x6784;&#x4F53;, &#x4E2D;&#x95F4;&#x4E09;&#x4E2A;&#x53C2;&#x6570;&#xFF08;whence&#x3001;start&#x3001;len&#xFF09;&#x90FD;&#x8BBE;&#x7F6E;&#x4E3A;<span class="hljs-number">0</span>&#xFF0C;&#x4F1A;&#x9501;&#x6574;&#x4E2A;&#x6587;&#x4EF6;&#x3002;
+<span class="hljs-keyword">struct</span> flock
+{  
+    short_l_type;    <span class="hljs-comment">// &#x9501;&#x7684;&#x7C7B;&#x578B; F_RDLCK&#xFF08;&#x5171;&#x4EAB;&#x9501;,&#x8BFB;&#x9501;&#xFF09; F_WDLCK&#xFF08;&#x4E92;&#x65A5;&#x9501;,&#x5199;&#x9501;&#xFF09; </span>
+    short_l_whence;  <span class="hljs-comment">// &#x504F;&#x79FB;&#x91CF;&#x7684;&#x8D77;&#x59CB;&#x4F4D;&#x7F6E;&#xFF1A;SEEK_SET,SEEK_CUR,SEEK_END  </span>
+    off_t_l_start;   <span class="hljs-comment">// &#x52A0;&#x9501;&#x7684;&#x8D77;&#x59CB;&#x504F;&#x79FB;</span>
+    off_t_l_len;     <span class="hljs-comment">// &#x4E0A;&#x9501;&#x5B57;&#x8282;</span>
+    pid_t_l_pid;     <span class="hljs-comment">// &#x9501;&#x7684;&#x5C5E;&#x4E3B;&#x8FDB;&#x7A0B;ID</span>
+};
+</code></pre>
+<h1 id="&#x5176;&#x4ED6;&#x77E5;&#x8BC6;&#x70B9;">&#x5176;&#x4ED6;&#x77E5;&#x8BC6;&#x70B9;</h1>
+<h2 id="ssizetsizetofft">ssize_t/size_t/off_t</h2>
+<p>&#x76EE;&#x7684;&#xFF1A;&#x589E;&#x52A0;&#x4EE3;&#x7801;&#x7684;&#x53EF;&#x79FB;&#x690D;&#x6027;&#x3002;</p>
+<ul>
+<li><p>size_t&#xFF1A;&#x8868;&#x8FBE;&#x4E0D;&#x540C;&#x5E73;&#x53F0;&#x4E0B;&#x8F83;&#x5927;&#x53EF;&#x80FD;&#x7684;&#x6570;&#x636E;&#x5C3A;&#x5BF8;&#x3002;</p>
+<p>&#x5728;32&#x4F4D;&#x67B6;&#x6784;&#x4E0A;&#xFF1A;typedef unsigned int size_t;</p>
+<p>&#x5728;64&#x4F4D;&#x67B6;&#x6784;&#x4E0A;&#xFF1A;typedef unsigned long size_t;</p>
+<p>&#x7C7B;&#x4F3C;&#x7684;&#xFF0C;ssize_t&#x6709;&#x7B26;&#x53F7;&#xFF0C;size_t&#x65E0;&#x7B26;&#x53F7;&#x3002;</p>
+</li>
+<li><p>off_t&#xFF1A;&#x8868;&#x8FBE;&#x4E0D;&#x540C;&#x5E73;&#x53F0;&#x4E0B;&#x6587;&#x4EF6;&#x504F;&#x79FB;&#x91CF;&#xFF1A;</p>
+<p>32&#x4F4D;&#x67B6;&#x6784;&#x4E0A;&#xFF1A;typedef long off_t;</p>
+<p>64&#x4F4D;&#x67B6;&#x6784;&#x4E0A;&#xFF1A;typedef long long off_t;</p>
+</li>
+<li><p>&#x683C;&#x5F0F;&#x5316;&#x6253;&#x5370;&#xFF1A;</p>
+<p>off_t---- &quot;%jd&quot;</p>
+<p>size_t ----- &quot;%uz&quot;</p>
+<p>ssize_t ---- &quot;%zd&quot;</p>
+</li>
+</ul>
+<h2 id="linux-&#x6587;&#x4EF6;i&#x8282;&#x70B9;">linux &#x6587;&#x4EF6;i&#x8282;&#x70B9;</h2>
+<p>linux&#x4E2D;&#xFF0C;&#x662F;&#x901A;&#x8FC7;i&#x8282;&#x70B9;&#x5B9E;&#x73B0;&#x6587;&#x4EF6;&#x7684;&#x67E5;&#x627E;&#x5B9A;&#x4F4D;&#x7684;&#x3002;i&#x8282;&#x70B9;&#x53EF;&#x4EE5;&#x8BA4;&#x4E3A;&#x662F;&#x4E00;&#x4E2A;&#x6307;&#x5411;&#x78C1;&#x76D8;&#x4E0A;&#x8BE5;&#x6587;&#x4EF6;&#x7684;&#x5B58;&#x50A8;&#x533A;&#x7684;&#x5730;&#x5740;&#xFF0C;&#x9664;&#x4E86;&#x5B58;&#x5730;&#x5740;&#xFF0C;&#x8FD8;&#x4F1A;&#x4FDD;&#x5B58;&#x6570;&#x636E;&#x91CF;&#x5927;&#x5C0F;&#x7B49;&#x7B49;&#x6587;&#x4EF6;&#x4FE1;&#x606F;&#x3002;&#x6BCF;&#x4E00;&#x4E2A;&#x76EE;&#x5F55;&#x9879;&#x4E2D;&#x90FD;&#x5305;&#x542B;&#x4E86;&#x6587;&#x4EF6;&#x540D;&#x548C;i&#x8282;&#x70B9;&#x3002;&#x5982;&#x4E0B;&#x56FE;&#xFF1A;</p>
+<p><img src="../images/linux_c/inode.jpg" height="220" width="350"></p>
+<ul>
+<li><p>&#x786C;&#x94FE;&#x63A5;&#x548C;&#x8F6F;&#x94FE;&#x63A5;(ln source_file dest_file)</p>
+<pre><code class="lang-shell"># fileB&#x662F;fileA&#x7684;&#x786C;&#x94FE;&#x63A5;&#xFF1A;fileA&#x548C;fileB&#x662F;&#x5BF9;&#x7B49;&#x7684;&#x5173;&#x7CFB;&#xFF0C;&#x5220;&#x6389;&#x6E90;&#x6587;&#x4EF6;fileA&#xFF0C;&#x78C1;&#x76D8;&#x6570;&#x636E;&#x4E0D;&#x4F1A;&#x5220;&#x9664;&#xFF1B;
+# &#x53EA;&#x6709;&#x786C;&#x94FE;&#x63A5;&#x6570;&#x4E3A;0&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5220;&#x9664;&#x6587;&#x4EF6;&#x540D;&#x65F6;&#xFF0C;&#x6570;&#x636E;&#x624D;&#x4F1A;&#x5728;&#x78C1;&#x76D8;&#x4E0A;&#x5220;&#x9664;&#x3002;
+ln -d fileA fileB
+
+# fileB&#x662F;fileA&#x7684;&#x8F6F;&#x94FE;&#x63A5;&#xFF1A;&#x7B26;&#x53F7;&#x94FE;&#x63A5;&#x5176;&#x5B9E;&#x662F;&#x6587;&#x4EF6;&#x7D22;&#x5F15;&#x7684;&#x7D22;&#x5F15;&#xFF0C;&#x4ECE;&#x5C5E;&#x5173;&#x7CFB;;
+# &#x5F53;&#x6E90;&#x6587;&#x4EF6;fileA&#x5220;&#x9664;&#x4E4B;&#x540E;&#xFF0C;&#x5176;&#x5B9E;&#x94FE;&#x63A5;&#x6587;&#x4EF6;&#x8FD8;&#x5B58;&#x5728;&#xFF0C;&#x4F46;&#x662F;&#x65E0;&#x6CD5;&#x4F7F;&#x7528;&#x3002;
+ln -s  fileA fileB
+</code></pre>
+</li>
+</ul>
+<h2 id="exit&#x548C;return&#x7684;&#x533A;&#x522B;">exit&#x548C;return&#x7684;&#x533A;&#x522B;</h2>
+<ul>
+<li><p>exit</p>
+<p><code>void exit(int Code)   // Code&#x662F;&#x7A0B;&#x5E8F;&#x9000;&#x51FA;&#x65F6;&#x7684;&#x72B6;&#x6001;&#x7801; 0&#x8868;&#x793A;&#x6B63;&#x5E38;&#x9000;&#x51FA;&#x3002;</code></p>
+<p>exit()&#x5176;&#x5B9E;&#x5C31;&#x662F;&#x76F4;&#x63A5;&#x9000;&#x51FA;&#x7A0B;&#x5E8F;&#xFF0C;&#x5B83;&#x5728;&#x6267;&#x884C;&#x5B8C;&#x4E00;&#x4E9B;&#x6E05;&#x7406;&#x5DE5;&#x4F5C;&#xFF08;&#x7EC8;&#x6B62;&#x5904;&#x7406;&#x7A0B;&#x5E8F;&#xFF0C;&#x5237;&#x65B0;&#x8F93;&#x51FA;&#x6D41;&#x5E76;&#x5173;&#x95ED;&#x6240;&#x6709;&#x6253;&#x5F00;&#x7684;&#x6D41;&#xFF09;&#x540E;&#x5C31;&#x8C03;&#x7528;_exit&#x76F4;&#x63A5;&#x9000;&#x51FA;&#x3002;</p>
+</li>
+<li><p>exit&#x548C;return&#x7684;&#x533A;&#x522B;&#xFF1A;</p>
+<p>return&#x662F;c&#x8BED;&#x8A00;&#x4E2D;&#x7684;&#x5173;&#x952E;&#x5B57;&#xFF0C;&#x800C;exit&#x662F;linux&#x4E2D;&#x7684;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#x3002;exit&#x8868;&#x793A;&#x7EC8;&#x6B62;&#x5F53;&#x524D;&#x8FDB;&#x7A0B;&#xFF0C;return&#x8868;&#x793A;&#x4ECE;&#x5F53;&#x524D;&#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x3002;&#x5728;main&#x51FD;&#x6570;&#x4E2D;&#xFF0C;exit&#x548C;return&#x4F5C;&#x7528;&#x662F;&#x4E00;&#x6837;&#x7684;&#xFF0C;&#x5C31;&#x662F;&#x7EC8;&#x6B62;&#x8FDB;&#x7A0B;&#xFF1B;&#x5982;&#x679C;return&#x51FA;&#x73B0;&#x5728;&#x5B50;&#x7A0B;&#x5E8F;&#x4E2D;&#x8868;&#x793A;&#x8FD4;&#x56DE;&#xFF08;&#x4F8B;&#x5982;&#x9012;&#x5F52;&#x51FD;&#x6570;&#x7684;&#x5B9E;&#x73B0;&#xFF09;&#xFF0C;&#x800C;exit&#x51FA;&#x73B0;&#x5728;&#x5B50;&#x8FDB;&#x7A0B;&#x4E2D;&#x8868;&#x793A;&#x7EC8;&#x6B62;&#x5B50;&#x8FDB;&#x7A0B;&#x3002;</p>
+</li>
+</ul>
+<h2 id="linux&#x6587;&#x4EF6;&#x7C7B;&#x578B;">linux&#x6587;&#x4EF6;&#x7C7B;&#x578B;</h2>
+<p>&#x53EF;&#x7528;&#x901A;&#x8FC7;stat&#x4E2D;&#x7684;st_mode&#x5224;&#x65AD;&#x3002;</p>
+<ul>
+<li>&#x666E;&#x901A;&#x6587;&#x4EF6;&#xFF1A;&#x6587;&#x672C;&#x6587;&#x4EF6;&#x548C;&#x4E8C;&#x8FDB;&#x5236;&#x6587;&#x4EF6;&#xFF0C;&#x5BF9;&#x4E8E;linux&#x5185;&#x6838;&#x6CA1;&#x6709;&#x533A;&#x522B;&#xFF0C;&#x5BF9;&#x5176;&#x5185;&#x5BB9;&#x7684;&#x89E3;&#x91CA;&#x7531;&#x5904;&#x7406;&#x8BE5;&#x6587;&#x4EF6;&#x7684;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x8FDB;&#x884C;&#x3002;&#xFF08;&#x6587;&#x672C;&#x6587;&#x4EF6;&#x4EE5;&#x5B57;&#x8282;&#x4E3A;&#x6700;&#x5C0F;&#x5B58;&#x50A8;&#x5355;&#x5143;&#xFF0C;&#x53C8;&#x53EB;ascii&#x6587;&#x4EF6;&#xFF1B;&#x4E8C;&#x8FDB;&#x5236;&#x6587;&#x4EF6;&#x4EE5;01&#x6BD4;&#x7279;&#x4E3A;&#x6700;&#x5C0F;&#x5B58;&#x50A8;&#x5355;&#x5143;&#xFF09;</li>
+<li>&#x76EE;&#x5F55;&#x6587;&#x4EF6;</li>
+<li>&#x5757;&#x8BBE;&#x5907;&#x6587;&#x4EF6;&#xFF1A;&#x63D0;&#x4F9B;&#x5BF9;&#x8BBE;&#x5907;&#x5E26;&#x7F13;&#x51B2;&#x7684;&#x8BBF;&#x95EE;&#xFF0C;&#x6BCF;&#x6B21;&#x4EE5;&#x56FA;&#x5B9A;&#x7684;&#x957F;&#x5EA6;&#x4E3A;&#x5355;&#x4F4D;&#xFF08;&#x901A;&#x5E38;&#x662F;512B&#x7684;&#x500D;&#x6570;&#xFF09;&#x8FDB;&#x884C;&#x8BBF;&#x95EE;&#xFF0C;&#x652F;&#x6301;&#x968F;&#x673A;&#x8BBF;&#x95EE;&#xFF0C;&#x5982;&#x786C;&#x76D8;&#x3001;u&#x76D8;&#x3002;</li>
+<li>&#x5B57;&#x7B26;&#x8BBE;&#x5907;&#x6587;&#x4EF6;&#xFF1A;&#x63D0;&#x4F9B;&#x4E0D;&#x5E26;&#x7F13;&#x51B2;&#x7684;&#x8BBF;&#x95EE;&#xFF0C;&#x6BCF;&#x6B21;&#x8BBF;&#x95EE;&#x957F;&#x5EA6;&#x53EF;&#x53D8;&#xFF0C;&#x987A;&#x5E8F;&#x8BBF;&#x95EE;&#x3002;&#x5982;&#x952E;&#x76D8;&#x3001;&#x9F20;&#x6807;&#x3002;</li>
+<li>FIFO(&#x547D;&#x540D;&#x7BA1;&#x9053;)&#xFF1A;&#x7528;&#x4E8E;&#x8FDB;&#x7A0B;&#x95F4;&#x901A;&#x4FE1;&#x3002;</li>
+<li>&#x5957;&#x63A5;&#x5B57;&#x6587;&#x4EF6;&#xFF1A;&#x8FDB;&#x7A0B;&#x95F4;&#x7F51;&#x7EDC;&#x901A;&#x4FE1;&#x3002;</li>
+</ul>
+<h2 id="extern&#x548C;restrict&#x5173;&#x952E;&#x5B57;">extern&#x548C;restrict&#x5173;&#x952E;&#x5B57;</h2>
+<ul>
+<li><p>extern&#x5173;&#x952E;&#x5B57;&#xFF1A;&#x7F6E;&#x4E8E;&#x53D8;&#x91CF;&#x6216;&#x8005;&#x51FD;&#x6570;&#x524D;&#xFF0C;&#x4EE5;&#x8868;&#x793A;&#x53D8;&#x91CF;&#x6216;&#x8005;&#x51FD;&#x6570;&#x7684;&#x5B9A;&#x4E49;&#x5728;&#x522B;&#x7684;&#x6587;&#x4EF6;&#x4E2D;&#x3002;&#x63D0;&#x793A;&#x7F16;&#x8BD1;&#x5668;&#x9047;&#x5230;&#x6B64;&#x53D8;&#x91CF;&#x6216;&#x51FD;&#x6570;&#x65F6;&#xFF0C;&#x5728;&#x5176;&#x5B83;&#x6A21;&#x5757;&#x4E2D;&#x5BFB;&#x627E;&#x5176;&#x5B9A;&#x4E49;&#x3002;</p>
+</li>
+<li><p>restrict&#x9650;&#x5B9A;&#x7B26;&#xFF1A;&#x7528;&#x4E8E;&#x9650;&#x5B9A;&#x548C;&#x7EA6;&#x675F;&#x6307;&#x9488;&#xFF0C;&#x8868;&#x660E;&#x8FD9;&#x4E2A;&#x6307;&#x9488;&#x662F;&#x8BBF;&#x95EE;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#x5BF9;&#x8C61;&#x7684;&#x552F;&#x4E00;&#x65B9;&#x5F0F;&#x3002; </p>
+<p>&#x5982;&#xFF1A;int *restrict ptr, ptr &#x6307;&#x5411;&#x7684;&#x5185;&#x5B58;&#x5355;&#x5143;&#x53EA;&#x80FD;&#x88AB; ptr &#x8BBF;&#x95EE;&#x5230;&#xFF0C;&#x4EFB;&#x4F55;&#x540C;&#x6837;&#x6307;&#x5411;&#x8FD9;&#x4E2A;&#x5185;&#x5B58;&#x5355;&#x5143;&#x7684;&#x5176;&#x4ED6;&#x6307;&#x9488;&#x90FD;&#x662F;&#x672A;&#x5B9A;&#x4E49;&#x7684;&#x3002;&#x80FD;&#x5E2E;&#x52A9;&#x7F16;&#x8BD1;&#x5668;&#x8FDB;&#x884C;&#x66F4;&#x597D;&#x7684;&#x4F18;&#x5316;&#x4EE3;&#x7801;,&#x751F;&#x6210;&#x66F4;&#x6709;&#x6548;&#x7387;&#x7684;&#x6C47;&#x7F16;&#x4EE3;&#x7801;&#x3002;</p>
+</li>
+</ul>
+<h2 id="exec&#x548C;system&#x7684;&#x533A;&#x522B;">exec&#x548C;system&#x7684;&#x533A;&#x522B;</h2>
+<ul>
+<li><p>exec()</p>
+<p>&#x8FDB;&#x7A0B;&#x8C03;&#x7528;&#x6B64;&#x51FD;&#x6570;&#x6267;&#x884C;&#x4E00;&#x4E2A;&#x65B0;&#x7A0B;&#x5E8F;&#xFF0C;&#x65B0;&#x7A0B;&#x5E8F;&#x4ECE;main&#x51FD;&#x6570;&#x5F00;&#x59CB;&#x6267;&#x884C;&#xFF0C;&#x8FDB;&#x7A0B;ID&#x4E0D;&#x53D8;&#xFF0C;&#x5168;&#x65B0;&#x7A0B;&#x5E8F;&#x66FF;&#x6362;&#x4E86;&#x5F53;&#x524D;&#x8FDB;&#x7A0B;&#x7684;&#x6B63;&#x6587;&#x3001;&#x6570;&#x636E;&#x3001;&#x5806;&#x548C;&#x6808;&#x6BB5;&#xFF0C;&#x65B0;&#x8FDB;&#x7A0B;&#x4EE3;&#x66FF;&#x539F;&#x8FDB;&#x7A0B;&#x6267;&#x884C;&#x3002;</p>
+</li>
+<li><p>system()</p>
+<p>&#x76F8;&#x5F53;&#x4E8E;fork()&#x51FA;&#x4E00;&#x4E2A;&#x5B50;&#x8FDB;&#x7A0B;&#xFF0C;&#x5E76;&#x7B49;&#x5F85;&#x6B64;&#x5B50;&#x8FDB;&#x7A0B;&#x6267;&#x884C;&#x5B8C;&#x6BD5;&#x3002;</p>
+</li>
+</ul>
+<pre><code class="lang-c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;unistd.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">execl</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *path, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *arg, ...)</span></span>;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">execlp</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *file, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *arg, ...)</span></span>;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">execle</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *path, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *arg, ..., <span class="hljs-keyword">char</span> *<span class="hljs-keyword">const</span> envp[])</span></span>;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">execv</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *path, <span class="hljs-keyword">char</span> *<span class="hljs-keyword">const</span> argv[])</span></span>;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">execvp</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *file, <span class="hljs-keyword">char</span> *<span class="hljs-keyword">const</span> argv[])</span></span>;
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">system</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *command)</span></span>;
+</code></pre>
+<h2 id="&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x51FD;&#x6570;&#x548C;&#x53EF;&#x91CD;&#x5165;&#x51FD;&#x6570;&#x7684;&#x533A;&#x522B;">&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x51FD;&#x6570;&#x548C;&#x53EF;&#x91CD;&#x5165;&#x51FD;&#x6570;&#x7684;&#x533A;&#x522B;</h2>
+<ul>
+<li><p>&#x6240;&#x6709;&#x51FD;&#x6570;&#x53EF;&#x4EE5;&#x5206;&#x4E3A;&#xFF1A;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x51FD;&#x6570;&#x3001;&#x7EBF;&#x7A0B;&#x4E0D;&#x5B89;&#x5168;&#x51FD;&#x6570;&#xFF1B;</p>
+</li>
+<li><p>&#x53EF;&#x91CD;&#x5165;&#x51FD;&#x6570;&#x662F;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x51FD;&#x6570;&#x7684;&#x4E00;&#x4E2A;&#x5B50;&#x96C6;&#xFF1B;</p>
+<p>&#x53EF;&#x91CD;&#x5165;&#xFF0C;&#x5373;&#x53EF;&#x91CD;&#x590D;&#x8FDB;&#x5165;&#xFF0C;&#x53EF;&#x88AB;&#x4E2D;&#x65AD;&#xFF0C;&#x88AB;&#x591A;&#x4E2A;&#x4EFB;&#x52A1;&#x8C03;&#x7528;&#x65F6;&#x4E0D;&#x5FC5;&#x62C5;&#x5FC3;&#x6570;&#x636E;&#x51FA;&#x9519;&#xFF0C;&#x8FD9;&#x6837;&#x7684;&#x51FD;&#x6570;&#x9664;&#x4E86;&#x4F7F;&#x7528;&#x81EA;&#x5DF1;&#x6808;&#x4E0A;&#x7684;&#x53D8;&#x91CF;&#x5916;&#x4E0D;&#x4F9D;&#x8D56;&#x4E8E;&#x4EFB;&#x4F55;&#x73AF;&#x5883;&#xFF0C;&#x82E5;&#x4F7F;&#x7528;&#x5168;&#x5C40;&#x53D8;&#x91CF;&#xFF0C;&#x9700;&#x7528;&#x4E92;&#x65A5;&#x624B;&#x6BB5;&#x5BF9;&#x5176;&#x52A0;&#x4EE5;&#x4FDD;&#x62A4;&#x3002;</p>
+<p>&#x6807;&#x51C6;io&#x5E93;&#x5F88;&#x591A;&#x5B9E;&#x73B0;&#x90FD;&#x4EE5;&#x4E0D;&#x53EF;&#x91CD;&#x5165;&#x7684;&#x65B9;&#x5F0F;&#x4F7F;&#x7528;&#x5168;&#x5C40;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x3002;</p>
+</li>
+</ul>
+<h2 id="&#x8FDB;&#x7A0B;&#x95F4;&#x901A;&#x4FE1;">&#x8FDB;&#x7A0B;&#x95F4;&#x901A;&#x4FE1;</h2>
+<ul>
+<li>&#x533F;&#x540D;&#x7BA1;&#x9053;</li>
+<li>&#x547D;&#x540D;&#x7BA1;&#x9053;(FIFO)</li>
+<li>&#x6D88;&#x606F;&#x961F;&#x5217;</li>
+<li>&#x4FE1;&#x53F7;&#x91CF;</li>
+<li>&#x5171;&#x4EAB;&#x5185;&#x5B58;</li>
+<li>&#x5957;&#x63A5;&#x5B57;</li>
+</ul>
+<p>&#x901A;&#x5E38;&#x7BA1;&#x9053;&#x6709;&#x4E24;&#x79CD;&#x5C40;&#x9650;&#x6027;&#xFF1A;</p>
+<ol>
+<li><p>&#x662F;&#x534A;&#x53CC;&#x5DE5;&#x7684;&#xFF08;&#x5373;&#x6570;&#x636E;&#x53EA;&#x80FD;&#x5728;&#x4E00;&#x4E2A;&#x65B9;&#x5411;&#x4E0A;&#x6D41;&#x52A8;&#xFF09;&#x3002;</p>
+</li>
+<li><p>&#x53EA;&#x80FD;&#x5728;&#x5177;&#x6709;&#x516C;&#x5171;&#x7956;&#x5148;&#x7684;&#x8FDB;&#x7A0B;&#x4E4B;&#x95F4;&#x4F7F;&#x7528;&#xFF0C;&#x6BD4;&#x5982;&#x7236;&#x5B50;&#x8FDB;&#x7A0B;&#x4E4B;&#x95F4;&#x901A;&#x4FE1;&#x3002;</p>
+</li>
+</ol>
+<p>&#x534A;&#x53CC;&#x5DE5;&#x7BA1;&#x9053;&#x2014;&#x2014;&#x6709;&#x4E0A;&#x8FF0;&#x4E24;&#x79CD;&#x5C40;&#x9650;&#x6027;&#xFF1B; </p>
+<p>&#x547D;&#x540D;&#x7BA1;&#x9053;(FIFO)&#x2014;&#x2014;&#x6CA1;&#x6709;&#x7B2C;&#x4E8C;&#x79CD;&#x5C40;&#x9650;&#x6027;&#xFF1B; </p>
+<p>UNIX&#x57DF;&#x5957;&#x63A5;&#x5B57;&#x548C;&#x547D;&#x540D;&#x6D41;&#x7BA1;&#x9053;&#x2014;&#x2014;&#x4E24;&#x79CD;&#x5C40;&#x9650;&#x6027;&#x90FD;&#x6CA1;&#x6709;&#x3002;</p>
+<pre><code class="lang-c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-function">FILE *<span class="hljs-title">popen</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *command, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *type)</span></span>;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">pclose</span><span class="hljs-params">(FILE *stream)</span></span>;
+
+<span class="hljs-comment">// &#x7BA1;&#x9053;&#x64CD;&#x4F5C;&#xFF1A;</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/types.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/stat.h&gt;</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">mkfifo</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *pathname, mode_t mode)</span></span>;
+<span class="hljs-comment">// mode---&#x8BBF;&#x95EE;&#x6743;&#x9650;</span>
+<span class="hljs-comment">// &#x521B;&#x5EFA;&#x5B8C;&#x540E;&#xFF0C;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;open/read/write/close/stat&#x7B49;&#x51FD;&#x6570;&#x8C03;&#x7528;&#x3002;</span>
+
+<span class="hljs-comment">// &#x5185;&#x5B58;&#x6620;&#x5C04;</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> *<span class="hljs-title">mmap</span><span class="hljs-params">(<span class="hljs-keyword">void</span> *addr, size_t length, <span class="hljs-keyword">int</span> prot, <span class="hljs-keyword">int</span> flags,<span class="hljs-keyword">int</span> fd, off_t offset)</span></span>;
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">munmap</span><span class="hljs-params">(<span class="hljs-keyword">void</span> *addr, size_t length)</span></span>;
+</code></pre>
+<h2 id="readv&#x548C;writev">readv&#x548C;writev</h2>
+<p>&#x9AD8;&#x7EA7;IO&#x5305;&#x62EC;&#x975E;&#x963B;&#x585E;I/O&#x3001;&#x8BB0;&#x5F55;&#x9501;&#x3001;&#x7CFB;&#x7EDF;V&#x6D41;&#x673A;&#x5236;&#x3001; I/O&#x591A;&#x8DEF;&#x8F6C;&#x63A5;(select&#x548C;poll&#x51FD;&#x6570;)&#x3001; readv&#x548C;writev&#x51FD;&#x6570;&#x4EE5;&#x53CA;&#x5B58;&#x50A8;&#x6620;&#x50CF;I/O(mmap)&#x3002;</p>
+<p>readv&#x548C;writev&#x51FD;&#x6570;&#x662F;Linux&#x4E2D;&#x7684;&#x4E24;&#x4E2A;&#x7CFB;&#x7EDF;&#x8C03;&#x7528;&#xFF0C;&#x7C7B;&#x4F3C;&#x4E8E;read&#x548C;write&#x51FD;&#x6570;&#xFF0C;&#x4E0D;&#x540C;&#x7684;&#x662F;&#xFF0C;readv&#x548C;writev&#x5728;&#x4E00;&#x6B21;&#x6267;&#x884C;&#x8FC7;&#x7A0B;&#x4E2D;&#x53EF;&#x4EE5;&#x539F;&#x5B50;&#x5730;&#x4F5C;&#x7528;&#x4E8E;&#x591A;&#x4E2A;&#x7F13;&#x51B2;&#x533A;&#xFF0C;&#x8FD9;&#x4E9B;&#x7F13;&#x51B2;&#x533A;&#x5E38;&#x5E38;&#x662F;&#x975E;&#x8FDE;&#x7EED;&#x7684;&#x3002;&#x51FD;&#x6570;&#x8C03;&#x7528;&#x6210;&#x529F;&#x65F6;&#x8FD4;&#x56DE;&#x8BFB;&#x3001;&#x5199;&#x7684;&#x603B;&#x5B57;&#x8282;&#x6570;&#xFF0C;&#x5931;&#x8D25;&#x65F6;&#x8FD4;&#x56DE;-1&#x5E76;&#x8BBE;&#x7F6E;&#x76F8;&#x5E94;&#x7684;errno&#x3002;</p>
+<pre><code class="lang-c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/uio.h&gt;</span></span>
+<span class="hljs-keyword">ssize_t</span> readv(<span class="hljs-keyword">int</span> fd, <span class="hljs-keyword">const</span> <span class="hljs-keyword">struct</span> iovec *iov, <span class="hljs-keyword">int</span> iovcnt);
+<span class="hljs-keyword">ssize_t</span> writev(<span class="hljs-keyword">int</span> fd, <span class="hljs-keyword">const</span> <span class="hljs-keyword">struct</span> iovec *iov, <span class="hljs-keyword">int</span> iovcnt);
+<span class="hljs-keyword">ssize_t</span> preadv(<span class="hljs-keyword">int</span> fd, <span class="hljs-keyword">const</span> <span class="hljs-keyword">struct</span> iovec *iov, <span class="hljs-keyword">int</span> iovcnt,<span class="hljs-keyword">off_t</span> offset);
+<span class="hljs-keyword">ssize_t</span> pwritev(<span class="hljs-keyword">int</span> fd, <span class="hljs-keyword">const</span> <span class="hljs-keyword">struct</span> iovec *iov, <span class="hljs-keyword">int</span> iovcnt,<span class="hljs-keyword">off_t</span> offset);
+&#x7528;&#x4E8E;&#x591A;&#x5143;&#x7D20;&#x6570;&#x7EC4;&#xFF1A;
+<span class="hljs-keyword">struct</span> iovec {
+    <span class="hljs-keyword">ptr_t</span> iov_base;   <span class="hljs-comment">// &#x8D77;&#x59CB;&#x5730;&#x5740;</span>
+    <span class="hljs-keyword">size_t</span> iov_len;   <span class="hljs-comment">// &#x5B57;&#x8282;&#x6570;</span>
+};
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;unistd.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;string.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/uio.h&gt;</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span>
+</span>{
+    <span class="hljs-keyword">char</span> *str0 = <span class="hljs-string">&quot;hello &quot;</span>;
+    <span class="hljs-keyword">char</span> *str1 = <span class="hljs-string">&quot;world\n&quot;</span>;
+    <span class="hljs-keyword">struct</span> iovec iov[<span class="hljs-number">2</span>];
+    <span class="hljs-keyword">ssize_t</span> nwritten;
+
+    iov[<span class="hljs-number">0</span>].iov_base = str0;
+    iov[<span class="hljs-number">0</span>].iov_len = <span class="hljs-built_in">strlen</span>(str0);
+    iov[<span class="hljs-number">1</span>].iov_base = str1;
+    iov[<span class="hljs-number">1</span>].iov_len = <span class="hljs-built_in">strlen</span>(str1);
+
+    nwritten = writev(STDOUT_FILENO, iov, <span class="hljs-number">2</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%ld bytes written.\n&quot;</span>, nwritten);
+
+    <span class="hljs-built_in">exit</span>(<span class="hljs-number">0</span>);
+}
+</code></pre>
+<h2 id="&#x5F3A;&#x5236;&#x6027;&#x9501;">&#x5F3A;&#x5236;&#x6027;&#x9501;</h2>
+<p>&#x4E3E;&#x4F8B;&#xFF1A;&#x6709;&#x51E0;&#x4E2A;&#x8FDB;&#x7A0B;(&#x4E0D;&#x4E00;&#x5B9A;&#x6709;&#x4EB2;&#x7F18;&#x5173;&#x7CFB;)&#x90FD;&#x5148;&#x901A;&#x8FC7;fctnl&#x9501;&#x673A;&#x5236;&#x6765;&#x5224;&#x65AD;&#x518D;&#x64CD;&#x4F5C;&#x6587;&#x4EF6;&#xFF0C;&#x8FD9;&#x4E2A;&#x5C31;&#x53EB;&#x4E00;&#x81F4;&#x7684;&#x65B9;&#x6CD5;&#x3002; </p>
+<p>&#x4F46;&#x662F;&#xFF0C;&#x5982;&#x679C;&#x540C;&#x65F6;&#xFF0C;&#x53C8;&#x6709;&#x4E2A;&#x6D41;&#x6C13;&#x8FDB;&#x7A0B;&#xFF0C;&#x7BA1;&#x5B83;3721&#xFF0C;&#x51B2;&#x4E0A;&#x53BB;&#xFF0C;&#x76F4;&#x63A5;open, write&#x4E00;&#x5806;&#x64CD;&#x4F5C;&#x3002; </p>
+<p>&#x8FD9;&#x65F6;&#x5019;&#x90A3;&#x51E0;&#x4E2A;&#x5148;fcntl &#x518D;&#x64CD;&#x4F5C;&#x7684;&#x8FDB;&#x7A0B;&#x5BF9;&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#x65E0;&#x80FD;&#x4E3A;&#x529B;&#xFF0C;&#x8FD9;&#x6837;&#x5C31;&#x53EB;&#x4E0D;&#x4E00;&#x81F4;&#x3002;&#x6587;&#x4EF6;&#x6700;&#x540E;&#x7684;&#x72B6;&#x6001;&#x5C31;&#x4E0D;&#x5B9A;&#x4E86;&#x3002; </p>
+<p>&#x6B63;&#x56E0;&#x4E3A;&#x8FD9;&#x79CD;&#x9501;&#x7EA6;&#x675F;&#x4E0D;&#x4E86;&#x5176;&#x5B83;&#x7684;&#x8BBF;&#x95EE;&#x65B9;&#x5F0F;&#xFF0C;&#x6240;&#x4EE5;&#x53EB;&#x5EFA;&#x8BAE;&#x6027;&#x9501;&#x3002;&#x5F3A;&#x5236;&#x6027;&#x9501;&#x9700;&#x8981;&#x5185;&#x6838;&#x652F;&#x6301;&#x7684;,&#x5BF9;read, write, open&#x90FD;&#x4F1A;&#x68C0;&#x67E5;&#x9501;&#x3002;</p>
+<p>&#x4E3A;&#x5BF9;&#x67D0;&#x4E2A;&#x7279;&#x5B9A;&#x6587;&#x4EF6;&#x65BD;&#x884C;&#x5F3A;&#x5236;&#x6027;&#x4E0A;&#x9501;&#xFF0C;&#x5E94;&#x6EE1;&#x8DB3;&#xFF1A; </p>
+<p>&#xFF08;1&#xFF09;&#x7EC4;&#x6210;&#x5458;&#x6267;&#x884C;&#x4F4D;&#x5FC5;&#x987B;&#x5173;&#x6389;    chmod g-x test.txt  </p>
+<p>&#xFF08;2&#xFF09;SGID&#x4F4D;&#x5FC5;&#x987B;&#x6253;&#x5F00;         chmod g+s test.txt  </p>
+<h2 id="signal-&#x4FE1;&#x53F7;">signal &#x4FE1;&#x53F7;</h2>
+<pre><code class="lang-c"><span class="hljs-comment">// &#x6307;&#x5B9A;&#x5F53;&#x67D0;&#x4E2A;&#x4FE1;&#x53F7;&#x53D1;&#x751F;&#x65F6;&#x5185;&#x6838;&#x7684;&#x5904;&#x7406;&#x65B9;&#x5F0F;&#x3002;</span>
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;signal.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">typedef</span> <span class="hljs-title">void</span> <span class="hljs-params">(*sighandler_t)</span><span class="hljs-params">(<span class="hljs-keyword">int</span>)</span></span>;
+<span class="hljs-keyword">sighandler_t</span> signal(<span class="hljs-keyword">int</span> signum, <span class="hljs-keyword">sighandler_t</span> handler);  <span class="hljs-comment">// &#x4FE1;&#x53F7;&#x5904;&#x7406;&#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x51FD;&#x6570;&#x6307;&#x9488;&#x3002;</span>
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;sys/types.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;signal.h&gt;</span>  </span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">kill</span><span class="hljs-params">(pid_t pid, <span class="hljs-keyword">int</span> sig)</span></span>;    <span class="hljs-comment">// &#x5C06;&#x4FE1;&#x53F7;&#x53D1;&#x9001;&#x7ED9;&#x6307;&#x5B9A;&#x8FDB;&#x7A0B;&#x6216;&#x8FDB;&#x7A0B;&#x7EC4;</span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">raise</span><span class="hljs-params">(<span class="hljs-keyword">int</span> sig)</span></span>;              <span class="hljs-comment">// &#x4F7F;&#x8FDB;&#x7A0B;&#x5411;&#x81EA;&#x8EAB;&#x53D1;&#x9001;&#x4FE1;&#x53F7;</span>
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;unistd.h&gt;</span></span>
+<span class="hljs-function"><span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> <span class="hljs-title">alarm</span><span class="hljs-params">(<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> seconds)</span></span>;  <span class="hljs-comment">// &#x65F6;&#x95F4;&#x5230;&#x8FBE;&#x65F6;&#x53D1;&#x9001;SIGALARM&#x4FE1;&#x53F7;</span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">pause</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>;  <span class="hljs-comment">// &#x8FDB;&#x7A0B;&#x8FDB;&#x5165;&#x4F11;&#x7720;&#xFF0C;&#x76F4;&#x5230;&#x88AB;&#x4FE1;&#x53F7;&#x4E2D;&#x65AD;&#x3002;</span>
+
+<span class="hljs-comment">// fork---&#x5B50;&#x8FDB;&#x7A0B;&#x590D;&#x5236;&#x7236;&#x8FDB;&#x7A0B;&#x7684;&#x5B58;&#x50A8;&#x6620;&#x50CF;&#xFF0C;&#x6240;&#x4EE5;&#xFF0C;&#x5B50;&#x8FDB;&#x7A0B;&#x7EE7;&#x627F;&#x7236;&#x8FDB;&#x7A0B;&#x7684;&#x4FE1;&#x53F7;&#x5904;&#x7406;&#x65B9;&#x5F0F;&#xFF1B;</span>
+<span class="hljs-comment">// exec---&#x5B50;&#x8FDB;&#x7A0B;&#x4F1A;&#x8986;&#x76D6;&#x4ECE;&#x7236;&#x8FDB;&#x7A0B;&#x7EE7;&#x627F;&#x6765;&#x7684;&#x5B58;&#x50A8;&#x6620;&#x50CF;&#xFF0C;&#x6240;&#x4EE5;&#xFF0C;&#x539F;&#x6765;&#x7684;&#x4FE1;&#x53F7;&#x5904;&#x7406;&#x51FD;&#x6570;&#x4F1A;&#x88AB;&#x8BBE;&#x7F6E;&#x4E3A;&#x9ED8;&#x8BA4;&#x52A8;&#x4F5C;&#xFF1B;</span>
+</code></pre>
+<p>// TODO</p>
+<p>C/C++ &#x591A;&#x7EBF;&#x7A0B;&#x53CA;&#x7EBF;&#x7A0B;&#x540C;&#x6B65;</p>
+<p>&#x8FDB;&#x7A0B;&#x95F4;&#x901A;&#x4FE1;&#x5982;&#x4F55;&#x5B9E;&#x73B0;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="shell脚本.html" class="navigation navigation-prev " aria-label="Previous page: shell脚本">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="R语言.html" class="navigation navigation-next " aria-label="Next page: R语言">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"libc函数库","level":"1.3.5","depth":2,"next":{"title":"R语言","level":"1.3.6","depth":2,"path":"1语言类/R语言.md","ref":"./1语言类/R语言.md","articles":[]},"previous":{"title":"shell脚本","level":"1.3.4","depth":2,"path":"1语言类/shell脚本.md","ref":"./1语言类/shell脚本.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"1语言类/libc函数库.md","mtime":"2019-11-29T10:49:25.019Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-12-23T07:08:47.255Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

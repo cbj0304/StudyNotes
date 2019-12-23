@@ -1,0 +1,668 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>brpc框架 · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="IO多路复用.html" />
+    
+    
+    <link rel="prev" href="scrapy框架.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    学习笔记
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../1语言类/">
+            
+                <a href="../1语言类/">
+            
+                    
+                    第一章
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../1语言类/c++11新特性.html">
+            
+                <a href="../1语言类/c++11新特性.html">
+            
+                    
+                    c++11新特性
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../1语言类/STL.html">
+            
+                <a href="../1语言类/STL.html">
+            
+                    
+                    STL标准模板库
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../1语言类/python语言.html">
+            
+                <a href="../1语言类/python语言.html">
+            
+                    
+                    python语言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../1语言类/shell脚本.html">
+            
+                <a href="../1语言类/shell脚本.html">
+            
+                    
+                    shell脚本
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../1语言类/libc函数库.html">
+            
+                <a href="../1语言类/libc函数库.html">
+            
+                    
+                    libc函数库
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../1语言类/R语言.html">
+            
+                <a href="../1语言类/R语言.html">
+            
+                    
+                    R语言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.7" data-path="../1语言类/mysql及索引优化.html">
+            
+                <a href="../1语言类/mysql及索引优化.html">
+            
+                    
+                    mysql及索引优化
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    第二章
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="flask框架.html">
+            
+                <a href="flask框架.html">
+            
+                    
+                    flask框架
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="scrapy框架.html">
+            
+                <a href="scrapy框架.html">
+            
+                    
+                    scrapy框架
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.4.3" data-path="brpc框架.html">
+            
+                <a href="brpc框架.html">
+            
+                    
+                    brpc框架
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="IO多路复用.html">
+            
+                <a href="IO多路复用.html">
+            
+                    
+                    IO多路复用
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../3算法类/">
+            
+                <a href="../3算法类/">
+            
+                    
+                    第三章
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../3算法类/排序算法.html">
+            
+                <a href="../3算法类/排序算法.html">
+            
+                    
+                    排序算法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="../3算法类/数据结构_树.html">
+            
+                <a href="../3算法类/数据结构_树.html">
+            
+                    
+                    数据结构_二叉树
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="../3算法类/数据结构_链表.html">
+            
+                <a href="../3算法类/数据结构_链表.html">
+            
+                    
+                    数据结构_链表
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="../3算法类/数据结构_图.html">
+            
+                <a href="../3算法类/数据结构_图.html">
+            
+                    
+                    数据结构_链表
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="../3算法类/正则表达式.html">
+            
+                <a href="../3算法类/正则表达式.html">
+            
+                    
+                    正则表达式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="../3算法类/动态规划.html">
+            
+                <a href="../3算法类/动态规划.html">
+            
+                    
+                    动态规划
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7" data-path="../3算法类/设计模式.html">
+            
+                <a href="../3算法类/设计模式.html">
+            
+                    
+                    设计模式
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../4工具类/">
+            
+                <a href="../4工具类/">
+            
+                    
+                    第四章
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../4工具类/vscode使用.html">
+            
+                <a href="../4工具类/vscode使用.html">
+            
+                    
+                    vscode使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../4工具类/markdown语法.html">
+            
+                <a href="../4工具类/markdown语法.html">
+            
+                    
+                    markdown语法
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../5其他/">
+            
+                <a href="../5其他/">
+            
+                    
+                    第五章
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../5其他/学习代码.html">
+            
+                <a href="../5其他/学习代码.html">
+            
+                    
+                    学习代码
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../5其他/学习网站.html">
+            
+                <a href="../5其他/学习网站.html">
+            
+                    
+                    学习网站
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >brpc框架</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <p>[toc]</p>
+<h1 id="&#x521D;&#x8BC6;brpc">&#x521D;&#x8BC6;brpc</h1>
+<ul>
+<li>brpc&#x5B98;&#x65B9;&#x6587;&#x6863;<br><a href="https://github.com/apache/incubator-brpc/blob/master/README_cn.md" target="_blank">https://github.com/apache/incubator-brpc/blob/master/README_cn.md</a></li>
+<li><p>brpc&#x7684;&#x529F;&#x80FD;<br>brpc&#x5B9E;&#x73B0;&#x4E86;&#x4E00;&#x5957;&quot;&#x8FDC;&#x7A0B;&#x8FC7;&#x7A0B;&#x8C03;&#x7528;&quot;&#x7F51;&#x7EDC;&#x6846;&#x67B6;&#xFF0C;&#x7A0B;&#x5E8F;&#x5458;&#x53EF;&#x4EE5;&#x57FA;&#x4E8E;&#x8FD9;&#x5957;&#x6846;&#x67B6;&#xFF0C;&#x65B9;&#x4FBF;&#x7684;&#x5B9E;&#x73B0;&#x81EA;&#x5DF1;&#x7684;&#x4E1A;&#x52A1;&#x903B;&#x8F91;&#xFF0C;&#x7F16;&#x7A0B;&#x5B9E;&#x73B0;server&#x7AEF;&#x548C;client&#x7AEF;&#x4EE3;&#x7801;&#x3002;&#x4E3B;&#x8981;&#x529F;&#x80FD;&#x5305;&#x62EC;&#xFF1A;  </p>
+<ul>
+<li>&#x5728;&#x4E00;&#x4E2A;&#x7AEF;&#x53E3;&#x642D;&#x5EFA;&#x652F;&#x6301;&#x591A;&#x4E2A;&#x534F;&#x8BAE;&#x7684;server;</li>
+<li>&#x8BBF;&#x95EE;&#x5404;&#x79CD;&#x534F;&#x8BAE;&#x4E0B;&#x7684;server&#x7684;client;</li>
+</ul>
+</li>
+<li><p>brpc&#x5BF9;&#x591A;&#x534F;&#x8BAE;&#x7684;&#x652F;&#x6301;</p>
+<ul>
+<li>server&#x7AEF;&#x591A;&#x534F;&#x8BAE;<br>&#x4E00;&#x4E2A;&#x7AEF;&#x53E3;&#x652F;&#x6301;&#x591A;&#x4E2A;&#x534F;&#x8BAE;&#xFF08;&#x767E;&#x5EA6;&#x5185;&#x90E8;&#x4F7F;&#x7528;&#x7684;&#x534F;&#x8BAE;(ub/sofa/baidu_std/hulu/nshead&#x7B49;&#xFF09;&#x3001;http&#x3001;redis&#x3001;memcached&#x3001;thrift&#x7B49;&#xFF09;&#xFF0C;&#x5B9E;&#x73B0;&#x539F;&#x7406;&#xFF1A;&#x57FA;&#x4E8E;&#x4E00;&#x5B9A;&#x7684;&#x89C4;&#x5219;&#x5C1D;&#x8BD5;&#x5224;&#x65AD;client&#x7528;&#x7684;&#x54EA;&#x79CD;&#x534F;&#x8BAE;&#x3002;</li>
+<li>client&#x7AEF;&#x591A;&#x534F;&#x8BAE;<br>client&#x7AEF;&#x4F5C;&#x4E3A;&#x53D1;&#x8D77;&#x7AEF;&#xFF0C;&#x81EA;&#x7136;&#x6E05;&#x695A;&#x81EA;&#x5DF1;&#x7684;&#x534F;&#x8BAE;&#x683C;&#x5F0F;&#xFF0C;&#x540C;&#x6837;&#x652F;&#x6301;&#x591A;&#x79CD;&#x534F;&#x8BAE;&#x3002;  </li>
+<li>ubrpc&#x53CA;nshead&#x534F;&#x8BAE;<br>ub&#x4F7F;&#x7528;&#x7684;&#x534F;&#x8BAE;&#x79CD;&#x7C7B;&#x5F88;&#x591A;&#xFF0C;&#x4F46;&#x90FD;&#x4EE5;nshead&#x4F5C;&#x4E3A;&#x4E8C;&#x8FDB;&#x5236;&#x5305;&#x7684;&#x5934;&#x90E8;&#xFF0C;&#x8FD9;&#x7C7B;&#x670D;&#x52A1;&#x5728;brpc&#x4E2D;&#x7EDF;&#x79F0;&#x4E3A;<strong>nshead service</strong>&#x3002;</li>
+<li>&#x5B98;&#x65B9;&#x6587;&#x6863;<br>brpc&#x652F;&#x6301;&#x7684;&#x534F;&#x8BAE;&#xFF1A; <a href="https://github.com/apache/incubator-brpc/blob/master/docs/cn/new_protocol.md" target="_blank">https://github.com/apache/incubator-brpc/blob/master/docs/cn/new_protocol.md</a>
+ubrpc&#x548C;nshead&#x534F;&#x8BAE;&#xFF1A; <a href="https://github.com/apache/incubator-brpc/blob/master/docs/cn/nshead_service.md" target="_blank">https://github.com/apache/incubator-brpc/blob/master/docs/cn/nshead_service.md</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="&#x642D;&#x5EFA;brpc&#x73AF;&#x5883;">&#x642D;&#x5EFA;brpc&#x73AF;&#x5883;</h1>
+<ul>
+<li><p>&#x5B89;&#x88C5;&#x4F9D;&#x8D56;<br><a href="https://github.com/apache/incubator-brpc/blob/master/docs/cn/getting_started.md" target="_blank">https://github.com/apache/incubator-brpc/blob/master/docs/cn/getting_started.md</a>  </p>
+</li>
+<li><p>&#x6027;&#x80FD;&#x6D4B;&#x8BD5;&#x5DE5;&#x5177;&#x3001;&#x5206;&#x6790;&#x7A0B;&#x5E8F;&#x4E2D;&#x7684;&#x70ED;&#x70B9;&#x51FD;&#x6570;<br><a href="https://github.com/apache/incubator-brpc/blob/master/docs/cn/cpu_profiler.md" target="_blank">https://github.com/apache/incubator-brpc/blob/master/docs/cn/cpu_profiler.md</a><br><a href="https://blog.csdn.net/10km/article/details/83820080" target="_blank">https://blog.csdn.net/10km/article/details/83820080</a>  </p>
+</li>
+<li><p>brpc&#x53CB;&#x597D;&#x63A5;&#x53E3;&#x2014;&#x2014;&#x4E09;&#x4E2A;&#x7528;&#x6237;&#x7C7B;</p>
+<ul>
+<li>Server (server&#x7AEF;&#xFF0C;&#x521B;&#x5EFA;&#x670D;&#x52A1;&#xFF0C;&#x5305;&#x542B;brpc/server.h)</li>
+<li>Channel(client&#x7AEF;&#xFF0C;&#x8BBF;&#x95EE;&#x670D;&#x52A1;&#xFF0C;&#x5305;&#x542B;brpc/channel.h)</li>
+<li>Controller(&#x8C03;&#x6574;&#x53C2;&#x6570;&#xFF0C;&#x4E09;&#x7C7B;&#x53C2;&#x6570;Client-side, Server-side&#x548C;Both-side, &#x5305;&#x542B;brpc/controller.h)</li>
+</ul>
+</li>
+</ul>
+<h1 id="brpc&#x548C;braft&#x7684;&#x5173;&#x7CFB;">brpc&#x548C;braft&#x7684;&#x5173;&#x7CFB;</h1>
+<ul>
+<li>raft&#x534F;&#x8BAE;&#x52A8;&#x56FE;&#xFF1A;<a href="http://thesecretlivesofdata.com/raft/" target="_blank">http://thesecretlivesofdata.com/raft/</a></li>
+<li>brpc&#x548C;braft<br>braft&#x662F;&#x57FA;&#x4E8E;brpc&#x7684;raft&#x534F;&#x8BAE;&#x5DE5;&#x4E1A;&#x7EA7;C++&#x5B9E;&#x73B0;&#xFF0C;&#x89E3;&#x51B3;&#x670D;&#x52A1;&#x5355;&#x70B9;&#x95EE;&#x9898;&#xFF0C;&#x5E2E;&#x52A9;&#x5DE5;&#x7A0B;&#x5E08;&#x72EC;&#x7ACB;&#x5B9E;&#x73B0;&#x652F;&#x6301;&#x9AD8;&#x8D1F;&#x8F7D;&#x548C;&#x4F4E;&#x5EF6;&#x8FDF;&#x7684;&#x5206;&#x5E03;&#x5F0F;&#x7CFB;&#x7EDF;&#x3002; &#x5177;&#x4F53;&#x5E94;&#x7528;&#xFF1A;&#x6BD4;&#x5982;&#x4E00;&#x4E9B;&#x5173;&#x952E;&#x6A21;&#x5757;&#x7684;&#x9AD8;&#x53EF;&#x7528;&#xFF0C;&#x4EE5;&#x53CA;&#x5206;&#x5E03;&#x5F0F;&#x5757;&#x5B58;&#x50A8;&#x3001;&#x5206;&#x5E03;&#x5F0F;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x3001;&#x5206;&#x5E03;&#x5F0F;NewSQL&#x7CFB;&#x7EDF;&#x3001;&#x5206;&#x5E03;&#x5F0F;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x7B49;&#x5B58;&#x50A8;&#x7CFB;&#x7EDF;&#x3002;<br>raft&#x5DF2;&#x7ECF;&#x6210;&#x4E3A;&#x5206;&#x5E03;&#x5F0F;&#x4E00;&#x81F4;&#x6027;&#x7B97;&#x6CD5;&#x7684;&#x4E3B;&#x6D41;&#xFF0C;braft&#x4E2D;&#x6838;&#x5FC3;&#x7684;&#x662F;&#x534F;&#x8BAE;&#x72B6;&#x6001;&#x673A;&#x6BD4;&#x5982;log&#x3001;snapshot&#x3001;configuration&#x8FD9;&#x4E9B;&#x4E1C;&#x897F;&#x7684;&#x62BD;&#x8C61;&#x548C;&#x5B9E;&#x73B0;&#x3002;<br>braft&#x662F;&#x89E3;&#x51B3;&#x590D;&#x5236;&#x72B6;&#x6001;&#x673A;&#x95EE;&#x9898;&#xFF0C;brpc&#x662F;&#x89E3;&#x51B3;&#x6A21;&#x5757;&#x95F4;rpc&#x901A;&#x4FE1;&#x95EE;&#x9898;&#x3002;braft&#x4E2D;raft&#x534F;&#x8BAE;&#x7684;&#x4E92;&#x901A;&#x76F4;&#x63A5;&#x4F7F;&#x7528;brpc&#x5B9E;&#x73B0;&#xFF0C;runtime&#x4F7F;&#x7528;&#x4E86;bthread&#x3002;&#xFF08;&#x590D;&#x5236;&#x72B6;&#x6001;&#x673A;&#x6A21;&#x578B;&#xFF1A;&#x591A;&#x4E2A;&#x8282;&#x70B9;&#x4E0A;&#xFF0C;&#x4ECE;&#x76F8;&#x540C;&#x7684;&#x521D;&#x59CB;&#x72B6;&#x6001;&#x5F00;&#x59CB;&#xFF0C;&#x6267;&#x884C;&#x76F8;&#x540C;&#x7684;&#x4E00;&#x4E32;&#x547D;&#x4EE4;&#xFF0C;&#x4EA7;&#x751F;&#x76F8;&#x540C;&#x7684;&#x6700;&#x7EC8;&#x72B6;&#x6001;&#x3002;&#xFF09;  </li>
+</ul>
+<h1 id="brpc&#x5B9E;&#x8DF5;">brpc&#x5B9E;&#x8DF5;</h1>
+<p>// TODO  </p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="scrapy框架.html" class="navigation navigation-prev " aria-label="Previous page: scrapy框架">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="IO多路复用.html" class="navigation navigation-next " aria-label="Next page: IO多路复用">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"brpc框架","level":"1.4.3","depth":2,"next":{"title":"IO多路复用","level":"1.4.4","depth":2,"path":"2框架类/IO多路复用.md","ref":"./2框架类/IO多路复用.md","articles":[]},"previous":{"title":"scrapy框架","level":"1.4.2","depth":2,"path":"2框架类/scrapy框架.md","ref":"./2框架类/scrapy框架.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"2框架类/brpc框架.md","mtime":"2019-11-14T01:46:39.859Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-12-23T07:08:47.255Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

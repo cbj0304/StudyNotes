@@ -1,0 +1,704 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>正则表达式 · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="动态规划.html" />
+    
+    
+    <link rel="prev" href="数据结构_图.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    学习笔记
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../1语言类/">
+            
+                <a href="../1语言类/">
+            
+                    
+                    第一章
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../1语言类/c++11新特性.html">
+            
+                <a href="../1语言类/c++11新特性.html">
+            
+                    
+                    c++11新特性
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../1语言类/STL.html">
+            
+                <a href="../1语言类/STL.html">
+            
+                    
+                    STL标准模板库
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../1语言类/python语言.html">
+            
+                <a href="../1语言类/python语言.html">
+            
+                    
+                    python语言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../1语言类/shell脚本.html">
+            
+                <a href="../1语言类/shell脚本.html">
+            
+                    
+                    shell脚本
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../1语言类/libc函数库.html">
+            
+                <a href="../1语言类/libc函数库.html">
+            
+                    
+                    libc函数库
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../1语言类/R语言.html">
+            
+                <a href="../1语言类/R语言.html">
+            
+                    
+                    R语言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.7" data-path="../1语言类/mysql及索引优化.html">
+            
+                <a href="../1语言类/mysql及索引优化.html">
+            
+                    
+                    mysql及索引优化
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../2框架类/">
+            
+                <a href="../2框架类/">
+            
+                    
+                    第二章
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../2框架类/flask框架.html">
+            
+                <a href="../2框架类/flask框架.html">
+            
+                    
+                    flask框架
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../2框架类/scrapy框架.html">
+            
+                <a href="../2框架类/scrapy框架.html">
+            
+                    
+                    scrapy框架
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../2框架类/brpc框架.html">
+            
+                <a href="../2框架类/brpc框架.html">
+            
+                    
+                    brpc框架
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../2框架类/IO多路复用.html">
+            
+                <a href="../2框架类/IO多路复用.html">
+            
+                    
+                    IO多路复用
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    第三章
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="排序算法.html">
+            
+                <a href="排序算法.html">
+            
+                    
+                    排序算法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="数据结构_树.html">
+            
+                <a href="数据结构_树.html">
+            
+                    
+                    数据结构_二叉树
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="数据结构_链表.html">
+            
+                <a href="数据结构_链表.html">
+            
+                    
+                    数据结构_链表
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="数据结构_图.html">
+            
+                <a href="数据结构_图.html">
+            
+                    
+                    数据结构_链表
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.5.5" data-path="正则表达式.html">
+            
+                <a href="正则表达式.html">
+            
+                    
+                    正则表达式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="动态规划.html">
+            
+                <a href="动态规划.html">
+            
+                    
+                    动态规划
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7" data-path="设计模式.html">
+            
+                <a href="设计模式.html">
+            
+                    
+                    设计模式
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../4工具类/">
+            
+                <a href="../4工具类/">
+            
+                    
+                    第四章
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../4工具类/vscode使用.html">
+            
+                <a href="../4工具类/vscode使用.html">
+            
+                    
+                    vscode使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../4工具类/markdown语法.html">
+            
+                <a href="../4工具类/markdown语法.html">
+            
+                    
+                    markdown语法
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../5其他/">
+            
+                <a href="../5其他/">
+            
+                    
+                    第五章
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../5其他/学习代码.html">
+            
+                <a href="../5其他/学习代码.html">
+            
+                    
+                    学习代码
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../5其他/学习网站.html">
+            
+                <a href="../5其他/学习网站.html">
+            
+                    
+                    学习网站
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >正则表达式</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <p>[TOC]</p>
+<h1 id="&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;">&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;</h1>
+<ul>
+<li><a href="../data/&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x624B;&#x518C;.html">&#x53C2;&#x8003;&#x624B;&#x518C;</a></li>
+</ul>
+<h2 id="&#x6B63;&#x5411;&#x9884;&#x67E5;&#x3001;&#x53CD;&#x5411;&#x9884;&#x67E5;">&#x6B63;&#x5411;&#x9884;&#x67E5;&#x3001;&#x53CD;&#x5411;&#x9884;&#x67E5;</h2>
+<ul>
+<li>&#x6B63;&#x5411;&#x80AF;&#x5B9A;&#x9884;&#x67E5;<br>&#x901A;&#x8FC7;&#x5B50;&#x6A21;&#x5F0F; (?=pattern) &#x786E;&#x5B9A;&#x540E;&#x8FB9;&#x754C;&#x3002;  </li>
+<li>&#x53CD;&#x5411;&#x80AF;&#x5B9A;&#x9884;&#x67E5;<br>&#x901A;&#x8FC7;&#x5B50;&#x6A21;&#x5F0F; (?&lt;=pattern) &#x786E;&#x5B9A;&#x524D;&#x8FB9;&#x754C;&#x3002;  </li>
+<li>&#x6B63;&#x5411;&#x5426;&#x5B9A;&#x9884;&#x67E5;/&#x53CD;&#x5411;&#x5426;&#x5B9A;&#x9884;&#x67E5;<br>&#x7C7B;&#x4F3C;&#x7684;&#x9053;&#x7406;&#xFF0C;&#x53EA;&#x662F;&#x786E;&#x5B9A;&#x8FB9;&#x754C;&#x7684;&#x975E;&#x3002;&#x5B50;&#x6A21;&#x5F0F;&#x4E2D;&#x7684;&quot;=&quot;&#x6362;&#x6210;&quot;!&quot;&#x3002;  </li>
+</ul>
+<pre><code class="lang-python"><span class="hljs-comment"># &#x6B63;&#x5411;&#x80AF;&#x5B9A;&#x9884;&#x67E5;&#x4E3E;&#x4F8B;</span>
+  <span class="hljs-keyword">import</span> re
+  str = <span class="hljs-string">&quot;&quot;&quot;
+  Windows 1.03 and Windows 2.0 fisrt Released in 1985 and 1987 respectively.
+  Windows 95 and Windows 98 are the successor.
+  Then Windows 2000 and Windows Xp appeared.
+  Windows Vista is the Latest version of the family.
+  &quot;&quot;&quot;</span>
+  res = re.findall(<span class="hljs-string">r&apos;Windows(?= [\d.]+\b)&apos;</span>, str)
+  print(res)
+  <span class="hljs-comment"># =&gt; &#x7ED3;&#x679C;(&#x53EA;&#x6709;&#x6570;&#x5B57;&#x524D;&#x8FB9;&#x7684;Windows&#x88AB;&#x5339;&#x914D;)</span>
+  <span class="hljs-comment"># =&gt; [&apos;Windows&apos;, &apos;Windows&apos;, &apos;Windows&apos;, &apos;Windows&apos;, &apos;Windows&apos;]</span>
+
+
+<span class="hljs-comment"># &#x53CD;&#x5411;&#x80AF;&#x5B9A;&#x9884;&#x67E5;&#x4E3E;&#x4F8B;</span>
+  str1=<span class="hljs-string">&quot;&quot;&quot;
+  CNY: 128.04
+  USD: 22.5
+  USD: 23.5
+  HKD: 1533.5
+  CNY: 23.78
+  &quot;&quot;&quot;</span>
+  res1 = re.findall(<span class="hljs-string">r&apos;(?&lt;=CNY: )\d+.\d+&apos;</span>, str1)
+  print(res1)
+  <span class="hljs-comment"># =&gt; &#x7ED3;&#x679C;(&#x53EA;&#x6709;CNY: &#x540E;&#x8FB9;&#x7684;&#x6570;&#x5B57;&#x548C;&#x5C0F;&#x6570;&#x70B9;&#x88AB;&#x5339;&#x914D;)&#xFF1A;</span>
+  <span class="hljs-comment"># =&gt; [&apos;128.04&apos;, &apos;23.78&apos;]</span>
+</code></pre>
+<h2 id="&#x8D2A;&#x5A6A;&#x6A21;&#x5F0F;&#x548C;&#x975E;&#x8D2A;&#x5A6A;&#x6A21;&#x5F0F;">&#x8D2A;&#x5A6A;&#x6A21;&#x5F0F;&#x548C;&#x975E;&#x8D2A;&#x5A6A;&#x6A21;&#x5F0F;</h2>
+<ul>
+<li><p>&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x4E2D;&#x7684;&#x9650;&#x5236;&#x5B57;&#x7B26;&#xFF1A;</p>
+<p>| &#x9650;&#x5236;&#x5B57;&#x7B26;  |        &#x542B;&#x4E49; |
+| :---- | --------: |
+| ?     |     0&#x6B21;&#x6216;1&#x6B21; |
+| *    |     0&#x6B21;&#x6216;&#x591A;&#x6B21; |
+| +    |     1&#x6B21;&#x6216;&#x591A;&#x6B21; |
+| {n}   |        n&#x6B21; |
+| {n,}  |      &#x81F3;&#x5C11;n&#x6B21; |
+| {n,m} | &#x6700;&#x5C11;n&#x6B21;&#xFF0C;&#x6700;&#x591A;m&#x6B21; |</p>
+</li>
+<li><p>&#x8D2A;&#x5A6A;&#x6A21;&#x5F0F;&#xFF1A;
+&#x9ED8;&#x8BA4;&#xFF0C;&#x5C3D;&#x53EF;&#x80FD;&#x591A;&#x7684;&#x5339;&#x914D;&#x5B57;&#x7B26;&#xFF08;&#x6700;&#x5927;&#x957F;&#x5EA6;&#x5339;&#x914D;&#xFF09;&#x3002;</p>
+</li>
+<li><p>&#x975E;&#x8D2A;&#x5A6A;&#x6A21;&#x5F0F;&#xFF1A;
+&#x5C1D;&#x8BD5;&#x5339;&#x914D;&#x5C3D;&#x53EF;&#x80FD;&#x5C11;&#x7684;&#x5B57;&#x7B26;&#x3002;<strong>?&#x8DDF;&#x5728;&#x4EE5;&#x4E0A;&#x9650;&#x5236;&#x5B57;&#x7B26;&#x540E;&#x8FB9;&#xFF0C;&#x5339;&#x914D;&#x6A21;&#x5F0F;&#x662F;&#x975E;&#x8D2A;&#x5A6A;&#x7684;&#x3002;</strong></p>
+</li>
+<li><p>&#x4E3E;&#x4F8B;&#xFF1A;</p>
+<pre><code class="lang-python"><span class="hljs-comment"># encoding: utf-8</span>
+<span class="hljs-keyword">import</span> re
+
+str = <span class="hljs-string">&quot;ab12c1234aac&quot;</span>
+res = re.findall(<span class="hljs-string">r&apos;ab.*c&apos;</span>, str)
+print(res)
+
+res1 = re.findall(<span class="hljs-string">r&apos;ab.*?c&apos;</span>, str)
+print(res1)
+
+<span class="hljs-comment"># &#x8FD0;&#x884C;&#x7ED3;&#x679C;&#xFF1A;</span>
+
+<span class="hljs-comment"># [&apos;ab12c1234aac&apos;]</span>
+<span class="hljs-comment"># [&apos;ab12c&apos;]</span>
+</code></pre>
+</li>
+</ul>
+<h2 id="python&#x539F;&#x751F;&#x6001;&#x5B57;&#x7B26;&#x4E32;">python&#x539F;&#x751F;&#x6001;&#x5B57;&#x7B26;&#x4E32;</h2>
+<p><code>str = r&quot;c:\news&quot;</code></p>
+<p>&#x7531;r&#x5F00;&#x5934;&#x5F15;&#x8D77;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x5C31;&#x662F;&#x58F0;&#x660E;&#x4E86;&#x540E;&#x9762;&#x5F15;&#x53F7;&#x91CC;&#x7684;&#x4E1C;&#x897F;&#x662F;&#x539F;&#x59CB;&#x5B57;&#x7B26;&#x4E32;&#xFF0C;&#x5728;&#x91CC;&#x9762;&#x653E;&#x4EFB;&#x4F55;&#x5B57;&#x7B26;&#x90FD;&#x8868;&#x793A;&#x8BE5;&#x5B57;&#x7B26;&#x7684;&#x539F;&#x59CB;&#x542B;&#x4E49;,&#x5F3A;&#x5236;&#x4E0D;&#x8F6C;&#x4E49;&#x3002;<br>&#x89E3;&#x51B3;python&#x5B57;&#x7B26;&#x4E32;\&#x8868;&#x793A;&#x8F6C;&#x4E49;&#xFF0C;&#x540C;&#x65F6;&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;\&#x4E5F;&#x8868;&#x793A;&#x8F6C;&#x4E49;&#x5F15;&#x8D77;&#x7684;&#x8BEF;&#x4F1A;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="数据结构_图.html" class="navigation navigation-prev " aria-label="Previous page: 数据结构_链表">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="动态规划.html" class="navigation navigation-next " aria-label="Next page: 动态规划">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"正则表达式","level":"1.5.5","depth":2,"next":{"title":"动态规划","level":"1.5.6","depth":2,"path":"3算法类/动态规划.md","ref":"./3算法类/动态规划.md","articles":[]},"previous":{"title":"数据结构_链表","level":"1.5.4","depth":2,"path":"3算法类/数据结构_图.md","ref":"./3算法类/数据结构_图.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"3算法类/正则表达式.md","mtime":"2019-11-05T09:32:03.260Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-12-23T07:08:47.255Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

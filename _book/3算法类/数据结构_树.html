@@ -1,0 +1,1032 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>数据结构_二叉树 · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="数据结构_链表.html" />
+    
+    
+    <link rel="prev" href="排序算法.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    学习笔记
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../1语言类/">
+            
+                <a href="../1语言类/">
+            
+                    
+                    第一章
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../1语言类/c++11新特性.html">
+            
+                <a href="../1语言类/c++11新特性.html">
+            
+                    
+                    c++11新特性
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../1语言类/STL.html">
+            
+                <a href="../1语言类/STL.html">
+            
+                    
+                    STL标准模板库
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../1语言类/python语言.html">
+            
+                <a href="../1语言类/python语言.html">
+            
+                    
+                    python语言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../1语言类/shell脚本.html">
+            
+                <a href="../1语言类/shell脚本.html">
+            
+                    
+                    shell脚本
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../1语言类/libc函数库.html">
+            
+                <a href="../1语言类/libc函数库.html">
+            
+                    
+                    libc函数库
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../1语言类/R语言.html">
+            
+                <a href="../1语言类/R语言.html">
+            
+                    
+                    R语言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.7" data-path="../1语言类/mysql及索引优化.html">
+            
+                <a href="../1语言类/mysql及索引优化.html">
+            
+                    
+                    mysql及索引优化
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../2框架类/">
+            
+                <a href="../2框架类/">
+            
+                    
+                    第二章
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../2框架类/flask框架.html">
+            
+                <a href="../2框架类/flask框架.html">
+            
+                    
+                    flask框架
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../2框架类/scrapy框架.html">
+            
+                <a href="../2框架类/scrapy框架.html">
+            
+                    
+                    scrapy框架
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../2框架类/brpc框架.html">
+            
+                <a href="../2框架类/brpc框架.html">
+            
+                    
+                    brpc框架
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../2框架类/IO多路复用.html">
+            
+                <a href="../2框架类/IO多路复用.html">
+            
+                    
+                    IO多路复用
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    第三章
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="排序算法.html">
+            
+                <a href="排序算法.html">
+            
+                    
+                    排序算法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.5.2" data-path="数据结构_树.html">
+            
+                <a href="数据结构_树.html">
+            
+                    
+                    数据结构_二叉树
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="数据结构_链表.html">
+            
+                <a href="数据结构_链表.html">
+            
+                    
+                    数据结构_链表
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="数据结构_图.html">
+            
+                <a href="数据结构_图.html">
+            
+                    
+                    数据结构_链表
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="正则表达式.html">
+            
+                <a href="正则表达式.html">
+            
+                    
+                    正则表达式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="动态规划.html">
+            
+                <a href="动态规划.html">
+            
+                    
+                    动态规划
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7" data-path="设计模式.html">
+            
+                <a href="设计模式.html">
+            
+                    
+                    设计模式
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../4工具类/">
+            
+                <a href="../4工具类/">
+            
+                    
+                    第四章
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../4工具类/vscode使用.html">
+            
+                <a href="../4工具类/vscode使用.html">
+            
+                    
+                    vscode使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../4工具类/markdown语法.html">
+            
+                <a href="../4工具类/markdown语法.html">
+            
+                    
+                    markdown语法
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../5其他/">
+            
+                <a href="../5其他/">
+            
+                    
+                    第五章
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../5其他/学习代码.html">
+            
+                <a href="../5其他/学习代码.html">
+            
+                    
+                    学习代码
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../5其他/学习网站.html">
+            
+                <a href="../5其他/学习网站.html">
+            
+                    
+                    学习网站
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >数据结构_二叉树</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <p>[TOC]</p>
+<h1 id="&#x4E8C;&#x53C9;&#x6811;">&#x4E8C;&#x53C9;&#x6811;</h1>
+<p><strong>&#x57FA;&#x672C;&#x601D;&#x60F3;</strong>&#xFF1A;&#x9012;&#x5F52;</p>
+<h1 id="&#x4E8C;&#x53C9;&#x6811;&#x904D;&#x5386;">&#x4E8C;&#x53C9;&#x6811;&#x904D;&#x5386;</h1>
+<ul>
+<li><p>&#x5148;&#x5E8F;&#xFF1A;&#x6839;-&#x5DE6;&#x5B50;&#x6811;-&#x53F3;&#x5B50;&#x6811;</p>
+</li>
+<li><p>&#x540E;&#x5E8F;&#xFF1A;&#x5DE6;&#x5B50;&#x6811;-&#x53F3;&#x5B50;&#x6811;-&#x6839;</p>
+</li>
+<li><p>&#x4E2D;&#x5E8F;&#xFF1A;&#x5DE6;&#x5B50;&#x6811;-&#x6839;-&#x53F3;&#x5B50;&#x6811;</p>
+</li>
+<li><p>&#x6811;&#x8282;&#x70B9;&#x7ED3;&#x6784;&#xFF1A;</p>
+<pre><code class="lang-c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span>
+
+<span class="hljs-keyword">typedef</span> <span class="hljs-keyword">struct</span> BINode
+{
+    <span class="hljs-keyword">char</span> ch;
+    <span class="hljs-keyword">struct</span> BINode * lchild;
+    <span class="hljs-keyword">struct</span> BINode * rchild;
+}BiNode;
+</code></pre>
+</li>
+<li><p>&#x9012;&#x5F52;&#x904D;&#x5386;&#xFF1A;</p>
+<pre><code class="lang-c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span>
+
+<span class="hljs-keyword">typedef</span> <span class="hljs-keyword">struct</span> BINode
+{
+
+    <span class="hljs-keyword">char</span> ch;
+    <span class="hljs-keyword">struct</span> BINode * lchild;
+    <span class="hljs-keyword">struct</span> BINode * rchild;
+
+}BiNode;
+
+<span class="hljs-comment">// &#x9012;&#x5F52; - &#x540E;&#x5E8F;&#x904D;&#x5386;&#x4E8C;&#x53C9;&#x6811;(&#x5148;&#x5E8F;&#x904D;&#x5386;&#x548C;&#x4E2D;&#x5E8F;&#x904D;&#x5386;&#x7C7B;&#x4F3C;&#x7684;)</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">postRecursion</span><span class="hljs-params">(BiNode *root)</span> </span>{
+    <span class="hljs-keyword">if</span>(root == <span class="hljs-literal">NULL</span>) {
+        <span class="hljs-keyword">return</span>;
+    }
+    <span class="hljs-comment">// &#x5148;&#x904D;&#x5386;&#x5DE6;&#x8282;&#x70B9;</span>
+    postRecursion(root-&gt;lchild);
+    <span class="hljs-comment">// &#x518D;&#x904D;&#x5386;&#x53F3;&#x8282;&#x70B9;</span>
+    postRecursion(root-&gt;rchild);
+    <span class="hljs-comment">// &#x518D;&#x904D;&#x5386;&#x6839;&#x8282;&#x70B9;</span>
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%c &quot;</span>, root-&gt;ch);
+
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">creatTree</span><span class="hljs-params">()</span> </span>{
+
+       <span class="hljs-comment">// &#x8BF4;&#x660E;&#xFF1A;&#x8FD9;&#x91CC;&#x521B;&#x5EFA;&#x6811;&#x7528;&#x7684;&#x662F;&#x9759;&#x6001;&#x5185;&#x5B58;&#x5206;&#x914D;&#xFF0C;&#x5B9E;&#x9645;&#x5E94;&#x7528;&#x4E2D;&#x53EF;&#x80FD;&#x66F4;&#x5E38;&#x89C1;&#x7684;&#x662F;&#x7528;&#x52A8;&#x6001;&#x5185;&#x5B58;&#x5206;&#x914D;malloc&#x3001;new</span>
+     BiNode nodeA = {<span class="hljs-string">&apos;A&apos;</span>, <span class="hljs-literal">NULL</span>, <span class="hljs-literal">NULL</span>};
+     BiNode nodeB = {<span class="hljs-string">&apos;B&apos;</span>, <span class="hljs-literal">NULL</span>, <span class="hljs-literal">NULL</span>};
+     BiNode nodeC = {<span class="hljs-string">&apos;C&apos;</span>, <span class="hljs-literal">NULL</span>, <span class="hljs-literal">NULL</span>};
+     BiNode nodeD = {<span class="hljs-string">&apos;D&apos;</span>, <span class="hljs-literal">NULL</span>, <span class="hljs-literal">NULL</span>};
+     BiNode nodeE = {<span class="hljs-string">&apos;E&apos;</span>, <span class="hljs-literal">NULL</span>, <span class="hljs-literal">NULL</span>};
+     BiNode nodeF = {<span class="hljs-string">&apos;F&apos;</span>, <span class="hljs-literal">NULL</span>, <span class="hljs-literal">NULL</span>};
+     BiNode nodeG = {<span class="hljs-string">&apos;G&apos;</span>, <span class="hljs-literal">NULL</span>, <span class="hljs-literal">NULL</span>};
+     BiNode nodeH = {<span class="hljs-string">&apos;H&apos;</span>, <span class="hljs-literal">NULL</span>, <span class="hljs-literal">NULL</span>};
+
+     nodeA.lchild = &amp;nodeB;
+     nodeA.rchild = &amp;nodeF;
+     nodeB.rchild = &amp;nodeC;
+     nodeC.lchild = &amp;nodeD;
+     nodeC.rchild = &amp;nodeE;
+     nodeF.rchild = &amp;nodeG;
+     nodeG.lchild = &amp;nodeH;
+
+     postRecursion(&amp;nodeA);  
+
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+
+    creatTree();
+    system(<span class="hljs-string">&quot;pause&quot;</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+
+}
+</code></pre>
+</li>
+</ul>
+<h1 id="&#x8BA1;&#x7B97;&#x53F6;&#x5B50;&#x8282;&#x70B9;&#x4E2A;&#x6570;">&#x8BA1;&#x7B97;&#x53F6;&#x5B50;&#x8282;&#x70B9;&#x4E2A;&#x6570;</h1>
+<pre><code class="lang-c++">  <span class="hljs-keyword">int</span> num=<span class="hljs-number">0</span>;
+  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">CaculateLeafNum</span><span class="hljs-params">(BiNode *root)</span> </span>{
+      <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">NULL</span>) {
+          <span class="hljs-keyword">return</span>;
+      }
+      <span class="hljs-keyword">if</span>(root-&gt;lchild == <span class="hljs-literal">NULL</span> &amp;&amp; root-&gt;rchild == <span class="hljs-literal">NULL</span>) {
+          num++;
+      }
+      <span class="hljs-comment">// &#x8BA1;&#x7B97;&#x5DE6;&#x5B50;&#x6811;&#x7684;&#x53F6;&#x5B50;&#x8282;&#x70B9;</span>
+      CaculateLeafNum(root-&gt;lchild);
+      <span class="hljs-comment">// &#x8BA1;&#x7B97;&#x53F3;&#x5B50;&#x6811;&#x7684;&#x53F6;&#x5B50;&#x8282;&#x70B9;</span>
+      CaculateLeafNum(root-&gt;rchild);
+  }
+</code></pre>
+<h1 id="&#x8BA1;&#x7B97;&#x4E8C;&#x53C9;&#x6811;&#x7684;&#x9AD8;&#x5EA6;">&#x8BA1;&#x7B97;&#x4E8C;&#x53C9;&#x6811;&#x7684;&#x9AD8;&#x5EA6;</h1>
+<pre><code class="lang-c++"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">Height</span><span class="hljs-params">(BiNode *root)</span> </span>{
+
+    <span class="hljs-keyword">if</span>(root == <span class="hljs-literal">NULL</span>) {
+        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    }
+
+    <span class="hljs-keyword">int</span> rheight = Height(root-&gt;lchild);
+    <span class="hljs-keyword">int</span> lheight = Height(root-&gt;rchild);
+
+    <span class="hljs-keyword">return</span> lheight &gt; rheight ? lheight + <span class="hljs-number">1</span> : rheight + <span class="hljs-number">1</span>;
+}
+</code></pre>
+<h1 id="&#x4E8C;&#x53C9;&#x6811;&#x7684;&#x62F7;&#x8D1D;&#x548C;&#x91CA;&#x653E;">&#x4E8C;&#x53C9;&#x6811;&#x7684;&#x62F7;&#x8D1D;&#x548C;&#x91CA;&#x653E;</h1>
+<pre><code class="lang-c++"><span class="hljs-function">BiNode *<span class="hljs-title">CopyBiTree</span><span class="hljs-params">(BiNode *root)</span> </span>{
+
+    <span class="hljs-keyword">if</span>(root == <span class="hljs-literal">NULL</span>) {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;
+    }
+    <span class="hljs-comment">// &#x62F7;&#x8D1D;&#x5DE6;&#x5B50;&#x6811;</span>
+    BiNode *newlchild = CopyBiTree(root-&gt;lchild);
+    <span class="hljs-comment">// &#x62F7;&#x8D1D;&#x53F3;&#x5B50;&#x6811;</span>
+    BiNode *newrchild = CopyBiTree(root-&gt;rchild);
+    <span class="hljs-comment">// &#x62F7;&#x8D1D;&#x5F53;&#x524D;&#x8282;&#x70B9;</span>
+    BiNode *newroot = (BiNode *)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(BiNode));
+    newroot-&gt;lchild = newlchild;
+    newroot-&gt;rchild = newrchild;
+    newroot-&gt;ch = root-&gt;ch;
+    <span class="hljs-keyword">return</span> newroot;
+
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">DestroyBiTree</span><span class="hljs-params">(BiNode *root)</span> </span>{
+
+    <span class="hljs-keyword">if</span>(root == <span class="hljs-literal">NULL</span>) {
+        <span class="hljs-keyword">return</span>;
+    }
+    <span class="hljs-comment">// &#x91CA;&#x653E;&#x5DE6;&#x5B50;&#x6811;</span>
+    DestroyBiTree(root-&gt;lchild);
+    <span class="hljs-comment">// &#x91CA;&#x653E;&#x53F3;&#x5B50;&#x6811;</span>
+    DestroyBiTree(root-&gt;rchild);
+    <span class="hljs-comment">// &#x91CA;&#x653E;&#x6839;&#x8282;&#x70B9;</span>
+    <span class="hljs-built_in">free</span>(root);
+
+}
+</code></pre>
+<h1 id="&#x904D;&#x5386;&#x6811;&#x7684;&#x5404;&#x6761;&#x8DEF;&#x5F84;">&#x904D;&#x5386;&#x6811;&#x7684;&#x5404;&#x6761;&#x8DEF;&#x5F84;</h1>
+<pre><code class="lang-c++"><span class="hljs-comment">// &#x5148;&#x6839;&#x904D;&#x5386;&#x6811;&#x7684;&#x5404;&#x8DEF;&#x5F84;</span>
+<span class="hljs-comment">// &#x5E94;&#x7528;&#xFF1A;&#x8BA1;&#x7B97;&#x5404;&#x8DEF;&#x5F84;&#x548C;&#x4E3A;&#x7ED9;&#x5B9A;sum&#x7684;&#x8DEF;&#x5F84;&#x3002;</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">allPath</span><span class="hljs-params">(BiNode *root, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; v)</span> </span>{
+    <span class="hljs-keyword">if</span> (!root) {
+        <span class="hljs-keyword">return</span>;
+    }
+    v.push_back(root-&gt;val);
+    <span class="hljs-keyword">if</span> (root-&gt;left == <span class="hljs-literal">NULL</span> &amp;&amp; root-&gt;right == <span class="hljs-literal">NULL</span>) {
+        <span class="hljs-comment">// &#x6253;&#x5370;&#x8DEF;&#x5F84;&#xFF0C;&#x540C;&#x65F6;&#x6E05;&#x7A7A;vector</span>
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> it = v.begin(); it != v.end(); it++) {
+            <span class="hljs-built_in">cout</span> &lt;&lt; *it &lt;&lt; <span class="hljs-string">&quot; &quot;</span>;
+        }
+        <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+    }
+    allPath(root-&gt;left, v);
+    allPath(root-&gt;right, v);
+    v.pop_back();     <span class="hljs-comment">// &#x904D;&#x5386;&#x5B8C;&#x8282;&#x70B9;&#x7684;&#x5DE6;&#x53F3;&#x5B50;&#x6811;&#xFF0C;&#x5F39;&#x51FA;&#xFF0C;&#x548C;push_back&#x547C;&#x5E94;&#xFF0C;&#x5F88;&#x5173;&#x952E;&#x3002;&#x3002;&#x3002;</span>
+}
+</code></pre>
+<h1 id="&#x4E8C;&#x53C9;&#x6811;&#x7684;&#x975E;&#x9012;&#x5F52;&#x904D;&#x5386;">&#x4E8C;&#x53C9;&#x6811;&#x7684;&#x975E;&#x9012;&#x5F52;&#x904D;&#x5386;</h1>
+<ul>
+<li><p>&#x5E7F;&#x5EA6;&#x4F18;&#x5148;&#x904D;&#x5386;BFS&#xFF08;&#x961F;&#x5217;&#x5B9E;&#x73B0;&#xFF09;</p>
+<p>&#x5E7F;&#x5EA6;&#x4F18;&#x5148;&#x904D;&#x5386;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x79F0;&#x4E3A;&#x5C42;&#x6B21;&#x4F18;&#x5148;&#x904D;&#x5386;&#xFF0C;&#x4ECE;&#x4E0A;&#x5230;&#x4E0B;&#xFF0C;&#x5148;&#x628A;&#x6BCF;&#x4E00;&#x5C42;&#x904D;&#x5386;&#x5B8C;&#x4E4B;&#x540E;&#x518D;&#x904D;&#x5386;&#x4E00;&#x4E0B;&#x4E00;&#x5C42;&#x3002;</p>
+</li>
+<li><p>&#x6DF1;&#x5EA6;&#x4F18;&#x5148;&#x904D;&#x5386;DFS&#xFF08;&#x6808;&#x5B9E;&#x73B0;&#xFF09;</p>
+<p>&#x6309;&#x7167;&#x4E00;&#x6761;&#x8DEF;&#x5F84;&#x8D70;&#x5230;&#x5E95;&#xFF0C;&#x518D;&#x56DE;&#x6EAF;&#xFF0C;&#x627E;&#x5230;&#x4E00;&#x4E2A;&#x672A;&#x904D;&#x5386;&#x7684;&#x90BB;&#x8282;&#x70B9;&#xFF0C;&#x7EE7;&#x7EED;&#x4E00;&#x76F4;&#x8D70;&#x5230;&#x5E95;&#x3002;</p>
+<p><strong>&#x7279;&#x522B;&#x8BF4;&#x660E;&#xFF1A;</strong>&#x7531;&#x4E8E;c++ STL&#x4E2D;&#x5B9E;&#x73B0;&#x4E86;&#x961F;&#x5217;&#x548C;&#x6808;&#xFF0C;&#x6240;&#x4EE5;&#x8FD9;&#x91CC;&#x7528;c++&#x5B9E;&#x73B0;&#xFF0C;&#x4EE5;&#x4E0B;&#x4EE3;&#x7801;&#x601D;&#x8DEF;&#x9002;&#x7528;&#x4E8E;&#x666E;&#x901A;&#x6811;&#x3002;</p>
+<p><strong>&#x4E8C;&#x53C9;&#x6811;&#x7684;&#x904D;&#x5386;&#x65B9;&#x5F0F;&#x5206;&#x4E3A;</strong>&#xFF1A;&#x5148;&#x5E8F;&#xFF0C;&#x540E;&#x5E8F;&#xFF0C;&#x4E2D;&#x5E8F;&#x3002;</p>
+<p><strong>&#x666E;&#x901A;&#x6811;&#x904D;&#x5386;&#x65B9;&#x5F0F;&#x5206;&#x4E3A;</strong>&#xFF1A;&#x6DF1;&#x5EA6;&#x4F18;&#x5148;&#x3001;&#x5E7F;&#x5EA6;&#x4F18;&#x5148;&#x3002;</p>
+<p>&#x4E8C;&#x53C9;&#x6811;&#x662F;&#x666E;&#x901A;&#x6811;&#x7684;&#x7279;&#x4F8B;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x7528;BFS/DFS&#x975E;&#x9012;&#x5F52;&#x65B9;&#x5F0F;&#x904D;&#x5386;&#x3002;&#x6DF1;&#x5EA6;&#x904D;&#x5386;&#x548C;&#x4E8C;&#x53C9;&#x6811;&#x7684;&#x5148;&#x6839;&#x904D;&#x5386;&#x57FA;&#x672C;&#x4E0A;&#x662F;&#x4E00;&#x6837;&#x7684;&#xFF0C;&#x53EA;&#x662F;&#x5148;&#x6839;&#x904D;&#x5386;&#x6709;&#x5DE6;&#x53F3;&#x4E4B;&#x5206;&#xFF08;&#x9488;&#x5BF9;&#x4E8C;&#x53C9;&#x6811;&#x7684;&#x672F;&#x8BED;&#xFF09;&#x3002;</p>
+<p>&#xFF08;&#x56FE;&#x7684;BFS/DFS&#x66F4;&#x590D;&#x6742;&#x4E9B;&#xFF0C;&#x9700;&#x8981;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x8BBF;&#x95EE;&#x6570;&#x7EC4;&#xFF0C;&#x6807;&#x8BC6;&#x5F53;&#x524D;&#x54EA;&#x4E9B;&#x5143;&#x7D20;&#x88AB;&#x8BBF;&#x95EE;&#x8FC7;&#xFF0C;&#x89C1;&#x76F8;&#x5173;&#x7B14;&#x8BB0;&#x3002;&#xFF09;</p>
+<pre><code class="lang-c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstdlib&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;queue&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stack&gt;</span></span>
+
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-comment">// &#x4E8C;&#x53C9;&#x6811;&#x8282;&#x70B9;&#x7ED3;&#x6784;</span>
+<span class="hljs-keyword">struct</span> BiNode
+{
+    <span class="hljs-keyword">char</span> ch;
+    BiNode* lchild;
+    BiNode* rchild;
+};
+
+<span class="hljs-comment">// &#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x8282;&#x70B9;</span>
+<span class="hljs-function">BiNode* <span class="hljs-title">createNode</span><span class="hljs-params">(<span class="hljs-keyword">char</span> data)</span> </span>{
+    BiNode* node = <span class="hljs-keyword">new</span> BiNode;
+    node-&gt;ch = data;
+    node-&gt;lchild = <span class="hljs-literal">NULL</span>;
+    node-&gt;rchild = <span class="hljs-literal">NULL</span>;
+    <span class="hljs-keyword">return</span> node;
+}
+
+<span class="hljs-comment">// &#x521B;&#x5EFA;&#x4E00;&#x68F5;&#x6811;</span>
+<span class="hljs-function">BiNode *<span class="hljs-title">creatTree</span><span class="hljs-params">()</span> </span>{
+
+     BiNode *nodeA = createNode(<span class="hljs-string">&apos;A&apos;</span>);
+     BiNode *nodeB = createNode(<span class="hljs-string">&apos;B&apos;</span>);
+     BiNode *nodeC = createNode(<span class="hljs-string">&apos;C&apos;</span>);
+     BiNode *nodeD = createNode(<span class="hljs-string">&apos;D&apos;</span>);
+     BiNode *nodeE = createNode(<span class="hljs-string">&apos;E&apos;</span>);
+     BiNode *nodeF = createNode(<span class="hljs-string">&apos;F&apos;</span>);
+     BiNode *nodeG = createNode(<span class="hljs-string">&apos;G&apos;</span>);
+     BiNode *nodeH = createNode(<span class="hljs-string">&apos;H&apos;</span>);
+
+     nodeA-&gt;lchild = nodeB;
+     nodeA-&gt;rchild = nodeF;
+     nodeB-&gt;rchild = nodeC;
+     nodeC-&gt;lchild = nodeD;
+     nodeC-&gt;rchild = nodeE;
+     nodeF-&gt;rchild = nodeG;
+     nodeG-&gt;lchild = nodeH;
+
+     <span class="hljs-keyword">return</span> nodeA;
+}
+
+<span class="hljs-comment">// &#x5E7F;&#x5EA6;&#x4F18;&#x5148;&#x904D;&#x5386;(Breadth-FirstSearch)</span>
+<span class="hljs-comment">/*
+&#x57FA;&#x672C;&#x601D;&#x8DEF;&#xFF1A;
+&#x7236;&#x8282;&#x70B9;&#x5165;&#x961F;&#x5217;&#xFF0C;
+&#x7236;&#x8282;&#x70B9;&#xFF08;&#x961F;&#x9996;&#xFF09;&#x51FA;&#x961F;&#x5217;&#xFF0C;&#x540C;&#x65F6;&#x5C06;&#x5176;&#x5B50;&#x8282;&#x70B9;&#xFF08;&#x961F;&#x5C3E;&#xFF09;&#x5165;&#x961F;&#x5217;&#xFF0C;
+&#x4F9D;&#x6B21;&#x5FAA;&#x73AF;&#x76F4;&#x5230;&#x961F;&#x5217;&#x4E3A;&#x7A7A;&#x3002;
+*/</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">BFS</span><span class="hljs-params">(BiNode *root)</span> </span>{
+    <span class="hljs-built_in">queue</span>&lt;BiNode *&gt; myQueue;
+
+    <span class="hljs-keyword">if</span> (root != <span class="hljs-literal">NULL</span>) {
+        myQueue.push(root);
+    }
+    <span class="hljs-keyword">while</span> (!myQueue.empty()) {
+        BiNode *node = myQueue.front();
+        myQueue.pop();
+        <span class="hljs-built_in">cout</span> &lt;&lt; node-&gt;ch &lt;&lt; <span class="hljs-string">&quot; &quot;</span>;
+        <span class="hljs-keyword">if</span> (node-&gt;lchild) { myQueue.push(node-&gt;lchild); }
+        <span class="hljs-keyword">if</span> (node-&gt;rchild) { myQueue.push(node-&gt;rchild); }
+    } 
+}
+
+<span class="hljs-comment">// &#x6DF1;&#x5EA6;&#x4F18;&#x5148;&#x904D;&#x5386;</span>
+<span class="hljs-comment">/*
+&#x57FA;&#x672C;&#x601D;&#x8DEF;&#xFF1A;
+&#x7236;&#x8282;&#x70B9;&#x538B;&#x6808;&#xFF0C;
+&#x7236;&#x8282;&#x70B9;&#x51FA;&#x6808;&#xFF0C;&#x540C;&#x65F6;&#x5C06;&#x5176;&#x5B50;&#x8282;&#x70B9;&#x538B;&#x6808;&#xFF0C;&#xFF08;&#x4E0B;&#x6B21;&#x518D;&#x5F39;&#x51FA;&#x6808;&#x7684;&#x4E00;&#x5B9A;&#x662F;&#x76F8;&#x90BB;&#x7684;&#x5B50;&#x8282;&#x70B9;, &#x4E00;&#x6761;&#x8DEF;&#x8D70;&#x5230;&#x9ED1;&#xFF09;
+&#x4F9D;&#x6B21;&#x5FAA;&#x73AF;&#x76F4;&#x5230;&#x6808;&#x4E3A;&#x7A7A;&#x3002;
+*/</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">DFS</span><span class="hljs-params">(BiNode *root)</span> </span>{
+    <span class="hljs-built_in">stack</span>&lt;BiNode *&gt; myStack;
+
+    <span class="hljs-keyword">if</span> (root != <span class="hljs-literal">NULL</span>) {
+        myStack.push(root);
+    }
+    <span class="hljs-keyword">while</span> (!myStack.empty()) {
+        BiNode *node = myStack.top();
+        myStack.pop();
+        <span class="hljs-built_in">cout</span> &lt;&lt; node-&gt;ch &lt;&lt; <span class="hljs-string">&quot; &quot;</span>;
+        <span class="hljs-keyword">if</span> (node-&gt;lchild) { myStack.push(node-&gt;lchild); }
+        <span class="hljs-keyword">if</span> (node-&gt;rchild) { myStack.push(node-&gt;rchild); }
+    }
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+    BiNode *root = creatTree();
+      BFS(root); <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+    DFS(root); <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+    system(<span class="hljs-string">&quot;pause&quot;</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+</li>
+</ul>
+<h1 id="&#x5982;&#x4F55;&#x786E;&#x5B9A;&#x4E00;&#x68F5;&#x6811;">&#x5982;&#x4F55;&#x786E;&#x5B9A;&#x4E00;&#x68F5;&#x6811;</h1>
+<ul>
+<li><p>&#x5982;&#x4F55;&#x786E;&#x5B9A;&#x4E00;&#x68F5;&#x6811;</p>
+<ul>
+<li>&#x4E2D;&#x5E8F;+&#x5148;&#x5E8F; &#x53EF;&#x4EE5;&#x786E;&#x5B9A;&#x4E00;&#x68F5;&#x6811;</li>
+<li>&#x4E2D;&#x5E8F;+&#x540E;&#x5E8F; &#x53EF;&#x4EE5;&#x786E;&#x5B9A;&#x4E00;&#x68F5;&#x6811;</li>
+</ul>
+<p>&#x6280;&#x5DE7;&#xFF1A;&#x5FC5;&#x987B;&#x5E26;&#x4E2D;&#x5E8F;&#x904D;&#x5386;&#xFF01;&#xFF01;&#xFF01;</p>
+</li>
+<li><p>&#x6839;&#x636E;&#x5148;&#x5E8F;&#x904D;&#x5386;&#x548C;&#x4E2D;&#x5E8F;&#x904D;&#x5386;&#x786E;&#x5B9A;&#x4E00;&#x68F5;&#x6811;&#xFF1F;
+&#x5148;&#x5E8F;&#xFF1A;ADEBCF
+&#x4E2D;&#x5E8F;&#xFF1A;DEACFB
+&#x601D;&#x8DEF;&#xFF1A;
+&#x6839;&#x636E;&#x5148;&#x5E8F;&#x904D;&#x5386;&#x53EF;&#x77E5;&#x6839;&#x8282;&#x70B9;A,&#x6839;&#x636E;&#x4E2D;&#x5E8F;&#x7ED3;&#x679C;&#xFF0C;&#x53EF;&#x77E5;&#x6839;&#x7684;&#x5DE6;&#x5B50;&#x6811;DE&#xFF0C;&#x53F3;&#x5B50;&#x6811;CFB&#xFF1B;
+&#x5DE6;&#x5B50;&#x6811;&#xFF1A;&#x5148;&#x5E8F;&#x662F;DE,&#x4E2D;&#x5E8F;&#x662F;DE =&gt;E&#x662F;D&#x7684;&#x53F3;&#x5B50;&#x6811;&#xFF1B;
+&#x53F3;&#x5B50;&#x6811;&#xFF1A;&#x5148;&#x5E8F;BCF&#xFF0C;&#x4E2D;&#x5E8F;CFB =&gt;B&#x662F;&#x6839;&#x8282;&#x70B9;&#xFF0C;F&#x662F;C&#x7684;&#x53F3;&#x8FB9;&#x8282;&#x70B9;
+==&gt; &#x540E;&#x5E8F;&#xFF1A;EDFCBA</p>
+</li>
+</ul>
+<h1 id="&#x5982;&#x4F55;&#x521B;&#x5EFA;&#x4E00;&#x68F5;&#x6811;">&#x5982;&#x4F55;&#x521B;&#x5EFA;&#x4E00;&#x68F5;&#x6811;</h1>
+<pre><code class="lang-c++"><span class="hljs-comment">// &#x5148;&#x5E8F;&#x521B;&#x5EFA;&#x4E00;&#x68F5;&#x6811;&#xFF0C;ABD##E##C##&#xFF0C;#&#x4EE3;&#x8868;&#x7A7A;&#x8282;&#x70B9;</span>
+<span class="hljs-function">Bitree <span class="hljs-title">CreateBitree</span><span class="hljs-params">(Bitree T)</span><span class="hljs-comment">//&#x5148;&#x5E8F;&#x521B;&#x5EFA;&#x4E00;&#x9897;&#x4E8C;&#x53C9;&#x6811;</span>
+</span>{
+  <span class="hljs-keyword">char</span>  e;
+  scanf_s(<span class="hljs-string">&quot;%c&quot;</span>, &amp;e);
+  fflush(<span class="hljs-built_in">stdin</span>);
+
+  <span class="hljs-keyword">if</span> (e != <span class="hljs-string">&apos;#&apos;</span>){
+    <span class="hljs-comment">//&#x5224;&#x65AD;&#x5F53;&#x524D;&#x8F93;&#x5165;&#x7684;&#x5B57;&#x7B26;</span>
+    T = (Bitree)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(Tree)); <span class="hljs-comment">//&#x5206;&#x914D;&#x5B58;&#x8D2E;&#x7A7A;&#x95F4;</span>
+    T-&gt;data = e;
+    T-&gt;lchild = <span class="hljs-literal">NULL</span>;
+    T-&gt;rchild = <span class="hljs-literal">NULL</span>;
+    T-&gt;lchild = CreateBitree(T-&gt;lchild); <span class="hljs-comment">//&#x9012;&#x5F52;&#x521B;&#x5EFA;&#x5DE6;&#x5B69;&#x5B50;&#x8282;&#x70B9;&#x503C;</span>
+    T-&gt;rchild = CreateBitree(T-&gt;rchild);   <span class="hljs-comment">//&#x9012;&#x5F52;&#x521B;&#x5EFA;&#x53F3;&#x5B69;&#x5B50;&#x8282;&#x70B9;&#x503C;</span>
+ }
+
+ <span class="hljs-keyword">return</span> T;
+}
+</code></pre>
+<h1 id="&#x7EBF;&#x6BB5;&#x6811;">&#x7EBF;&#x6BB5;&#x6811;</h1>
+<p>&#x3010;&#x9898;&#x76EE;&#x3011;&#x7ED9;&#x5B9A;&#x4E00;&#x4E2A;&#x6570;&#x7EC4;arr&#xFF0C;&#x6570;&#x7EC4;&#x53EF;&#x80FD;&#x975E;&#x5E38;&#x5927;&#x3002;&#x5728;&#x7A0B;&#x5E8F;&#x8FD0;&#x884C;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x4F60;&#x53EF;&#x80FD;&#x8981;&#x9891;&#x7E41;&#x7684;&#x505A;query&#x548C;update&#x64CD;&#x4F5C;&#xFF1A; query(arr, L, R) &#x8868;&#x793A;&#x8BA1;&#x7B97;&#x6570;&#x7EC4;arr&#x4E2D;&#xFF0C;&#x4ECE;&#x4E0B;&#x6807;L&#x5230;&#x4E0B;&#x6807;R&#x4E4B;&#x95F4;&#x7684;&#x6240;&#x6709;&#x6570;&#x5B57;&#x7684;&#x548C;&#x3002; update(arr, i, val) &#x8868;&#x793A;&#x8981;&#x628A;arr[i]&#x4E2D;&#x7684;&#x6570;&#x5B57;&#x6539;&#x6210;val&#x3002;</p>
+<p>&#x4E00;&#x822C;&#xFF0C;&#x6811;&#x7684;&#x64CD;&#x4F5C;&#x65B9;&#x5F0F;&#xFF1A;&#x9012;&#x5F52;&#xFF1B;&#x6811;&#x7684;&#x65F6;&#x95F4;&#x590D;&#x6742;&#x5EA6;&#xFF1A;o(logN)&#x3002;</p>
+<p>&#x5B9A;&#x4E49;&#x6570;&#x7EC4;&#xFF1A;arr[5] = [1, 3, 5, 7, 9, 11]   </p>
+<p><img src="../images/tree/segment_tree.jpg" height="300" width="450"></p>
+<pre><code class="lang-c"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;assert.h&gt;</span></span>
+
+<span class="hljs-comment">// &#x521B;&#x5EFA;&#x7EBF;&#x6BB5;&#x6811;</span>
+<span class="hljs-comment">// tree[] &#x7EBF;&#x6BB5;&#x6811;&#xFF0C;&#x9664;&#x90E8;&#x5206;&#x53F6;&#x5B50;&#x8282;&#x70B9;&#x5916;&#xFF0C;&#x53EF;&#x8BA4;&#x4E3A;&#x662F;&#x6EE1;&#x4E8C;&#x53C9;&#x6811;&#xFF0C;&#x53EF;&#x4EE5;&#x7528;&#x6570;&#x7EC4;&#x8868;&#x793A;</span>
+<span class="hljs-comment">// node &#x7EBF;&#x6BB5;&#x6811;&#x7684;&#x8282;&#x70B9;index</span>
+<span class="hljs-comment">// arr[] start/end  &#x7EBF;&#x6BB5;&#x6811;&#x8282;&#x70B9;node&#x5BF9;&#x5E94;&#x7684;&#x7EDF;&#x8BA1;&#x533A;&#x95F4;</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">build_tree</span><span class="hljs-params">(<span class="hljs-keyword">int</span> arr[], <span class="hljs-keyword">int</span> tree[], <span class="hljs-keyword">int</span> node, <span class="hljs-keyword">int</span> start, <span class="hljs-keyword">int</span> end)</span> </span>{
+    <span class="hljs-keyword">if</span> (start == end) {                  <span class="hljs-comment">// &#x9012;&#x5F52;&#x51FA;&#x53E3;</span>
+        tree[node] = arr[start];
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">int</span> mid = (start + end) / <span class="hljs-number">2</span>;
+        <span class="hljs-keyword">int</span> left_node = <span class="hljs-number">2</span> * node + <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">int</span> right_node = <span class="hljs-number">2</span> * node + <span class="hljs-number">2</span>; <span class="hljs-comment">// &#x6EE1;&#x4E8C;&#x53C9;&#x6811;&#x7528;&#x6570;&#x7EC4;&#x8868;&#x793A;&#xFF0C;&#x8BA1;&#x7B97;&#x8282;&#x70B9;node&#x7684;&#x5DE6;&#x53F3;&#x8282;&#x70B9;</span>
+
+        <span class="hljs-comment">// &#x6839;&#x636E;&#x6570;&#x7EC4;&#x533A;&#x95F4;&#xFF0C;&#x9012;&#x5F52;&#x521B;&#x5EFA;&#x5DE6;&#x53F3;&#x5B50;&#x6811;</span>
+        build_tree(arr, tree, left_node, start, mid);
+        build_tree(arr, tree, right_node, mid+<span class="hljs-number">1</span>, end);
+        tree[node] = tree[left_node] + tree[right_node];
+    }
+}
+
+<span class="hljs-comment">// &#x8BA1;&#x7B97;&#x4EFB;&#x610F;&#x533A;&#x95F4;&#x4E4B;&#x548C;</span>
+<span class="hljs-comment">// arr[start, end]  ==&gt; tree[node]</span>
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">query_tree</span><span class="hljs-params">(<span class="hljs-keyword">int</span> arr[], <span class="hljs-keyword">int</span> tree[], <span class="hljs-keyword">int</span> node, <span class="hljs-keyword">int</span> start, <span class="hljs-keyword">int</span> end, <span class="hljs-keyword">int</span> L, <span class="hljs-keyword">int</span> R)</span> </span>{
+    <span class="hljs-keyword">if</span> (R &lt; start || L &gt; end) {   <span class="hljs-comment">// &#x4E0D;&#x5728;&#x533A;&#x95F4;&#x5185;</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (L &lt;= start &amp;&amp;  R &gt;= end) {    <span class="hljs-comment">// &#x533A;&#x95F4;&#x8986;&#x76D6;&#x4E86;[L, R]</span>
+        <span class="hljs-keyword">return</span> tree[node];
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-comment">// &#x9012;&#x5F52;&#x8BA1;&#x7B97;&#x5DE6;&#x53F3;&#x5B50;&#x6811;&#x5728;[L, R]&#x533A;&#x95F4;&#x4E0A;&#x7684;&#x7D2F;&#x8BA1;&#x548C;</span>
+        <span class="hljs-keyword">int</span> mid = (start + end) / <span class="hljs-number">2</span>;
+        <span class="hljs-keyword">int</span> left_node = <span class="hljs-number">2</span> * node + <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">int</span> right_node = <span class="hljs-number">2</span> * node + <span class="hljs-number">2</span>;
+        <span class="hljs-keyword">int</span> sum_left = query_tree(arr, tree, left_node, start, mid, L, R);
+        <span class="hljs-keyword">int</span> sum_right = query_tree(arr, tree, right_node, mid+<span class="hljs-number">1</span>, end, L, R);
+        <span class="hljs-keyword">return</span> sum_left + sum_right;
+    }
+}
+
+<span class="hljs-comment">// &#x4FEE;&#x6539;&#x6570;&#x7EC4;&#x4E2D;&#x4E0B;&#x6807;&#x4E3A;index&#x7684;&#x503C;</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">update_tree</span><span class="hljs-params">(<span class="hljs-keyword">int</span> arr[], <span class="hljs-keyword">int</span> tree[], <span class="hljs-keyword">int</span> node, <span class="hljs-keyword">int</span> start, <span class="hljs-keyword">int</span> end, <span class="hljs-keyword">int</span> idx, <span class="hljs-keyword">int</span> val)</span> </span>{
+    assert(idx &gt;= start &amp;&amp; idx &lt;= end);
+    <span class="hljs-keyword">if</span> (start == end &amp;&amp; start == idx) {    <span class="hljs-comment">// &#x805A;&#x7126;&#x5230;&#x4E86;&#x6307;&#x5B9A;&#x70B9; </span>
+        arr[idx] = val;
+        tree[node] = val;
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">int</span> mid = (start + end) / <span class="hljs-number">2</span>;
+        <span class="hljs-keyword">int</span> left_node = <span class="hljs-number">2</span> * node + <span class="hljs-number">1</span>;
+        <span class="hljs-keyword">int</span> right_node = <span class="hljs-number">2</span> * node + <span class="hljs-number">2</span>;
+        <span class="hljs-comment">// &#x9012;&#x5F52;&#x4FEE;&#x6539;&#x5DE6;&#x5B50;&#x6811;&#x6216;&#x8005;&#x53F3;&#x5B50;&#x6811;&#xFF0C;&#x7136;&#x540E;&#x5F53;&#x524D;&#x6839;&#x8282;&#x70B9;=&#x5DE6;&#x548C;+&#x53F3;&#x548C;</span>
+        <span class="hljs-keyword">if</span> (idx &gt;= start &amp;&amp; idx &lt;= mid) {
+            update_tree(arr, tree, left_node, start, mid, idx, val);
+        } <span class="hljs-keyword">else</span> {
+            update_tree(arr, tree, right_node, mid+<span class="hljs-number">1</span>, end, idx, val);
+        }
+        tree[node] = tree[left_node] + tree[right_node];
+    }
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> 
+</span>{
+    <span class="hljs-keyword">int</span> arr[] = {<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">5</span>, <span class="hljs-number">7</span>, <span class="hljs-number">9</span>, <span class="hljs-number">11</span>};
+    <span class="hljs-keyword">int</span> size = <span class="hljs-number">6</span>;
+    <span class="hljs-keyword">int</span> tree[<span class="hljs-number">1000</span>] = {<span class="hljs-number">0</span>};
+    build_tree(arr, tree, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, size<span class="hljs-number">-1</span>); 
+
+    <span class="hljs-keyword">int</span> sum = query_tree(arr, tree, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, size<span class="hljs-number">-1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">4</span>);
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;sum = %d\n&quot;</span>, sum);
+
+    update_tree(arr, tree, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, size<span class="hljs-number">-1</span>, <span class="hljs-number">4</span>, <span class="hljs-number">6</span>);
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">15</span>; i++) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;tree[%d]=%d\n&quot;</span>, i, tree[i]);
+    }
+
+    system(<span class="hljs-string">&quot;pause&quot;</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<p>&#x5176;&#x4ED6;&#x95EE;&#x9898;&#xFF1A;</p>
+<p>&#x4E8C;&#x53C9;&#x6811;&#x539F;&#x5730;&#x8F6C;&#x94FE;&#x8868;&#xFF1A;<a href="https://www.jianshu.com/p/ddc1b5367a96" target="_blank">https://www.jianshu.com/p/ddc1b5367a96</a></p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="排序算法.html" class="navigation navigation-prev " aria-label="Previous page: 排序算法">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="数据结构_链表.html" class="navigation navigation-next " aria-label="Next page: 数据结构_链表">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"数据结构_二叉树","level":"1.5.2","depth":2,"next":{"title":"数据结构_链表","level":"1.5.3","depth":2,"path":"3算法类/数据结构_链表.md","ref":"./3算法类/数据结构_链表.md","articles":[]},"previous":{"title":"排序算法","level":"1.5.1","depth":2,"path":"3算法类/排序算法.md","ref":"./3算法类/排序算法.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"3算法类/数据结构_树.md","mtime":"2019-12-11T06:06:11.269Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-12-23T07:08:47.255Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

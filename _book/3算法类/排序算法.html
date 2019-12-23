@@ -1,0 +1,1246 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>排序算法 · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="数据结构_树.html" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    学习笔记
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../1语言类/">
+            
+                <a href="../1语言类/">
+            
+                    
+                    第一章
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../1语言类/c++11新特性.html">
+            
+                <a href="../1语言类/c++11新特性.html">
+            
+                    
+                    c++11新特性
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../1语言类/STL.html">
+            
+                <a href="../1语言类/STL.html">
+            
+                    
+                    STL标准模板库
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.3" data-path="../1语言类/python语言.html">
+            
+                <a href="../1语言类/python语言.html">
+            
+                    
+                    python语言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.4" data-path="../1语言类/shell脚本.html">
+            
+                <a href="../1语言类/shell脚本.html">
+            
+                    
+                    shell脚本
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.5" data-path="../1语言类/libc函数库.html">
+            
+                <a href="../1语言类/libc函数库.html">
+            
+                    
+                    libc函数库
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.6" data-path="../1语言类/R语言.html">
+            
+                <a href="../1语言类/R语言.html">
+            
+                    
+                    R语言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.7" data-path="../1语言类/mysql及索引优化.html">
+            
+                <a href="../1语言类/mysql及索引优化.html">
+            
+                    
+                    mysql及索引优化
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../2框架类/">
+            
+                <a href="../2框架类/">
+            
+                    
+                    第二章
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.4.1" data-path="../2框架类/flask框架.html">
+            
+                <a href="../2框架类/flask框架.html">
+            
+                    
+                    flask框架
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.2" data-path="../2框架类/scrapy框架.html">
+            
+                <a href="../2框架类/scrapy框架.html">
+            
+                    
+                    scrapy框架
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.3" data-path="../2框架类/brpc框架.html">
+            
+                <a href="../2框架类/brpc框架.html">
+            
+                    
+                    brpc框架
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4.4" data-path="../2框架类/IO多路复用.html">
+            
+                <a href="../2框架类/IO多路复用.html">
+            
+                    
+                    IO多路复用
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    第三章
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter active" data-level="1.5.1" data-path="排序算法.html">
+            
+                <a href="排序算法.html">
+            
+                    
+                    排序算法
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.2" data-path="数据结构_树.html">
+            
+                <a href="数据结构_树.html">
+            
+                    
+                    数据结构_二叉树
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.3" data-path="数据结构_链表.html">
+            
+                <a href="数据结构_链表.html">
+            
+                    
+                    数据结构_链表
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.4" data-path="数据结构_图.html">
+            
+                <a href="数据结构_图.html">
+            
+                    
+                    数据结构_链表
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.5" data-path="正则表达式.html">
+            
+                <a href="正则表达式.html">
+            
+                    
+                    正则表达式
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.6" data-path="动态规划.html">
+            
+                <a href="动态规划.html">
+            
+                    
+                    动态规划
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5.7" data-path="设计模式.html">
+            
+                <a href="设计模式.html">
+            
+                    
+                    设计模式
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../4工具类/">
+            
+                <a href="../4工具类/">
+            
+                    
+                    第四章
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.6.1" data-path="../4工具类/vscode使用.html">
+            
+                <a href="../4工具类/vscode使用.html">
+            
+                    
+                    vscode使用
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6.2" data-path="../4工具类/markdown语法.html">
+            
+                <a href="../4工具类/markdown语法.html">
+            
+                    
+                    markdown语法
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../5其他/">
+            
+                <a href="../5其他/">
+            
+                    
+                    第五章
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../5其他/学习代码.html">
+            
+                <a href="../5其他/学习代码.html">
+            
+                    
+                    学习代码
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../5其他/学习网站.html">
+            
+                <a href="../5其他/学习网站.html">
+            
+                    
+                    学习网站
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >排序算法</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <p>[TOC]</p>
+<h1 id="&#x6392;&#x5E8F;&#x7B97;&#x6CD5;">&#x6392;&#x5E8F;&#x7B97;&#x6CD5;</h1>
+<ul>
+<li><p><strong>&#x6392;&#x5E8F;&#x5F52;&#x7EB3;</strong></p>
+<p>| &#x6392;&#x5E8F;                     |   &#x65F6;&#x95F4;&#x590D;&#x6742;&#x5EA6; |              &#x7A7A;&#x95F4;&#x590D;&#x6742;&#x5EA6; | &#x7A33;&#x5B9A;&#x6027;     |
+| :----------------------- | -----------: | ----------------------: | ---------- |
+| &#x5192;&#x6CE1;&#x6392;&#x5E8F;                 |       o(n^2) |                    o(1) |            |
+| &#x9009;&#x62E9;&#x6392;&#x5E8F;                 |       o(n^2) |                    o(1) | <strong>&#x4E0D;&#x7A33;&#x5B9A;</strong> |
+| &#x63D2;&#x5165;&#x6392;&#x5E8F;                 |       o(n^2) |                    o(1) |            |
+| &#x5E0C;&#x5C14;&#xFF08;&#x53D8;&#x6B65;&#x957F;&#x7684;&#x63D2;&#x5165;&#x6392;&#x5E8F;&#xFF09; | o(n^(1.3-2)) |                    o(1) | <strong>&#x4E0D;&#x7A33;&#x5B9A;</strong> |
+| &#x5FEB;&#x901F;&#x6392;&#x5E8F;                 |     o(nlogn) |           o(n)~o(nlogn) | <strong>&#x4E0D;&#x7A33;&#x5B9A;</strong> |
+| &#x5806;&#x6392;&#x5E8F;                   |     o(nlogn) |                    o(1) | <strong>&#x4E0D;&#x7A33;&#x5B9A;</strong> |
+| &#x5F52;&#x5E76;&#x6392;&#x5E8F;                 |     o(nlogn) |                    o(n) |            |
+| &#x57FA;&#x6570;                     |         o(n) | o(M)  (M&#x4E3A;&#x9009;&#x62E9;&#x6876;&#x7684;&#x6570;&#x91CF;) |            |
+| &#x8BA1;&#x6570;                     |         o(n) | o(M)  (M&#x4E3A;&#x9009;&#x62E9;&#x6876;&#x7684;&#x6570;&#x91CF;) |            |
+| &#x6876;                       |         o(n) | o(M)  (M&#x4E3A;&#x9009;&#x62E9;&#x6876;&#x7684;&#x6570;&#x91CF;) |            |</p>
+</li>
+</ul>
+<ul>
+<li><p><strong>&#x5C0F;&#x7ED3;</strong></p>
+<ol>
+<li><p>&#x53EA;&#x8981;&#x662F;&#x987A;&#x5E8F;&#x7684;&#x64CD;&#x4F5C;&#x5143;&#x7D20;&#xFF0C;&#x79FB;&#x52A8;&#x548C;&#x5206;&#x914D;&#x6536;&#x96C6;&#x7B49;&#xFF0C;&#x76F8;&#x540C;&#x5143;&#x7D20;&#x7684;&#x76F8;&#x5BF9;&#x4F4D;&#x7F6E;&#x4E0D;&#x53D8;&#xFF0C;&#x6392;&#x5E8F;&#x5C31;&#x662F;&#x7A33;&#x5B9A;&#x7684;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x6D89;&#x53CA;<strong>&#x8DF3;&#x8DC3;&#x5F0F;&#x4EA4;&#x6362;</strong>&#xFF0C;&#x6392;&#x5E8F;&#x5C31;&#x4E0D;&#x7A33;&#x5B9A;&#xFF0C;&#x5982;&#xFF1A;&#x5806;&#x3001;&#x5FEB;&#x6392;&#x3001;&#x5E0C;&#x5C14;&#x3002;</p>
+</li>
+<li><p>&#x4E09;&#x79CD;&#x7B80;&#x5355;&#x7684;&#x6392;&#x5E8F;&#xFF0C;&#x65F6;&#x95F4;&#x590D;&#x6742;&#x5EA6;&#x6700;&#x9AD8;o(n^2)&#xFF0C;&#x7A7A;&#x95F4;&#x590D;&#x6742;&#x5EA6;&#x6700;&#x4F4E;o(1)&#x3002;</p>
+<p>&#x5192;&#x6CE1;&#x6392;&#x5E8F;&#xFF1A;&#x76F8;&#x90BB;&#x7684;&#x4E24;&#x4E24;&#x6BD4;&#x8F83;&#xFF0C;&#x6BCF;&#x8F6E;&#x5192;&#x6CE1;&#x4F1A;&#x4F7F;&#x6700;&#x5927;&#x7684;&#x5143;&#x7D20;&#x6C89;&#x5E95;&#x3002;</p>
+<p>&#x9009;&#x62E9;&#x6392;&#x5E8F;&#xFF1A;&#x6BCF;&#x6B21;&#x4ECE;&#x540E;&#x8FB9;&#x7684;n&#x4E2A;&#x5143;&#x7D20;&#x9009;&#x62E9;&#x4E00;&#x4E2A;&#x6700;&#x5C0F;&#x7684;&#x653E;&#x5728;&#x524D;&#x8FB9;&#xFF08;&#x6700;&#x7B80;&#x5355;&#x76F4;&#x89C2;&#xFF09;&#x3002;</p>
+<p>&#x63D2;&#x5165;&#x6392;&#x5E8F;&#xFF1A;&#x4ECE;&#x7B2C;2&#x4E2A;&#x5143;&#x7D20;&#x5F00;&#x59CB;&#xFF0C;&#x4ECE;&#x524D;&#x8FB9;&#x5DF2;&#x6392;&#x5E8F;&#x5217;&#x4E2D;&#x627E;&#x5408;&#x9002;&#x7684;&#x4F4D;&#x7F6E;&#xFF0C;&#x63D2;&#x5165;&#x5E76;&#x79FB;&#x52A8;&#x5176;&#x4ED6;&#x5143;&#x7D20;&#x3002;</p>
+</li>
+<li><p>&#x5DE5;&#x7A0B;&#x4E0A;&#x90FD;&#x91C7;&#x7528;&#x591A;&#x79CD;&#x6392;&#x5E8F;&#x7B97;&#x6CD5;&#x76F8;&#x7ED3;&#x5408;&#x7684;&#x65B9;&#x5F0F;&#x5B9E;&#x73B0;&#x3002;</p>
+<p>STL&#x4E2D;&#x7684;sort&#xFF0C;&#x5BF9;<strong>&#x666E;&#x901A;&#x5FEB;&#x901F;&#x6392;&#x5E8F;</strong>&#x8FDB;&#x884C;&#x4E86;&#x4F18;&#x5316;&#xFF0C;&#x540C;&#x65F6;&#x7ED3;&#x5408;&#x4E86;<strong>&#x63D2;&#x5165;&#x6392;&#x5E8F;</strong>&#x548C;<strong>&#x5806;&#x6392;&#x5E8F;</strong>&#x3002;&#x5F53;&#x6570;&#x636E;&#x91CF;&#x8F83;&#x5927;&#x65F6;&#x91C7;&#x7528;&#x5FEB;&#x901F;&#x6392;&#x5E8F;&#xFF0C;&#x5206;&#x6BB5;&#x9012;&#x5F52;&#x3002;&#x4E00;&#x65E6;&#x5206;&#x6BB5;&#x540E;&#x7684;&#x6570;&#x636E;&#x91CF;&#x5C0F;&#x4E8E;&#x67D0;&#x4E2A;&#x9600;&#x503C;&#xFF0C;&#x4E3A;&#x907F;&#x514D;&#x9012;&#x5F52;&#x8C03;&#x7528;&#x5E26;&#x6765;&#x8FC7;&#x5927;&#x7684;&#x989D;&#x5916;&#x8D1F;&#x8377;&#xFF0C;&#x4FBF;&#x4F1A;&#x6539;&#x7528;&#x63D2;&#x5165;&#x6392;&#x5E8F;&#x3002;&#x800C;&#x5982;&#x679C;&#x9012;&#x5F52;&#x5C42;&#x6B21;&#x8FC7;&#x6DF1;&#xFF0C;&#x6709;&#x51FA;&#x73B0;&#x6700;&#x574F;&#x60C5;&#x51B5;&#x7684;&#x503E;&#x5411;&#xFF0C;&#x8FD8;&#x4F1A;&#x6539;&#x7528;&#x5806;&#x6392;&#x5E8F;&#x3002;</p>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="&#x6D4B;&#x8BD5;&#x51FD;&#x6570;&#x6846;&#x67B6;">&#x6D4B;&#x8BD5;&#x51FD;&#x6570;&#x6846;&#x67B6;</h2>
+<pre><code class="lang-c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;algorithm&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstdlib&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cmath&gt;</span></span>
+
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">show</span><span class="hljs-params">(<span class="hljs-keyword">int</span> item)</span></span>{ <span class="hljs-built_in">cout</span> &lt;&lt; item &lt;&lt; <span class="hljs-string">&quot; &quot;</span>;}
+
+<span class="hljs-comment">// TODO &#x6392;&#x5E8F;&#x7B97;&#x6CD5;&#x5B50;&#x51FD;&#x6570;</span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+
+    <span class="hljs-keyword">int</span> arr[<span class="hljs-number">10</span>] = {<span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-number">7</span>,<span class="hljs-number">8</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">4</span>,<span class="hljs-number">9</span>,<span class="hljs-number">6</span>};
+    <span class="hljs-comment">// bubbleSort(arr, 10);</span>
+    <span class="hljs-comment">// insertionSort(arr, 10);</span>
+    mergeSort(arr, <span class="hljs-number">0</span>, <span class="hljs-number">10</span>);
+    for_each(arr, arr+<span class="hljs-number">10</span>, show);
+    system(<span class="hljs-string">&quot;pause&quot;</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+
+}
+</code></pre>
+<h2 id="&#x5192;&#x6CE1;&#x6392;&#x5E8F;">&#x5192;&#x6CE1;&#x6392;&#x5E8F;</h2>
+<pre><code class="lang-c++"><span class="hljs-comment">// &#x5192;&#x6CE1;&#x6392;&#x5E8F;</span>
+
+<span class="hljs-comment">//   -- &#x7A33;&#x5B9A;&#x6027;&#xFF1A;&#x7A33;&#x5B9A;</span>
+<span class="hljs-comment">//   -- &#x65F6;&#x95F4;&#x590D;&#x6742;&#x5EA6;&#xFF1A;o(n^2)</span>
+<span class="hljs-comment">//   -- &#x7A7A;&#x95F4;&#x590D;&#x6742;&#x5EA6;&#xFF1A;o(1)</span>
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">bubbleSort</span><span class="hljs-params">(<span class="hljs-keyword">int</span> arr[], <span class="hljs-keyword">int</span> size)</span> </span>{
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; size - <span class="hljs-number">1</span>; i++) {      <span class="hljs-comment">// &#x5171;&#x9700;&#x5192;&#x6CE1;&#x591A;&#x5C11;&#x8D9F;&#xFF0C;&#x6BCF;&#x8F6E;&#x5B8C;&#x6BD5;&#xFF0C;&#x6700;&#x5927;&#x7684;&#x5143;&#x7D20;&#x4E0B;&#x6C89;</span>
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; size - <span class="hljs-number">1</span> - i; j++) {
+            <span class="hljs-keyword">if</span> (arr[j] &gt; arr[j+<span class="hljs-number">1</span>]) {        <span class="hljs-comment">// &#x76F8;&#x90BB;&#x5143;&#x7D20;&#x4E24;&#x4E24;&#x5BF9;&#x6BD4;</span>
+                <span class="hljs-keyword">int</span> temp = arr[j+<span class="hljs-number">1</span>];        <span class="hljs-comment">// &#x5143;&#x7D20;&#x4EA4;&#x6362;</span>
+                arr[j+<span class="hljs-number">1</span>] = arr[j];
+                arr[j] = temp;
+            }
+        }
+    }
+
+}
+</code></pre>
+<h2 id="&#x63D2;&#x5165;&#x6392;&#x5E8F;">&#x63D2;&#x5165;&#x6392;&#x5E8F;</h2>
+<pre><code class="lang-c++"><span class="hljs-comment">// &#x63D2;&#x5165;&#x6392;&#x5E8F;</span>
+
+<span class="hljs-comment">//   -- &#x7A33;&#x5B9A;&#x6027;&#xFF1A;&#x7A33;&#x5B9A;</span>
+<span class="hljs-comment">//   -- &#x65F6;&#x95F4;&#x590D;&#x6742;&#x5EA6;&#xFF1A;o(n^2)</span>
+<span class="hljs-comment">//   -- &#x7A7A;&#x95F4;&#x590D;&#x6742;&#x5EA6;&#xFF1A;o(1)</span>
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">insertionSort</span><span class="hljs-params">(<span class="hljs-keyword">int</span> arr[], <span class="hljs-keyword">int</span> size)</span> </span>{
+
+    <span class="hljs-comment">// &#x5143;&#x7D20;0&#x9ED8;&#x8BA4;&#x6709;&#x5E8F;&#xFF0C;&#x53D6;&#x51FA;&#x7B2C;n&#xFF08;1~size-1&#xFF09;&#x4E2A;&#x5143;&#x7D20;&#xFF0C;&#x5411;&#x524D;&#x4EE5;&#x6B64;&#x6BD4;&#x8F83;&#x63D2;&#x5165;&#x5408;&#x9002;&#x7684;&#x4F4D;&#x7F6E;</span>
+    <span class="hljs-keyword">int</span> i, j;
+    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">1</span>; i &lt; size; i++) {
+        <span class="hljs-keyword">int</span> current = arr[i];   <span class="hljs-comment">// &#x4FDD;&#x5B58;&#x5F53;&#x524D;&#x5143;&#x7D20;</span>
+        <span class="hljs-keyword">for</span>(j = i - <span class="hljs-number">1</span>; j &gt;= <span class="hljs-number">0</span> &amp;&amp; arr[j] &gt; current; j--){
+            arr[j+<span class="hljs-number">1</span>] = arr[j];   <span class="hljs-comment">// &#x5143;&#x7D20;&#x540E;&#x79FB;</span>
+        }
+        arr[j+<span class="hljs-number">1</span>] = current;  <span class="hljs-comment">// &#x627E;&#x5230;&#x5408;&#x9002;&#x7684;&#x4F4D;&#x7F6E;&#x63D2;&#x5165;</span>
+    }
+
+}
+</code></pre>
+<h2 id="&#x5F52;&#x5E76;&#x6392;&#x5E8F;">&#x5F52;&#x5E76;&#x6392;&#x5E8F;</h2>
+<ul>
+<li><p><strong>&#x5206;&#x6CBB;(&#x5206;&#x800C;&#x6CBB;&#x4E4B;):</strong></p>
+<p>&#x628A;&#x4E00;&#x4E2A;&#x590D;&#x6742;&#x7684;&#x95EE;&#x9898;&#x5206;&#x6210;&#x591A;&#x4E2A;&#x540C;&#x7B49;&#x7ED3;&#x6784;&#x7684;&#x5B50;&#x95EE;&#x9898;&#xFF0C;<br>&#x518D;&#x628A;&#x5B50;&#x95EE;&#x9898;&#x5206;&#x6210;&#x66F4;&#x5C0F;&#x7684;&#x5B50;&#x95EE;&#x9898;&#x2026;&#x2026;<br>&#x76F4;&#x5230;&#x6700;&#x540E;&#x5B50;&#x95EE;&#x9898;&#x53EF;&#x4EE5;&#x7B80;&#x5355;&#x7684;&#x76F4;&#x63A5;&#x6C42;&#x89E3;&#xFF0C;&#x539F;&#x95EE;&#x9898;&#x7684;&#x89E3;&#x5373;&#x5B50;&#x95EE;&#x9898;&#x7684;&#x89E3;&#x7684;&#x5408;&#x5E76;&#x3002;</p>
+</li>
+<li><p>&#x5F52;&#x5E76;&#x6392;&#x5E8F;&#x548C;&#x5FEB;&#x901F;&#x6392;&#x5E8F;:</p>
+<p>&#x90FD;&#x91C7;&#x7528;&#x4E86;&#x4E8C;&#x5206;&#x6CD5;&#x601D;&#x60F3;&#x3002;<br>&#x4E0D;&#x540C;&#x4E4B;&#x5904;&#x5728;&#x4E8E;&#xFF0C;&#x5F52;&#x5E76;&#x6392;&#x5E8F;&#x5728;&#x201C;&#x5206;&#x201D;&#x7684;&#x95EE;&#x9898;&#x4E0A;&#x662F;&#x7B80;&#x5355;&#x7684;&#x4E00;&#x5200;&#x5207;&#xFF0C;&#x800C;&#x5C06;&#x91CD;&#x70B9;&#x653E;&#x5728;&#x4E86;&#x5982;&#x4F55;&#x201C;&#x5F52;&#x5E76;&#x201D;&#x4E0A;&#x3002;&#x987A;&#x5E8F;&#x5408;&#x5E76;&#x5BFC;&#x81F4;&#x6392;&#x5E8F;&#x7A33;&#x5B9A;&#x3002;&#x800C;&#x5FEB;&#x901F;&#x6392;&#x5E8F;&#x5219;&#x82B1;&#x4E86;&#x5F88;&#x5927;&#x7684;&#x529F;&#x592B;&#x5728;&#x5982;&#x4F55;&#x201C;&#x5206;&#x201D;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#x4E0A;&#xFF0C;&#x201C;&#x5F52;&#x5E76;&#x201D;&#x5219;&#x53D8;&#x5F97;&#x975E;&#x5E38;&#x7B80;&#x5355;&#x3002;</p>
+</li>
+</ul>
+<pre><code class="lang-c++"><span class="hljs-comment">// &#x5F52;&#x5E76;&#x6392;&#x5E8F;</span>
+
+<span class="hljs-comment">//   -- &#x7A33;&#x5B9A;&#x6027;&#xFF1A;&#x7A33;&#x5B9A;</span>
+<span class="hljs-comment">//   -- &#x65F6;&#x95F4;&#x590D;&#x6742;&#x5EA6;&#xFF1A;o(nlogn)</span>
+<span class="hljs-comment">//   -- &#x7A7A;&#x95F4;&#x590D;&#x6742;&#x5EA6;&#xFF1A;o(n)</span>
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Merge</span><span class="hljs-params">(<span class="hljs-keyword">int</span>* arr, <span class="hljs-keyword">int</span> begin, <span class="hljs-keyword">int</span> middle, <span class="hljs-keyword">int</span> end)</span></span>;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">mergeSort</span><span class="hljs-params">(<span class="hljs-keyword">int</span> arr[], <span class="hljs-keyword">int</span> begin, <span class="hljs-keyword">int</span> end)</span> </span>{
+     <span class="hljs-keyword">if</span> (end-begin &lt;= <span class="hljs-number">1</span>) {
+        <span class="hljs-keyword">return</span>;
+     }
+     <span class="hljs-keyword">int</span> mid = <span class="hljs-built_in">floor</span>((end+begin)/<span class="hljs-number">2</span>);
+     mergeSort(arr, begin, mid);
+     mergeSort(arr, mid, end);
+     Merge(arr, begin, mid, end);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Merge</span><span class="hljs-params">(<span class="hljs-keyword">int</span>* arr, <span class="hljs-keyword">int</span> begin, <span class="hljs-keyword">int</span> middle, <span class="hljs-keyword">int</span> end)</span> </span>{
+
+    <span class="hljs-comment">// &#x5408;&#x6CD5;&#x6027;&#x9A8C;&#x8BC1;</span>
+    <span class="hljs-keyword">if</span> (arr == <span class="hljs-literal">NULL</span> || begin &gt;= middle || middle &gt;= end) {
+         <span class="hljs-keyword">return</span>;
+    }
+
+    <span class="hljs-comment">// &#x5F52;&#x5E76;&#x6392;&#x5E8F;&#x9700;&#x8981;&#x989D;&#x5916;&#x7684;&#x7A7A;&#x95F4;o(n)</span>
+    <span class="hljs-keyword">int</span> copyindex = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">int</span> *copyarr = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[end - begin];
+
+    <span class="hljs-comment">// &#x5408;&#x5E76;</span>
+    <span class="hljs-keyword">int</span> varbegin = begin;
+    <span class="hljs-keyword">int</span> varmiddle = middle;
+    <span class="hljs-keyword">while</span>(middle &gt; varbegin &amp;&amp; end &gt; varmiddle){
+        <span class="hljs-keyword">if</span>(arr[varbegin] &gt; arr[varmiddle]){
+            copyarr[copyindex] = arr[varmiddle];
+            varmiddle++;
+            copyindex++;
+        } <span class="hljs-keyword">else</span> {
+            copyarr[copyindex] = arr[varbegin];
+            varbegin++;
+            copyindex++;
+        }
+    }
+
+    <span class="hljs-keyword">while</span> (middle &gt; varbegin)
+    {
+        copyarr[copyindex] = arr[varbegin];
+        copyindex++;
+        varbegin++;
+    }
+
+    <span class="hljs-keyword">while</span> (end &gt; varmiddle)
+    {
+        copyarr[copyindex] = arr[varmiddle];
+        copyindex++;
+        varmiddle++;
+    }
+
+    <span class="hljs-built_in">memcpy</span>(arr+begin, copyarr, <span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">int</span>)*(end-begin));
+    <span class="hljs-keyword">delete</span> [] copyarr;
+}
+</code></pre>
+<h2 id="&#x57FA;&#x6570;&#x6392;&#x5E8F;">&#x57FA;&#x6570;&#x6392;&#x5E8F;</h2>
+<ul>
+<li><p><strong>&#x57FA;&#x6570;&#x6392;&#x5E8F;&#x5B9A;&#x4E49;&#xFF1A;</strong></p>
+<p>&#x628A;&#x5F85;&#x6392;&#x5E8F;&#x7684;&#x6574;&#x6570;&#x6309;&#x4F4D;&#x5206;&#xFF0C;&#x5206;&#x4E3A;&#x4E2A;&#x4F4D;&#xFF0C;&#x5341;&#x4F4D;.....&#x4ECE;&#x4F4E;&#x4F4D;&#x5230;&#x9AD8;&#x4F4D;&#x4F9D;&#x6B21;&#x5C06;&#x4F4D;&#x6570;&#x8FDB;&#x884C;&#x6392;&#x5E8F;&#x3002;</p>
+</li>
+<li><p><strong>&#x6392;&#x5E8F;&#x8FC7;&#x7A0B;&#xFF08;&#x5206;&#x914D;&#x548C;&#x6536;&#x96C6;&#xFF09;&#xFF1A;</strong></p>
+<ol>
+<li>&#x6309;&#x4E2A;&#x4F4D;&#x6570;&#x5B57;&#x5927;&#x5C0F;&#x6392;&#x5E8F;&#xFF0C;&#x5206;&#x522B;&#x653E;&#x5230;0-9&#x8FD9;10&#x4E2A;&#x6876;&#x4E2D;&#xFF1B;&#x4F9D;&#x6B21;&#x5C06;0-9&#x6876;&#x4E2D;&#x6570;&#x636E;&#x6536;&#x96C6;&#x56DE;&#x539F;&#x6570;&#x7EC4;&#xFF1B;  </li>
+<li>&#x6309;&#x5341;&#x4F4D;&#x6570;&#x5B57;&#x5927;&#x5C0F;&#x6392;&#x5E8F;&#xFF0C;&#x5206;&#x522B;&#x653E;&#x5230;0-9&#x8FD9;10&#x4E2A;&#x6876;&#x4E2D;&#xFF1B;&#x4F9D;&#x6B21;&#x5C06;0-9&#x6876;&#x4E2D;&#x6570;&#x636E;&#x6536;&#x96C6;&#x56DE;&#x539F;&#x6570;&#x7EC4;&#xFF1B;<br>...</li>
+</ol>
+</li>
+<li><p><strong>&#x65F6;&#x95F4;&#x590D;&#x6742;&#x5EA6;&#x5206;&#x6790;&#xFF1A;</strong></p>
+<p>&#x5206;&#x914D;&#x7684;&#x65F6;&#x95F4;&#x590D;&#x6742;&#x5EA6;o(n)<br>&#x6536;&#x96C6;&#x7684;&#x65F6;&#x95F4;&#x590D;&#x6742;&#x5EA6;o(k)--&#x57FA;&#x6570;&#xFF0C;&#x8FDB;&#x5236;&#x6570;<br>&#x6240;&#x4EE5;&#x65F6;&#x95F4;&#x6548;&#x7387;&#x548C;&#x521D;&#x59CB;&#x5316;&#x662F;&#x5426;&#x6709;&#x5E8F;&#x65E0;&#x5173;&#xFF0C; &#x5E73;&#x5747;&#x3001;&#x6700;&#x574F;&#x3001;&#x6700;&#x597D;&#x7684;&#x65F6;&#x95F4;&#x590D;&#x6742;&#x5EA6;&#x90FD;&#x662F;o(n+k)</p>
+</li>
+<li><p><strong>&#x5E94;&#x7528;&#xFF1A;</strong></p>
+<p>&#x6570;&#x503C;&#x6392;&#x5E8F;&#xFF1A;&#x57FA;&#x6570;&#x6392;&#x5E8F;&#x662F;&#x6309;&#x7167;&#x4F4E;&#x4F4D;&#x5148;&#x6392;&#x5E8F;&#xFF0C;&#x7136;&#x540E;&#x6536;&#x96C6;&#xFF1B;&#x518D;&#x6309;&#x7167;&#x9AD8;&#x4F4D;&#x6392;&#x5E8F;&#xFF0C;&#x7136;&#x540E;&#x518D;&#x6536;&#x96C6;&#xFF1B;&#x4F9D;&#x6B21;&#x7C7B;&#x63A8;&#xFF0C;&#x76F4;&#x5230;&#x6700;&#x9AD8;&#x4F4D;&#x3002;<br>&#x4F18;&#x5148;&#x7EA7;&#x6392;&#x5E8F;&#xFF1A;&#x6709;&#x65F6;&#x5019;&#x6709;&#x4E9B;&#x5C5E;&#x6027;&#x662F;&#x6709;&#x4F18;&#x5148;&#x7EA7;&#x987A;&#x5E8F;&#x7684;&#xFF0C;&#x5148;&#x6309;&#x4F4E;&#x4F18;&#x5148;&#x7EA7;&#x6392;&#x5E8F;&#xFF0C;&#x518D;&#x6309;&#x9AD8;&#x4F18;&#x5148;&#x7EA7;&#x6392;&#x5E8F;&#x3002;  </p>
+<pre><code class="lang-c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;algorithm&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstdlib&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cmath&gt;</span></span>
+
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-comment">// &#x57FA;&#x6570;&#x6392;&#x5E8F;</span>
+<span class="hljs-comment">//   -- &#x7A33;&#x5B9A;&#x6027;&#xFF1A;&#x7A33;&#x5B9A;</span>
+<span class="hljs-comment">//   -- &#x65F6;&#x95F4;&#x590D;&#x6742;&#x5EA6;&#xFF1A;o(n+k)</span>
+<span class="hljs-comment">//   -- &#x7A7A;&#x95F4;&#x590D;&#x6742;&#x5EA6;&#xFF1A;o(n+k)</span>
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">show</span><span class="hljs-params">(<span class="hljs-keyword">int</span> item)</span></span>{ <span class="hljs-built_in">cout</span> &lt;&lt; item &lt;&lt; <span class="hljs-string">&quot; &quot;</span>;}
+
+  <span class="hljs-comment">// &#x6B64;&#x51FD;&#x6570;&#x7528;&#x4E8E;&#x6C42;&#x89E3;&#x6240;&#x7ED9;&#x6570;&#x7EC4;&#x4E2D;&#x6700;&#x5927;&#x6570;&#x6709;&#x51E0;&#x4F4D;</span>
+  <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">max</span><span class="hljs-params">(<span class="hljs-keyword">int</span> date[],<span class="hljs-keyword">int</span> n)</span></span>{
+      <span class="hljs-keyword">int</span> max=<span class="hljs-number">0</span>;
+      <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;i &lt; n;i++){
+          <span class="hljs-keyword">int</span> count=<span class="hljs-number">1</span>,tem=date[i];
+          <span class="hljs-keyword">while</span>(tem/<span class="hljs-number">10</span>!=<span class="hljs-number">0</span>){<span class="hljs-comment">//&#x8BA1;&#x7B97;&#x6BCF;&#x4E2A;&#x6570;&#x7684;&#x4F4D;&#x6570;&#xFF0C;&#x7528;count&#x8BA1;&#x6570;</span>
+              tem=tem/<span class="hljs-number">10</span>;
+              count++;
+      }
+      <span class="hljs-keyword">if</span>(count&gt;max)
+          max=count;<span class="hljs-comment">//&#x628A;&#x6700;&#x5927;&#x4F4D;&#x6570;&#x8D4B;&#x503C;max</span>
+    }
+    <span class="hljs-keyword">return</span> max;
+
+}
+
+<span class="hljs-comment">// &#x57FA;&#x6570;&#x6392;&#x5E8F;</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">basesort</span><span class="hljs-params">(<span class="hljs-keyword">int</span> date[],<span class="hljs-keyword">int</span> n)</span></span>{
+
+  <span class="hljs-keyword">int</span> maxx=max(date,n);<span class="hljs-comment">//&#x53D6;&#x5F97;&#x6700;&#x5927;&#x4F4D;&#x6570;</span>
+  <span class="hljs-keyword">int</span> num=<span class="hljs-number">1</span>;
+  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;i &lt; maxx;i++){<span class="hljs-comment">//&#x4F4D;&#x6570;&#x51B3;&#x5B9A;&#x6392;&#x5E8F;&#x5FAA;&#x73AF;&#x6B21;&#x6570;</span>
+      <span class="hljs-keyword">int</span> count[<span class="hljs-number">10</span>];<span class="hljs-comment">//&#x58F0;&#x660E;count&#x4E3A;&#x4E86;&#x7EDF;&#x8BA1;&#x6BCF;&#x4E2A;&#x6876;&#x653E;&#x4E86;&#x51E0;&#x4E2A;&#x6570;</span>
+      <span class="hljs-keyword">int</span> temp[<span class="hljs-number">10</span>][<span class="hljs-string">&apos;n&apos;</span>];<span class="hljs-comment">//temp&#x76F8;&#x5F53;&#x4E8E;&#x6876;&#xFF0C;&#x524D;&#x4E00;&#x4E2A;&#x6570;&#x6807;&#x8BB0;&#x7B2C;&#x51E0;&#x4E2A;&#x7BEE;&#x5B50;&#xFF0C;&#x540E;&#x4E00;&#x4E2A;&#x4E3A;&#x4E86;&#x6807;&#x8BB0;&#x653E;&#x7684;&#x4E2A;&#x6570;</span>
+      <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> f = <span class="hljs-number">0</span>;f &lt; <span class="hljs-number">10</span>;f++){<span class="hljs-comment">//&#x5BF9;&#x58F0;&#x660E;&#x6570;&#x7EC4;&#x521D;&#x59CB;&#x5316;</span>
+          count[f]=<span class="hljs-number">0</span>;
+      }
+      <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> g = <span class="hljs-number">0</span>;g &lt; <span class="hljs-number">10</span>;g++){<span class="hljs-comment">//&#x5BF9;&#x58F0;&#x660E;&#x6570;&#x7EC4;&#x521D;&#x59CB;&#x5316;</span>
+          <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> z = <span class="hljs-number">0</span>;z &lt; n;z++){
+              temp[g][z]=<span class="hljs-number">0</span>;
+          }
+      }
+      <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>;j &lt; n;j++){
+          <span class="hljs-keyword">int</span> fg=date[j]/num;<span class="hljs-comment">//num&#x662F;&#x53D8;&#x91CF;&#xFF0C;&#x56E0;&#x4E3A;&#x6BCF;&#x6B21;&#x5FAA;&#x73AF;&#x6BD4;&#x8F83;&#x7684;&#x4F4D;&#x662F;&#x4E0D;&#x540C;&#x7684;</span>
+          <span class="hljs-keyword">int</span> k=fg%<span class="hljs-number">10</span>;
+          count[k]++;
+          <span class="hljs-keyword">int</span> te=count[k]<span class="hljs-number">-1</span>;
+          temp[k][te]=date[j];<span class="hljs-comment">//&#x628A;&#x6570;&#x636E;&#x653E;k&#x6876;&#x7684;te&#x4F4D;&#x4E0A;&#x5B58;&#x50A8;</span>
+      }
+      <span class="hljs-keyword">int</span> b=<span class="hljs-number">0</span>;
+      <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> h = <span class="hljs-number">0</span>;h &lt; <span class="hljs-number">10</span>;h++){
+          <span class="hljs-keyword">if</span>(count[h]&gt;<span class="hljs-number">0</span>){<span class="hljs-comment">//h&gt;0&#x8BF4;&#x660E;h&#x6876;&#x5185;&#x6709;&#x6570;&#x5B57;&#x5B58;&#x50A8;</span>
+              <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> v = <span class="hljs-number">0</span>;v &lt; count[h];v++){<span class="hljs-comment">//count[h]&#x662F;h&#x6876;&#x7684;&#x5B58;&#x50A8;&#x4E2A;&#x6570;</span>
+                  date[b]=temp[h][v];<span class="hljs-comment">//&#x628A;&#x6876;&#x5185;&#x6392;&#x597D;&#x7684;&#x6570;&#x5168;&#x90FD;&#x5012;&#x7ED9;&#x8981;&#x6392;&#x5E8F;&#x7684;&#x6570;&#x7EC4;&#xFF0C;&#x8FDB;&#x884C;&#x4E0B;&#x8F6E;&#x6392;&#x5E8F;</span>
+                  b++;
+              }
+          }
+      }
+      num=num*<span class="hljs-number">10</span>;
+  }
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+    <span class="hljs-keyword">int</span> arr[<span class="hljs-number">10</span>] = {<span class="hljs-number">33</span>,<span class="hljs-number">157</span>,<span class="hljs-number">27</span>,<span class="hljs-number">82</span>,<span class="hljs-number">1</span>,<span class="hljs-number">32</span>,<span class="hljs-number">5544</span>,<span class="hljs-number">79</span>,<span class="hljs-number">6</span>};
+    basesort(arr, <span class="hljs-number">10</span>);
+    for_each(arr, arr+<span class="hljs-number">10</span>, show);
+    system(<span class="hljs-string">&quot;pause&quot;</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+</li>
+</ul>
+<h2 id="&#x8BA1;&#x6570;&#x6392;&#x5E8F;">&#x8BA1;&#x6570;&#x6392;&#x5E8F;</h2>
+<ul>
+<li><p>&#x5B9A;&#x4E49;</p>
+<p>&#x627E;&#x51FA;&#x5F85;&#x6392;&#x5E8F;&#x7684;&#x6570;&#x7EC4;&#x4E2D;&#x6700;&#x5927;&#x548C;&#x6700;&#x5C0F;&#x7684;&#x5143;&#x7D20;<br>&#x7EDF;&#x8BA1;&#x6570;&#x7EC4;&#x4E2D;&#x6BCF;&#x4E00;&#x4E2A;&#x503C;&#x4E3A;i&#x7684;&#x5143;&#x7D20;&#x51FA;&#x73B0;&#x7684;&#x6B21;&#x6570;&#xFF0C;&#x5B58;&#x5165;&#x6570;&#x7EC4;countArray&#x7684;&#x7B2C;i&#x9879;<br>&#x5BF9;&#x5168;&#x90E8;&#x7684;&#x8BA1;&#x6570;&#x7D2F;&#x52A0;&#xFF08;&#x4ECE;countArray&#x4E2D;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x958B;&#x59CB;&#xFF0C;&#x6BCF;&#x4E00;&#x9879;&#x548C;&#x524D;&#x4E00;&#x9879;&#x76F8;&#x52A0;&#xFF09;<br>&#x53CD;&#x5411;&#x586B;&#x5145;&#x76EE;&#x6807;&#x6570;&#x7EC4;&#xFF1A;&#x5C06;&#x6BCF;&#x4E00;&#x4E2A;&#x5143;&#x7D20;i&#x653E;&#x5728;&#x65B0;&#x6570;&#x7EC4;&#x7684;&#x7B2C;countArray[i]&#x9879;&#x3002;&#x6BCF;&#x653E;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x5C31;&#x5C06;countArray[i]&#x51CF;&#x53BB;1  </p>
+<pre><code class="lang-c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;algorithm&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstdlib&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cmath&gt;</span></span>
+
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-comment">// &#x8BA1;&#x6570;&#x6392;&#x5E8F;</span>
+<span class="hljs-comment">//   -- &#x7A33;&#x5B9A;&#x6027;&#xFF1A;&#x7A33;&#x5B9A;</span>
+<span class="hljs-comment">//   -- &#x65F6;&#x95F4;&#x590D;&#x6742;&#x5EA6;&#xFF1A;o(n+k)</span>
+<span class="hljs-comment">//   -- &#x7A7A;&#x95F4;&#x590D;&#x6742;&#x5EA6;&#xFF1A;o(n+k)</span>
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">show</span><span class="hljs-params">(<span class="hljs-keyword">int</span> item)</span></span>{ <span class="hljs-built_in">cout</span> &lt;&lt; item &lt;&lt; <span class="hljs-string">&quot; &quot;</span>;}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">countingSort</span><span class="hljs-params">(<span class="hljs-keyword">int</span> arr[], <span class="hljs-keyword">int</span> size, <span class="hljs-keyword">int</span> maxValue)</span> </span>{
+
+    <span class="hljs-keyword">int</span> *bucket = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[maxValue + <span class="hljs-number">1</span>];
+    <span class="hljs-keyword">int</span> bucketLen = maxValue + <span class="hljs-number">1</span>;
+    fill(bucket, bucket+maxValue + <span class="hljs-number">1</span>, <span class="hljs-number">0</span>);
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; size; i++) {
+        bucket[arr[i]]++;
+    }
+
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>, index = <span class="hljs-number">0</span>; j &lt; bucketLen; j++) {
+        <span class="hljs-keyword">while</span>(bucket[j] &gt; <span class="hljs-number">0</span>) {
+            arr[index++] = j;
+            bucket[j]--;
+        }
+    }
+
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+
+    <span class="hljs-keyword">int</span> arr[<span class="hljs-number">10</span>] = {<span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-number">7</span>,<span class="hljs-number">8</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">4</span>,<span class="hljs-number">9</span>,<span class="hljs-number">6</span>};
+    <span class="hljs-comment">// 10&#x4E2A;&#x5143;&#x7D20;&#xFF0C;&#x6B63;&#x6574;&#x6570;&#x5143;&#x7D20;&#x7684;&#x6700;&#x5927;&#x503C;&#x662F;10</span>
+    countingSort(arr, <span class="hljs-number">10</span>, <span class="hljs-number">10</span>);
+    for_each(arr, arr+<span class="hljs-number">10</span>, show);
+    system(<span class="hljs-string">&quot;pause&quot;</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+
+}
+</code></pre>
+</li>
+</ul>
+<h2 id="&#x6876;&#x6392;&#x5E8F;">&#x6876;&#x6392;&#x5E8F;</h2>
+<ul>
+<li><p>&#x6876;&#x6392;&#x5E8F;&#x662F;&#x5BF9;&#x8BA1;&#x6570;&#x6392;&#x5E8F;&#x7684;&#x6539;&#x8FDB;</p>
+<p>&#x8BA1;&#x6570;&#x6392;&#x5E8F;&#xFF1A;&#x4ECE;&#x6700;&#x5C0F;&#x503C;&#x5230;&#x6700;&#x5927;&#x503C;&#x4E4B;&#x95F4;&#x7684;&#x6BCF;&#x4E00;&#x4E2A;&#x4F4D;&#x7F6E;&#x7533;&#x8BF7;&#x7A7A;&#x95F4;&#xFF1B;<br>&#x6876;&#x6392;&#x5E8F;&#xFF1A;&#x6700;&#x5C0F;&#x503C;&#x5230;&#x6700;&#x5927;&#x503C;&#x4E4B;&#x95F4;&#x6BCF;&#x4E00;&#x4E2A;&#x56FA;&#x5B9A;&#x533A;&#x57DF;&#x7533;&#x8BF7;&#x7A7A;&#x95F4;&#xFF0C;&#x51CF;&#x5C11;&#x4E86;&#x5143;&#x7D20;&#x503C;&#x4E0D;&#x8FDE;&#x7EED;&#x60C5;&#x51B5;&#x4E0B;&#x7684;&#x7A7A;&#x95F4;&#x6D6A;&#x8D39;&#x3002;  </p>
+<ol>
+<li>&#x5F85;&#x6392;&#x5E8F;&#x96C6;&#x5408;&#x4E2D;&#x5143;&#x7D20;&#x6620;&#x5C04;&#x5230;&#x5404;&#x4E2A;&#x6876;&#x4E0A;&#x7684;&#x8FC7;&#x7A0B;&#xFF0C;&#x4E0D;&#x5B58;&#x5728;&#x6BD4;&#x8F83;&#x548C;&#x4EA4;&#x6362;  </li>
+<li>&#x5BF9;&#x5404;&#x4E2A;&#x6876;&#x4E2D;&#x5143;&#x7D20;&#x6392;&#x5E8F;&#x53EF;&#x81EA;&#x4E3B;&#x9009;&#x62E9;&#x5408;&#x9002;&#x7684;&#x6392;&#x5E8F;&#x7B97;&#x6CD5;&#xFF0C;&#x6876;&#x6392;&#x5E8F;&#x7B97;&#x6CD5;&#x7684;&#x590D;&#x6742;&#x5EA6;&#x548C;&#x7A33;&#x5B9A;&#x6027;&#xFF0C;&#x90FD;&#x6839;&#x636E;&#x9009;&#x62E9;&#x7684;&#x6392;&#x5E8F;&#x7B97;&#x6CD5;&#x4E0D;&#x540C;&#x800C;&#x4E0D;&#x540C;&#x3002;</li>
+</ol>
+</li>
+<li><p>&#x6392;&#x5E8F;&#x8FC7;&#x7A0B;&#xFF1A;</p>
+<ol>
+<li>&#x6839;&#x636E;&#x5F85;&#x6392;&#x5E8F;&#x96C6;&#x5408;&#x4E2D;&#x6700;&#x5927;&#x5143;&#x7D20;&#x548C;&#x6700;&#x5C0F;&#x5143;&#x7D20;&#x7684;&#x5DEE;&#x503C;&#x8303;&#x56F4;&#x548C;&#x6620;&#x5C04;&#x89C4;&#x5219;&#xFF0C;&#x786E;&#x5B9A;&#x7533;&#x8BF7;&#x7684;&#x6876;&#x4E2A;&#x6570;&#xFF1B;  </li>
+<li>&#x904D;&#x5386;&#x5F85;&#x6392;&#x5E8F;&#x96C6;&#x5408;&#xFF0C;&#x5C06;&#x6BCF;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x79FB;&#x52A8;&#x5230;&#x5BF9;&#x5E94;&#x7684;&#x6876;&#x4E2D;&#xFF1B;  </li>
+<li>&#x5BF9;&#x6BCF;&#x4E00;&#x4E2A;&#x6876;&#x4E2D;&#x5143;&#x7D20;&#x8FDB;&#x884C;&#x6392;&#x5E8F;&#xFF0C;&#x5E76;&#x79FB;&#x52A8;&#x5230;&#x5DF2;&#x6392;&#x5E8F;&#x96C6;&#x5408;&#x4E2D;&#x3002;  </li>
+</ol>
+<p>&#x793A;&#x4F8B;&#xFF1A;</p>
+<p>&#x5F85;&#x6392;&#x5E8F;&#x96C6;&#x5408;&#x4E3A;&#xFF1A;[-7, 51, 3, 121, -3, 32, 21, 43, 4, 25, 56, 77, 16, 22, 87, 56, -10, 68, 99, 70]<br>&#x6620;&#x5C04;&#x89C4;&#x5219;&#x4E3A;&#xFF1A;f(x)=x/10-c&#xFF0C;&#x5176;&#x4E2D;&#x5E38;&#x91CF;&#x4F4D;&#xFF1A;c=min/10&#xFF0C;&#x5373;&#x4EE5;&#x95F4;&#x9694;&#x5927;&#x5C0F; 10 &#x6765;&#x533A;&#x5206;&#x4E0D;&#x540C;&#x503C;&#x57DF;&#x3002;<br>&#x6392;&#x5E8F;&#x7B97;&#x6CD5;&#x4E3A;&#xFF1A;&#x5806;&#x6392;&#x5E8F;&#xFF0C;&#x6839;&#x636E;&#x5806;&#x6392;&#x5E8F;&#x7279;&#x6027;&#x53EF;&#x77E5;&#xFF0C;K &#x4E2A;&#x5143;&#x7D20;&#x7684;&#x96C6;&#x5408;&#xFF0C;&#x65F6;&#x95F4;&#x590D;&#x6742;&#x5EA6;&#x4E3A;&#xFF1A;Klog_2K&#xFF0C;&#x7B97;&#x6CD5;&#x4E0D;&#x4FDD;&#x6301;&#x7A33;&#x5B9A;&#x6027;</p>
+<p>&#x6392;&#x5E8F;&#x8FC7;&#x7A0B;&#xFF1A;</p>
+<ol>
+<li>&#x904D;&#x5386;&#x96C6;&#x5408;&#x53EF;&#x5F97;&#xFF0C;&#x6700;&#x5927;&#x503C;&#x4E3A;&#xFF1A;max=121&#xFF0C;&#x6700;&#x5C0F;&#x503C;&#x4E3A;&#xFF1A;min=-10&#xFF0C;&#x5F85;&#x7533;&#x8BF7;&#x6876;&#x7684;&#x4E2A;&#x6570;&#x4E3A;&#xFF1A;max/10-min/10+1=14</li>
+<li>&#x904D;&#x5386;&#x5F85;&#x6392;&#x5E8F;&#x96C6;&#x5408;&#xFF0C;&#x4F9D;&#x6B21;&#x6DFB;&#x52A0;&#x5404;&#x5143;&#x7D20;&#x5230;&#x5BF9;&#x5E94;&#x7684;&#x6876;&#x4E2D;&#x3002;</li>
+<li>&#x5BF9;&#x6BCF;&#x4E00;&#x4E2A;&#x6876;&#x4E2D;&#x5143;&#x7D20;&#x8FDB;&#x884C;&#x6392;&#x5E8F;&#xFF0C;&#x5E76;&#x79FB;&#x52A8;&#x56DE;&#x539F;&#x59CB;&#x96C6;&#x5408;&#x4E2D;&#xFF0C;&#x5373;&#x5B8C;&#x6210;&#x6392;&#x5E8F;&#x8FC7;&#x7A0B;&#x3002;</li>
+</ol>
+</li>
+</ul>
+<pre><code class="lang-c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;algorithm&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstdlib&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cmath&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;list&gt;</span></span>
+
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-comment">// &#x6876;&#x6392;&#x5E8F;</span>
+<span class="hljs-comment">//   -- &#x7A33;&#x5B9A;&#x6027;&#xFF1A;&#x7A33;&#x5B9A;</span>
+<span class="hljs-comment">//   -- &#x65F6;&#x95F4;&#x590D;&#x6742;&#x5EA6;&#xFF1A;o(n+k)</span>
+<span class="hljs-comment">//   -- &#x7A7A;&#x95F4;&#x590D;&#x6742;&#x5EA6;&#xFF1A;o(n+k)</span>
+
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">bucketSort</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt; <span class="hljs-keyword">int</span>&gt; &amp;vec)</span> </span>{
+
+    <span class="hljs-keyword">int</span> max = *max_element(vec.begin(), vec.end());
+    <span class="hljs-keyword">int</span> min = *min_element(vec.begin(), vec.end());
+
+    <span class="hljs-built_in">vector</span>&lt; <span class="hljs-built_in">vector</span>&lt; <span class="hljs-keyword">int</span>&gt; &gt; bucketArr;
+    bucketArr.resize(max/<span class="hljs-number">10</span>-min/<span class="hljs-number">10</span>+<span class="hljs-number">1</span>);
+
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; vec.size(); ++i){
+        <span class="hljs-keyword">int</span> index = vec[i]/<span class="hljs-number">10</span> - min/<span class="hljs-number">10</span>;
+        bucketArr[index].push_back(vec[i]);
+    }
+    vec.clear();
+
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; bucketArr.size(); i++) {
+        sort(bucketArr[i].begin(), bucketArr[i].end());
+        vec.insert(vec.begin(), bucketArr[i].begin(),bucketArr[i].end());
+    }
+
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+
+    <span class="hljs-keyword">int</span> arr[] = {<span class="hljs-number">-7</span>, <span class="hljs-number">51</span>, <span class="hljs-number">3</span>, <span class="hljs-number">121</span>, <span class="hljs-number">-3</span>, <span class="hljs-number">32</span>, <span class="hljs-number">21</span>, <span class="hljs-number">43</span>, <span class="hljs-number">4</span>, <span class="hljs-number">25</span>, <span class="hljs-number">56</span>, <span class="hljs-number">77</span>, <span class="hljs-number">16</span>, <span class="hljs-number">22</span>, <span class="hljs-number">87</span>, <span class="hljs-number">56</span>, <span class="hljs-number">-10</span>, <span class="hljs-number">68</span>, <span class="hljs-number">99</span>, <span class="hljs-number">70</span>};
+    <span class="hljs-built_in">vector</span>&lt; <span class="hljs-keyword">int</span>&gt; arrvec;
+    arrvec.resize(<span class="hljs-keyword">sizeof</span>(arr)/<span class="hljs-keyword">sizeof</span>(arr[<span class="hljs-number">0</span>]));
+    <span class="hljs-built_in">memcpy</span>(&amp;arrvec[<span class="hljs-number">0</span>], arr, <span class="hljs-keyword">sizeof</span>(arr));
+
+    <span class="hljs-comment">// bucketSort(arrvec);</span>
+    for_each(arrvec.begin(), arrvec.end(), show);
+    system(<span class="hljs-string">&quot;pause&quot;</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+
+}
+</code></pre>
+<h2 id="&#x5FEB;&#x901F;&#x6392;&#x5E8F;">&#x5FEB;&#x901F;&#x6392;&#x5E8F;</h2>
+<ul>
+<li><p>&#x5FEB;&#x901F;&#x6392;&#x5E8F;</p>
+<p>&#x5229;&#x7528;&#x5206;&#x6CBB;&#x6CD5;&#x53EF;&#x4EE5;&#x5C06;&#x89E3;&#x51B3;&#x529E;&#x6CD5;&#x5206;&#x4E3A; &#x201C;&#x4E09;&#x6B65;&#x8D70;&#x201D; &#x6218;&#x7565;&#xFF1A;  </p>
+<ol>
+<li>&#x5728;&#x6570;&#x636E;&#x96C6;&#x4E2D;&#x9009;&#x5B9A;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x4F5C;&#x4E3A;&#x201C;&#x57FA;&#x51C6;&#x201D;&#xFF08;pivot&#xFF09;    </li>
+<li>&#x5C06;&#x6240;&#x6709;&#x6570;&#x636E;&#x96C6;&#x5C0F;&#x4E8E;&#x57FA;&#x51C6;&#x7684;&#x5143;&#x7D20;&#x653E;&#x5728;&#x57FA;&#x51C6;&#x5DE6;&#x8FB9;&#xFF0C;&#x5927;&#x4E8E;&#x57FA;&#x51C6;&#x7684;&#x5143;&#x7D20;&#x653E;&#x5728;&#x57FA;&#x51C6;&#x53F3;&#x8FB9;&#xFF0C;&#x628A;&#x539F;&#x6570;&#x636E;&#x96C6;&#x5206;&#x4E3A;&#x4E24;&#x4E2A;&#x6570;&#x636E;&#x96C6;&#x7684;&#x64CD;&#x4F5C;&#x53EB;&#x505A;&#x201C;&#x5206;&#x533A;&#x201D;&#xFF0C;&#x5206;&#x533A;&#x7ED3;&#x675F;&#x540E;&#x57FA;&#x51C6;&#x6240;&#x5728;&#x7684;&#x4F4D;&#x7F6E;&#x4E5F;&#x5C31;&#x662F;&#x57FA;&#x51C6;&#x6700;&#x540E;&#x7684;&#x4F4D;&#x7F6E;   </li>
+<li>&#x5206;&#x522B;&#x5BF9;&#x57FA;&#x51C6;&#x5DE6;&#x53F3;&#x4E24;&#x8FB9;&#x7684;&#x6570;&#x636E;&#x96C6;&#x8FDB;&#x884C;&#x524D;&#x4E24;&#x4E2A;&#x6B65;&#x9AA4;&#xFF0C;&#x76F4;&#x81F3;&#x6570;&#x636E;&#x96C6;&#x53EA;&#x5269;&#x4E0B;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#x4E3A;&#x6B62;   </li>
+</ol>
+</li>
+</ul>
+<pre><code class="lang-c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;lgorithm&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstdlib&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cmath&gt;</span></span>
+
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+<span class="hljs-comment">// &#x5FEB;&#x901F;&#x6392;&#x5E8F;</span>
+<span class="hljs-comment">//   -- &#x7A33;&#x5B9A;&#x6027;&#xFF1A;&#x4E0D;&#x7A33;&#x5B9A;</span>
+<span class="hljs-comment">//   -- &#x65F6;&#x95F4;&#x590D;&#x6742;&#x5EA6;&#xFF1A;o(nlogn)</span>
+<span class="hljs-comment">//   -- &#x7A7A;&#x95F4;&#x590D;&#x6742;&#x5EA6;&#xFF1A;o(nlogn)</span>
+
+<span class="hljs-comment">// &#x4EA4;&#x6362;&#x6570;&#x7EC4;&#x4E2D;&#x7684;&#x4E24;&#x4E2A;&#x5143;&#x7D20;</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Swap</span><span class="hljs-params">(<span class="hljs-keyword">int</span> arr[], <span class="hljs-keyword">int</span> low, <span class="hljs-keyword">int</span> high)</span>
+</span>{
+    <span class="hljs-keyword">int</span> temp;
+    temp = arr[low];
+    arr[low] = arr[high];
+    arr[high] = temp;
+
+}
+
+<span class="hljs-comment">// &#x5206;&#x6CBB;&#x6CD5;</span>
+<span class="hljs-comment">// &#x5982;&#x679C;&#x57FA;&#x51C6;&#x6570;&#x9009;&#x53D6;&#x4E3A;array[low]&#xFF0C;&#x90A3;&#x4E48;&#x5FC5;&#x987B;&#x5148;&#x4ECE;&#x9AD8;&#x4F4D;high&#x67E5;&#x627E;&#x5230;&#x5C0F;&#x4E8E;&#x57FA;&#x51C6;&#x7684;&#x6570;&#xFF0C;&#x7136;&#x540E;&#x518D;&#x4ECE;&#x4F4E;&#x4F4D;low&#x5BFB;&#x627E;&#x5927;&#x4E8E;&#x57FA;&#x51C6;&#x7684;&#x6570;&#xFF0C;&#x4EA4;&#x6362;&#xFF1B;</span>
+<span class="hljs-comment">// &#x5982;&#x679C;&#x57FA;&#x51C6;&#x6570;&#x9009;&#x53D6;&#x4E3A;array[high]&#xFF0C;&#x90A3;&#x4E48;&#x5FC5;&#x987B;&#x5148;&#x4ECE;&#x4F4E;&#x4F4D;low&#x67E5;&#x627E;&#x5230;&#x5927;&#x4E8E;&#x57FA;&#x51C6;&#x7684;&#x6570;&#xFF0C;&#x7136;&#x540E;&#x518D;&#x4ECE;&#x9AD8;&#x4F4D;high&#x5BFB;&#x627E;&#x5C0F;&#x4E8E;&#x57FA;&#x51C6;&#x7684;&#x6570;&#xFF0C;&#x4EA4;&#x6362;&#xFF1B;</span>
+<span class="hljs-comment">// &#x79FB;&#x52A8;&#x8FC7;&#x7A0B;&#x4E2D;high&#x548C;low&#x4E2D;&#x81F3;&#x5C11;&#x6709;&#x4E00;&#x4E2A;&#x6307;&#x5411;&#x7684;&#x662F;&#x57FA;&#x51C6;&#xFF0C;&#x6700;&#x540E;high&#x548C;low&#x76F8;&#x9047;&#xFF0C;&#x6307;&#x5411;&#x57FA;&#x51C6;&#xFF0C;&#x4E5F;&#x662F;&#x57FA;&#x51C6;&#x6700;&#x7EC8;&#x7684;&#x4F4D;&#x7F6E;</span>
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">Partition</span><span class="hljs-params">(<span class="hljs-keyword">int</span> arr[], <span class="hljs-keyword">int</span> low, <span class="hljs-keyword">int</span> high)</span>
+</span>{
+
+    <span class="hljs-keyword">int</span> base = arr[low];  <span class="hljs-comment">// &#x53D6;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x4E3A;&#x57FA;&#x51C6;</span>
+    <span class="hljs-keyword">int</span> index = low;
+    <span class="hljs-keyword">while</span>(low &lt; high)
+    {
+        <span class="hljs-comment">// &#x5148;&#x4ECE;&#x9AD8;&#x4F4D;high&#x67E5;&#x627E;&#x5230;&#x5C0F;&#x4E8E;&#x57FA;&#x51C6;&#x7684;index,&#x548C;low&#x4EA4;&#x6362;</span>
+        <span class="hljs-keyword">while</span>(low &lt; high &amp;&amp; arr[high] &gt;= base)
+        {
+            high --;
+        }
+        Swap(arr, low, high);
+        <span class="hljs-comment">// &#x518D;&#x4ECE;&#x4F4E;&#x4F4D;low&#x67E5;&#x627E;&#x5927;&#x4E8E;&#x57FA;&#x51C6;&#x7684;index&#xFF0C;&#x548C;high&#x4EA4;&#x6362;</span>
+        <span class="hljs-keyword">while</span>(low &lt; high &amp;&amp; arr[low] &lt;= base)
+        {
+            low ++;
+        }
+        Swap(arr, low, high);
+    }
+    <span class="hljs-keyword">return</span> low;
+
+}
+
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">QuickSort</span><span class="hljs-params">(<span class="hljs-keyword">int</span> arr[], <span class="hljs-keyword">int</span> low, <span class="hljs-keyword">int</span> high)</span>
+</span>{
+    <span class="hljs-keyword">if</span>(low &lt; high)
+    {
+        <span class="hljs-keyword">int</span> base = Partition(arr, low, high);
+        QuickSort(arr, low, base - <span class="hljs-number">1</span>);
+        QuickSort(arr, base + <span class="hljs-number">1</span>, high);
+    }
+
+}
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+    <span class="hljs-keyword">int</span> arr[<span class="hljs-number">10</span>] = {<span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-number">7</span>,<span class="hljs-number">8</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">4</span>,<span class="hljs-number">9</span>,<span class="hljs-number">6</span>};
+    QuickSort(arr, <span class="hljs-number">0</span>, <span class="hljs-number">10</span>);
+    for_each(arr, arr+<span class="hljs-number">10</span>, show);
+    system(<span class="hljs-string">&quot;pause&quot;</span>);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+
+}
+</code></pre>
+<h2 id="&#x5806;&#x6392;&#x5E8F;">&#x5806;&#x6392;&#x5E8F;</h2>
+<ul>
+<li><p>&#x5806;&#x6392;&#x5E8F;</p>
+<p><strong>&#x5927;&#x9876;&#x5806;</strong>&#xFF1A;&#x6BCF;&#x4E2A;&#x7ED3;&#x70B9;&#x7684;&#x503C;&#x90FD;&#x5927;&#x4E8E;&#x6216;&#x7B49;&#x4E8E;&#x5176;&#x5DE6;&#x53F3;&#x5B69;&#x5B50;&#x7ED3;&#x70B9;&#x7684;&#x503C;&#xFF0C;&#x6839;&#x7ED3;&#x70B9;&#x7684;&#x503C;&#x4E00;&#x5B9A;&#x662F;&#x6240;&#x6709;&#x7ED3;&#x70B9;&#x4E2D;&#x6700;&#x5927;&#x7684;<br><strong>&#x5C0F;&#x9876;&#x5806;</strong>&#xFF1A;&#x6BCF;&#x4E2A;&#x7ED3;&#x70B9;&#x7684;&#x503C;&#x90FD;&#x5C0F;&#x4E8E;&#x6216;&#x7B49;&#x4E8E;&#x5176;&#x5DE6;&#x53F3;&#x5B69;&#x5B50;&#x7ED3;&#x70B9;&#x7684;&#x503C;&#xFF0C;&#x6839;&#x7ED3;&#x70B9;&#x7684;&#x503C;&#x4E00;&#x5B9A;&#x662F;&#x6240;&#x6709;&#x7ED3;&#x70B9;&#x4E2D;&#x6700;&#x5C0F;&#x7684;<br>&#x5927;&#x6839;&#x5806;&#x4E3A;&#x4F8B;&#xFF1A;<br><strong>&#x5B8C;&#x5168;&#x4E8C;&#x53C9;&#x6811;</strong>&#xFF1A;&#x53EF;&#x4EE5;&#x7528;&#x6570;&#x7EC4;&#x8868;&#x793A;,K(i)&#x8868;&#x793A;&#x5F53;&#x524D;&#x7ED3;&#x70B9;&#xFF0C;&#x5219;&#x5B50;&#x8282;&#x70B9;K(2i)&#x548C;K(2i+1)<br>&#x6784;&#x9020;n&#x4E2A;&#x7ED3;&#x70B9;&#x7684;&#x5927;&#x9876;&#x5806;&#xFF0C;&#x8C03;&#x6574;&#x5F97;&#x5927;&#x9876;&#xFF0C;&#x53D6;&#x51FA;&#x6700;&#x5927;&#x5143;&#x7D20;&#x548C;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x4EA4;&#x6362;-&gt;&#x6700;&#x5927;&#x503C;&#x5F52;&#x961F;<br>&#x5BF9;n-1&#x4E2A;&#x7ED3;&#x70B9;&#xFF0C;&#x8C03;&#x6574;&#x5F97;&#x5927;&#x9876;&#xFF0C;&#x53D6;&#x51FA;&#x6700;&#x5927;&#x5143;&#x7D20;&#x548C;&#x5012;&#x6570;&#x7B2C;&#x4E8C;&#x4E2A;&#x5143;&#x7D20;&#x4EA4;&#x6362;-&gt; &#x6B21;&#x5927;&#x503C;&#x5F52;&#x961F;
+...</p>
+<p>&#x5806;&#x8C03;&#x6574;&#xFF1A;<br>&#x5982;&#x679C;&#x4ECE;&#x4E0B;&#x6807;&#x4ECE;0&#x5F00;&#x59CB;&#x5B58;&#x50A8;&#xFF0C;&#x5219;&#x7F16;&#x53F7;&#x4E3A;i&#x7684;&#x7ED3;&#x70B9;&#x7684;&#x4E3B;&#x8981;&#x5173;&#x7CFB;&#x4E3A;&#xFF1A;<br>&#x53CC;&#x4EB2;&#xFF1A;&#x4E0B;&#x53D6;&#x6574; (i-1)/2<br>&#x5DE6;&#x5B69;&#x5B50;&#xFF1A;2i+1<br>&#x53F3;&#x5B69;&#x5B50;&#xFF1A;2i+2<br>```c++</p>
+<h1 id="include-">include <iostream></iostream></h1>
+<h1 id="include-">include <algorithm></algorithm></h1>
+<h1 id="include-">include <cstdlib></cstdlib></h1>
+<h1 id="include-">include <cmath></cmath></h1>
+</li>
+</ul>
+<p>using namespace std;</p>
+<p>// &#x5806;&#x6392;&#x5E8F;
+//   -- &#x7A33;&#x5B9A;&#x6027;&#xFF1A;&#x4E0D;&#x7A33;&#x5B9A;
+//   -- &#x65F6;&#x95F4;&#x590D;&#x6742;&#x5EA6;&#xFF1A;o(nlogn)
+//   -- &#x7A7A;&#x95F4;&#x590D;&#x6742;&#x5EA6;&#xFF1A;o(1)</p>
+<p>void CreatHeap(int a[], int i, int  n) {</p>
+<pre><code>// &#x6570;&#x7EC4;&#x662F;&#x4ECE;0&#x5F00;&#x59CB;&#x8BA1;&#x6570;&#xFF0C;&#x6240;&#x4EE5;&#x5DE6;&#x8282;&#x70B9;&#x4E3A;2*i+1&#xFF0C;&#x53F3;&#x8282;&#x70B9;&#x4E3A;2*i+2
+// [0~i]&#x662F;&#x7236;&#x8282;&#x70B9;&#x7684;&#x4E0B;&#x6807;&#xFF0C;n&#x662F;&#x8282;&#x70B9;&#x603B;&#x6570;
+for (; i &gt;= 0; --i)
+{
+    int left = i*2 + 1;    //&#x5DE6;&#x5B50;&#x6811;&#x8282;&#x70B9;
+    int right = i*2 + 2;    //&#x53F3;&#x5B50;&#x6811;&#x8282;&#x70B9;
+    int j = 0;
+    //&#x9009;&#x51FA;&#x5DE6;&#x53F3;&#x5B50;&#x8282;&#x70B9;&#x4E2D;&#x6700;&#x5927;&#x7684;
+    if (right &lt; n) {
+        j = a[left] &gt; a[right] ? left : right;
+    } else{
+        j = left;
+    }
+    //&#x4EA4;&#x6362;&#x5B50;&#x8282;&#x70B9;&#x4E0E;&#x7236;&#x8282;&#x70B9;
+    if (a[j] &gt; a[i]) {
+        int tmp = a[i];
+        a[i] = a[j];
+        a[j] = tmp;
+    }
+}
+</code></pre><p>}</p>
+<p>// &#x8FDB;&#x884C;&#x5806;&#x6392;&#x5E8F;&#xFF0C;&#x4F9D;&#x6B21;&#x9009;&#x51FA;&#x6700;&#x5927;&#x503C;&#x653E;&#x5230;&#x6700;&#x540E;&#x9762;</p>
+<p>void HeapSort(int a[], int n) {</p>
+<pre><code>//&#x521D;&#x59CB;&#x5316;&#x6784;&#x9020;&#x5806;
+CreatHeap(a, n/2-1, n);
+for (int j = n-1; j &gt;= 0; j--) {
+
+    //&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x548C;&#x7B2C;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x8FDB;&#x884C;&#x4EA4;&#x6362;
+    int tmp = a[0];
+    a[0] = a[j];
+    a[j] = tmp;
+
+    int i = j / 2 - 1;
+    CreatHeap(a, i, j);
+}
+</code></pre><p>}</p>
+<p>int main(){</p>
+<pre><code>int arr[10] = {3,5,7,8,1,2,4,9,6};
+HeapSort(arr, 10);
+for_each(arr, arr+10, show);
+system(&quot;pause&quot;);
+return 0;
+</code></pre><p>}</p>
+<pre><code>
+## &#x5E0C;&#x5C14;&#x6392;&#x5E8F;
+
+* &#x5E0C;&#x5C14;&#x6392;&#x5E8F;
+
+1. &#x5BF9;&#x7B80;&#x5355;&#x63D2;&#x5165;&#x6392;&#x5E8F;&#x7684;&#x6539;&#x8FDB;&#xFF1A;  
+   &#x7B80;&#x5355;&#x63D2;&#x5165;&#x6392;&#x5E8F;&#x5728;&#x6EE1;&#x8DB3;&#x4E24;&#x4E2A;&#x6761;&#x4EF6;&#x4E0B;&#x6548;&#x7387;&#x5F88;&#x9AD8;&#xFF1A;  
+   a.&#x57FA;&#x672C;&#x6709;&#x5E8F; b.&#x5C0F;&#x89C4;&#x6A21;&#x6570;&#x636E;  
+   &#x5E0C;&#x5C14;&#x6392;&#x5E8F;&#x540C;&#x65F6;&#x89E3;&#x51B3;&#x7684;&#x4EE5;&#x4E0A;&#x4E24;&#x4E2A;&#x95EE;&#x9898;&#xFF0C;&#x601D;&#x8DEF;&#x5982;&#x4E0B;&#xFF1A;   
+   &#x9996;&#x5148;&#x5B83;&#x628A;&#x8F83;&#x5927;&#x7684;&#x6570;&#x636E;&#x96C6;&#x5408;&#x5206;&#x5272;&#x6210;&#x82E5;&#x5E72;&#x4E2A;&#x5C0F;&#x7EC4;&#xFF08;&#x903B;&#x8F91;&#x4E0A;&#x5206;&#x7EC4;&#xFF09;&#xFF0C;&#x7136;&#x540E;&#x5BF9;&#x6BCF;&#x4E00;&#x4E2A;&#x5C0F;&#x7EC4;&#x5206;&#x522B;&#x8FDB;&#x884C;&#x63D2;&#x5165;&#x6392;&#x5E8F;&#x3002;  
+   &#x5BF9;&#x5404;&#x7EC4;&#x8FDB;&#x884C;&#x63D2;&#x5165;&#x7684;&#x65F6;&#x5019;&#x5E76;&#x4E0D;&#x662F;&#x5148;&#x5BF9;&#x4E00;&#x7EC4;&#x6392;&#x5E8F;&#x5B8C;&#x518D;&#x5BF9;&#x53E6;&#x4E00;&#x7EC4;&#x6392;&#x5E8F;&#xFF0C;&#x800C;&#x662F;&#x8F6E;&#x6D41;&#x5BF9;&#x6BCF;&#x7EC4;&#x8FDB;&#x884C;&#x63D2;&#x5165;&#x3002;  
+   &#x5B9E;&#x73B0;&#x4E0A;&#x76F8;&#x5F53;&#x4E8E;&#x5BF9;&#x7B80;&#x5355;&#x63D2;&#x5165;&#x6392;&#x5E8F;&#x7684;&#x5916;&#x5C42;&#x589E;&#x52A0;&#x4E86;&#x4E00;&#x4E2A;&#x63A7;&#x5236;&#x589E;&#x91CF;&#x7684;&#x5FAA;&#x73AF;&#x3002; 
+
+2. &#x65F6;&#x95F4;&#x590D;&#x6742;&#x5EA6;&#xFF1A;
+   &#x5E0C;&#x5C14;&#x6392;&#x5E8F;&#x7684;&#x590D;&#x6742;&#x5EA6;&#x548C;&#x589E;&#x91CF;&#x5E8F;&#x5217;&#x662F;&#x76F8;&#x5173;&#x7684;&#xFF0C;&#x4F7F;&#x7528;{1,2,4,8...}&#x8FD9;&#x79CD;&#x589E;&#x91CF;&#x5E8F;&#x5217;&#x6700;&#x574F;&#x65F6;&#x95F4;&#x590D;&#x6742;&#x5EA6;&#x662F;o(n^2)    
+   &#x6539;&#x8FDB;&#x589E;&#x91CF;&#x5E8F;&#x5217;&#x65F6;&#x95F4;&#x590D;&#x6742;&#x5EA6;&#x53EF;&#x4EE5;&#x5230;o(n^1.3)
+
+```c++
+#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+#include &lt;cstdlib&gt;
+#include &lt;cmath&gt;
+
+using namespace std;
+
+// &#x5E0C;&#x5C14;&#x6392;&#x5E8F;
+//   -- &#x7A33;&#x5B9A;&#x6027;&#xFF1A;&#x4E0D;&#x7A33;&#x5B9A;
+//   -- &#x65F6;&#x95F4;&#x590D;&#x6742;&#x5EA6;&#xFF1A;o(n^(1.3-2))
+//   -- &#x7A7A;&#x95F4;&#x590D;&#x6742;&#x5EA6;&#xFF1A;o(1)
+
+
+void show(int item){ cout &lt;&lt; item &lt;&lt; &quot; &quot;;}
+
+void insertI(int arr[], int gap, int i) {
+
+    int current = arr[i];
+    int j;
+    for(j = i-gap; j &gt;= 0 &amp;&amp; arr[j] &gt; current; j -= gap){
+        arr[j+gap] = arr[j];
+    }
+    arr[j+gap] = current;
+
+}
+
+// &#x5E0C;&#x5C14;&#x6392;&#x5E8F;
+void shellSort(int  arr[], int len){
+    // &#x589E;&#x91CF;&#x63A7;&#x5236; ... 8  4 2 1
+    for(int gap = len/2; gap &gt; 0; gap /= 2 ){
+        for(int i = gap; i &lt; len; i++){
+            // &#x548C;&#x7B80;&#x5355;&#x63D2;&#x5165;&#x6392;&#x5E8F;&#x7C7B;&#x4F3C;&#xFF0C;&#x53EA;&#x662F;&#x589E;&#x91CF;&#x7531;1&#x53D8;&#x4E3A;gap
+            insertI(arr, gap, i);
+        }
+    }
+
+}
+
+int main(){
+    int arr[10] = {3,5,7,8,1,2,4,9,6};
+    shellSort(arr, 10);
+    for_each(arr, arr+10, show);
+    system(&quot;pause&quot;);
+    return 0;
+
+}
+</code></pre><h1 id="&#x62D3;&#x5C55;&#x9898;&#x76EE;">&#x62D3;&#x5C55;&#x9898;&#x76EE;</h1>
+<ul>
+<li><p>&#x5982;&#x679C;&#x6570;&#x636E;&#x91CF;&#x4E0D;&#x662F;&#x5F88;&#x5927;&#x4E14;&#x57FA;&#x672C;&#x6709;&#x5E8F;&#x65F6;&#xFF0C;&#x7528;&#x54EA;&#x79CD;&#x6392;&#x5E8F;&#x65F6;&#x95F4;&#x590D;&#x6742;&#x5EA6;&#x6700;&#x4F4E;&#xFF1F;</p>
+<p>&#x5206;&#x6790;&#xFF1A;</p>
+<ol>
+<li>&#x6570;&#x636E;&#x91CF;&#x8303;&#x56F4;&#x672A;&#x77E5;&#xFF0C;&#x4E0D;&#x5B9C;&#x9009;&#x62E9;<strong>&#x8BA1;&#x6570;&#x6392;&#x5E8F;&#x3001;&#x57FA;&#x6570;&#x6392;&#x5E8F;</strong>&#x8FD9;&#x4E9B;o(n)&#x7684;&#x6392;&#x5E8F;&#x3002;</li>
+<li>&#x4E09;&#x79CD;&#x57FA;&#x672C;&#x6392;&#x5E8F;&#x4E2D;<strong>&#x5192;&#x6CE1;&#x548C;&#x9009;&#x62E9;</strong>&#xFF0C;&#x4E0D;&#x7BA1;&#x5E8F;&#x5217;&#x5982;&#x4F55;&#xFF0C;&#x90FD;&#x662F;o(n^2)&#x7684;&#x590D;&#x6742;&#x5EA6;&#xFF0C;&#x4E0D;&#x9009;&#x3002;</li>
+<li><strong>&#x63D2;&#x5165;&#x6392;&#x5E8F;</strong>&#x548C;&#x539F;&#x59CB;&#x5E8F;&#x5217;&#x662F;&#x5426;&#x6709;&#x5E8F;&#x6709;&#x5173;&#x7CFB;&#xFF0C;&#x57FA;&#x672C;&#x6709;&#x5E8F;&#x65F6;&#x5143;&#x7D20;&#x79FB;&#x52A8;&#x4F1A;&#x5F88;&#x5C0F;(&lt;=k&#xFF09;&#xFF0C;&#x590D;&#x6742;&#x5EA6;&#x4E3A;o(n*k)&#xFF0C;&#x53EF;&#x9009;&#x3002;</li>
+<li><strong>&#x5FEB;&#x901F;&#x6392;&#x5E8F;&#x3001;&#x5F52;&#x5E76;&#x6392;&#x5E8F;</strong>&#x548C;&#x539F;&#x59CB;&#x987A;&#x5E8F;&#x4E5F;&#x6CA1;&#x6709;&#x5173;&#x7CFB;&#x3002;</li>
+<li>&#x6700;&#x4F18;&#x7B54;&#x6848;&#xFF1A;<strong>&#x6539;&#x8FDB;&#x540E;&#x7684;&#x5806;&#x6392;&#x5E8F;</strong>&#xFF0C;&#x65F6;&#x95F4;&#x590D;&#x6742;&#x5EA6;&#x662F;o(n*logk)&#x3002;[&#x521B;&#x5EFA;k&#x4E2A;&#x5143;&#x7D20;&#x7684;&#x5C0F;&#x6839;&#x5806;]</li>
+</ol>
+</li>
+<li><p>&#x5224;&#x65AD;&#x6570;&#x7EC4;&#x4E2D;&#x662F;&#x5426;&#x6709;&#x91CD;&#x590D;&#x503C;&#xFF0C;&#x8981;&#x6C42;&#x7A7A;&#x95F4;&#x590D;&#x6742;&#x5EA6;&#x662F;o(1)&#x3002;</p>
+<p>&#x5148;&#x6392;&#x5E8F;&#xFF0C;&#x518D;&#x67E5;&#x627E;&#x3002;&#x7A7A;&#x95F4;&#x590D;&#x6742;&#x5EA6;&#x4E3A;o(1)&#x7684;&#x6700;&#x4F18;&#x6392;&#x5E8F;&#xFF1A;&#x5806;&#x6392;&#x5E8F;&#x3002;&#x3010;&#x6CE8;&#x610F;&#x8FD9;&#x91CC;&#x8981;&#x8BBE;&#x8BA1;&#x4E00;&#x79CD;&#x975E;&#x9012;&#x5F52;&#x5B9E;&#x73B0;&#x7684;&#x5806;&#x6392;&#x5E8F;&#xFF0C;&#x56E0;&#x4E3A;&#x9012;&#x5F52;&#x65F6;&#x95F4;&#x7684;&#x5806;&#x6392;&#x5E8F;&#xFF0C;&#x8C03;&#x7528;&#x6808;&#x7684;&#x95EE;&#x9898;&#xFF0C;&#x4F1A;&#x4F7F;&#x7A7A;&#x95F4;&#x590D;&#x6742;&#x5EA6;&#x4E3A;o(logn)&#x3011;</p>
+</li>
+<li><p>&#x628A;&#x4E24;&#x4E2A;&#x6709;&#x5E8F;&#x6570;&#x7EC4;&#x5408;&#x5E76;&#x4E3A;&#x4E00;&#x4E2A;&#x6570;&#x7EC4;&#xFF0C;&#x7B2C;&#x4E00;&#x4E2A;&#x6570;&#x7EC4;&#x7684;&#x7A7A;&#x95F4;&#x6B63;&#x597D;&#x53EF;&#x4EE5;&#x5BB9;&#x7EB3;&#x4E24;&#x4E2A;&#x6570;&#x7EC4;&#x7684;&#x5143;&#x7D20;&#x3002;</p>
+<p>&#x601D;&#x8DEF;&#xFF1A;&#x8BBE;&#x7F6E;&#x4E24;&#x4E2A;index&#xFF0C;&#x5206;&#x522B;&#x6307;&#x5411;&#x4E24;&#x4E2A;&#x6570;&#x7EC4;&#x7684;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x6709;&#x6548;&#x6570;&#x636E;&#x5143;&#x7D20;&#xFF0C;&#x5411;&#x524D;&#x79FB;&#x52A8;&#x6BD4;&#x8F83;&#xFF0C;&#x9010;&#x4E00;&#x5C06;&#x5927;&#x8005;&#x8986;&#x76D6;&#x5230;&#x6570;&#x7EC4;1&#x7684;&#x5C3E;&#x90E8;&#x3002;&#x7A7A;&#x95F4;&#x590D;&#x6742;&#x5EA6;&#x4E3A;o(1)&#x3002;</p>
+</li>
+</ul>
+<h1 id="&#x53C2;&#x8003;&#x8D44;&#x6599;">&#x53C2;&#x8003;&#x8D44;&#x6599;</h1>
+<ul>
+<li>&#x52A8;&#x56FE;  <a href="https://www.cnblogs.com/onepixel/articles/7674659.html" target="_blank">https://www.cnblogs.com/onepixel/articles/7674659.html</a></li>
+<li>B&#x7AD9;&#x89C6;&#x9891;  BAT&#x7B97;&#x6CD5;&#x9762;&#x8BD5;&#x7CBE;&#x8BB2;</li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: 第三章">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="数据结构_树.html" class="navigation navigation-next " aria-label="Next page: 数据结构_二叉树">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"排序算法","level":"1.5.1","depth":2,"next":{"title":"数据结构_二叉树","level":"1.5.2","depth":2,"path":"3算法类/数据结构_树.md","ref":"./3算法类/数据结构_树.md","articles":[]},"previous":{"title":"第三章","level":"1.5","depth":1,"path":"3算法类/README.md","ref":"3算法类/README.md","articles":[{"title":"排序算法","level":"1.5.1","depth":2,"path":"3算法类/排序算法.md","ref":"./3算法类/排序算法.md","articles":[]},{"title":"数据结构_二叉树","level":"1.5.2","depth":2,"path":"3算法类/数据结构_树.md","ref":"./3算法类/数据结构_树.md","articles":[]},{"title":"数据结构_链表","level":"1.5.3","depth":2,"path":"3算法类/数据结构_链表.md","ref":"./3算法类/数据结构_链表.md","articles":[]},{"title":"数据结构_链表","level":"1.5.4","depth":2,"path":"3算法类/数据结构_图.md","ref":"./3算法类/数据结构_图.md","articles":[]},{"title":"正则表达式","level":"1.5.5","depth":2,"path":"3算法类/正则表达式.md","ref":"./3算法类/正则表达式.md","articles":[]},{"title":"动态规划","level":"1.5.6","depth":2,"path":"3算法类/动态规划.md","ref":"./3算法类/动态规划.md","articles":[]},{"title":"设计模式","level":"1.5.7","depth":2,"path":"3算法类/设计模式.md","ref":"./3算法类/设计模式.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"3算法类/排序算法.md","mtime":"2019-12-20T02:19:39.151Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-12-23T07:08:47.255Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
