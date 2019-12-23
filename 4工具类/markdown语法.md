@@ -64,7 +64,7 @@
 
 ## 表格
 			插入表格(注意：表格前一行是空白行)：
-
+	
 			| 左对齐标题 | 右对齐标题 | 居中对齐标题 |
 			| :------| ------: | :------: |
 			| 短文本 | 中等文本 | 稍微长一点的文本 |
@@ -82,7 +82,7 @@
 ## 插入代码
 
 			代码全部选中，然后按tab键缩进（前边留一空行）。
-
+	
 				int main(){
 				    int arr[10] = {3,5,7,8,1,2,4,9,6};
 				    HeapSort(arr, 10);
@@ -155,3 +155,43 @@
 ​	2、插入单行代码，使用`  
 
 ​	  `一行代码`
+
+
+
+# markdown笔记 + github云端保存 + gitbook生成书籍目录
+
+* 参考链接
+
+  https://www.cnblogs.com/liyao0312/p/11334655.html
+  
+* 生成书籍
+
+  ```shell
+  # 官网安装node
+  
+  # 全局安装 gitbook-cli
+  npm config set registry https://registry.npm.taobao.org/      # 建议使用nmp淘宝源
+  npm i -g gitbook-cli
+  
+  # 初始化电子书
+  # 创建一个目录，进入
+  mkdir gitbook-demo
+  cd gitbook-demo
+   
+  # 初始化电子书目录
+  gitbook init
+  # 执行gitbook init后，目录里会有两个文件，README.md 是对电子书的简单介绍，SUMMARY.md 是电子书的目录结构。根据书籍内容编辑这两个文件。
+   
+  # 1. 编译电子书，同时打开一个web服务，在4000端口监听。
+  gitbook serve 
+  # 2. 值编译书籍，生成本地静态电子书
+  gitbook build [书籍路径] [输出路径]      # 不写参数，生成在当前路径的_book文件夹下。
+  # 遇到一个问题，生成的本地静态电子书，链接打不开，
+  # 解决办法：
+  # 在导出的文件夹目录下找到gitbook->theme.js文件
+  # 找到下面的代码（搜索 if(m)for(n.handler&&），将if(m)改成if(false) ，在重新打开index.html即可。
+  ```
+
+  
+
+  

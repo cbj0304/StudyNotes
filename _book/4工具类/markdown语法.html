@@ -666,6 +666,38 @@
 <p>&#x200B;    ```</p>
 <p>&#x200B;    2&#x3001;&#x63D2;&#x5165;&#x5355;&#x884C;&#x4EE3;&#x7801;&#xFF0C;&#x4F7F;&#x7528;`  </p>
 <p>&#x200B;      <code>&#x4E00;&#x884C;&#x4EE3;&#x7801;</code></p>
+<h1 id="markdown&#x7B14;&#x8BB0;--github&#x4E91;&#x7AEF;&#x4FDD;&#x5B58;--gitbook&#x751F;&#x6210;&#x4E66;&#x7C4D;&#x76EE;&#x5F55;">markdown&#x7B14;&#x8BB0; + github&#x4E91;&#x7AEF;&#x4FDD;&#x5B58; + gitbook&#x751F;&#x6210;&#x4E66;&#x7C4D;&#x76EE;&#x5F55;</h1>
+<ul>
+<li><p>&#x53C2;&#x8003;&#x94FE;&#x63A5;</p>
+<p><a href="https://www.cnblogs.com/liyao0312/p/11334655.html" target="_blank">https://www.cnblogs.com/liyao0312/p/11334655.html</a></p>
+</li>
+<li><p>&#x751F;&#x6210;&#x4E66;&#x7C4D;</p>
+<pre><code class="lang-shell"># &#x5B98;&#x7F51;&#x5B89;&#x88C5;node
+
+# &#x5168;&#x5C40;&#x5B89;&#x88C5; gitbook-cli
+npm config set registry https://registry.npm.taobao.org/      # &#x5EFA;&#x8BAE;&#x4F7F;&#x7528;nmp&#x6DD8;&#x5B9D;&#x6E90;
+npm i -g gitbook-cli
+
+# &#x521D;&#x59CB;&#x5316;&#x7535;&#x5B50;&#x4E66;
+# &#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x76EE;&#x5F55;&#xFF0C;&#x8FDB;&#x5165;
+mkdir gitbook-demo
+cd gitbook-demo
+
+# &#x521D;&#x59CB;&#x5316;&#x7535;&#x5B50;&#x4E66;&#x76EE;&#x5F55;
+gitbook init
+# &#x6267;&#x884C;gitbook init&#x540E;&#xFF0C;&#x76EE;&#x5F55;&#x91CC;&#x4F1A;&#x6709;&#x4E24;&#x4E2A;&#x6587;&#x4EF6;&#xFF0C;README.md &#x662F;&#x5BF9;&#x7535;&#x5B50;&#x4E66;&#x7684;&#x7B80;&#x5355;&#x4ECB;&#x7ECD;&#xFF0C;SUMMARY.md &#x662F;&#x7535;&#x5B50;&#x4E66;&#x7684;&#x76EE;&#x5F55;&#x7ED3;&#x6784;&#x3002;&#x6839;&#x636E;&#x4E66;&#x7C4D;&#x5185;&#x5BB9;&#x7F16;&#x8F91;&#x8FD9;&#x4E24;&#x4E2A;&#x6587;&#x4EF6;&#x3002;
+
+# 1. &#x7F16;&#x8BD1;&#x7535;&#x5B50;&#x4E66;&#xFF0C;&#x540C;&#x65F6;&#x6253;&#x5F00;&#x4E00;&#x4E2A;web&#x670D;&#x52A1;&#xFF0C;&#x5728;4000&#x7AEF;&#x53E3;&#x76D1;&#x542C;&#x3002;
+gitbook serve 
+# 2. &#x503C;&#x7F16;&#x8BD1;&#x4E66;&#x7C4D;&#xFF0C;&#x751F;&#x6210;&#x672C;&#x5730;&#x9759;&#x6001;&#x7535;&#x5B50;&#x4E66;
+gitbook build [&#x4E66;&#x7C4D;&#x8DEF;&#x5F84;] [&#x8F93;&#x51FA;&#x8DEF;&#x5F84;]      # &#x4E0D;&#x5199;&#x53C2;&#x6570;&#xFF0C;&#x751F;&#x6210;&#x5728;&#x5F53;&#x524D;&#x8DEF;&#x5F84;&#x7684;_book&#x6587;&#x4EF6;&#x5939;&#x4E0B;&#x3002;
+# &#x9047;&#x5230;&#x4E00;&#x4E2A;&#x95EE;&#x9898;&#xFF0C;&#x751F;&#x6210;&#x7684;&#x672C;&#x5730;&#x9759;&#x6001;&#x7535;&#x5B50;&#x4E66;&#xFF0C;&#x94FE;&#x63A5;&#x6253;&#x4E0D;&#x5F00;&#xFF0C;
+# &#x89E3;&#x51B3;&#x529E;&#x6CD5;&#xFF1A;
+# &#x5728;&#x5BFC;&#x51FA;&#x7684;&#x6587;&#x4EF6;&#x5939;&#x76EE;&#x5F55;&#x4E0B;&#x627E;&#x5230;gitbook-&gt;theme.js&#x6587;&#x4EF6;
+# &#x627E;&#x5230;&#x4E0B;&#x9762;&#x7684;&#x4EE3;&#x7801;&#xFF08;&#x641C;&#x7D22; if(m)for(n.handler&amp;&amp;&#xFF09;&#xFF0C;&#x5C06;if(m)&#x6539;&#x6210;if(false) &#xFF0C;&#x5728;&#x91CD;&#x65B0;&#x6253;&#x5F00;index.html&#x5373;&#x53EF;&#x3002;
+</code></pre>
+</li>
+</ul>
 
                                 
                                 </section>
@@ -709,7 +741,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"markdown语法","level":"1.6.2","depth":2,"next":{"title":"第五章","level":"1.7","depth":1,"path":"5其他/README.md","ref":"5其他/README.md","articles":[{"title":"学习代码","level":"1.7.1","depth":2,"path":"5其他/学习代码.md","ref":"./5其他/学习代码.md","articles":[]},{"title":"学习网站","level":"1.7.2","depth":2,"path":"5其他/学习网站.md","ref":"./5其他/学习网站.md","articles":[]}]},"previous":{"title":"vscode使用","level":"1.6.1","depth":2,"path":"4工具类/vscode使用.md","ref":"./4工具类/vscode使用.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"4工具类/markdown语法.md","mtime":"2019-11-14T01:07:29.529Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-12-23T07:08:47.255Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"markdown语法","level":"1.6.2","depth":2,"next":{"title":"第五章","level":"1.7","depth":1,"path":"5其他/README.md","ref":"5其他/README.md","articles":[{"title":"学习代码","level":"1.7.1","depth":2,"path":"5其他/学习代码.md","ref":"./5其他/学习代码.md","articles":[]},{"title":"学习网站","level":"1.7.2","depth":2,"path":"5其他/学习网站.md","ref":"./5其他/学习网站.md","articles":[]}]},"previous":{"title":"vscode使用","level":"1.6.1","depth":2,"path":"4工具类/vscode使用.md","ref":"./4工具类/vscode使用.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"4工具类/markdown语法.md","mtime":"2019-12-23T07:48:22.957Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-12-23T07:49:03.624Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
@@ -717,10 +749,6 @@
         
     <script src="../gitbook/gitbook.js"></script>
     <script src="../gitbook/theme.js"></script>
-    
-        
-        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
-        
     
         
         <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
