@@ -12,7 +12,7 @@
     * [mysql及索引优化](./1语言类/mysql及索引优化.md)
 * [第二章](2框架类/README.md)
     * [flask框架](./2框架类/flask框架.md)
-    * [scrapy框架](./2框架类/scrapy框架.md)
+    * [scrapy框架](./2框架类/scrapy框架_fake.md)
     * [brpc框架](./2框架类/brpc框架.md)
     * [IO多路复用](./2框架类/IO多路复用.md)
 * [第三章](3算法类/README.md)
