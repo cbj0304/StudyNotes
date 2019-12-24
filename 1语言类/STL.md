@@ -5,11 +5,15 @@
 * c++标准库（c++ Standard Library）
 * STL标准模板库（Standard Template Llibrary）
 
-## 重要网站
+## 参考资料
 
-* <https://zh.cppreference.com/>
-* <http://www.cplusplus.com/>
-* <https://gcc.gnu.org/> (libstdc++)
+* 重要网站
+  * <https://zh.cppreference.com/>
+  * <http://www.cplusplus.com/>
+  * <https://gcc.gnu.org/> (libstdc++)
+
+* 参考书籍
+  * STL源码剖析(侯捷)
 
 ## STL六大部件
 
@@ -56,17 +60,23 @@
 
 * stl五种迭代器：
 
-  1. 输出迭代器（Output iterator）
+  ```mermaid
+graph TD
+A[输出迭代器 output_iterator]
+B[输入迭代器 input_iterator] --> |继承| C[前向迭代器 forward_iterator] --> |继承|D[双向迭代器 bidirectional_iterator] --> |继承| E[随机存取迭代器 random_access_iterato]
+  ```
 
-  2. 输入迭代器（Input iterator）
+  * **输出迭代器**（Output iterator）   
 
-  3. 前向迭代器（Forward iterator）
+  * **输入迭代器**（Input iterator）    
 
-  4. 双向迭代器（Bidirectional iterator）
-
-  5. 随机存取迭代器（Random access iterator）
-
-     **说明：** *3继承自2；4继承自3；5继承自4*
+  * **前向迭代器**（Forward iterator） 继承自  输入迭代器  
+  
+  * **双向迭代器**（Bidirectional iterator） 继承自 前向迭代器  
+  
+  * **随机存取迭代器**（Random access iterator） 继承自 双向迭代器  
+  
+  
 
 ## stl使用的是堆内存还是栈内存？
 
