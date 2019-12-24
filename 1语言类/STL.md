@@ -60,22 +60,17 @@
 
 * stl五种迭代器：
 
-  ```mermaid
+```mermaid
 graph TD
 A[输出迭代器 output_iterator]
 B[输入迭代器 input_iterator] --> |继承| C[前向迭代器 forward_iterator] --> |继承|D[双向迭代器 bidirectional_iterator] --> |继承| E[随机存取迭代器 random_access_iterato]
-  ```
+```
 
-  * **输出迭代器**（Output iterator）   
-
-  * **输入迭代器**（Input iterator）    
-
-  * **前向迭代器**（Forward iterator） 继承自  输入迭代器  
-  
-  * **双向迭代器**（Bidirectional iterator） 继承自 前向迭代器  
-  
-  * **随机存取迭代器**（Random access iterator） 继承自 双向迭代器  
-  
+  * **输出迭代器**（Output iterator）
+  * **输入迭代器**（Input iterator）
+  * **前向迭代器**（Forward iterator） --- 继承自输入迭代器  
+  * **双向迭代器**（Bidirectional iterator） --- 继承自前向迭代器  
+  * **随机存取迭代器**（Random access iterator） --- 继承自双向迭代器  
   
 
 ## stl使用的是堆内存还是栈内存？
