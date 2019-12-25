@@ -1392,9 +1392,13 @@ int main()
       后置++和后置--，增加一个伪参数int来标识
 
   5. 重载<< 和链式编程
-    函数返回值充当左值 需要返回一个引用
+    函数返回的引用可以充当左值，执行链式操作。
 
-  6. 案例：自己实现复数类，并重载 + /- /<< /++ /-- 运算符
+  6. 如果待重载的运算符需要两个操作数：
+     成员函数情况下，只需要一个参数，因为this指针（类本身）就是一个操作数了；
+     友元函数情况下，需要两个参数代表两个操作数。
+
+  7. 案例：自己实现复数类，并重载 + /- /<< /++ /-- 运算符
   */
 
   class Complex {
@@ -1482,13 +1486,13 @@ int main()
       类模板和函数模板都必须定义在.h文件中，特例化版本必须与模板定义在同一个.h头文件中；
       模板的实例化类型确定是在编译期间；
       特化/偏特化 主要的用途都是对于特定的类型，指定特定的处理方式，
-      编译阶段确定如果是某个特化类型，就用特化的模板；如果都不是，就用最一般的模板。
+      编译阶段确定如果符合某个特化版本，就用特化的模板；如果都不是，就用最一般的模板。
       特例化本质上是我们顶替了编译器的工作，我们帮编译器做了类型推导，
       全特化本质上是一个实例，而偏特化本质上还是一个模板，只是原来模板的一个子集。
 
   2. 偏特化在STL中的应用：
       应用1：使迭代器既可以萃取出值类型，又可以包容原生指针
-          (1) 在每个迭代器中都定义了value_type值类型的类型成员，
+          (1) 在每个迭代器中都定义了一个类型别名 -- value_type，
           	这样直接通过迭代器的value_type类型成员就可以知道值类型。
           (2) 但是迭代器必须兼容原生态的指针，
           	而原生指针很难被重新定义(如在原生指针的类中添加value_type的值类型的类型成员),
@@ -1733,132 +1737,132 @@ int main()
      */
 
      int myfun1(int x, int y) {
-     return x + 2 * y;
+        return x + 2 * y;
      }
 
      struct myfun2 {
-     int operator() (int x, int y) {
-       return x + 2 * y;
-     }
+        int operator() (int x, int y) {
+            return x + 2 * y;
+        }
      };
 
      struct predFun {
-     bool operator() (int a) {
-       return (a >= 100);
-     }
+        bool operator() (int a) {
+        return (a >= 100);
+        }
      };
 
      // 测试bind一个函数，函数对象类似，如 std::divides<double> my_divide;
      double my_divide(double x, double y) {
-     return x / y;
+        return x / y;
      }
 
      // 测试bind类的成员变量和成员函数
      struct MyPair {
-     double a, b;
-     double multiply() { return a * b; }
+        double a, b;
+        double multiply() { return a * b; }
      };
 
      int main() {
 
-     int init = 100;
-     int nums[] = {10, 20, 30};
-     // 累计
-     cout << accumulate(nums, nums+3, init) << endl;           // 累计（默认加法）100+10+20+30=160
-     cout << accumulate(nums, nums+3, init, minus<int>()) << endl;   // 累计，减法 100-10-20-30=40
-     // 自定义函数对象（仿函数）、函数指针
-     cout << accumulate(nums, nums+3, init, myfun1) << endl;  // init=myfun1(init, *it) 220
-     cout << accumulate(nums, nums+3, init, myfun2()) << endl;  // init=myfun2(init, *it) 220
+        int init = 100;
+        int nums[] = {10, 20, 30};
+        // 累计
+        cout << accumulate(nums, nums+3, init) << endl;           // 累计（默认加法）100+10+20+30=160
+        cout << accumulate(nums, nums+3, init, minus<int>()) << endl;   // 累计，减法 100-10-20-30=40
+        // 自定义函数对象（仿函数）、函数指针
+        cout << accumulate(nums, nums+3, init, myfun1) << endl;  // init=myfun1(init, *it) 220
+        cout << accumulate(nums, nums+3, init, myfun2()) << endl;  // init=myfun2(init, *it) 220
 
-     //replace/ replace_if/ replace_copy/ replace_copy_if
-     vector<int> vi {1, 120, -1, 30, -1, 35, 7};
-     replace(vi.begin(), vi.end(), -1, 100);
-     replace_if(vi.begin(), vi.end(), predFun(), 20);
+        //replace/ replace_if/ replace_copy/ replace_copy_if
+        vector<int> vi {1, 120, -1, 30, -1, 35, 7};
+        replace(vi.begin(), vi.end(), -1, 100);
+        replace_if(vi.begin(), vi.end(), predFun(), 20);
 
-     // count/ count_if
-     cout << count(vi.begin(), vi.end(), 20) << endl;
-     cout << count_if(vi.begin(), vi.end(), predFun()) << endl;
+        // count/ count_if
+        cout << count(vi.begin(), vi.end(), 20) << endl;
+        cout << count_if(vi.begin(), vi.end(), predFun()) << endl;
 
-     // find/ find_if
-     auto it = find_if(vi.begin(), vi.end(), predFun());
-     if (it != vi.end()) {
-       cout << "find it=>" << *it << endl;
-     }
+        // find/ find_if
+        auto it = find_if(vi.begin(), vi.end(), predFun());
+        if (it != vi.end()) {
+        cout << "find it=>" << *it << endl;
+        }
 
-     // sort
-     sort(vi.begin(), vi.end());        // 1 7 20 20 30 35
-     for_each(vi.begin(), vi.end(), show_item<int>); cout << endl;
+        // sort
+        sort(vi.begin(), vi.end());        // 1 7 20 20 30 35
+        for_each(vi.begin(), vi.end(), show_item<int>); cout << endl;
 
-     // lower_bound/ upper_bound/ binary_search
-     auto it_low = lower_bound(vi.begin(), vi.end(), 20);   // 指向第一个20的位置
-     auto it_upper = upper_bound(vi.begin(), vi.end(), 20);   // 指向第一个大于20的位置，也就是30所在的位置
-     size_t count1 = it_upper - it_low;              // 随机访问迭代器支持减法
-     size_t count2 = distance(it_low, it_upper);     // 可以计算任意两个迭代器之间的元素个数，计算结果和count1相同
-     cout << "counts of val=20 is: " << count1 << ", " << count2 << endl;
-     assert(binary_search(vi.begin(), vi.end(), 20) == true);
-     assert(binary_search(vi.begin(), vi.end(), 200) == false);
+        // lower_bound/ upper_bound/ binary_search
+        auto it_low = lower_bound(vi.begin(), vi.end(), 20);   // 指向第一个20的位置
+        auto it_upper = upper_bound(vi.begin(), vi.end(), 20);   // 指向第一个大于20的位置，也就是30所在的位置
+        size_t count1 = it_upper - it_low;              // 随机访问迭代器支持减法
+        size_t count2 = distance(it_low, it_upper);     // 可以计算任意两个迭代器之间的元素个数，计算结果和count1相同
+        cout << "counts of val=20 is: " << count1 << ", " << count2 << endl;
+        assert(binary_search(vi.begin(), vi.end(), 20) == true);
+        assert(binary_search(vi.begin(), vi.end(), 200) == false);
 
-     // bind2nd
-     // 允许把函数对象less<int>()的第二个参数绑定为40，
-     // 本来是二元函数x<y返回true，这里绑定后x<40返回true。
-     // bind2nd是一个函数适配器，是为了修饰仿函数，返回一个仿函数，且继承自unary_functon，还可以继续被适配；
-     // not1也是一个函数适配器，修饰完，返回的也还是一个仿函数。
-     size_t n = count_if(vi.begin(), vi.end(), not1(bind2nd(less<int>(), 20)));   // 不小于20，输出5
+        // bind2nd
+        // 允许把函数对象less<int>()的第二个参数绑定为40，
+        // 本来是二元函数x<y返回true，这里绑定后x<40返回true。
+        // bind2nd是一个函数适配器，是为了修饰仿函数，返回一个仿函数，且继承自unary_functon，还可以继续被适配；
+        // not1也是一个函数适配器，修饰完，返回的也还是一个仿函数。
+        size_t n = count_if(vi.begin(), vi.end(), not1(bind2nd(less<int>(), 20)));   // 不小于20，输出5
 
-     // bind：可以绑定函数、函数对象、成员函数、成员变量
-     // _1 _2 _3... 占位符, 占位：表示预留着，调用的时候通过参数传递。
-     using namespace std::placeholders;             // _1 _2 等占位符可见
+        // bind：可以绑定函数、函数对象、成员函数、成员变量
+        // _1 _2 _3... 占位符, 占位：表示预留着，调用的时候通过参数传递。
+        using namespace std::placeholders;             // _1 _2 等占位符可见
 
-     auto b1 = bind(less<int>(), _1, _2);          // 绑定函数名，参数1，参数2预留，通过实参传递
-     cout << b1(10, 12) << endl;
+        auto b1 = bind(less<int>(), _1, _2);          // 绑定函数名，参数1，参数2预留，通过实参传递
+        cout << b1(10, 12) << endl;
 
-     auto fn_five = bind(my_divide, 10, 2);         // 绑定函数名，参数1，参数2
-     cout << fn_five() << endl;
+        auto fn_five = bind(my_divide, 10, 2);         // 绑定函数名，参数1，参数2
+        cout << fn_five() << endl;
 
-     auto fn_half = bind(my_divide, _1, 2);         // 参数1预留，通过实参传递
-     cout << fn_half(10) << endl;
+        auto fn_half = bind(my_divide, _1, 2);         // 参数1预留，通过实参传递
+        cout << fn_half(10) << endl;
 
-     auto fn_invert = bind(my_divide, _2, _1);       // 预留参数1、参数2，通过实参传递，但位置颠倒
-     cout << fn_invert(2, 10) << endl;
+        auto fn_invert = bind(my_divide, _2, _1);       // 预留参数1、参数2，通过实参传递，但位置颠倒
+        cout << fn_invert(2, 10) << endl;
 
-     auto fn_toint = bind<int> (my_divide, _1, _2);  // 支持传一个模板参数，这个模板参数是函数返回值类型，
-     cout << fn_toint(10, 3) << endl;                // 不传的话，直接返回函数本来的类型。
+        auto fn_toint = bind<int> (my_divide, _1, _2);  // 支持传一个模板参数，这个模板参数是函数返回值类型，
+        cout << fn_toint(10, 3) << endl;                // 不传的话，直接返回函数本来的类型。
 
-     MyPair ten_two {10, 2};        // c++11后支持以统一初始化列表给成员对象赋值
+        MyPair ten_two {10, 2};        // c++11后支持以统一初始化列表给成员对象赋值
 
-     // 绑定成员函数和成员变量时，有一个参数，就是*this，类对象。
-     // 绑定类成员函数首地址，参数1(*this)预留，可通过实参传递。
-     // 注意类成员函数指针的语法： &类名::函数名
-     // 静态函数指针： int (*pFunA)(int, int) = &MyClass::FunA;  pFunA(1, 2);
-     // 普通成员函数指针：void (MyClass::*pFunB)() = &MyClass::FunB;  (obj->*pFunB)();
-     auto b_memfn = bind(&MyPair::multiply, _1);    
-     cout << b_memfn(ten_two) << endl;
+        // 绑定成员函数和成员变量时，有一个参数，就是*this，类对象。
+        // 绑定类成员函数首地址，参数1(*this)预留，可通过实参传递。
+        // 注意类成员函数指针的语法： &类名::函数名
+        // 静态函数指针： int (*pFunA)(int, int) = &MyClass::FunA;  pFunA(1, 2);
+        // 普通成员函数指针：void (MyClass::*pFunB)() = &MyClass::FunB;  (obj->*pFunB)();
+        auto b_memfn = bind(&MyPair::multiply, _1);    
+        cout << b_memfn(ten_two) << endl;
 
-     auto b_memdata = bind(&MyPair::a, ten_two);    // 绑定类成员变量首地址，参数1。调用时不需要传参数了
-     cout << b_memdata() << endl;
+        auto b_memdata = bind(&MyPair::a, ten_two);    // 绑定类成员变量首地址，参数1。调用时不需要传参数了
+        cout << b_memdata() << endl;
 
-     auto b_memdata2 = bind(&MyPair::a, _1);
-     cout << b_memdata2(ten_two) << endl;
+        auto b_memdata2 = bind(&MyPair::a, _1);
+        cout << b_memdata2(ten_two) << endl;
 
-     // count_if(vi.begin(), vi.end(), bind2nd(less<int>(), 20)) 改写为：
-     cout << count_if(vi.begin(), vi.end(), bind(less<int>(), _1, 20)) << endl;
+        // count_if(vi.begin(), vi.end(), bind2nd(less<int>(), 20)) 改写为：
+        cout << count_if(vi.begin(), vi.end(), bind(less<int>(), _1, 20)) << endl;
 
-     // heap（调用算法实现堆排序）
-     // 第一种方法：创建堆、堆排序
-     make_heap(vi.begin(), vi.end()); 
-     sort_heap(vi.begin(), vi.end());
-     copy(vi.begin(), vi.end(), ostream_iterator<int>(cout, " ")); cout << endl;
+        // heap（调用算法实现堆排序）
+        // 第一种方法：创建堆、堆排序
+        make_heap(vi.begin(), vi.end()); 
+        sort_heap(vi.begin(), vi.end());
+        copy(vi.begin(), vi.end(), ostream_iterator<int>(cout, " ")); cout << endl;
 
-     // 方法二：不停的创建堆，并弹出堆顶元素
-     while(vi.size() > 0) {
-       make_heap(vi.begin(), vi.end());   // 创建大根堆 first最大
-       pop_heap(vi.begin(), vi.end());    // first和last-1交换
-       cout << vi.back() << " " << endl;  // 弹出堆顶元素
-       vi.pop_back();
-     }
+        // 方法二：不停的创建堆，并弹出堆顶元素
+        while(vi.size() > 0) {
+            make_heap(vi.begin(), vi.end());   // 创建大根堆 first最大
+            pop_heap(vi.begin(), vi.end());    // first和last-1交换
+            cout << vi.back() << " " << endl;  // 弹出堆顶元素
+            vi.pop_back();
+        }
 
-     system("pause");
-     return 0;
+        system("pause");
+        return 0;
      }
      ```
 
@@ -1938,6 +1942,7 @@ int main()
          return 0;
      }
      ```
+
 # 其他
 
 * B站学习视频  
