@@ -75,14 +75,14 @@ B[输入迭代器 input_iterator] --> |继承| C[前向迭代器 forward_iterato
 
 ## stl使用的是堆内存还是栈内存？
 
-1. array定长数组，占用栈内存。
-2. 其他大部分容器:基础变量结构(类似一个头部信息)，会存放在栈上，大量的数据会存放在堆上(allocator调用new/delete操作符进行批量的内存分配)。
-   例如：vector内部会维护三个指针类型（64位系统上每个指针占8byte），分别指向目前使用空间的头部、尾部以及可用空间的尾部，所以`sizeof(vector<int>)=8*3=24byte`，但是实际存储的大量数据是通过new在堆上创建的，sizeof只会计算类中栈空间大小，也就是定义vector这个容器需要的空间大小，所以动态增加元素时，`sizeof(vector<int>)=24byte`。
-   **说明**：一个指针所占的字节数跟系统的寻址能力有关，16位系统，指针占2个字节；32位系统指针占4个字节；64位系统，指针占8个字节。
+1. array定长数组：占用栈内存。
+2. 其他大部分容器：基础变量结构(类似一个头部信息)，会存放在栈上，大量的数据会存放在堆上(allocator调用new/delete操作符进行批量的内存分配)。  
+   例如：vector内部会维护三个指针类型（64位系统上每个指针占8byte），分别指向目前使用空间的头部、尾部以及可用空间的尾部，所以`sizeof(vector<int>)=8*3=24byte`，但是实际存储的大量数据是通过new在堆上创建的，sizeof只会计算类中栈空间大小，也就是定义vector这个容器需要的空间大小，所以动态增加元素时，`sizeof(vector<int>)=24byte`。    
+   **说明**：一个指针所占的字节数跟系统的寻址能力有关，16位系统，指针占2个字节；32位系统指针占4个字节；64位系统，指针占8个字节（64位系统，int占4字节，指针占8字节）。
 
 ## STL各种容器、迭代器汇总
 
-* 容器类型占栈空间大小。
+* 容器类型占栈空间大小（sizeof() -- 一个对象被创建时，需要开辟栈空间的字节数）。
 
 * 容器的迭代器类型。
 
@@ -267,7 +267,7 @@ B[输入迭代器 input_iterator] --> |继承| C[前向迭代器 forward_iterato
       short f();  // sizeof(f()) == sizeof(short)
 
   2. 结构体计算占用字节大小：
-      原则：结构体变量中每个成员的偏移量必须是成员大小的整数倍。（首元素偏移量是0）
+      原则：结构体变量中每个成员的偏移量必须是当前这个成员大小的整数倍。（首元素偏移量是0）
   */
 
   struct A {
@@ -289,7 +289,8 @@ B[输入迭代器 input_iterator] --> |继承| C[前向迭代器 forward_iterato
       cout << "char=" << sizeof(char) << endl;       // char=1
       cout << "short=" << sizeof(short) << endl;     // short=2
       cout << "int=" << sizeof(int) << endl;         // int=4
-      cout << "long=" << sizeof(long) << endl;       // long=4
+      cout << "long=" << sizeof(long) << endl;       // long=8（32位系统long占4字节）
+      cout << "long=" << sizeof(long long) << endl;  // long long=8
       cout << "float=" << sizeof(float) << endl;     // float=4
       cout << "double=" << sizeof(double) << endl;   // double=8
       cout << "pointer=" << sizeof(int*) << endl;    // pointer=8
@@ -328,6 +329,24 @@ B[输入迭代器 input_iterator] --> |继承| C[前向迭代器 forward_iterato
 
 using namespace std;
 
+// 函数指针
+void printItem(const int& item) {
+    cout << item << " ";
+}
+
+// 函数对象（仿函数，用struct比较方便，默认是public）
+struct printItem1 {
+    void operator() (const int& item) {
+        cout << item << " ";
+    }
+};
+
+// 函数模板（函数模板实例化后就如同一个函数指针一样用。printItem == printItem2<int>）
+template<typename T>
+void printItem2(const T& item) {
+    cout << item << " ";
+}
+
 int main()
 {
     // vector的那种遍历方法 ,支持随机访问迭代器的容器都可用类似的方法
@@ -345,8 +364,16 @@ int main()
     for (int i = 0; i < vi.size(); i++) { cout << vi[i] << " " << vi.at(i) << endl; }
 
     // 第四种: stl中for_each算法，此处匿名函数可以换成仿函数、函数指针、函数模板等
-    for_each(vi.begin(), vi.end(), [](const int& val)->void {cout << val << endl;});
-    for_each(vi.begin(), vi.end(), show_item<int>);
+    cout << endl << "function pointer...";
+    for_each(vi.begin(), vi.end(), printItem);      // 函数指针（函数名）
+    cout << endl << "function object...";
+    for_each(vi.begin(), vi.end(), printItem1());   // 函数对象（仿函数）
+    cout << endl << "function template...";
+    for_each(vi.begin(), vi.end(), printItem2<int>);    // 函数模板
+    cout << endl << "lambda expression...";
+    for_each(vi.begin(), vi.end(),
+        [](const int& item)->void {cout << item << " ";});   // 匿名函数
+
 
     // 第五种：copy到标准输出流
     // ostream_iterator (ostream_type& s, const char_type* delimiter);
@@ -366,9 +393,10 @@ int main()
 * list/forward_list -- 顺序容器，非连续空间
 * deque -- 顺序容器，分段连续空间(模拟连续空间)
 * stack/queue/priority_queue -- 容器适配器
-  * priority_queue底层是通过vector实现的一个大根堆；
+  * priority_queue底层是通过vector实现的一个大根堆(默认大根堆,大的元素优先出队)；
   * stack底层是deque，支持一端插入删除，也可以用list和vector实现；
   * queue底层是deque，支持一端插入，一端删除，也可以用list实现。
+  * 说明：以上是标准用法，其实只要保证合法操作，也可以用vector当做一个栈使用，这样既可以保证后进先出（push_back/pop_back），又可以进行顺序访问和遍历。-- 某些场景下有这个需求。
 * set/map/multiset/multimap -- 基于红黑树、key有序的关联容器
 * unordered_set/unordered_map/unordered_multiset/unordered_multimap  -- 基于hashtable，key无序的关联容器
 
@@ -427,19 +455,21 @@ int main()
       cout << "array.front()=" << c.front() << endl;
       cout << "array.back()=" << c.back() << endl;        // 获取首尾元素
       assert(c.at(5) == c[5]);                            // at()有越界检查的功能，[]没有越界检查，但是效率更高
-      
+
       cout << "array.size()=" << c.size() << endl;          // 元素个数
       cout << "array.max_size()=" << c.max_size() << endl;  // 最多能容纳的元素个数
       cout << "array.data()=" << c.data() << endl;          // 数组首地址，类似c数组的数组名
       assert(c.empty() == false);                           // 判空
 
       // ********** 算法
-      // 快速排序
-      qsort(c.data(), ASIZE, sizeof(long), compareLongs);
+      // 快速排序 qsort，头文件stdlib.h
+      // void qsort(void *base, int nelem, int width, int (*fcmp)(const void *,const void *)); 
+      qsort(c.data(), ASIZE, sizeof(long), compareLongs);  // sort是qsort改进版本，c++建议用sort
       for_each(c.begin(), c.end(), show_item<long>);
       cout << endl;
-      
-      // 二分查找
+
+      // 二分查找 bsearch，头文件stdlib.h
+      // void* bsearch(const void *key, const void *base, size_t nelem, size_t width, int (*comp)(const void *, const void *)); -- 自定义比较函数返回值是int
       long data = 17421;
       long* pItem = (long *)bsearch(&data, c.data(), ASIZE, sizeof(long), compareLongs);
       if (pItem != NULL) {
@@ -459,7 +489,6 @@ int main()
 * array内存结构
 
 <img src="../images/stl/array.jpg" height="400" width="650" />
-
 
 ## vector
 
@@ -489,10 +518,10 @@ int main()
     通过迭代器或者下标[]
   3. 在任意位置插入删除（需要大量移动元素，不如list高效）：
     insert()
-    erase()  // erase和insert配对，通过游标操作，彻底的擦除元素
-    remove() // 算法库中的remove是将指定元素移动到容器的尾部并不减少vector的size,
-    	       // vector需要用remove和erase配合使用彻底的擦除指定元素,
-    	       // 为什么这样？因为不同元素的删除方式不一样，不能做出通用性的删除动作。
+    erase()     // [!!! 擦除 !!!]erase和insert配对，通过游标操作，彻底的擦除元素
+    remove()    // [!!! 移动 !!!]算法库（注意vector并没有remove成员函数）中的remove是将指定元素移动到容器的尾部并不减少vector的size,
+    	        // vector需要用remove和erase配合使用彻底的擦除指定元素,
+    	       // 为什么这样？因为不同容器的删除方式不一样，不能做出通用性的删除动作。
 
   访问：
     随机访问迭代器可以访问任意位置的元素：
@@ -599,8 +628,8 @@ int main()
         pop_back()
         pop_front()
         insert()
-        erase()  // erase和insert配对，通过游标操作，彻底的擦除元素
-        remove() // list成员函数中的remove可以移除指定值的节点，并释放资源。
+        erase()  // erase和insert配对，通过游标操作，彻底的擦除元素（彻底删除，传指针参数 ）
+        remove() // list成员函数中的remove可以移除指定值的节点，并释放资源（彻底删除，传值参数）
            // vector没有remove成员函数，调用的是算法库中的remove，不会真正删除，见vector示例代码。
 
       访问：
@@ -621,9 +650,9 @@ int main()
         vector是一块连续的内存，支持下标随机访问，但是插入和删除操作会导致大量内存拷贝，效率较低。
         list是双向链表，只能顺序访问，不支持随机访问，但是任何位置插入或删除非常迅速。
         结论：
-    1. 如果需要高效的随机存取，不在乎插入删除效率，用vector；
-    2. 如果需要大量的插入删除，而不在乎随机存取，用list；
-    3. 如果既需要随机存取，又关系两端数据的插入删除，用deque；
+        1. 如果需要高效的随机存取，不在乎插入删除效率，用vector；
+        2. 如果需要大量的插入删除，而不在乎随机存取，用list；
+        3. 如果既需要随机存取，又涉及两端数据的插入删除，用deque；
     */
     int main() {
 
@@ -638,7 +667,7 @@ int main()
       c.push_back("you");
       c.push_front("me");       // 支持收尾插入
       c.emplace_front("hate");
-      c.emplace_back("like");   // push_back/push_front的右值引用版本（高效）
+      c.emplace_back("like");   // push_back/push_front的右值引用版本（高效）  emplace-安放
       c.insert(++begin(c), "inserter");  // 在第二个位置插入
       auto iit = c.begin();
       advance(iit, 5);
@@ -858,11 +887,12 @@ int main()
           容量：empty() / size()
 
   priority_queue和queue的区别和联系 
-      (1) 二者都定义在头文件#include<queue>中，都是先进先出(FIFO)的容器适配器，不提供迭代器，不提供遍历方法，不提供clear()接口。
+      (1) 二者都定义在头文件#include<queue>中，不提供迭代器，不提供遍历方法，不提供clear()接口。
+      (2) queue是一个先进先出的线性存储表，一端插入，一端删除；
       (2) priority_queue支持自定义数据的优先级，让优先级高的排在前面，优先出队；
       (3) priority_queue默认底层容器是vector实现的大顶堆heap；默认比较函数是 less<int>，降序排序;
           queue默认的底层容器是deque，也可以用list。
-      (4) priority_queue 通过 top() 函数来访问队首（堆顶）元素；queue可以通过front()和back()访问队首/队尾元素。
+      (4) priority_queue 只能通过 top() 函数来访问队首（堆顶）元素；queue可以通过front()和back()访问队首/队尾元素。
   */
 
   int main() {
@@ -878,7 +908,7 @@ int main()
       assert(c.back() == 400);        // 访问最后一个元素
 
       // 2. 适配器，优先级队列
-      priority_queue<int, vector<int>, greater<int>> q;       // 升序队列
+      priority_queue<int, vector<int>, greater<int>> q;       // 升序队列，小根堆
       for (int n : {3, 5, 7, 2, 1, 10}) {
           q.push(n);
       }
@@ -1018,7 +1048,7 @@ int main()
       pair<multiset<int>::iterator, multiset<int>::iterator> ret;
       ret = mc.equal_range(5);
       cout << *(ret.first) << endl;      // 第一个大于等于该元素的值
-      cout << *(ret.second) << endl;     // 第一个大于该元素的值
+      cout << *(ret.second) << endl;     // 第一个大于该元素的值  （类似左开右闭）
       for (auto it = ret.first; it != ret.second; it++) {
           cout << *it << endl;           // 遍历范围查询结果
       }
@@ -1235,6 +1265,7 @@ int main()
 ## tuple
 
 * tuple使用
+  元组容器：支持用户自定义元素的个数和类型。
 
   ```c++
   #include <tuple>
@@ -1255,7 +1286,14 @@ int main()
       assert(get<0>(c2) == "zs");
 
       tuple<string, int, char> c = {"cbj", 80, 'y'};    // 统一初始化列表
-      string s;
+
+      // 获取元组中元素数量 -- tuple_size<decltype(c)>::value
+      size_t num = tuple_size<decltype(c)>::value;
+      cout << "tuple size= " << num << endl;
+      // 获取指定index的元素的类型 -- tuple_element<0, decltype(c)>::type
+      cout << "tuple type= " << typeid(tuple_element<0, decltype(c)>::type).name() << endl;
+      tuple_element<0, decltype(c)>::type s;   // 等价于 string s;
+      // string s;
       int i;
       tie(s, i, std::ignore) = c;          // unpack elements (with ignore) 任何类型都可以用std::ignore占位
       assert(s == get<0>(c));
