@@ -702,19 +702,19 @@ look into my eyes, you're under"""
 
     * 参考：python中的str和bytes类型 <https://www.cnblogs.com/chownjy/p/6625299.html>
     * python3字符串的两种类型：
-        str(unicode)   ->  <class 'str'>          # 普通字符串
-        byte码            ->  <class 'bytes'>        # 二进制数据流
+      str(unicode)   ->  <class 'str'>          # 普通字符串  
+      byte码         ->  <class 'bytes'>        # 二进制数据流  
 
     * python2和python3字符串类型的差异：
-        python2 中的<class 'unicode'> 变成了 python3 的<class 'str'>，  
-        python2 中的<class 'str'> 变成了 python3 的<class 'bytes'>，  
-        python2中默认的编码方式是ascii码，中文会乱码，  
-        python3默认编码是utf8编码，中文不会乱码。  
-        解决中文乱码，在第一行加 -*-coding:utf-8-*- 或  #encoding=utf-8。  
+      python2 中的<class 'unicode'> 变成了 python3 的<class 'str'>，  
+      python2 中的<class 'str'> 变成了 python3 的<class 'bytes'>，  
+      python2中默认的编码方式是ascii码，中文会乱码，  
+      python3默认编码是utf8编码，中文不会乱码。  
+      解决中文乱码，在第一行加 -*-coding:utf-8-*- 或  #encoding=utf-8。  
 
-  * **str(unicode)对象和bytes对象转换：**
-          bstr = str.encode('utf-8')  
-          str = bstr.decode('utf-8')  
+  * **str(unicode)对象和bytes对象转换：**  
+    bstr = str.encode('utf-8')    
+    str = bstr.decode('utf-8')    
 **代码示例：**
 
 ```python
