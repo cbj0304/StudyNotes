@@ -71,7 +71,7 @@ B[输入迭代器 input_iterator] --> |继承| C[前向迭代器 forward_iterato
   * **前向迭代器**（Forward iterator） --- 继承自输入迭代器  
   * **双向迭代器**（Bidirectional iterator） --- 继承自前向迭代器  
   * **随机存取迭代器**（Random access iterator） --- 继承自双向迭代器  
-  
+
 
 ## stl使用的是堆内存还是栈内存？
 
@@ -1100,6 +1100,17 @@ int main()
       (1) set基于红黑树实现，有自动排序的功能，查找/插入/删除 的时间复杂度o(logN);
       (2) unordered_set基于哈希表，查找/插入/删除 的时间复杂度o(1); 而代价是消耗比较多的内存，无自动排序功能。
       底层实现上，使用一个下标范围比较大的数组来存储元素，形成很多的桶，利用hash函数对key进行映射到不同区域进行保存。
+
+  5. 关联式容器使用时需要注意，如果key不存在，使用map[key]会有意想不到的结果。可以用以下方式：
+     方式1：if (m.count(key)>0) { do_something( m[key] ); }
+     方式2：it=m.find(key); if (it!=m.end()) {do_something( m[key] ); }
+     推荐使用方式2，因为方式1需要查两次，效率差。
+  6. mp.at("key") 会进行越界检查，如果不存在key会抛出异常（out_of_range）;
+     mp["key"] 没有越界检查-返回未定义的行为！！！如果不存在"key",会自动创建一个value为0的节点，这时候map的size+1了，同时返回0；
+
+  7. 容器有通用的泛型方法find(begin，end，target)查找目标，但是这个方法是适用于所有容器的遍历式查找，并不高效，查找要使用map类成员mp.find(key)。
+  8. 关联容器不可用算法库函数如lower_bound()，而其自带同名成员函数:如 myset.lower_bound( x )返回一个迭代器，若找不到返回end()迭代器。
+
   */
 
   int main() {
@@ -1342,10 +1353,6 @@ int main()
 }
 ```
 
-
-
-
-
 # 友元、模板、运算符重载
 
 * 友元分类（friend）
@@ -1392,7 +1399,8 @@ int main()
       后置++和后置--，增加一个伪参数int来标识
 
   5. 重载<< 和链式编程
-    函数返回的引用可以充当左值，执行链式操作。
+    函数返回值是引用类型：左值引用（&）可以充当左值，执行链式操作（连续运用操作符号）。
+    函数返回值是值类型：返回的是拷贝的一个临时对象，是右值，不能执行链式操作。
 
   6. 如果待重载的运算符需要两个操作数：
      成员函数情况下，只需要一个参数，因为this指针（类本身）就是一个操作数了；
@@ -1409,28 +1417,28 @@ int main()
           this->imag = im;
       }
       ~Complex(){ }
-    
+
       // 重载+运算符（成员函数）
       Complex operator+ (const Complex& other) {
           return Complex(this->real + other.real, this->imag + other.imag);
       }
-    
+
       // 重载+运算符（友元函数）
       friend Complex operator- (Complex &c1, Complex &c2);
-    
+
       // 重载<<运算符（友元函数）
       friend ostream& operator<< (ostream& out, Complex& c) {
           out << "< real=" << c.real << " imag=" << c.imag << " >";
           return out; 
       }
-    
+
       // 重载前置++运算符
       Complex& operator++ () {
           this->real++;
           this->imag++;
           return *this;
       }
-    
+
       // 重载后置++运算符 int标识
       Complex& operator++ (int) {
           Complex c(this->real, this->imag);
@@ -1455,13 +1463,13 @@ int main()
       Complex c1(2, 3), c2(2, 2);
       Complex c3 = c1 + c2;
       cout << "c3 =>" << c3 << endl;
-    
+
       c3++;
       cout << "c3++ =>" << c3 << endl;
-    
+
       ++c3;
       cout << "++c3 =>" << c3 << endl;
-    
+
       system("pause");
       return 0;
   }
@@ -1599,7 +1607,15 @@ int main()
          equal_range: 查找，返回一对iterator（lower_bound和upper_bound）。
          search: 查找一个子序列第一次出现的位置。
          search_n: 查找val出现n次的子序列。
-         binary_search: 在有序序列中查找value，找到返回true。
+         unique/unique_copy: 清除序列中重复元素，和remove类似，它也不能真正删除，将相同元素排到后边去。
+         lower_bound/ upper_bound/ binary_search:
+         1. 返回大于等于val的第一个元素的迭代器：
+         ForwardIterator lower_bound(ForwardIterator first, ForwardIterator last, const Tp& val);
+         2. 返回大于val的第一个元素的迭代器：
+         ForwardIterator upper_bound(ForwardIterator first, ForwardIterator last, const Tp& val);
+         2. 二分查找val是否存在：
+         bool binary_search(ForwardIterator first, ForwardIterator last, const Tp& val);
+         ！！！注意：unique、binary_search、lower_bound、upper_bound使用的前提都是先sort！！！
 
      ** 排序[algorithm]：
          sort: 升序排序
@@ -1618,10 +1634,16 @@ int main()
          replace_copy/replace_copy_if:同上，不过将结果拷贝到另一个容器。
          swap: 交换存储在两个容器中的元素。
          swap_range: 将指定范围内的元素与另一个序列元素值进行交换。
-         unique/unique_copy: 清除序列中重复元素，和remove类似，它也不能真正删除元素。
+         
 
      ** 排列组合[algorithm]：
          next_permutation:
+         // 获取下一个排列数，n个不同的字 符有 n! 种排列
+         // 下一个排列大于上一个排列时返回 true，如果上一个排列是序列中最大的，它返回 false，所以会生成字典序最小的排列。 
+         // 列出所有全排列：
+         // 方法一：先排序，在执行while循环；
+         // 方法二：for循环n!次调用次函数；
+
          prev_permutation:
 
      ** 数值算法[numeric]:
@@ -1698,13 +1720,7 @@ int main()
           // 自定义比较函数  param1<param2时返回true，则按照从小到大排序。
           sort(RandomAccessIterator first, RandomAccessIterator last, Compare comp);   
 
-      lower_bound/ upper_bound/ binary_search:
-          1. 返回大于等于val的第一个元素：
-          ForwardIterator lower_bound(ForwardIterator first, ForwardIterator last, const Tp& val);
-          2. 返回大于val的第一个元素：
-          ForwardIterator upper_bound(ForwardIterator first, ForwardIterator last, const Tp& val);
-          2. 二分查找val是否存在：
-          bool binary_search(ForwardIterator first, ForwardIterator last, const Tp& val);
+      
 
       函数适配器：binder1st/binder2nd/not1/bind
       ** 仿函数可以被适配的条件：
@@ -1861,6 +1877,29 @@ int main()
             vi.pop_back();
         }
 
+        // 获取下一个全排列 next_permutation:
+        // 获取下一个排列数，n个不同的字 符有 n! 种排列
+        // 下一个排列大于上一个排列时返回 true，如果上一个排列是序列中最大的，它返回 false，所以会生成字典序最小的排列。
+        // 列出所有全排列：
+        // 方法1：for循环n!次调用次函数；
+        // 方法2：先排序，在执行while循环；
+
+        int a[3] = {1, 3, 2};
+
+        // 方法1：
+        for (int i=0; i<6; i++) {
+            copy(a, a+3, ostream_iterator<int>(cout, " "));
+            next_permutation(a, a+3);
+            cout << endl;
+        }
+
+        // 方法2：
+        sort(a, a+3);
+        do {
+            copy(a, a+3, ostream_iterator<int>(cout, " "));  // 打印数组a
+            cout << endl;
+        } while(next_permutation(a, a+3));
+
         system("pause");
         return 0;
      }
@@ -1869,16 +1908,16 @@ int main()
 *    sort方法示例
 
      ```c++
-        #include <iostream>
-          #include <vector>
-          #include <string>
-          #include <algorithm>
-          #include <cstdlib>
+    #include <iostream>
+    #include <vector>
+    #include <string>
+    #include <algorithm>
+    #include <cstdlib>
 
-          using namespace std;
+    using namespace std;
 
-          /*
-          c++标准库的sort方法：
+    /*
+    c++标准库的sort方法：
      1. 使用：
          #include <algorithm>
          using namespace std;
@@ -1941,7 +1980,54 @@ int main()
          system("pause");
          return 0;
      }
-     ```
+    ```
+
+# 字符串流
+
+```c++
+#include <iostream>
+#include <sstream>
+#include <cstdlib>
+#include <string>
+
+using namespace std;
+
+/*
+字符串流的两个应用
+1. 类型转换
+2. 分隔字符串
+*/
+
+int main()
+{
+    // 类型转换
+    stringstream ss;
+    string s;
+    int data = 1234;
+    ss << data;          // 流入
+    ss >> s;             // 流出
+    cout << s << endl;           // 打印到标准输出验证   "1234"
+
+    // 清空字符串流
+    ss.str("");
+    // 或者 ss.clear();
+
+    // 分隔字符串
+    stringstream ss1;
+    ss1 << "100 seconds left";
+    int d;
+    string s1, s2;
+    ss1 >> d;        // 空白符分隔，流向变量d     100
+    ss1 >> s1;       // 流向变量s1               seconds
+    ss1 >> s2;       // 流向变量s2               left
+
+    // 打印验证
+    cout << "d=" << d << " s1=" << s1 << " s2=" << s2 << endl;
+
+    system("pause");
+    return 0;
+}
+```
 
 # 其他
 
