@@ -1307,3 +1307,8 @@ script -t 2> timing.log -a output.session
 # 回放
 scriptreplay timing.log output.session
 ```
+
+# 网址
+
+* shell十三问
+  <https://www.cnblogs.com/rustling/p/9833174.html>

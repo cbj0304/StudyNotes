@@ -2,11 +2,11 @@
 
 # 操作系统体系结构
 
-​        Linux是一套免费使用和自由传播的类Unix操作系统，是GNU操作系统的内核。Linux和UNIX的最大的区别是，前者是开发源代码的自由软件，而后者是对源代码实行知识产权保护的传统商业软件。狭义的操作系统仅指内核，广义的操作系统如下图所示。
+​        Linux是一套免费使用和自由传播的类Unix操作系统，是GNU操作系统的内核。Linux和UNIX的最大的区别是，前者是开放源代码的**自由软件**，而后者是对源代码实行知识产权保护的传统**商业软件**。狭义的操作系统仅指内核，广义的操作系统如下图所示。
 
 * 系统调用：内核的接口。
 * 公共函数库：构建在系统调用接口之上。
-* shell解析器：命令解释器，读取用户输入，调用内核接口执行命令。
+* shell解析器（外壳）：构建在系统调用接口之上。命令解释器，读取用户输入，调用内核接口执行命令。
 
 <img src="../images/linux_c/unix.jpg" height="180" width="200" />
 
@@ -27,7 +27,7 @@
 
 * fd和FILE*的区别
 
-  FILE结构函数可以看作是对fd直接操作的系统调用的封装, 它的优点是带有用户态缓存的IO。FILE在"stdio.h"中有定义。
+  FILE结构函数（标准IO库）可以看作是对fd直接操作函数（系统调用IO）的封装, 它的优点是带有用户态缓存的IO。FILE在"stdio.h"中有定义。
 
 ```c
 struct _iobuf {
@@ -45,11 +45,10 @@ typedef struct _iobuf FILE;
 
 * 三个特殊的文件
 
-   描述符int(POSIX名称)---STDIN_FILENO(0)/STDOUT_FILENO(1)/STDERR_FILENO(2)   
+  * 文件描述符 int(POSIX名称)---STDIN_FILENO(0)/STDOUT_FILENO(1)/STDERR_FILENO(2)   
+  * 文件指针 FILE*---stdin/stdout/stderr   
 
-  文件指针FILE*---stdin/stdout/stderr   
-
-  通常这三个文件都与终端联系，如fprintf(stderr,"error message")，文件输出到终端  
+  通常这三个文件都与终端联系，如fprintf(stderr,"error message")，格式化输出到终端。  
 
 ## 系统调用IO
 
@@ -62,7 +61,8 @@ typedef struct _iobuf FILE;
 #include <sys/stat.h>
 
 /*
-主题：系统调用文件操作。
+~~~~ 系统调用文件IO ~~~
+
 头文件： <fcntl.h>
 
 特殊文件描述符：
@@ -84,8 +84,8 @@ int close(int fd)  -- 进程终止时，内核会自动关闭所创建的文件
 off_t lseek(int fd, off_t offset, int whence)  -- 为打开的文件设置偏移量（空洞文件不占存储区）
 ssize_t read(int fd，void* buf, size_t count)
 实际读取的数据量(ssize_t)可能小于期望读取的数据量(count),比如：
-1. 普通文件督导期望字节数之前已经到了文件尾部；
-2. 从网络读取时，网络的缓冲机构可能造成返回值小于所要求的字节数。
+1. 普通文件读到期望字节数之前已经到了文件尾部；
+2. 从网络读取时，网络的缓冲机制可能造成返回值小于所要求的字节数。
 ssize_t write(int fd, const void *buf, size_t count)
 
 原子操作：
@@ -199,7 +199,9 @@ int main() {
 #include <sys/stat.h>
 
 /*
-主题：标准IO库文件操作。
+~~~~ 标准IO库文件操作 ~~~
+
+标准I/O库提供缓冲的目的是尽可能地减少使用read和write调用的次数。
 
 头文件：
 #include <stdio.h>
@@ -215,21 +217,21 @@ mode介绍：
 "b"： 二进制文件打开，在Linux加不加此模式无区别
 
 什么时候用fflush？
-fflush即清空缓存，
+fflush作用：清空缓冲区。
 如果给定的文件流是一个输出流（内存->磁盘文件），fflush把输出到缓冲区的内容写入文件；
 如果给定的文件流是一个输入流（文件->内存），fflush会清空输入缓冲区。
 几处应用：
-(1) flush(stdin) 刷新标准输入缓冲区，把输入缓冲区里的东西丢弃。
+(1) fflush(stdin) 清空标准输入缓冲区。
     int main() {
         printf("input a char\n");
         char a = getchar();
-        fflush(stdin);  // getchar之后，输入n，按下回车就会被getchar接收到并保存到a中
-        char b = getchar(); // 但是回车键'\n'在缓冲区中会被b接收，fflush可以清空缓冲区中的'\n'
+        fflush(stdin);  // 调用getchar，用户输入一个字符，然后按下回车('\n')，'\n'就会被getchar接收到并保存到其用户缓冲区中，此处fflush可以清空缓冲区中的'\n'。
+        char b = getchar(); // 如果没有fflush，\n'在缓冲区中会被b接收
         fflush(stdin);
         printf("you have put a=%c, b=%c\n", a, b);
         system("pause");
     }
-(2) fflush(stdout) 刷新标准输出缓冲区，把输出缓冲区里的东西打印到标准输出设备上。
+(2) fflush(stdout) 清空标准输出缓冲区，把输出缓冲区里的东西打印到标准输出设备上。
     如程序在输出到屏幕前发生了错误，调用此函数可以保证任意时间把调试输出打印到屏幕。
 (3) 一般fflush不应该在读取文件的时候用，而应该在写入文件时用。
     另外，fclose关闭文件时会清空缓冲区；
@@ -243,10 +245,18 @@ fflush即清空缓存，
 可以调用setbuf函数更改缓冲类型和缓冲区大小。
 任何时候我们都可以调用fflush冲洗一个流，是未写数据都传送至内核。
 
-多线程通过fwrite写一个文件可能会存在线程不安全的问题，解决办法：
-1、 在打开文件时，加锁，fwrite之后fclose,并释放锁。
-2、 修改文件打开的权限为fopen(fileName, "a+"),并在fwrite后使用fflush(fp)刷出流。
+多线程通过fwrite写一个文件可能会存在线程不安全的问题，
+解决办法一：
+修改文件打开的权限为fopen(fileName, "a+")，并在fwrite后使用fflush(fp)刷出流。
+在打开文件时，加锁，fwrite之后fclose,并释放锁。
+解决办法二：
+保存到一个内存队列中，然后再输出。
+解决办法三：
+不同线程分别保存多个临时文件，完成后将多个临时文件拼为完整的文件。
 
+关于EOF？
+在C标准函数库中标识文本文件的结束符(End Of File)，其值通常是-1。
+在文本文件中，数据都是以字符的ASCII代码值的形式存放。ASCII代码值的范围是0~127，不可能出现-1。
 */
 
 int main() {
@@ -498,8 +508,8 @@ ofstream fout;
 fout.open("a.txt", ios::out);
 
 定义文件流对象时，打开方式如下：
-ios::in      : 以输入方式打开文件流
-ios::out     ：输出
+ios::in      ： 以输入（读）方式打开文件流
+ios::out     ： 输出（写）
 ios::app     ： 追加
 ios::binary  ： 二进制
 
@@ -799,6 +809,11 @@ struct tms {
 };
 int sc_clk_tck = sysconf(_SC_CLK_TCK); // 每秒时钟滴答数
 返回的clock_t除以时钟滴答数，得到秒数。
+
+(7) time() 和 clock()的区别？
+头文件 #include <time.h>
+time()：时钟时间(wall time)，系统时间戳。两次调用的时间差即为系统经过的总时间，期间可能调度多个进程执行，进程挂起时(如sleep)也会统计进去。单位：秒(s)
+clock()：cpu时间，用于统计某一程序或函数的执行速度。两次调用的差即为该进程占用cpu时间片时运行的时间。单位：微秒(us)。CLOCKS_PER_SEC（1000,000，cpu一秒运行的时钟周期数）。
 */
 
 int main() {
@@ -816,6 +831,25 @@ int main() {
     time_t t1 = mktime(area);
     time_t t2 = mktime(gmt);
     printf("t1=%ld t2=%ld", t1, t2);
+
+    // 区别time()和clock()
+    clock_t start, end;
+    time_t t_start, t_end;
+
+    start = clock();
+    t_start = time(NULL);
+    sleep(3);              // 进程挂起，不占用cpu，不计入clock()
+    float res=0;
+    int i=0;
+    for (;i<10000000;i++) {
+        res=(float)i*213124/200000;
+    }
+    end = clock();
+    t_end = time(NULL);
+    printf("clock_diff=%f\ntime_diff=%f\n", (double)(end - start) / CLOCKS_PER_SEC, (double)(t_end - t_start));
+    // 输出 
+    // clock_diff=0.070000  （程序在处理器中运算所占用的时间）
+    // time_diff=3.000000  （程序从开始运行到最后结束所消耗的时间）
 
     system("pause");
     return 0;
@@ -1050,7 +1084,7 @@ int main() {
 
 /*
 预备知识：
-c/c++程序的内存分配：
+c/c++程序的内存分配（进程空间）：
     栈区： 由编译器自动分配释放，存放函数的参数值，局部变量的值等。
     堆区： 由程序员分配释放。malloc/free、new/delete
     静态存储区（全局区）：初始化全局变量和静态变量。
@@ -1066,6 +1100,14 @@ char*和char[]的区别:
     a1是字符指针，指向的字符串存放在文字常量区，无法修改；赋值在编译时就确定了（常量区）。
     a2是字符数组，数组存放在栈中，可以被修改；赋值是在运行时确定的（栈区）。
 
+C语言内存分配函数：malloc/calloc/realloc
+    头文件 #include <stdlib.h>
+    (1) int *p = (int *)malloc(20*sizeof(int));  // 申请存放20个int的空间
+        calloc申请空间后，对空间逐一初始化，并设值为0；因此效率较malloc要低些。
+    (2) int *p = (int *)calloc(20, sizeof(int));  // 申请存放20个int的空间
+    (3) int *pp = (int *)realloc(p, 30*sizeof(int));  // 将基址p处扩容到30个int的空间，pp不一定等于p，见下说明：
+        realloc用于对已申请的动态内存扩容，p为原来空间的基址指针，new_size为接下来要扩容的大小。
+        如果size较小，原来申请的动态内存后面还有空余内存，系统将直接在原内存空间后面扩容，并返回原动态空间基地址；如果size较大，原来申请的空间后面没有足够大的空间扩容，系统将重新申请一块(20+size)*sizeof(int)的内存，并把原来空间的内容拷贝过去，原来空间free;如果size非常大，系统内存申请失败，返回NULL,原来的内存不会释放。注意：如果扩容后的内存空间较原空间小，将会出现数据丢失，如果直接realloc(p, 0);相当于free(p)。
 */
 
 void test_memory() {
@@ -1319,6 +1361,67 @@ struct flock
     off_t_l_len;     // 上锁字节
     pid_t_l_pid;     // 锁的属主进程ID
 };
+
+/*
+关于close_on_exec：
+功能：该标志被设置时，打开的文件描述符在执行exec调用新程序前自动被关闭。
+close_on_exec是一个进程所有文件描述符（文件句柄）的位图标志，每个比特位代表一个打开的文件描述符，用于确定在调用系统调用execl()时需要关闭的文件句柄（参见include/fcntl.h）。当一个程序使用fork()函数创建了一个子进程时，通常会在该子进程中调用execl()函数加载执行另一个新程序。此时子进程将完全被新程序替换掉，并在子进程中开始执行新程序。若一个文件描述符在close_on_exec中的对应比特位被设置，那么在执行execl()时该描述符将被关闭，execl执行的程序就不能向该fd进行读写操作；否则该描述符将始终处于打开状态，execl()可以操作这个文件。看下边的例子。
+*/
+
+/************ ass.c ******************/
+#include <stdio.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <string.h>
+
+int main(int argc, char *argv[])  
+{  
+    int fd, len;
+    printf("argc = %d ",argc);
+
+    fd = *argv[1];  
+    printf("fd = %d\n",fd);  
+
+    char *s = "zzzzzzzzzzzzzzzzzzz";  
+    len = write(fd, (void *)s, strlen(s));
+    if(-1 == len) {
+        printf("write fail\n");
+    }
+
+    close(fd);  
+    return 0;  
+}
+
+/****************** test.c **********************/
+#include <stdio.h>
+#include <sys/types.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <string.h>
+
+int main()  
+{
+    pid_t pid;
+    int fd;
+    fd = open("test.txt",O_RDWR|O_APPEND);  
+    printf("fd = %d\n",fd);  
+
+    fcntl(fd, F_SETFD, 1);
+
+    pid = fork();  
+    if(pid == 0) {
+        // 这里操作fd会失败，因为设置了执行时关闭
+        // 改为fcntl(fd, F_SETFD, 0); 或者将此句注释掉就可以读写这个fd了
+        execl("ass", "./ass.exe", &fd, NULL);
+    }
+
+    char *s="ooooooooooooooooooo";
+    write(fd, s, strlen(s));     // 当前进程可以操作fd
+
+    close(fd);  
+    return 0;  
+}
+
 ```
 
 
@@ -1329,27 +1432,28 @@ struct flock
 
 目的：增加代码的可移植性。
 
-* size_t：表达不同平台下较大可能的数据尺寸。
+* size_t：表达不同平台下较大可能表示的数据尺寸。
 
-  在32位架构上：typedef unsigned int size_t;
-
-  在64位架构上：typedef unsigned long size_t;
-
+  在32位架构上：typedef unsigned int size_t;    // 4字节
+  在64位架构上：typedef unsigned long size_t;   // 8字节
   类似的，ssize_t有符号，size_t无符号。
 
-* off_t：表达不同平台下文件偏移量：
+* off_t：表达不同平台下文件偏移量。
 
-  32位架构上：typedef long off_t;
-
-  64位架构上：typedef long long off_t;
+  32位架构上：typedef long off_t;            // 4字节
+  64位架构上：typedef long long off_t;       // 8字节
 
 * 格式化打印：
 
-  off_t---- "%jd"
+  off_t---- "%jd"  
+  size_t ----- "%uz"  
+  ssize_t ---- "%zd" 
 
-  size_t ----- "%uz"
-
-  ssize_t ---- "%zd"
+* 整型占字节数小结
+  32位系统： int--4B   long int--4B   long long--8B  指针--4B  
+  64位系统： int--4B   long int--8B   long long--8B  指针--8B  
+  32位系统和64位系统中long类型、指针类型占字节数不同。  
+  指针不是既不是int，也不是long，指针是一种类型，大小取决于不同平台上的寻址能力。  
 
 ## linux 文件i节点
 
@@ -1360,11 +1464,11 @@ linux中，是通过i节点实现文件的查找定位的。i节点可以认为�
 * 硬链接和软链接(ln source_file dest_file)
 
   ```shell
-  # fileB是fileA的硬链接：fileA和fileB是对等的关系，删掉源文件fileA，磁盘数据不会删除；
+  # fileB是fileA的硬链接：fileA和fileB是 <对等的关系> ，删掉源文件fileA，磁盘数据不会删除；
   # 只有硬链接数为0的时候，删除文件名时，数据才会在磁盘上删除。
   ln -d fileA fileB
 
-  # fileB是fileA的软链接：符号链接其实是文件索引的索引，从属关系;
+  # fileB是fileA的软链接：符号链接其实是文件索引的索引 <从属关系> ;
   # 当源文件fileA删除之后，其实链接文件还存在，但是无法使用。
   ln -s  fileA fileB
   ```
@@ -1379,7 +1483,21 @@ linux中，是通过i节点实现文件的查找定位的。i节点可以认为�
 
 * exit和return的区别：
 
-  return是c语言中的关键字，而exit是linux中的系统调用。exit表示终止当前进程，return表示从当前函数返回。在main函数中，exit和return作用是一样的，就是终止进程；如果return出现在子程序中表示返回（例如递归函数的实现），而exit出现在子进程中表示终止子进程。
+  return是c语言中的**关键字**，而exit是linux中的**系统调用**。exit表示**终止**当前进程，return表示从当前函数**返回**。在main函数中，exit和return作用是一样的，就是终止进程；如果return出现在子程序中表示返回（例如递归函数的实现），而exit出现在子进程中表示终止子进程。
+
+## 进程退出信号
+
+* SIGTERM（15） 
+  kill不带参数（如果kill后边没有带信号编码，就会发出终止信号15）或的killall命令发送到进程，会产生SIGTERM，让程序有好的退出。
+  与SIGKILL信号不同，它允许用户自定义信号处理程序，可以被捕获和解释（或忽略）。
+* SIGKILL（9）
+  发送信号：kill -9 [PID]，强制终止进程。
+* SIGINT（2）
+  发送信号：kill -2 [PID]，效果等同于在前台运行PID的进程时按下Ctrl+C键结束前台进程。
+* 其他
+  kill 0 命令用于终止所有由当前shell启动的进程。
+  kill -l 列出所有信号名称。
+  只有第9种信号(SIGKILL)才可以无条件终止进程，其他信号进程都有权利忽略。
 
 ## linux文件类型
 
@@ -1394,9 +1512,11 @@ linux中，是通过i节点实现文件的查找定位的。i节点可以认为�
 
 ## extern和restrict关键字
 
-* extern关键字：置于变量或者函数前，以表示变量或者函数的定义在别的文件中。提示编译器遇到此变量或函数时，在其它模块中寻找其定义。
+* extern关键字
+  置于变量或者函数前，以表示变量或者函数的定义在别的文件中。提示编译器遇到此变量或函数时，在其它模块中寻找其定义。
 
-* restrict限定符：用于限定和约束指针，表明这个指针是访问一个数据对象的唯一方式。 
+* restrict限定符
+  用于限定和约束指针，表明这个指针是访问一个数据对象的唯一方式。 
 
   如：int *restrict ptr, ptr 指向的内存单元只能被 ptr 访问到，任何同样指向这个内存单元的其他指针都是未定义的。能帮助编译器进行更好的优化代码,生成更有效率的汇编代码。
 
@@ -1404,7 +1524,8 @@ linux中，是通过i节点实现文件的查找定位的。i节点可以认为�
 
 * exec()
 
-  进程调用此函数执行一个新程序，新程序从main函数开始执行，进程ID不变，全新程序替换了当前进程的正文、数据、堆和栈段，新进程代替原进程执行。
+  我们用fork函数创建新进程后，经常会在新进程中调用exec函数去执行另外一个程序。当进程调用exec函数时，当前进程空间（正文、数据、堆和栈段）被完全**替换为新程序**。因为调用exec函数并不创建新进程，所以前后**进程的ID并没有改变**。
+  在调用进程内部执行一个可执行文件。可执行文件既可以是二进制文件，也可以是任何Linux下可执行的脚本文件。exec函数族的函数执行成功后不会返回，调用失败时，会设置errno并返回-1，然后从原程序的调用点接着往下执行。  
 
 * system()
 
@@ -1418,11 +1539,35 @@ int execle(const char *path, const char *arg, ..., char *const envp[])
 int execv(const char *path, char *const argv[]);
 int execvp(const char *file, char *const argv[]);
 
+/*
+参数说明：
+path：可执行文件的路径名字
+arg：可执行程序所带的参数，第一个参数为可执行文件名字，没有带路径且arg必须以NULL结束
+file：如果参数file中包含/，则就将其视为路径名，否则就按 PATH环境变量，在它所指定的各目录中搜寻可执行文件。
+
+exec族函数参数极难记忆和分辨，函数名中的字符会给我们一些帮助：
+l : 使用参数列表
+p：使用文件名，并从PATH环境进行寻找可执行文件
+v：应先构造一个指向各参数的指针数组，然后将该数组的地址作为这些函数的参数。
+e：多了envp[]数组，使用新的环境变量代替调用进程的环境变量
+*/
+
+#include <unistd.h>
+//函数原型：int execl(const char *path, const char *arg, ...);
+
+int main(void)
+{
+    printf("before execl\n");
+    if(execl("./bin/echoarg","echoarg","abc",NULL) == -1) {
+        printf("execl failed!\n");
+    }
+    printf("after execl\n");
+    return 0;
+}
+
 #include <stdlib.h>
 int system(const char *command);
 ```
-
-
 
 ## 线程安全函数和可重入函数的区别
 
@@ -1430,9 +1575,8 @@ int system(const char *command);
 
 * 可重入函数是线程安全函数的一个子集；
 
-  可重入，即可重复进入，可被中断，被多个任务调用时不必担心数据出错，这样的函数除了使用自己栈上的变量外不依赖于任何环境，若使用全局变量，需用互斥手段对其加以保护。
-
-  标准io库很多实现都以不可重入的方式使用全局数据结构。
+  可重入，即可重复进入，可被中断，被多个任务调用时不必担心数据出错，这样的函数除了使用自己栈上的变量外不依赖于任何环境，若使用全局变量，需用互斥手段对其加以保护。  
+  标准io库很多实现都以不可重入的方式使用全局数据结构。  
 
 ## 进程间通信
 
@@ -1472,8 +1616,6 @@ int mkfifo(const char *pathname, mode_t mode);
 void *mmap(void *addr, size_t length, int prot, int flags,int fd, off_t offset);
 int munmap(void *addr, size_t length);
 ```
-
-
 
 ## readv和writev
 
@@ -1520,13 +1662,13 @@ int main()
 
 ## 强制性锁
 
-举例：有几个进程(不一定有亲缘关系)都先通过fctnl锁机制来判断再操作文件，这个就叫一致的方法。 
+举例：有几个进程(不一定有亲缘关系)都先通过fcntl锁机制来判断再操作文件，这个就叫一致的方法。 
 
 但是，如果同时，又有个流氓进程，管它3721，冲上去，直接open, write一堆操作。 
 
 这时候那几个先fcntl 再操作的进程对这种方式无能为力，这样就叫不一致。文件最后的状态就不定了。 
 
-正因为这种锁约束不了其它的访问方式，所以叫建议性锁。强制性锁需要内核支持的,对read, write, open都会检查锁。
+正因为这种锁约束不了其它的访问方式，所以叫建议性锁。强制性锁需要**内核支持**的,对read, write, open都会检查锁。
 
 为对某个特定文件施行强制性上锁，应满足： 
 
@@ -1555,7 +1697,6 @@ int pause(void);  // 进程进入休眠，直到被信号中断。
 // fork---子进程复制父进程的存储映像，所以，子进程继承父进程的信号处理方式；
 // exec---子进程会覆盖从父进程继承来的存储映像，所以，原来的信号处理函数会被设置为默认动作；
 ```
-
 
 
 // TODO
