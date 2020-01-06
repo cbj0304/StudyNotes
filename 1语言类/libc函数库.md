@@ -1,5 +1,19 @@
 [TOC]
 
+# 内容提要
+
+  * 文件操作（系统调用、标准IO库、C++流对象）
+  * 格式化IO（标准输出流、字符串、文件）
+  * 时间日期操作
+  * 字符串操作
+  * 多线程（C/C++）
+  * 内存分配
+  * 目录操作
+  * 其他系统调用
+  * 其他知识点
+    ssize_t/size_t/off_t/inode/exit/return/  
+    kill/extern/restrict/exec/system/signal/fcntl
+
 # 操作系统体系结构
 
 ​        Linux是一套免费使用和自由传播的类Unix操作系统，是GNU操作系统的内核。Linux和UNIX的最大的区别是，前者是开放源代码的**自由软件**，而后者是对源代码实行知识产权保护的传统**商业软件**。狭义的操作系统仅指内核，广义的操作系统如下图所示。
@@ -1434,14 +1448,14 @@ int main()
 
 * size_t：表达不同平台下较大可能表示的数据尺寸。
 
-  在32位架构上：typedef unsigned int size_t;    // 4字节
-  在64位架构上：typedef unsigned long size_t;   // 8字节
-  类似的，ssize_t有符号，size_t无符号。
+  在32位架构上：typedef unsigned int size_t;    // 4字节  
+  在64位架构上：typedef unsigned long size_t;   // 8字节  
+  类似的，ssize_t有符号，size_t无符号。  
 
 * off_t：表达不同平台下文件偏移量。
 
-  32位架构上：typedef long off_t;            // 4字节
-  64位架构上：typedef long long off_t;       // 8字节
+  32位架构上：typedef long off_t;            // 4字节  
+  64位架构上：typedef long long off_t;       // 8字节  
 
 * 格式化打印：
 
@@ -1449,11 +1463,11 @@ int main()
   size_t ----- "%uz"  
   ssize_t ---- "%zd" 
 
-* 整型占字节数小结
-  32位系统： int--4B   long int--4B   long long--8B  指针--4B  
-  64位系统： int--4B   long int--8B   long long--8B  指针--8B  
-  32位系统和64位系统中long类型、指针类型占字节数不同。  
-  指针不是既不是int，也不是long，指针是一种类型，大小取决于不同平台上的寻址能力。  
+* 整型占字节数小结  
+  32位系统： int--4B   long int--4B   long long--8B  指针--4B    
+  64位系统： int--4B   long int--8B   long long--8B  指针--8B   
+  32位系统和64位系统中long类型、指针类型占字节数不同。    
+  指针不是既不是int，也不是long，指针是一种类型，大小取决于不同平台上的寻址能力。   
 
 ## linux 文件i节点
 
@@ -1487,17 +1501,17 @@ linux中，是通过i节点实现文件的查找定位的。i节点可以认为�
 
 ## 进程退出信号
 
-* SIGTERM（15） 
-  kill不带参数（如果kill后边没有带信号编码，就会发出终止信号15）或的killall命令发送到进程，会产生SIGTERM，让程序有好的退出。
+* SIGTERM（15）  
+  kill不带参数（如果kill后边没有带信号编码，就会发出终止信号15）或的killall命令发送到进程，会产生SIGTERM，让程序有好的退出。  
   与SIGKILL信号不同，它允许用户自定义信号处理程序，可以被捕获和解释（或忽略）。
-* SIGKILL（9）
-  发送信号：kill -9 [PID]，强制终止进程。
-* SIGINT（2）
-  发送信号：kill -2 [PID]，效果等同于在前台运行PID的进程时按下Ctrl+C键结束前台进程。
-* 其他
-  kill 0 命令用于终止所有由当前shell启动的进程。
-  kill -l 列出所有信号名称。
-  只有第9种信号(SIGKILL)才可以无条件终止进程，其他信号进程都有权利忽略。
+* SIGKILL（9）  
+  发送信号：kill -9 [PID]，强制终止进程。  
+* SIGINT（2）  
+  发送信号：kill -2 [PID]，效果等同于在前台运行PID的进程时按下Ctrl+C键结束前台进程。  
+* 其他  
+  kill 0 命令用于终止所有由当前shell启动的进程。  
+  kill -l 列出所有信号名称。  
+  只有第9种信号(SIGKILL)才可以无条件终止进程，其他信号进程都有权利忽略。  
 
 ## linux文件类型
 
@@ -1619,8 +1633,7 @@ int munmap(void *addr, size_t length);
 
 ## readv和writev
 
-高级IO包括非阻塞I/O、记录锁、系统V流机制、 I/O多路转接(select和poll函数)、 readv和writev函数以及存储映像I/O(mmap)。
-
+高级IO包括非阻塞I/O、记录锁、系统V流机制、 I/O多路转接(select和poll函数)、 readv和writev函数以及存储映像I/O(mmap)。  
 readv和writev函数是Linux中的两个系统调用，类似于read和write函数，不同的是，readv和writev在一次执行过程中可以原子地作用于多个缓冲区，这些缓冲区常常是非连续的。函数调用成功时返回读、写的总字节数，失败时返回-1并设置相应的errno。
 
 ```c
