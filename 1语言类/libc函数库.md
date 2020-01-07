@@ -10,7 +10,7 @@
   * 内存分配
   * 目录操作
   * 其他系统调用
-  * 其他知识点
+  * 其他知识点  
     ssize_t/size_t/off_t/inode/exit/return/  
     kill/extern/restrict/exec/system/signal/fcntl
 
