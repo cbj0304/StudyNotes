@@ -10,6 +10,7 @@
     * [libc函数库](./1语言类/libc函数库.md)
     * [R语言](./1语言类/R语言.md)
     * [mysql及索引优化](./1语言类/mysql及索引优化.md)
+    * [gdb和makefile](./1语言类/gdb和makefile.md)
 * [第二章](2框架类/README.md)
     * [flask框架](./2框架类/flask框架.md)
     * [scrapy框架](./2框架类/scrapy框架_fake.md)
