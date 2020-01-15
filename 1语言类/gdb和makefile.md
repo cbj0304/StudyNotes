@@ -151,10 +151,11 @@ clean :
 - $?  ：指代比目标更新的依赖条件，空格分隔。`规则为 t: p1 p2，其中 p2 的时间戳比 t 新，$?就指代p2`
 - $*  ： 指代匹配符 % 匹配的部分。`%.txt 匹配 f1.txt，$* 就表示 f1`
 - $(@D) 和 $(@F) ：分别指向$@的目录名和文件名。`$@ 是 src/input.c，那么$(@D) 的值为 src ，$(@F) 的值为 input.c`
-- $(<D) 和 $(<F) 分别指向 $< 的目录名和文件名。
+- $(<D) 和 $(<F) ：分别指向 $< 的目录名和文件名。
 ```
 
 ### 变量赋值
+
   * ?=   如果没有被赋值过就赋予等号后面的值。
   * +=  追加赋值。
   * :=   覆盖之前的值（变量值替换）。
@@ -172,11 +173,13 @@ clean :
   ```
 
 ### override
+
 在执行 make 时,如果通过命令行定义了一个变量,那么它将替代在 Makefile中出现的同名变量的定义。  
 如果不希望命令行指定的变量值替代在 Makefile 中的变量定义（通过=/:=/+=赋值的变量）,那么我们需要在 Makefile 中使用指示符“override”来对这个变量进行声明。
 即， override可以保护makefile中定义的变量的值。 
 
 ### vpath/VPATH
+
   * 大写VPATH是make中一种特殊变量；  格式：VPATH = dir1:dir2 
   * 小写vpath是makefile中的一个关键字； 格式：vpath pattern dir 为符合模式"pattern"的文件指定搜索目录"dir"。多个目录使用空格或者冒号:分开。
   * 作用：make会在当当前目录找不到的情况下，到vpath/VPATH所指定的目录中去找寻文件了。  
@@ -224,6 +227,7 @@ clean :
   ```
 
 ### 命令参数
+
   * make -n（或者 --just-print）：只显示命令，不执行命令（用于排查问题）。
   * make -s（或者 --slient）：全面禁止命令显示。
 
@@ -237,23 +241,25 @@ clean :
   foo : $(OBJS)
   ifeq ($(CC), gcc)  # 不缩进（否则会被认为是传递给 shell 的命令）
     $(CC) -o foo $(OBJ) $(libs_for_gcc) # 传递命令，缩进
-  else                
+  else
     $(CC) -o foo $(OBJ) $(normal_libs)
   endif
   
   ifneq (,$(findstring t,$(MAKEFLAGS)))  # 函数 findstring 用于判断 A 字符串是否在 B 字符串， 没有返回空，有返回 A（判断执行flag make -t）
-  ifeq ($(strip $(foo)),)       # 判断变量是否为空
+  ifeq ($(strip $(foo)),)               # 判断变量是否为空
+  ifeq ($(shell uname -m), x86_64)      # 执行shell命令
   ```
 
 ## 函数
+
   ```makefile
   $(function     arguments)  # 风格 1
   ${function     arguments}  # 风格 2 , 函数和参数用空格或tab分隔，不同参数用逗号分隔，函数调用的返回用$获取。
   
-  comma:= , 
-  empty:= 
+  comma:= ,
+  empty:=
   space:= $(empty) $(empty)       # 定义空格
-  foo:= a b c 
+  foo:= a b c
   bar:= $(subst $(space),$(comma),$(foo))  # subst函数提供替换字符功能，替换后变为 a,b,c
   ```
 
@@ -270,9 +276,9 @@ clean :
   # 简单替换：将"text"中的"from"替换成"to"
   $(subst from ,to ,text)
   
-  # 模式替换 $(patsubst pattern ,replacement ,text) 
-  objects = foo.o bar.o baz.o 
-  $(patsubst %.o, %.c, $(objects))    # 等价于 $(objects:.o=.c) 
+  # 模式替换 $(patsubst pattern ,replacement ,text)
+  objects = foo.o bar.o baz.o
+  $(patsubst %.o, %.c, $(objects))    # 等价于 $(objects:.o=.c)
 
   # 去除字符串开头和结尾的空格，同时对中间的多个空格替换为一个。$(strip string)
   $(strip a b   c )
@@ -284,8 +290,8 @@ clean :
   sources := foo.c bar.c baz.s ugh.h 
 　$(filter %.c %.s, $(sources))   # 返回 foo.c bar.c baz.s
 
-  # 返回不符合的字符串。$(filter-out pattern ...,text) 
-  objects = main1.o foo.o main2.o bar.o 
+  # 返回不符合的字符串。$(filter-out pattern ...,text)
+  objects = main1.o foo.o main2.o bar.o
   mains = main1.o main2.o 
   $(filter-out $(mains), $(objects))      # 返回foo.o bar.o
   
@@ -294,10 +300,10 @@ clean :
   
   # 字符串切片 $(word n ,text)   $(wordlist s , e ,text)   $(words text) $(firstword names ...) $(lastword names ...) 
   $(word   2,  foo bar baz)         # 返回 bar
-  $(wordlist 2, 3, foo bar baz)     # 返回 bar baz   
+  $(wordlist 2, 3, foo bar baz)     # 返回 bar baz
   $(words aa bb cc dd)              # 返回 4
   $(firstword foo bar)              # 返回 foo
-  $(lastword foo bar)               # 返回 bar 
+  $(lastword foo bar)               # 返回 bar
   ```
 
 ### 文件名处理函数
@@ -312,22 +318,22 @@ clean :
   # 文件名后缀  $(suffix names ...)
   $(suffix src/foo.c src-1.0/bar.c hacks lcd.c.o)        # 返回 ： .c .c .o
 
-  # 不包含后缀  $(basename names ...) 
+  # 不包含后缀  $(basename names ...)
   $(basename src/foo.c src-1.0/bar hacks)   # 返回 : src/foo src-1.0/bar hacks
 
-  # 加后缀  $(addsuffix suffix, names ...) 
+  # 加后缀  $(addsuffix suffix, names ...)
   $(addsuffix .c, foo bar)      # 返回 : foo.c bar.c
 
-  # 加前缀  $(addprefix prefix, names ...) 
+  # 加前缀  $(addprefix prefix, names ...)
   $(addprefix src/, foo bar)    # 返回 ： src/foo src/bar
 
   # 对应连接参数  $(join list1, list2)
-  $(join a b, .c .o)            # 返回 ： a.c b.o 
+  $(join a b, .c .o)            # 返回 ： a.c b.o
 
-  # 获取工作目录下所有符合模式的文件  $(wildcard pattern ) 
+  # 获取工作目录下所有符合模式的文件  $(wildcard pattern )
   $(wildcard *.c)     # 返回所有 .c 文件
 
-  # 返回绝对路径，如果文件不存在，返回空  $(realpath names ...) 
+  # 返回绝对路径，如果文件不存在，返回空  $(realpath names ...)
 
   # 返回绝对路径，$(abspath names ...)
   ```
@@ -358,6 +364,7 @@ clean :
   ```
 
 # gdb调试
+
 ## 调试环境
 
 利用gdb调试，需要在gcc编译过程中加上-g选项。  
@@ -366,7 +373,7 @@ clean :
 
 ```shell
 $ gcc test.c -g -o test   # 生成带有调试信息的可执行文件test
-$ gdb test                # 调试可执行文件 
+$ gdb test                # 调试可执行文件
 $ gdb -p PID              # 调试正在运行的进程
 $ gdb -c core.123         # 查看core文件出错点的函数调用
 ```

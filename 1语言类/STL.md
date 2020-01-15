@@ -2034,3 +2034,14 @@ int main()
 * B站学习视频  
   https://www.bilibili.com/video/av59131050  
   https://www.bilibili.com/video/av45108908（c++11新增容器）
+
+* 知识点汇总
+  std::map<int, Item> mymap;
+  赋值方式有两种：
+  * 通过下标： mymap[1] = a_item
+    通过下标插入时，先在map中查找有没有键为1的项，**有则更新**；没有则调用Item的默认构造函数(无参数)创建一个对象插入，插入完成后，在赋值为a_item的值。所以**使用下标赋值时，对象Item必须定义默认构造函数**，效率较低。  
+  * 通过insert方法： 
+    mymap.insert(std::pair<int, Item>(1, a_item))  
+    mymap.insert(std::make_pair(1, a_item))  
+    通过insert插入时，如果键已经存在，则插入失败，不会修改键对应的值（**有则失败**）；如果键不存在，则直接将对象插入。
+
