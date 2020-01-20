@@ -9,15 +9,12 @@
 using namespace std;
 
 /*
+===================================================================================
 回溯法
 类似于：
 暴力枚举 + 减枝
 递归法 + 限制条件
 深度优先搜索树空间
-
-排列组合数、求子集、求组合和问题。
-选与不选的问题，暴力枚举一棵满二叉树。
-https://blog.csdn.net/gaorutao0923/article/details/97132767
 
 回溯法的概念：
 回溯法也称为试探法，它并不考虑问题规模的大小，而是从问题的最明显的最小规模开始逐步求解出可能的答案，迭代地逼近最终问题的解。
@@ -30,54 +27,43 @@ https://blog.csdn.net/gaorutao0923/article/details/97132767
 
 回溯和穷举：
 回溯 = 暴力枚举 + 减枝。
-*/
 
-/*
-leetcode-17
-给定一个仅包含数字 2-9 的字符串，返回所有它能表示的字母组合。
-给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。
 
-思路：
-递归+回溯
-深度搜索树DFS
-
-此题也可以用正向迭代的方式实现，两重for循环。
-
+===================================================================================
+解决的典型题型：
 
 回溯是一种思想，求解本质是先序遍历一棵树（DFS），求解树的有效路径问题。
 所有可以画成一棵状态树，可通过暴力枚举实现的题目，可以用此框架。
-全排列问题：
-每次取出一个未访问过的元素放入path，递归取下一个元素，直到处理到最后一个元素为止。
-求子集的问题：
-每个元素都有取或者不取两种可能。
-！！！！！ 暴力枚举一般都需要恢复现场，进行下一轮的递归。
 
+leetcode-17
+给定一个仅包含数字 2-9 的字符串，返回所有它能表示的字母组合。
+给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。
+（说明：此题也可以用正向迭代的方式实现，两重for循环。）
 
-leetcode-46
+leetcode-46（全排列问题）
 给定一个没有重复数字的序列，求所有的全排列。
 输入: [1,2,3]
 输出: [ [1,2,3], [1,3,2], [2,1,3], [2,3,1], [3,1,2], [3,2,1] ]
 
-
-leetcode-47
+leetcode-47（全排列问题）
 给定一个可包含重复数字的序列，求所有的全排列。
 说明：解集不能包含重复的子集。
 输入: [1,1,2]
 输出: [ [1,1,2], [1,2,1], [2,1,1] ]
 
-leetcode-78
+leetcode-78（求子集，选与不选的问题）
 给定一个没有重复数字的序列，求所有的子集。
 说明：解集不能包含重复的子集。
 输入: nums = [1,2,3]
 输出: [ [3], [1], [2], [1,2,3], [1,3], [2,3], [1,2], [] ]
 
-leetcode-39
+leetcode-39（求子集）
 给定一个无重复元素的数组 candidates 和一个目标数 target，
 找出 candidates 中所有可以使数字和为 target 的组合。
 candidates 中的数字可以无限制重复被选取。
 说明：解集不能包含重复的子集。
 
-leetcode-40
+leetcode-40（求子集）
 给定一个数组 candidates 和一个目标数 target ，
 找出 candidates 中所有可以使数字和为 target 的组合。
 candidates 中的每个数字在每个组合中只能使用一次。
@@ -92,52 +78,9 @@ n 代表括号的对数, 求所有有效的括号组合。
 例如，给出 n = 3，生成结果为：
 [ "((()))", "(()())", "(())()", "()(())", "()()()" ]
 */
-class Solution17 {
-public:
-    Solution17() {
-        _map = {
-            {'2', {"a", "b", "c"}},
-            {'3', {"d", "e", "f"}},
-            {'4', {"g", "h", "i"}},
-            {'5', {"j", "k", "l"}},
-            {'6', {"m", "n", "o"}},
-            {'7', {"p", "q", "r", "s"}},
-            {'8', {"t", "u", "v"}},
-            {'9', {"w", "x", "y", "z"}}
-        };
-    }
-    vector<string> letterCombinations(string digits) {
-        if (digits.size() == 0) {
-            return _res;
-        }
 
-        string tmpstr("");
-        findCombination(digits, 0, tmpstr);
-        return _res;
-    }
-private:
-    // 数字字符对应的字母集合
-    map<char, vector<string>> _map;
-    vector<string> _res;
-    void findCombination(const string & digits, int index, string & curStr) {
-        cout << "index=" << index << " str=" << curStr << endl; 
-        if (index == digits.size()) {
-            _res.push_back(curStr);
-            cout << "return curStr=" << curStr << endl;
-            return;
-        }
 
-        char ch = digits[index];
-        if (_map.find(ch) != _map.end()) {
-            vector<string> letters = _map[ch];
-            for(auto it = letters.begin(); it != letters.end(); it++) {
-                cout << "index=" << index << " letters=" << *it << endl;
-                string s = curStr + *it;
-                findCombination(digits, index+1, s);
-            }
-        }
-    }
-};
+
 
 /*
 leetcode-39
@@ -152,6 +95,16 @@ candidates 中的数字可以无限制重复被选取。
 
 输入: candidates = [2,3,6,7], target = 7,
 所求解集为: [ [7], [2,2,3] ]
+
+
+思路：
+1. 是否需要去重？
+    candidates无重复元素，dfs遍历树结构时（每层递归中的for循环中元素不同）不会有重复路径。
+2. 保证每个元素可以无限次被选取？
+    每层递归从candidates中当前元素i开始遍历。
+3. 停止条件？
+    pathsum == target：路径有效退出；
+    pathsum > target：路径无效退出；
 */
 class Solution39 {
 public:
@@ -196,6 +149,16 @@ candidates 中的每个数字在每个组合中只能使用一次。
     解集不能包含重复的组合。 
 输入: candidates = [10,1,2,7,6,1,5], target = 8,
 所求解集为: [ [1, 7], [1, 2, 5], [2, 6], [1, 1, 6] ]
+
+思路：
+1. 去重？
+    candidates可能有重复元素，dfs遍历树结构时（每层递归中的for循环中元素可能相同）会有重复路径。
+    事先对candidates排序，把相同元素放在一起，再在递归for循环中减枝，去掉相同的路径。
+2. 保证每个数字只用一次？
+    每层递归从candidates中下一个元素i+1开始遍历，保证每个元素只取一次。
+3. 停止条件？
+    pathsum == target：路径有效退出；
+    pathsum > target：路径无效退出；
 */
 
 class Solution40 {
@@ -246,52 +209,6 @@ private:
     }
 };
 
-/*
-leetcode-46
-全排列
-给定一个没有重复数字的序列，返回其所有可能的全排列。
-输入: [1,2,3]
-输出: [ [1,2,3], [1,3,2], [2,1,3], [2,3,1], [3,1,2], [3,2,1] ]
-*/
-
-class Solution46 {
-public:
-    vector<vector<int>> permute(vector<int>& nums) {
-        if (nums.size() == 0) {
-            return _res;
-        }
-
-        vector<bool> visited;
-        visited.reserve(nums.size());
-        visited.assign(nums.size(), false);
-
-        vector<int> path;
-        findCombination(nums, 0, path, visited);
-        return _res;
-    }
-private:
-    vector<vector<int>> _res;
-
-    void findCombination(vector<int>& nums, int index, 
-            vector<int>& curPath, vector<bool> & visited) {
-        if (index == nums.size()) {
-            _res.push_back(curPath);
-            return;    // 选够所有的元素，此条路径退出
-        }
-
-        for(int i=0; i<nums.size(); i++) {
-            if (visited[i] == 1) {
-                continue;
-            }
-            // cout << "use=" << nums[i] << endl;
-            curPath.push_back(nums[i]);
-            visited[i] = true;
-            findCombination(nums, index+1, curPath, visited);
-            curPath.pop_back();
-            visited[i] = false;    // 恢复现场
-        }
-    } 
-};
 
 /*
 leetcode-47
@@ -300,6 +217,15 @@ leetcode-47
 
 输入: [1,1,2]
 输出: [ [1,1,2], [1,2,1], [2,1,1] ]
+
+思路：
+把n个元素放入n个位置。
+index代表当前的第index个位置，当index==nums.size()时表示位置已放置完毕，输出路径。
+每次从n个元素中找未被放置过的元素（visited=false）放入第index++个位置，
+深度递归，直到放全并输出路径，本次完毕后需要恢复现场进行下一次深度递归。
+
+因为递归分支中的for循环中会出现重复元素，所以需要去重，去重思路：
+事先对nums排序，把相同元素放到一起，在分支的for循环中减掉相同路径的分支。
 */
 
 class Solution47 {
@@ -356,6 +282,7 @@ leetcode-78
 思路：
 1. 位运算法
 2. 回溯法
+    每个元素都有两种可能，选和不选，然后深度递归，直到判断完所有的元素，输出路径。
 */
 
 class Solution78 {
@@ -377,7 +304,7 @@ private:
             _res.push_back(curpath);
             return;
         }
-
+        // 进行n次（yes/no）的选择，到第n层选择完毕，并计算所有路径。
         curpath.push_back(nums[index]);   // 选index
         findCombination(nums, index+1, curpath);
         curpath.pop_back();              // 不选index
@@ -391,6 +318,17 @@ leetcode-22
 给出 n 代表生成括号的对数，请你写出一个函数，使其能够生成所有可能的并且有效的括号组合。
 例如，给出 n = 3，生成结果为：
 [ "((()))", "(()())", "(())()", "()(())", "()()()" ]
+
+思路：
+    包含3个 "(" 和3个 ")" 字符的序列的全排列问题。
+    减枝：
+        如果之前左括号个数大于右括号个数，此时，既可以放左括号，又可以放右括号；
+        如果之前左括号个数等于右括号个数，此时只能放左括号；
+        如果之前左括号个数小于右括号个数，无效退出；
+    退出条件：
+        左括号个数小于右括号个数；      路径无效退出
+        左括号 > n 或者 右括号 > n；    路径无效退出
+        左括号 == n && 右括号 == n；    路径有效退出
 */
 
 class Solution22 {
@@ -407,13 +345,14 @@ public:
 private:
     vector<string> _res;
     void findCombination(const int n, int left_cnt, int right_cnt, string &curpath) {
-        if (left_cnt > n  || right_cnt > n) {
+        if (left_cnt > n  || right_cnt > n  || left_cnt < right_cnt) {
             return;
         }
         if (left_cnt == n && right_cnt == n) {
             _res.push_back(curpath);
             return;
         }
+        // 左括号比较多时，可以加入右括号；否则只能加入右括号
         if (left_cnt > right_cnt) {
             curpath = curpath + ")";
             findCombination(n, left_cnt, right_cnt+1, curpath);
@@ -422,6 +361,59 @@ private:
         curpath = curpath + "(";
         findCombination(n, left_cnt+1, right_cnt, curpath);
         curpath.pop_back();
+    }
+};
+
+/*
+leetcode-17
+给定一个仅包含数字 2-9 的字符串，返回所有它能表示的字母组合。
+给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。
+（说明：此题也可以用正向迭代的方式实现，两重for循环。）
+*/
+class Solution17 {
+public:
+    Solution17() {
+        _map = {
+            {'2', {"a", "b", "c"}},
+            {'3', {"d", "e", "f"}},
+            {'4', {"g", "h", "i"}},
+            {'5', {"j", "k", "l"}},
+            {'6', {"m", "n", "o"}},
+            {'7', {"p", "q", "r", "s"}},
+            {'8', {"t", "u", "v"}},
+            {'9', {"w", "x", "y", "z"}}
+        };
+    }
+    vector<string> letterCombinations(string digits) {
+        if (digits.size() == 0) {
+            return _res;
+        }
+
+        string tmpstr("");
+        findCombination(digits, 0, tmpstr);
+        return _res;
+    }
+private:
+    // 数字字符对应的字母集合
+    map<char, vector<string>> _map;
+    vector<string> _res;
+    void findCombination(const string & digits, int index, string & curStr) {
+        cout << "index=" << index << " str=" << curStr << endl; 
+        if (index == digits.size()) {
+            _res.push_back(curStr);
+            cout << "return curStr=" << curStr << endl;
+            return;
+        }
+
+        char ch = digits[index];
+        if (_map.find(ch) != _map.end()) {
+            vector<string> letters = _map[ch];
+            for(auto it = letters.begin(); it != letters.end(); it++) {
+                cout << "index=" << index << " letters=" << *it << endl;
+                string s = curStr + *it;
+                findCombination(digits, index+1, s);
+            }
+        }
     }
 };
 
