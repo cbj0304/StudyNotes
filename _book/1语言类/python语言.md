@@ -6,9 +6,24 @@
 
   python_cookbook第三版
 
-* 学习目标
+* 内容提要
   * 数据类型
+    * 可迭代对象 vs 迭代器对象
+    * 数据类型：容器、数值、字符串、时间日期
+    * 自定义类（自定义属性/方法、内置属性/方法）
   * 函数和算法
+    * 格式化
+    * 内建函数locals/globals
+    * json/dict互转
+    * 函数参数 */**
+    * 正则, {} [] ()的区别
+    * lambda表达式
+    * 回调函数
+    * 闭包和装饰器
+  * 并发编程
+    * 协程
+    * gunicore和gevent
+    * python多线程和多进程
 
 # 数据类型
 
@@ -16,7 +31,7 @@
 
 * **列表（list）**
 
-  举例：[1，2，3]， 有序集合，元素可重复，元素类型可以不同。
+  举例：[1，2，3]， 有序集合，元素可重复，**元素类型可以不同**（这一点和c不同，需要注意）。
 
   方法：append/insert/extend/pop/clear/copy/index/remove/reverse/sort
 
@@ -24,7 +39,7 @@
 
   举例：('abc', 3, 3.21)
 
-  和list类似，但是元素一旦初始化不能修改，没有append/insert修改元素的这类方法。
+  和list类似，但是**元素一旦初始化不能修改**，没有append/insert修改元素的这类方法。
 
 * **集合（set）**
 
@@ -42,6 +57,9 @@
 
   方法：clear/copy/fromkeys/get/has_key/items/keys/setdefault/update/values/pop/popitem
 
+  python中的dict的key可以是什么类型？
+  一个对象能不能作为字典的key，就取决于其有没有__hash__方法。所以所有python自带类型中，除了list、dict、set和内部至少带有上述三种类型之一的tuple之外，其余的对象都能当key。
+
 * **字符串（string）**
 
   举例：'abc'
@@ -52,11 +70,10 @@
 
 * **可迭代对象：**
 
-    以上都是可迭代对象（Iterable），内部实现了__iter__方法，可以通过for...in...循环遍历/迭代。
+    以上都是可迭代对象（Iterable），内部实现了`__iter__`方法，可以通过for...in...循环遍历/迭代。
 
-    通过isinstance()函数可以判断一个对象是否是 iterable 对象。
+    通过isinstance()函数可以判断一个对象是否是 Iterable 对象（isinstance(a, Iterable) ==True）。
 
-    isinstance(a, Iterable) -> 如果a是可迭代类型，返回True
 
 **代码示例：**
 
@@ -74,20 +91,33 @@ from collections import ChainMap
 import json
 
 if __name__ == '__main__':
-    a = [1, 2, 23, -2, 4, 23]
-    print(a)
-    print(list(a))
-    print(type(a))
+    # ******************** list 
+    a = [1, 2, "hello"]
+    b = ['hello', 100]
+    b.append(66.6)         # 末尾添加一个元素
+    b.insert(1, 'china')   # 在指定位置添加
+    a.extend(b)            # 合并两个list
+    print("a={}\nb={}\n".format(a, b)) # a=[1, 2, 'hello', 'hello', 'china', 100, 66.6] b=['hello', 'china', 100, 66.6]
 
-    assert(a.index(23, 0, len(a)) == 2)
+    print(type(a))        # <class 'list'>
+    assert(a.index(100, 0, len(a)) == 5)  # 返回下标，如果有多个返回第一个
+    assert(a.count("hello") == 2)
     assert(isinstance(a, Iterable) is True)
 
-    a.reverse()
-    print(a)
-    print(a.count(23))
+    a1 = [1, 3, -1, 10]
+    a1.reverse()               # 反转 [10,-1,3,1]
+    a1.sort()                  # 排序 [-1, 1, 3, 10]
+    a1.sort(reverse=True)      # 降序排序 [10, 3, 1, -1]
+    a1.pop()                   # 删除最后一个元素 [10, 3, 1]
+    a1.pop(1)                  # 删除index=1的元素 [10, 1]
 
-    tu = (1, 23, 'aaa')
-    print(tu)
+    # ******************** tuple
+    tu1 = (1, )                    # 单个元素的tuple需要在结尾加逗号
+    tu = (1, 23, [1, 2, "test"], 66.6, 'aaa')
+    print(tu[3])                   # 下标访问   66.6
+    print(tu[3:])                  # 切片，和list一样  (66.6, 'aaa')
+    print(len(tu))                 # 5
+    del tu                         # 可以用del删除整个tuple，但是单个元素不能增删改
 
     # 可迭代对象之间可以相互转换
     listA = [3, 4, 2, 6, 4]
@@ -96,29 +126,51 @@ if __name__ == '__main__':
     print(tupleA)
     print(setA)
 
-    # set
-    s = set('acbds')
-    print(s)  # {'c', 's', 'a', 'b', 'd'}
+    # ******************** set
+    s = set()          # 不能用{}创建空集合，{}用于创建空字典
+    s1 = set({'acbds', 10})
+    s2 = {15, 2, 10, "hello", (1, 3)}
 
+    print(s2.difference(s1))      # 差集 在s2中不在s1中  {15, 2, "hello", (1, 3)}
+    print(s2.intersection(s1))    # 交集 {10}
+    print(s2.union(s1))           # 并集 {'acbds', 15, 2, 10, "hello", (1, 3)}\
+
+    s2.add("test")
+    s2.remove(10)          # 只能删除已存在的值
+    print(s2)              # {15, 2, "hello", (1, 3), "test"}
+    assert(len(s2) == 5)
+
+    s2.clear()             # 清空集合
+
+    # ******************** dict
     # defaultdict会自动为将要访问的键创建映射实体，类似于普通dict的setdefault方法
+    # 第二个参数"default_factory"接收一个工厂函数作为参数, 例如int str list set等，如果访问不存在的key时，会返回一个根据default_factory参数的默认值(如list对应[]), 普通的dict会返回Keyerror抛出异常。
     d = defaultdict(list)
     d['a'] = [1, 2, 3]
     d['b'] = [4, 5]
     d['a2'] = [11]
-    print(json.dumps(d))
+    print(json.dumps(d))      # {"a": [1, 2, 3], "b": [4, 5], "a2": [11]}
+    print(d['ccc'])           # 返回list的默认值 []
 
     dic = {}
     dic.setdefault('a2', []).append(2)
     dic.setdefault('b3', []).append(3)
     dic.setdefault('b1', []).append(11)
-    print(json.dumps(dic))
+    print(json.dumps(dic))    # {"a2": [2], "b3": [3], "b1": [11]}
+    # print(dic['ccc'])       # KeyError: 'ccc'
 
     # 使词典有序
     d2 = OrderedDict()
     d2['a2'] = 200
     d2['a5'] = 500
     d2['a1'] = 100
-    print(json.dumps(d2))
+    print(json.dumps(d2))   # 按照赋值顺序 {"a2": 200, "a5": 500, "a1": 100}
+
+    # 验证dict的key类型
+    d = {'a':123, 123:"ccc", (12,):['a', 'b', 'c']}
+    print(d.keys())          # dict_keys(['a', 123, (12,)])
+    print(d.values())        # dict_values([123, 'ccc', ['a', 'b', 'c']])
+    print(d.items())         # dict_items([('a', 123), (123, 'ccc'), ((12,), ['a', 'b', 'c'])])
 
     # 字典计算
     prices = {
@@ -129,28 +181,26 @@ if __name__ == '__main__':
     # zip：接受两个可迭代对象，将两个对象中对应元素'压缩'成一个个的tuple，
     # 返回由这些tuple组成的list
     # 若两个可迭代对象不等长，以短者为基准截断
-    lst = list(zip(prices.values(), prices.keys()))
+    lst = list(zip(prices.values(), prices.keys()))  # [(201, 'CC'), (403, 'BB'), (100, 'JJ')]
     assert(max(lst) == (403, 'BB'))
-    lst.sort()
-    print(lst)    # [(100, 'JJ'), (201, 'CC'), (403, 'BB')]
+    lst.sort()         # [(100, 'JJ'), (201, 'CC'), (403, 'BB')]
 
     la = [3, 5, 2, 10]
     ta = ('g', 'f', 'c')
-    za = zip(ta, la)
-    print(list(za))
+    za = zip(ta, la)            # za = [('g', 3), ('f', 5), ('c', 2)]
 
     # 可迭代对象的集合操作
-    print(prices.keys())
+    print(prices.keys())        # ['CC', 'BB', 'JJ']
     another = {'CC', 'DD'}
     another2 = ['CC', 'DD']
-    print(prices.keys() & another)
-    print(prices.keys() & another2)
+    print(prices.keys() & another)      # {'CC'}
+    print(prices.keys() & another2)     # {'CC'}
 
     # 词频统计
     words = ["hello", "you", "you", "and", "hello", "hello"]
     words_count = Counter(words)
-    print(words_count, type(words_count))
-    print(words_count.most_common(2))
+    print(words_count, type(words_count))  # Counter({'hello': 3, 'you': 2, 'and': 1}) <class 'collections.Counter'>
+    print(words_count.most_common(2))      # [('hello', 3), ('you', 2)]
 
     # 根据某一键值排序
     lines = [
@@ -161,12 +211,16 @@ if __name__ == '__main__':
     ]
     by_age = sorted(lines, key=itemgetter('age'))
     print(by_age)
-    by_age_score = sorted(lines, key=itemgetter('age', 'score'))
+    by_age_score = sorted(lines, key=itemgetter('age', 'score'))  # 升序排序
+    # [{'name': 'ddd', 'age': 16, 'score': 10.2}, 
+    #  {'name': 'bbb', 'age': 16, 'score': 89.2}, 
+    #  {'name': 'aaa', 'age': 17, 'score': 98.2}, 
+    #  {'name': 'ccc', 'age': 21, 'score': 10.2}]
     print(by_age_score)
 
     mylist = [3, 5, -1, 9, -5, 7]
     out = [n if n > 0 else 0 for n in mylist]
-    print(out)
+    print(out)                    # [3, 5, 0, 9, 0, 7]
 
     mydict = {
         "beijing": 100,
@@ -182,6 +236,7 @@ if __name__ == '__main__':
     p3 = dict((key, val) for key, val in mydict.items() if val > 100)
     print(p1)
 
+    # ****************************　namedtuple
     # 命名元组(代码从下标操作解脱出来)
     student = namedtuple('student', ['name', 'age', 'score'])  # 返回一种类型student
     st = student("cbj", 18, 100)
@@ -191,9 +246,10 @@ if __name__ == '__main__':
 
     # 生成器表达式
     nums = [2, 3, 4]
-    s1 = sum(x*x for x in nums)     # 使用生成器表达式（更优雅和省内存）
-    s2 = sum(x*x for x in nums)     # 创建一个临时列表
+    s1 = sum(x*x for x in nums)       # 使用生成器表达式（更优雅和省内存）
+    s2 = sum([x*x for x in nums])     # 创建一个临时列表
 
+    # 文件名相关
     files = os.listdir('D:/gcctool/0_mytestdata')
     print([file for file in files])
 
@@ -201,7 +257,7 @@ if __name__ == '__main__':
         print('there be python.')
 
     datas = ['my ', 'age ', 18]
-    print(','.join([str(x) for x in datas]))
+    print(','.join([str(x) for x in datas]))        # my ,age ,18
 
     lang = [
         {'name': 'c++', 'score': 100},
@@ -218,751 +274,66 @@ if __name__ == '__main__':
     a = {'x': 1, 'y': 2}
     b = {'z': 4, 'x': 3}
     c = ChainMap(a, b)
-    print("x=%d, y=%d, z=%d" % (c['x'], c['y'], c['z']))
+    print(c)                            # ChainMap({'x': 1, 'y': 2}, {'z': 4, 'x': 3})
+    print("x=%d, y=%d, z=%d" % (c['x'], c['y'], c['z']))     # x=1, y=2, z=4
     del c['y']
     print(c.keys(), c.values(), c.items())
 ```
 
-## 数值类型
+## 可迭代对象 vs 迭代器对象
 
-* **python3内置数值类型(Numeric)：**
-  * 整数（int）：python3中的整型只有一种 long 类型
-  * 浮点数（float）:
-  * 定点数（decimal.Decimal）：固定的小数点位置，固定位数的整数部分和小数部分，更精确。
-  * 复数（complex）：用指数达到了浮动小数点的效果，更灵活。
-  * 分数（fractions.Fraction）：有理数。
-  * 布尔类型（bool）： True/False本质上是1/0。
-* **python中的数学模块math/cmath：**
-  * math模块：提供对实数的计算支持
-  * cmath模块：供对于复数运算的支持(a=3+4j)
+* **可迭代对象（Iterable）和迭代器对象（Iterator）**
 
-          具体函数查看： dir(math)  dir(cmath)
+  * Iterator：迭代器对象，必须要实现`__next__`魔法函数。
 
-* **无穷大于非数字：**
+    Iterable：可迭代对象，继承Iterator，必须要实现`__iter__`魔法函数。
 
-  * 正无穷：float('inf')
+  * a = [1, 2, 3]   # a是可迭代对象（Iterable）
 
-  * 负无穷：float('-inf')
+    b = iter(a)     # b是迭代器对象（Iterator）
 
-  * 非数字：float('nan')
+  * 只要可以用作for循环的都是可迭代对象（for循环的过程实际是不断调用可迭代对象的iter()方法的过程，iter()方法的返回值是迭代器对象，因此可以链式操作）。
 
-    得到inf时就查看是否有溢出或者除以0，得到nan时就查看是否有非法操作（如对负数开平方）。
-
-* **numPy模块**
-
-      第三方库安装 pip install numpy
-
-      向量和矩阵的线性代数运算
-
-* **random模块**
-
-      随机数生成模块
-
-**代码示例：**
-
-```python
-# -*- coding: utf-8 -*-
-from fractions import Fraction
-from decimal import Decimal
-from decimal import localcontext
-import cmath
-import numpy as np
-import random
-
-def IntegerTest():
-    print('整型测试...')
-    data = 120
-    print('data={}, type={}'.format(data, type(data)))    # <class 'int'>
-
-    exit(0)
-
-
-def FloatTest():
-    print('浮点数测试...')
-    # 生成浮点数
-    data1 = 12.34
-    # float() 将整数和字符串转换成浮点数
-    data2 = float('12.35')
-    print('data={}, type={}'.format(data1, type(data1)))   # <class 'float'>
-    print('data={}, type={}'.format(data2, type(data2)))   # <class 'float'>
-
-    exit(0)
-
-
-def DecimalTest():
-    print('定点数测试...')
-    # 生成定点数
-    data = Decimal('120.3')
-    print('data={}, type={}'.format(data, type(data)))    # <class 'decimal.Decimal'>
-
-    exit(0)
-
-
-def ComplexTest():
-    print('复数测试...')
-    # 生成复数
-    data1 = 2 + 3j
-    data2 = complex(3, 4)
-    print('data={}, type={}'.format(data1, type(data1)))    # <class 'complex'>
-    print('data={}, type={}'.format(data2, type(data2)))    # <class 'complex'>
-
-    # 取出实部和虚部
-    assert(data1.real == 2)
-    assert(data1.imag == 3)
-
-    # 复数运算
-    print(data1 * data2)
-    print(data1 / data2)
-    print(abs(data1))
-    print(cmath.sin(data1))
-    print(cmath.exp(data1))
-
-    # 对复数数组执行操作
-    arr = np.array([2+3j, 4+5j, 7-8j])
-    print(arr + 2)
-    print(np.sin(arr))
-
-    print(cmath.sqrt(-1))
-
-    exit(0)
-
-
-def BooleanTest():
-    print('布尔类型测试...')
-    # 生成布尔类型
-    data1 = False
-    data2 = bool(100)
-    print('data={}, type={}'.format(data1, type(data1)))     # <class 'bool'>
-    print('data={}, type={}'.format(data2, type(data2)))     # <class 'bool'>  True
-
-    exit(0)
-
-
-def FractionTest():
-    print('有理数测试...')
-    # 生成有理数
-    data = Fraction(2, 8)
-    print('data={}, type={}'.format(data, type(data)))     # 1/4 <class 'fractions.Fraction'>
-
-    # 取出分子和分母
-    assert(data.numerator == 1)      # 分子
-    assert(data.denominator == 4)    # 分母
-
-    # 分数运算
-    a = Fraction(3, 4)
-    b = Fraction(7, 16)
-    print(a + b)
-    print(a * b)
-    print(float(a))
-    pi = Fraction('3.141592654')
-    print(pi.limit_denominator(8))    # 设置分母的最大值，返回最接近的有理数 22/7
-
-    # float转分数（有理数）
-    x = 3.75
-    tu = x.as_integer_ratio()   # (15, 4) <class 'tuple'>
-    print(Fraction(*tu))
-
-    exit(0)
-
-
-def numPyTest():
-    print('test numPy')
-
-    # 一维数组，作用到所有元素上
-    ax = np.array([1, 4, 5, 2])
-    ay = np.array([2, 3, 1, 5])
-
-    print(ax, type(ax))        # <class 'numpy.ndarray'>
-    print(ax * 2)
-    print(ax + 10)
-    print(ax + ay)
-    print(ax * ay)
-
-    myfun = lambda x: 3*x**2 - 2*x + 7
-    print(myfun(ax))
-
-    print(np.sqrt(ax))
-    print(np.cos(ax))
-
-    # 多维数组，作用到所有元素上
-    grid = np.zeros(shape=(3, 4), dtype=float)
-    print(grid + 10)
-    print(grid, type(grid))      # <class 'numpy.ndarray'>
-
-    grid2 = np.array([[1, 2, 3], [4, 5, 6]])   # 2行3列
-    print(np.sin(grid2))
-    print(grid2[0])              # 第1行
-    print(grid2[:, 0])           # 第1列
-    print(grid2[0, 0:2])       # 1-2行，1-3列   (下标从0开始，:两侧左开右闭)
-
-    # 矩阵操作
-    m = np.matrix([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
-    print(m, type(m))
-    print(m.T)        # 转置
-    v = np.matrix([[1], [2], [3]])
-    print(m * v)
-
-    exit(0)
-
-
-def RandomTest():
-    print('test Random...')
-    values = [10, 2, 3, 4, 5, 6]
-    a1 = random.choice(values)      # 随机选取一个元素
-    a2 = random.sample(values, 3)   # 随机选取n个元素
-    random.shuffle(values)          # 乱序输出
-    print('choice={}\nsample={}\nshuffle={}'.format(a1, a2, values))
-
-    b1 = random.randint(0, 100)       # 产生随机整数
-    b2 = random.random()              # 产生0-1的随机浮点数
-    b3 = random.getrandbits(100)      # 产生占据100个二进制bit位的大整数（python支持大整数运算，位数不受限制）
-    print('randint={}\nrandom={}\ngetrandbits={}'.format(b1, b2, b3))
-
-    # python随机数生成算法是确定可复现的，可以修改初始化种子(可以用int或者bytes字符串)
-    random.seed(1234)
-    print(random.randint(0, 10))
-    random.seed(b'test')
-    print(random.randint(0, 10))
-
-    print(random.uniform(1.0, 10.0))     # 获取均匀分布的随机数
-    print(random.gauss(10.0, 2.0))    # 产生高斯分布的随机数（均值10.0， 标准差2.0）
-
-    exit(0)
-
-
-if __name__ == '__main__':
-    # IntegerTest()
-    # FloatTest()
-    # DecimalTest()
-    # ComplexTest()
-    # BooleanTest()
-    # FractionTest()
-    # numPyTest()
-    RandomTest()
-
-    # 四舍五入
-    assert(round(2.4573, 2) == 2.46)
-    assert(round(2.76) == 3)
-    assert(round(273513, -3) == 274000)
-
-    # 浮点数不能特别精确的表示十进制数，如果要求不能有任何误差就用定点数，但是会有一些性能损耗
-    # 一般情况下浮点数足以
-    a = Decimal('4.2')
-    b = Decimal('2.15')
-    assert(a + b == Decimal('6.35'))    # 试试换成float怎么样？...
-    # 创建本地上下文控制定点数参数，如有效数字
-    with localcontext() as ctx:
-        ctx.prec = 3
-        print(a/b)
-
-    # 格式化  '[<>^]?width[,]?(.digits)?'
-    x = 12345.678
-    print(format(x, '>10.2f'))
-    print(format(x, '^10.2E'))
-    print(format(x, ','))      # 千分位分隔符
-
-    # 二、八、十、十六进制
-    y = 1234
-    s1 = bin(y)       # <class 'str'>
-    s2 = oct(y)
-    s3 = hex(y)
-    len = y.bit_length()   # 转换为二进制占多少bit位
-    print('bin(y)={}\noct(y)={}\nhex(y)={}\nbit_length()={}'.format(s1, s2, s3, len))
-    # 另一种方法
-    print(format(y, 'b'))
-    print(format(y, 'o'))
-    print(format(y, 'x'))
-    # 转十进制
-    assert(int('4d2', 16) == 1234)
-    assert(int('10011010010', 2) == 1234)
-
-    # 整数转字节码
-    d = 20747284487117727783387188
-    nbyte, rem = divmod(d.bit_length(), 8)    # 计算整数占多少字节
-    if rem:
-        nbyte += 1
-    print(d.to_bytes(nbyte, 'little'))
-    assert(d.to_bytes(nbyte, 'big') == b'\x11)h\x8b\xb3Y<\xfc#\x004')
-    assert(d.from_bytes(b'\x11)h\x8b\xb3Y<\xfc#\x004', 'big') == 20747284487117727783387188)
-```
-
-## 字符串类型
-
-* **字符串处理函数汇总：**
-
-  * 切割：
-
-        re.split()
-
-        str[m:n]
-
-  * 查找与匹配：
-
-        str.startswith()
-
-        str.endswith()
-
-        re.findall()
-
-        re.match()
-
-        str.find()
-
-        fnmatch()
-
-        fnmatchcase()
-
-  * 替换
-
-        str.replace()
-
-        re.sub()
-
-  * 格式化：
-
-        unicodedata.normalize()
-
-        str.lstrip()
-
-        str.rstrip()
-
-        str.strip()
-
-  * 转换：
-
-        str.upper()
-
-        str.lower()
-
-        str.translate()
-
-  * 格式化：
-
-        文本标准化：unicodedata.normalize()
-
-        清空左右指定字符：str.lstrip()/str.rstrip()/str.strip()
-
-        替换：str.translate()/str.replace()
-
-        对齐：str.ljust()/str.rjust()/str.center()/format
-
-        拼接：join/+/print(..., sep=':')
-
-        字符串中插入变量: format()/format_map()+vars()
-
-        指定列宽格式化字符串: testwrap.fill()
-
-  * 其他：
-
-        s.isdigit()
-
-**代码示例：**
-
-```python
-# -*- coding: utf-8 -*-
-import re
-from fnmatch import fnmatch, fnmatchcase
-import unicodedata
-from test_class import Student
-import textwrap
-
-if __name__ == '__main__':
-
-    # -------------------切割---------------------------
-    str = 'hello my; name, is cbj'
-    lst = re.split(r'[,;\s]\s*', str)
-    print('split -> type={}, ret={}'.format(type(lst), lst))
-
-    # ()在正则中用于捕获和分组
-    lst2 = re.split(r'(,|;|\s)\s*', str)
-    print('split re-has-() -> type={} ret={}'.format(type(lst2), lst2))
-
-    # (?:...) 分组，不捕获
-    lst3 = re.split(r'(?:,|;|\s)\s*', str)
-    print('split re-has-() -> type={} ret={}'.format(type(lst3), lst3))
-
-    # seq[start:end:step]
-    lst4 = [1, 2, 3, 4, 5]
-    assert(lst4[::2] == [1, 3, 5])
-
-    # -------------------查找与匹配---------------------------
-    # 检查字符串的开头结尾
-    url = 'http://www.python.org'
-    assert(url.startswith('http') is True)
-    assert(url.endswith('https') is False)
-    tu = ('org', 'python')
-    assert(url.endswith(tu) is True)
-
-    assert(url[-3:] == 'org')      # 切片的方式检查收尾
-
-    ret = re.match(r'http', url)     # 正则的方式检查收尾
-    print(ret.group() if ret else None)
-
-    files = ['a.py', 'b.cpp', 'c.java']
-    print(any(f for f in files if f.endswith('py')))
-    print([f.endswith('py') for f in files])
-
-    # 使用通配符匹配字符串（fnmatch模块）
-    assert(fnmatch('test02.TXT', '*.txt') is True)
-    assert(fnmatch('test02.py', '?est0?.py') is True)
-    assert(fnmatch('test02.py', 'test[0-9]*.py') is True)
-    assert(fnmatchcase('test.TXT', '*.txt') is False)    # 大小写敏感
-
-    # 查找 （str.find 或者 re.match re.findall）
-    assert(url.find('python') == 11)
-
-    # -------------------替换---------------------------
-    # 替换 （str.replace 或者 re.sub）
-    str = 'my name is A, your name is B'
-    strnew = str.replace('name', 'fullname')
-    assert(str == 'my name is A, your name is B')  # 未被修改
-    assert(strnew == 'my fullname is A, your fullname is B')
-
-    # -------------------格式化---------------------------
-    # 将文本标准化
-    s1 = 'Spicy Jalape\u00f1o'
-    s2 = 'Spicy Jalapen\u0303o'
-    assert((s1 == s2) is False)
-
-    t1 = unicodedata.normalize('NFC', s1)
-    t2 = unicodedata.normalize('NFC', s2)
-    assert((t1 == t2) is True)
-
-    # 内置函数：大小写转换，判断是不是数字字符等等
-    s = "hello world 2018"
-    assert(s.isdigit() is False)
-    assert(re.findall(r'\d+', s)[0].isdigit() is True)
-    assert(s.upper() == 'HELLO WORLD 2018')
-    assert(s.upper().lower() == 'hello world 2018')
-
-    # strip
-    s = '---*** hello  '
-    assert(s.lstrip('-*') == ' hello  ')    # 去掉左侧的-或者*
-    assert(s.rstrip() == '---*** hello')    # 去掉右侧空格
-
-    # translate
-    replace_map = {
-        ord('\t'): ' ',
-        ord('\f'): ' ',
-        ord('\r'): None,   # 表示删除
-    }
-    s = 'my \fname\r is\tcb\rj\n'
-    print(s.translate(replace_map))
-    # 创建替换词典的技巧
-    print(dict.fromkeys([1, 2, 3]))
-    print(dict.fromkeys([1, 2, 3], "test"))
-    # 也可以用replace
-    s = 'my \fname\r is\tcb\rj\n'
-    s = s.replace('\t', ' ')
-    s = s.replace('\f', ' ')
-    s = s.replace('\r', '')
-    print(s)
-
-    # 字符串对齐 ljust/rjust/center/format
-    text = 'Hello World'
-    f1 = text.ljust(20, '*')
-    f2 = text.rjust(20)
-    f3 = text.center(20, '-')
-    g1 = format(text, '*<20')
-    g2 = format(text, '>20')
-    g3 = format(text, '-^20')
-    print('f1={}\nf2={}\nf3={}'.format(f1, f2, f3))
-    print('g1={}\ng2={}\ng3={}'.format(g1, g2, g3))
-
-    data = 10.3247
-    s1 = '{:-^20}'.format(text)
-    s2 = '{:>10.2f}'.format(data)
-    print('s1={}\ns2={}'.format(s1, s2))
-
-    # 字符串拼接 join/+/print(..., sep=':')
-    lst = ['hello', 'my', 'name', 'is', 'John']
-    res1 = ' '.join(lst)             # 此方法效率更优
-    res2 = lst[0] + ' ' + lst[4]     # 会引起内存赋值和垃圾回收
-    res3 = 'hello' 'world'
-    print('join -> res1={}\nres2={}\nres3={}'.format(res1, res2, res3))
-
-    print('hello', 'my', 'world', sep=' ')
-
-    # 使用生成器函数，复用代码
-    def sample():
-        yield 'hello1'
-        yield 'my1'
-        yield 'world1'
-
-    print(' '.join(sample()))
-    for part in sample():
-        print(part)
-
-    # 字符串中插入变量 format()/format_map()+vars()
-    s = '{name} has {n} apples'
-    r1 = s.format(name='cbj', n=10)
-    name = 'bj'
-    n = 100
-    r2 = s.format_map(vars())    # vars从变量域中自行查找
-    st = Student('zzs', 100)       # vars()提取对象实例中的成员变量
-    r3 = '{name} has {score}'.format_map(vars(st))
-    print('format -> r1={}\nr2={}\nr3={}\n'.format(r1, r2, r3))
-
-    # 指定列宽格式化字符串testwrap.fill()
-    text = """
-Look into my eyes, look into my eyes, the eyes, the eyes, \
-the eyes, not around the eyes, don't look around the eyes, \
-look into my eyes, you're under"""
-    print(textwrap.fill(text, 20))
-    print(textwrap.fill(text, 30, initial_indent='    '))  # 首行缩进，其他格式见函数声明
-```
-
-* **字符编码：**
-
-    1. ascii码：规定了128个字符的编码（内存中用一个byte的后边7bit表示），表示英文够用，中文不够用。
-
-    2. unicode：是字符集，规定了符号的二进制码(万国码),但是没有规定二进制码该如何存储。
-
-    3. utf8：是编码规则，是互联网上使用广泛的一种unicode实现方式。它是一种变长编码，可以用1-4个字节表示一个符号，
-
-        比如英文字母用1个字节表示，utf8和ascii码是相同的；比如汉字就需要用3个字节表示。
-
-* **python字符串类型：**
-
-    * 参考：python中的str和bytes类型 <https://www.cnblogs.com/chownjy/p/6625299.html>
-
-    * python3字符串的两种类型：
-
-        str(unicode)   ->  <class 'str'>          # 普通字符串
-
-        byte码            ->  <class 'bytes'>        # 二进制数据流
-
-    * python2和python3字符串类型的差异：
-        python2 中的<class 'unicode'> 变成了 python3 的<class 'str'>，
-
-        python2 中的<class 'str'> 变成了 python3 的<class 'bytes'>，
-
-        python2中默认的编码方式是ascii码，中文会乱码，
-
-        python3默认编码是utf8编码，中文不会乱码。
-
-        解决中文乱码，在第一行加 -*-coding:utf-8-*- 或  #encoding=utf-8。
-
-  * **str(unicode)对象和bytes对象转换：**
-
-          bstr = str.encode('utf-8')
-
-          str = bstr.decode('utf-8')
-
-**代码示例：**
-
-```python
-# -*- coding: utf-8 -*-
-
-if __name__ == '__main__':
-    # python3 中 unicode和基础str是等价的，类型都是 <class 'str'>
-    ustr = u'字符串'
-    str = '字符串'
-    print('ustr={}, type={}'.format(ustr, type(ustr)))        # <class 'str'>
-    print('str={}, type={}'.format(str, type(str)))           # <class 'str'>
-
-    # 字符串转字节码
-    bstr = ustr.encode('utf-8')
-    print('bstr={}, type={}'.format(bstr, type(bstr)))        # <class 'bytes'>
-
-    # 字节码转字符串
-    str_new = bstr.decode('utf-8')
-    print('str_new={}, type={}'.format(str_new, type(str_new)))  # <class 'str'>
-
-    # 整型转ascii字符chr(i)  i取值在0-255
-    print(chr(97))   # str 'a'
-
-    # ascii字符转整型ord('a')
-    print(ord('a'))  # int 97
-```
-
-## 时间日期
-
-* **datetime库**
-
-     timedelta: 时间差对象
-
-       datetime: 时间对象
-
-* **dateutil库**
-
-    第三方库安装 pip install python-dateutil
-
-      处理较复杂的时间日期操作（时区， 模糊时间范围， 节假日等）
-
-* **calendar库**
-
-    处理日历操作
-
-* **pytz库**
-
-    第三方库安装 pip install pytz
-
-      处理时区操作
-
-      整个地球被划分为二十四时区，每个时区都有自己的本地时间。
-
-      为统一而普遍使用一个标准时间，称为通用协调时UTC。
-
-     北京时区是东八区，领先UTC 8个小时,标记为 Date: Sun, 13 June 2010 09:45:28 +0800。
-
-      uct时间转北京时间： uct + 时区差 = 本地时间。
-
-* **ime模块**
-
-  时间戳 timestamp
-
-  时间元组 struct_time
-
-  格式化时间 format_time
-
-**代码示例：**
-
-```python
-# -*- coding: utf-8 -*-
-from datetime import datetime
-from datetime import timedelta
-from datetime import date
-from dateutil.relativedelta import relativedelta
-import calendar
-import pytz
-from pytz import timezone
-import time
-
-if __name__ == '__main__':
-    # datetime库
-    a1 = timedelta(days=2, hours=6)
-    a2 = timedelta(hours=4)
-    a3 = a1 + a2
-    print('type(a)={}\na.seconds()={}\na.days()={}\na.total_seconds()={}\n'.format(
-        type(a3),
-        a3.seconds,
-        a3.days,
-        a3.total_seconds()
-    ))
-
-    b1 = datetime(2019, 10, 13, 10, 16)
-    print(b1 + timedelta(days=2, minutes=30))
-    b2 = datetime(2019, 12, 12)
-    b3 = b2 - b1
-    print(b3.days)
-
-    today = datetime.today()
-    now = datetime.now()
-    print('today={}, type={}\n now={}, type={}'.format(
-        today,
-        type(today),
-        now,
-        type(now)
-    ))
-    print('weekday=', b1.weekday())   # 星期几 取值是[0, 6]
-
-    # 统计本月有多少天
-    d = date.today().replace(day=1)  # 回归本月第一天
-    print('first date of month={}, type={}'.format(d, type(d)))
-    _, days_in_month = calendar.monthrange(d.year, d.month)
-    # 打印日历
-    print(calendar.prcal(2019))
-
-    # dateutil库
-    c1 = datetime(2019, 10, 18)
-    print(c1 + relativedelta(months=+4))
-    print(c1 + relativedelta(months=-2))
-
-    print('next Tuesday=', c1 + relativedelta(weekday=1))   # 下一个星期二
-
-    # 字符串转日期
-    text = '2019-09-20'
-    d1 = datetime.strptime(text, '%Y-%m-%d')
-    print('d1={}, type={}'.format(d1, type(d1)))
-    # 方法2
-    year_, month_, day_ = text.split('-')
-    d2 = datetime(int(year_), int(month_), int(day_))
-
-    # 日期转字符串
-    t = datetime.strftime(d1, '%Y %m %d %H:%M:%S')
-    print('t={} type={}'.format(t, type(t)))
-
-    # pytz (时区 timezone)
-    e = datetime(2012, 12, 21, 9, 30, 0)
-    # 时间本地化为芝加哥时间
-    loc_d = timezone('US/Central').localize(e)
-    # 本地化后的时间转换为其他时区的时间
-    h_d = loc_d.astimezone(timezone('Asia/Hong_Kong'))
-    print('l_d={}\nhd={}'.format(loc_d, h_d))  # hd=2012-12-21 23:30:00 +08:00   +08:00代表东八区
-
-    # 为了避免不必要的错误，一般的做法是先将日期转为utc时间(0时区的标准时间)，
-    # 所有时间操作完毕后再转为本地时间
-    utc_d = loc_d.astimezone(pytz.utc)
-    print('utcd=', utc_d)
-
-    # 打印pytz库中的时区代码
-    print(pytz.all_timezones)
-
-    # time模块
-    print(dir(time))
-    t1 = time.time()  # 时间戳
-    t2 = time.localtime()   # struct_time
-    print('y={} m={} d={} h={} M={} S={} weekday={} nth_day_of_year={} 是否夏令时={}'.format(
-        t2.tm_year, t2.tm_mon, t2.tm_mday,
-        t2.tm_hour, t2.tm_min, t2.tm_sec,
-        t2.tm_wday, t2.tm_yday, t2.tm_isdst
-    ))
-
-    t3 = time.mktime(t2)  # struct_time转时间戳
-
-    t4 = time.strftime("%Y-%m-%d %X", t2)  # struct_time 转 字符串时间
-
-    t5 = time.strptime('2011-05-05 16:37:06', '%Y-%m-%d %X')  # 字符串时间转struct_time
-
-    t6 = time.ctime(time.time())  # 时间戳转可读字符串时间，如 Tue Feb 17 10:00:18 2013
-
-    print('t1={}\nt2={}\nt3={}\nt4={}\nt5={}\nt6={}'.format(
-        t1, t2, t3, t4, t5, t6
-    ))
-```
-
-## 可迭代对象
-
-**实现了\_\_iter\_\_方法的对象就叫做可迭代对象”，\_\_iter__方法的作用就是返回一个迭代器对象**。
+    只要可以用next()函数的都是迭代器对象。
 
 * **可迭代对象：**
 
-  * 内部实现了__iter__方法，如str/list/tuple/set/dict
+  * 内部实现了`__iter__`方法，如str/list/tuple/set/dict
 
   * 可迭代对象的优势：
 
-        1. 可以用for循环遍历
+    1.可以用for循环遍历
     
-        2. 可用一些现成的算法，如sum、list等
+    2.可用一些现成的算法，如sum、list等
 
   * 如何产生可迭代对象：
 
-        1. 内建可迭代对象（list、set、tuple、dict、str）
-        2. 自定义可迭代对象 (参考 intRange)
-        3. 代理可迭代对象（参考 iterProxyText）
-        4. 利用生成器(包含yield关键字)创建可迭代对象（参考 yeildText， 生成器机制和协程：test_coroutine.py）
+        1. 内建可迭代对象（list、set、tuple、dict、str）  
+        2. 自定义可迭代对象 (参考 intRange)  
+        3. 代理可迭代对象（参考 iterProxyText）  
+        4. 利用生成器(包含yield关键字)创建可迭代对象（参考 yeildText， 生成器机制和协程：test_coroutine.py）  
 
 * **迭代器对象：**
 
   * 定义：
 
-        内部实现了`__next__`方法，此方法不依赖索引取值。<br>
-        内部实现了`__iter__`方法，执行迭代器的`__iter__`方法得到的依然是迭代器本身。
+    内部实现了`__next__`方法，next方法并没有索引值，所以需要自己维护一个索引值，方便获取下一个变量的位置。    
 
   * 迭代器的优点：
 
-        1.提供了一种不依赖索引的取值方式 <br>
-        2.同一时刻在内存中只存在一个值,更节省内存
+    提供了一种不依赖索引的取值方式
+
+    同一时刻在内存中只存在一个值,更节省内存
 
   * 作用过程(参考 iterTest)：
 
-        执行可迭代对象下的`__iter__`方法,返回一个迭代器对象(容器自身)。<br>
-        再通过迭代器对象的`__next__`方法返回容器中的下一个值,如果取值次数超过源值的数量就会抛出StopIteration异常。迭代器就像一个懒加载的工厂，等到有人需要的时候才给它生成值返回，没调用的时候就处于休眠状态等待下一次调用。直到无元素可调用，返回StopIteration异常。
+    **执行可迭代对象下的`__iter__`方法,返回一个迭代器对象(容器自身)。**  
+    
+    **再通过迭代器对象的`__next__`方法返回容器中的下一个值,如果取值次数超过源值的数量就会抛出StopIteration异常。**迭代器就像一个懒加载的工厂，等到有人需要的时候才给它生成值返回，没调用的时候就处于休眠状态等待下一次调用。直到无元素可调用，返回StopIteration异常。
 
 * **生成器**
 
-  生成器其实是一种特殊的迭代器，不过这种迭代器更加优雅。它不需要再像上面的类一样写`__iter__()`和`__next__()`方法了，只需要一个`yiled`关键字。 生成器一定是迭代器（反之不成立），因此任何生成器也是以一种懒加载的模式生成值。
+  函数中只要有yield，这个函数就会变成生成器。每次运行到yield的时候，函数会暂停，并且保存当前的运行状态，返回返回当前的数值，并在下一次执行next方法的时候，又从当前位置继续往下走。生成器可以使用for循环获取值，也可以使用next获取生成器函数的值。
 
 * **正向迭代和反向迭代**
 
@@ -970,11 +341,19 @@ if __name__ == '__main__':
 
   * 反向迭代
 
-        列表的reverse()方法
+    列表的reverse()方法；
 
-        切片操作
+    切片操作；
 
-        实现反向迭代协议的__reversesd__方法，它返回一个反向迭代器
+    实现反向迭代协议的`__reversesd__`方法，它返回一个反向迭代器；
+
+* **生成器表达式 和 列表解析式**
+
+  * 生成器表达式
+    格式：(返回值 for 元素 in 可迭代对象 if 条件)  
+    生成器表达式返回一个生成器，调用next方法不断获取后边的值，更节省内存。
+  * 列表解析式，格式：上边的小括号变成中括号。
+    列表解析式产生一个临时列表对象（可迭代对象）。
 
 **代码示例：**
 
@@ -986,32 +365,40 @@ from itertools import permutations
 from itertools import combinations
 from collections import Iterable
 
+# 测试可迭代对象的工作流程
 def iterTest():
-    a = [1, 2]
-    it = a.__iter__()
-    print(it.__next__())
+    # 方式 1
+    a = [1, 2]             # 可迭代对象
+    it = a.__iter__()      # 迭代器对象  -> 也可以用it=iter(a)
+    print(it.__next__())   # 调用迭代器对象的next方法  -> 也可以用next(it)
     print(it.__next__())
     # print(it.__next__())    # 越界报错
 
-    # next方法操作迭代器对象
+    # 方式 2
     a1 = [3, 4, 5]
-    it1 = iter(a1)          # <class 'list_iterator'>
+    it1 = iter(a1)
     try:
         while True:
             print(next(it1))
     except StopIteration:
         pass
 
-    # 文件是迭代器对象
-    with open('test_re.py', encoding='utf-8') as f:
-        while True:
-            line = next(f, None)
-            if line is None:
-                break
-            print(line, end='#')
+# 自定义迭代器对象
+class MyIterator:
+    def __init__(self, x):
+        self.x = x
+        self.index = 0  # 内部维护索引值
+    
+    def __next__(self):
+        try:
+            result = self.x[self.index]
+        except IndexError:
+            raise StopIteration
 
+        self.index += 1
+        return result
 
-# 自定义迭代对象
+# 自定义可迭代对象
 class intRange(object):
     def __init__(self, start, end, step):
         self.start = start
@@ -1084,9 +471,13 @@ def yeildText():
 if __name__ == '__main__':
     # iterTest()
     yeildText()
-    exit(0)
+
+    # 测试自定义迭代器对象
+    it1 = MyIterator([1, 2, 3])
+    print(next(it1))
 
     # 自定义可迭代对象 实现__iter__/__reverse__方法
+    # 执行for循环的过程就是不断调用iter()方法
     n1 = intRange(1, 5, 1)
     for n in n1:
         print(n)               # 正向
@@ -1160,17 +551,706 @@ if __name__ == '__main__':
         print(p)
 ```
 
+## 数值类型
+
+* **python3内置数值类型(Numeric)：**
+  * 整数（int）：python3中的整型只有一种 long 类型
+  * 浮点数（float）: 小数点的位置可以按需要浮动。float 类型本身是一种不精确的数据表示方法，可能会有一点点误差。
+  * 定点数（decimal.Decimal）：程序中所有数的小数点固定在同一位置不变。python中的decimal类型存储了一个准确（精确）的数字表达法；不存储值的近似值。
+  * 复数（complex）：用指数达到了浮动小数点的效果，更灵活。
+  * 分数（fractions.Fraction）：有理数。
+  * 布尔类型（bool）： True/False本质上是1/0。
+* **python中的数学模块math/cmath：**
+  * math模块：提供对实数的计算支持
+  * cmath模块：供对于复数运算的支持(a=3+4j)  
+          具体函数查看： dir(math)  dir(cmath)
+
+* **无穷大与非数字：**
+
+  * 正无穷：float('inf')
+
+  * 负无穷：float('-inf')
+
+  * 非数字：float('nan')
+
+    得到inf时就查看是否有**溢出或者除以0**，得到nan时就查看是否有**非法操作**（如对负数开平方）。
+
+* **numPy模块**
+
+      第三方库安装 pip install numpy
+
+      向量和矩阵的线性代数运算
+
+* **random模块**
+
+      随机数生成模块
+
+**代码示例：**
+
+```python
+# -*- coding: utf-8 -*-
+from fractions import Fraction
+from decimal import Decimal
+from decimal import localcontext
+import cmath
+import numpy as np
+import random
+
+def IntegerTest():
+    print('整型测试...')
+    data = 120
+    print('data={}, type={}'.format(data, type(data)))    # <class 'int'>
+
+def FloatTest():
+    print('浮点数测试...')
+    # 生成浮点数
+    data1 = 12.34
+    # float() 将整数和字符串转换成浮点数
+    data2 = float('12.35')
+    print('data={}, type={}'.format(data1, type(data1)))   # <class 'float'>
+    print('data={}, type={}'.format(data2, type(data2)))   # <class 'float'>
+
+def DecimalTest():
+    print('定点数测试...')
+    # 生成定点数
+    data = Decimal('120.3')
+    print('data={}, type={}'.format(data, type(data)))    # <class 'decimal.Decimal'>
+
+def ComplexTest():
+    print('复数测试...')
+    # 生成复数
+    data1 = 2 + 3j
+    data2 = complex(3, 4)
+    print('data={}, type={}'.format(data1, type(data1)))    # <class 'complex'>
+    print('data={}, type={}'.format(data2, type(data2)))    # <class 'complex'>
+
+    # 取出实部和虚部
+    assert(data1.real == 2)
+    assert(data1.imag == 3)
+
+    # 复数运算
+    print(data1 * data2)
+    print(data1 / data2)
+    print(abs(data1))
+    print(cmath.sin(data1))
+    print(cmath.exp(data1))
+
+    # 对复数数组执行操作
+    arr = np.array([2+3j, 4+5j, 7-8j])
+    print(arr + 2)
+    print(np.sin(arr))
+
+    print(cmath.sqrt(-1))
+
+def BooleanTest():
+    print('布尔类型测试...')
+    # 生成布尔类型
+    data1 = False
+    data2 = bool(100)
+    print('data={}, type={}'.format(data1, type(data1)))     # <class 'bool'>
+    print('data={}, type={}'.format(data2, type(data2)))     # <class 'bool'>  True
+
+def FractionTest():
+    print('有理数(分数)测试...')
+    # 生成有理数
+    data = Fraction(2, 8)
+    print('data={}, type={}'.format(data, type(data)))     # 1/4 <class 'fractions.Fraction'>
+
+    # 取出分子和分母
+    assert(data.numerator == 1)      # 分子
+    assert(data.denominator == 4)    # 分母
+
+    # 分数运算
+    a = Fraction(3, 4)
+    b = Fraction(7, 16)
+    print(a + b)
+    print(a * b)
+    print(float(a))
+    pi = Fraction('3.141592654')
+    print(pi.limit_denominator(8))    # 设置分母的最大值，返回最接近的有理数 22/7
+
+    # float转分数（有理数）
+    x = 3.75
+    tu = x.as_integer_ratio()   # (15, 4) <class 'tuple'>
+    print(Fraction(*tu))
+
+def numPyTest():
+    print('test numPy')
+
+    # 一维数组，作用到所有元素上
+    ax = np.array([1, 4, 5, 2])
+    ay = np.array([2, 3, 1, 5])
+
+    print(ax, type(ax))        # <class 'numpy.ndarray'>
+    print(ax * 2)
+    print(ax + 10)
+    print(ax + ay)
+    print(ax * ay)
+
+    myfun = lambda x: 3*x**2 - 2*x + 7
+    print(myfun(ax))
+
+    print(np.sqrt(ax))
+    print(np.cos(ax))
+
+    # 多维数组，作用到所有元素上
+    grid = np.zeros(shape=(3, 4), dtype=float)
+    print(grid + 10)
+    print(grid, type(grid))      # <class 'numpy.ndarray'>
+
+    grid2 = np.array([[1, 2, 3], [4, 5, 6]])   # 2行3列
+    print(np.sin(grid2))
+    print(grid2[0])              # 第1行
+    print(grid2[:, 0])           # 第1列
+    print(grid2[0, 0:2])       # 1-2行，1-3列   (下标从0开始，:两侧左开右闭)
+
+    # 矩阵操作
+    m = np.matrix([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+    print(m, type(m))
+    print(m.T)        # 转置
+    v = np.matrix([[1], [2], [3]])
+    print(m * v)
+
+def RandomTest():
+    print('test Random...')
+    values = [10, 2, 3, 4, 5, 6]
+    a1 = random.choice(values)      # 随机选取一个元素
+    a2 = random.sample(values, 3)   # 随机选取n个元素
+    random.shuffle(values)          # 乱序输出
+    print('choice={}\nsample={}\nshuffle={}'.format(a1, a2, values))
+
+    b1 = random.randint(0, 100)       # 产生随机整数
+    b2 = random.random()              # 产生0-1的随机浮点数
+    b3 = random.getrandbits(100)      # 产生占据100个二进制bit位的大整数（python支持大整数运算，位数不受限制）
+    print('randint={}\nrandom={}\ngetrandbits={}'.format(b1, b2, b3))
+
+    # python随机数生成算法是确定可复现的，可以修改初始化种子(可以用int或者bytes字符串)
+    random.seed(1234)
+    print(random.randint(0, 10))
+    random.seed(b'test')
+    print(random.randint(0, 10))
+
+    print(random.uniform(1.0, 10.0))     # 获取均匀分布的随机数
+    print(random.gauss(10.0, 2.0))       # 产生高斯分布的随机数（均值10.0， 标准差2.0）
+
+
+if __name__ == '__main__':
+    # IntegerTest()
+    # FloatTest()
+    # DecimalTest()
+    # ComplexTest()
+    # BooleanTest()
+    # FractionTest()
+    # numPyTest()
+    # RandomTest()
+
+    # 四舍五入
+    assert(round(2.4573, 2) == 2.46)
+    assert(round(2.76) == 3)
+    assert(round(273513, -3) == 274000)
+
+    # 浮点数不能特别精确的表示十进制数，如果要求不能有任何误差就用定点数，但是会有一些性能损耗
+    # 一般情况下浮点数足以
+    a = Decimal('4.2')
+    b = Decimal('2.15')
+    assert(a + b == Decimal('6.35'))    # 试试换成float怎么样？...
+    # 创建本地上下文控制定点数参数，如有效数字
+    with localcontext() as ctx:
+        ctx.prec = 3
+        print(a/b)
+
+    # 格式化  '[<>^]?width[,]?(.digits)?'
+    x = 12345.678
+    print(format(x, '>10.2f'))
+    print(format(x, '^10.2E'))
+    print(format(x, ','))      # 千分位分隔符
+
+    # 二、八、十、十六进制
+    y = 1234
+    s1 = bin(y)       # <class 'str'>
+    s2 = oct(y)
+    s3 = hex(y)
+    len = y.bit_length()   # 转换为二进制占多少bit位
+    print('bin(y)={}\noct(y)={}\nhex(y)={}\nbit_length()={}'.format(s1, s2, s3, len))
+    # 另一种方法
+    print(format(y, 'b'))
+    print(format(y, 'o'))
+    print(format(y, 'x'))
+    # 转十进制
+    assert(int('4d2', 16) == 1234)
+    assert(int('10011010010', 2) == 1234)
+
+    # 整数转字节码
+    d = 20747284487117727783387188
+    nbyte, rem = divmod(d.bit_length(), 8)    # 计算整数占多少字节
+    if rem:
+        nbyte += 1
+    print(d.to_bytes(nbyte, 'little'))
+    assert(d.to_bytes(nbyte, 'big') == b'\x11)h\x8b\xb3Y<\xfc#\x004')
+    assert(d.from_bytes(b'\x11)h\x8b\xb3Y<\xfc#\x004', 'big') == 20747284487117727783387188)
+```
+
+## 字符串类型
+
+* **字符串处理函数汇总：**
+
+  * 切割：
+    * re.split()  
+    * str[m:n]
+
+  * 查找与匹配：
+    * str.startswith()
+    * str.endswith()
+    * re.findall()
+    * re.match()
+    * str.find()
+    * fnmatch()
+    * fnmatchcase()
+
+  * 替换
+    * str.replace()
+    * re.sub()
+
+  * 格式化：
+    * unicodedata.normalize()
+    * str.lstrip()
+    * str.rstrip()
+    * str.strip()
+
+  * 转换：
+    * str.upper()
+    * str.lower()
+    * str.translate()
+
+  * 格式化：
+    * 文本标准化：unicodedata.normalize()
+    * 清空左右指定字符：str.lstrip()/str.rstrip()/str.strip()
+    * 替换：str.translate()/str.replace()
+    * 对齐：str.ljust()/str.rjust()/str.center()/format
+    * 拼接：join/+/print(..., sep=':')
+    * 字符串中插入变量: format()/format_map()+vars()
+    * 指定列宽格式化字符串: testwrap.fill()
+
+  * 其他：
+    * s.isdigit()
+
+  * python正则表达式：
+    * re.match    # 从开始位置开始匹配，如果开头没有则无
+    * re.search   # 搜索整个字符串
+    * re.findall  # 搜索整个字符串，返回一个list
+
+        ```python
+        # match和search返回的都是Match对象(当匹配到一个符合条件的立即返回，未匹配返回None)，区别是一个从开始匹配，一个整个字符串匹配。
+        # findall返回一个list
+        >>> import re
+        >>> s = '3123C72D1D8E67'
+        >>> r = re.match('\d',s)
+        >>> r1 = re.search('\d', s)
+        >>> r2 = re.findall('\d', s)
+        >>> print('r={}\n r1={}\n r2={}'.format(r, r1, r2))
+        # r=<re.Match object; span=(0, 1), match='3'>
+        # r1=<re.Match object; span=(0, 1), match='3'>
+        # r2=['3', '1', '2', '3', '7', '2', '1', '8', '6', '7']
+        >>> print(r.group())
+        # 3
+        ```
+
+**代码示例：**
+
+```python
+# -*- coding: utf-8 -*-
+import re
+from fnmatch import fnmatch, fnmatchcase
+import unicodedata
+from test_class import Student
+import textwrap
+
+if __name__ == '__main__':
+
+    # -------------------切割---------------------------
+    str = 'hello my; name, is cbj'
+    lst = re.split(r'[,;\s]\s*', str)  #  ['hello', 'my', 'name', 'is', 'cbj']
+    print('split -> type={}, ret={}'.format(type(lst), lst))  
+
+    # ()在正则中用于捕获和分组
+    lst2 = re.split(r'(,|;|\s)\s*', str)  # ['hello', ' ', 'my', ';', 'name', ',', 'is', ' ', 'cbj']
+    print('split re-has-() -> type={} ret={}'.format(type(lst2), lst2))
+
+    # (?:...) 分组，不捕获
+    lst3 = re.split(r'(?:,|;|\s)\s*', str)  # #  ['hello', 'my', 'name', 'is', 'cbj']
+    print('split re-has-() -> type={} ret={}'.format(type(lst3), lst3))
+    # 注意：正则中中括号和圆括号的区别：
+    # [ ]中括号里面的字符都是单独的，也就是es|ed被当做五个独立的字符；
+    # 而（）圆括号则表示这是一个分组，分组里的|有或者的含义；
+
+    # seq[start:end:step]
+    lst4 = [1, 2, 3, 4, 5]
+    assert(lst4[::2] == [1, 3, 5])
+
+    # -------------------查找与匹配---------------------------
+    # 检查字符串的开头结尾
+    url = 'http://www.python.org'
+    assert(url.startswith('http') is True)
+    assert(url.endswith('https') is False)
+    tu = ('org', 'python')
+    assert(url.endswith(tu) is True)
+
+    assert(url[-3:] == 'org')      # 切片的方式检查首尾
+
+    ret = re.match(r'http', url)     # 正则的方式检查首尾
+    print(ret.group() if ret else None)
+
+    files = ['a.py', 'b.cpp', 'c.java']
+    print(any(f for f in files if f.endswith('py')))
+    print([f.endswith('py') for f in files])
+
+    # fnmatch模块：使用通配符进行文件名称的匹配，匹配风格类似unix shell
+    # 通配符用于文件名匹配；正则表达式用于字符串匹配；
+    assert(fnmatch('test02.TXT', '*.txt') is True)            # * --- 0个或者多个任意字符
+    assert(fnmatch('test02.py', '?est0?.py') is True)         # ? --- 匹配任意单个字符
+    assert(fnmatch('test02.py', 'test[0-9]*.py') is True)
+    assert(fnmatchcase('test.TXT', '*.txt') is False)    # 大小写敏感
+
+    # 查找 （str.find 或者 re.match re.findall）
+    assert(url.find('python') == 11)
+
+    # -------------------替换---------------------------
+    # 替换 （str.replace 或者 re.sub）
+    str = 'my name is A, your name is B'
+    strnew = str.replace('name', 'fullname')
+    assert(str == 'my name is A, your name is B')  # 未被修改
+    assert(strnew == 'my fullname is A, your fullname is B')
+
+    # -------------------格式化---------------------------
+    # 将文本标准化(nicode正规化)
+    s1 = 'Spicy Jalape\u00f1o'
+    s2 = 'Spicy Jalapen\u0303o'
+    assert((s1 == s2) is False)
+
+    t1 = unicodedata.normalize('NFC', s1)
+    t2 = unicodedata.normalize('NFC', s2)
+    assert((t1 == t2) is True)
+
+    # 内置函数：大小写转换，判断是不是数字字符等等
+    s = "hello world 2018"
+    assert(s.isdigit() is False)
+    assert(re.findall(r'\d+', s)[0].isdigit() is True)
+    assert(s.upper() == 'HELLO WORLD 2018')
+    assert(s.upper().lower() == 'hello world 2018')
+
+    # strip
+    s = '---*** hello  '
+    assert(s.lstrip('-*') == ' hello  ')    # 去掉左侧的-或者*
+    assert(s.rstrip() == '---*** hello')    # 去掉右侧空格
+
+    # translate  （ord(字符)返回它对应的unicode编码）
+    replace_map = {
+        ord('\t'): ' ',
+        ord('\f'): ' ',
+        ord('\r'): None,   # 表示删除
+    }
+    s = 'my \fname\r is\tcb\rj\n'
+    print(s.translate(replace_map))
+
+    # 创建词典的技巧
+    print(dict.fromkeys([1, 2, 3]))            # {1: None, 2: None, 3: None}
+    print(dict.fromkeys([1, 2, 3], "test"))    # {1: 'test', 2: 'test', 3: 'test'}
+
+    # 也可以用replace
+    s = 'my \fname\r is\tcb\rj\n'
+    s = s.replace('\t', ' ')
+    s = s.replace('\f', ' ')
+    s = s.replace('\r', '')
+    print(s)
+
+    # 字符串对齐 ljust/rjust/center/format
+    text = 'Hello World'
+    f1 = text.ljust(20, '*')
+    f2 = text.rjust(20)
+    f3 = text.center(20, '-')
+    g1 = format(text, '*<20')
+    g2 = format(text, '>20')
+    g3 = format(text, '-^20')
+    print('f1={}\nf2={}\nf3={}'.format(f1, f2, f3))
+    print('g1={}\ng2={}\ng3={}'.format(g1, g2, g3))
+
+    data = 10.3247
+    s1 = '{:-^20}'.format(text)
+    s2 = '{:>10.2f}'.format(data)
+    print('s1={}\ns2={}'.format(s1, s2))
+
+    # 字符串拼接 join/+/print(..., sep=':')
+    lst = ['hello', 'my', 'name', 'is', 'John']
+    res1 = ' '.join(lst)             # 此方法效率更优
+    res2 = lst[0] + ' ' + lst[4]     # 会引起内存赋值和垃圾回收
+    res3 = 'hello' 'world'
+    print('join -> res1={}\nres2={}\nres3={}'.format(res1, res2, res3))
+
+    print('hello', 'my', 'world', sep=' ')
+
+    # 使用生成器函数，复用代码
+    def sample():
+        yield 'hello1'
+        yield 'my1'
+        yield 'world1'
+
+    print(' '.join(sample()))
+    for part in sample():
+        print(part)
+
+    # 字符串中插入变量 format()/format_map()+vars()
+    # vars(obj) 函数返回对象obj的属性和属性值的字典对象 <class 'dict'>
+    s = '{name} has {n} apples'
+    r1 = s.format(name='cbj', n=10)
+    name = 'bj'
+    n = 100
+    r2 = s.format_map(vars())      # vars() 从变量域中自行查找
+    st = Student('zzs', 100)       # vars() 提取对象实例中的成员变量
+    r3 = '{name} has {score}'.format_map(vars(st))
+    print('format -> r1={}\nr2={}\nr3={}\n'.format(r1, r2, r3))
+
+    # 指定列宽格式化字符串testwrap.fill()
+    text = """
+Look into my eyes, look into my eyes, the eyes, the eyes, \
+the eyes, not around the eyes, don't look around the eyes, \
+look into my eyes, you're under"""
+    print(textwrap.fill(text, 20))
+    print(textwrap.fill(text, 30, initial_indent='    '))  # 首行缩进，其他格式见函数声明
+```
+
+* **字符编码：**
+    * ascii码：规定了128个字符的编码（内存中用一个byte的后边7bit表示），表示英文够用，中文不够用。
+    * unicode：是一个字符集，规定了符号的二进制码(世界统一，又叫万国码)，但是没有规定二进制码该如何存储。
+    * utf8：是编码规则，是互联网上使用广泛的一种unicode实现方式。它是一种变长编码，可以用1-4个字节表示一个符号，比如英文字母用1个字节表示，utf8和ascii码是相同的；比如汉字就需要用3个字节表示。
+    * 参考链接：http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html
+
+* **python字符串类型：**
+
+    * 参考：python中的str和bytes类型 <https://www.cnblogs.com/chownjy/p/6625299.html>
+    * python3字符串的两种类型：
+
+      ```python
+      str(unicode)   ->  <class 'str'>          # 普通字符串  
+      byte码         ->  <class 'bytes'>        # 二进制数据流 
+      ```
+      python中的bytes类型， 如 b'e\x00\x00d\x00\x007Z\x00\x00d\x01\x00S'，b表示是Bytes类型。Bytes以二进制字节序列的形式记录数据，每一个字符就代表一个字节（8位）。比如上面的e表示二进制0110 0101。部分ASCII码对照表如下图所示。但是，不是所有的字节都是可显示的，甚至有些字节无法对应到ASCII码上（因为ASCII码只定义了128个字符，而一个字节有256个）。比如0000 0000对应的ASCII是不可显示的、0111 1111没有对应的ASCII码。为了表示这些无法显示的字节，就引入了\x符号，其表示后续的字符为16进制。如，\x00表示16进制的00，也就是二进制的0000 0000。至此，所有字节都可被表示。
+      字节码转16进制:bt = b'e\x00\x00d\x00\x007Z\x00\x00d\x01\x00S'    bt.hex()
+
+    * python2和python3字符串类型的差异：
+      python2 中的<class 'unicode'> 变成了 python3 的<class 'str'>，  
+      python2 中的<class 'str'> 变成了 python3 的<class 'bytes'>，  
+      python2中默认的编码方式是ascii码，中文会乱码，  
+      python3默认编码是utf8编码，中文不会乱码。  
+      解决中文乱码，在第一行加 -\*-coding:utf-8-\*- 或  #encoding=utf-8。  
+
+  * **str(unicode)对象和bytes对象转换：**
+    bstr = str.encode('utf-8')
+    str = bstr.decode('utf-8')
+   
+**代码示例：**
+
+```python
+# -*- coding: utf-8 -*-
+
+if __name__ == '__main__':
+    # python3 中 unicode和基础str是等价的，类型都是 <class 'str'>
+    ustr = u'字符串'
+    str = '字符串'
+    print('ustr={}, type={}'.format(ustr, type(ustr)))        # <class 'str'>
+    print('str={}, type={}'.format(str, type(str)))           # <class 'str'>
+
+    # 字符串转字节码
+    bstr = ustr.encode('utf-8')
+    print('bstr={}, type={}'.format(bstr, type(bstr)))        # <class 'bytes'>
+
+    # 字节码转字符串
+    str_new = bstr.decode('utf-8')
+    print('str_new={}, type={}'.format(str_new, type(str_new)))  # <class 'str'>
+
+    # chr(i) 返回整数 i 所对应的 Unicode 字符。
+    # 整数 i 的取值范围是0 - 1114111(十六进制为 0x10FFFF)，否则将引发 ValueError 错误。
+    # [0-127] ascii码和unicode字符集是一样的。
+    print(chr(97))   # str 'a'
+
+    # ascii字符转整型ord('a')
+    print(ord('a'))  # int 97
+```
+
+## 时间日期
+
+* **datetime库**  
+  datetime.date：日期（相当于日历）  
+  datetime.time：时间(相当于手表)    
+  datetime.datetime：上面两个合在一起，既包含时间又包含日期(一般日期时间处理这个就够了，查看方法 dir(datetime))  
+  datetime.timedelta：表示时间间隔，即两个时间点的间隔  
+ 
+  ```python
+  >>> from datetime import date, time, datetime, timedelta, tzinfo
+  >>> dt = datetime.today()
+  >>> d = datetime.date(dt)
+  >>> t = datetime.time(dt)
+  >>> print('dt={}, type={} \nd={}, type={} \nt={}, type={} \n'.format(dt,type(dt), d, type(d), t, type(t)))
+  '''
+  dt=2020-01-02 14:43:38.201627, type=<class 'datetime.datetime'> 
+  d=2020-01-02, type=<class 'datetime.date'> 
+  t=14:43:38.201627, type=<class 'datetime.time'>
+  '''
+  >>> print(dt.timetuple())
+  # time.struct_time(tm_year=2020, tm_mon=1, tm_mday=2, tm_hour=14, tm_min=43, tm_sec=38, tm_wday=3, tm_yday=2, tm_isdst=-1)
+  >>> print(dt.year, dt.month, dt.hour, dt.minute, dt.second, dt.weekday())
+  # 2020 1 14 43 38 3
+  ```
+
+* **dateutil库**  
+  第三方库安装 pip install python-dateutil   
+  处理较复杂的时间日期操作（时区， 模糊时间范围， 节假日等）
+
+* **calendar库**  
+  处理日历操作
+
+* **pytz库**  
+  第三方库安装 pip install pytz   
+  处理时区操作  
+  整个地球被划分为二十四时区，每个时区都有自己的本地时间。  
+  为统一而普遍使用一个标准时间，称为通用协调时UTC。  
+  北京时区是东八区，领先UTC 8个小时,标记为 Date: Sun, 13 June 2010 09:45:28 +0800。  
+  uct时间转北京时间： uct + 时区差 = 本地时间。  
+
+* **ime模块**  
+  时间戳 timestamp  
+  时间元组 struct_time  
+  格式化时间 format_time  
+
+**代码示例：**  
+
+```python
+# -*- coding: utf-8 -*-
+from datetime import date, time, datetime, timedelta
+from dateutil.relativedelta import relativedelta
+import calendar
+import pytz
+from pytz import timezone
+import time
+
+if __name__ == '__main__':
+    # ***********************  datetime库
+    a1 = timedelta(days=2, hours=6)
+    a2 = timedelta(hours=4)
+    a3 = a1 + a2
+    print('type(a)={}\na.seconds()={}\na.days()={}\na.total_seconds()={}\n'.format(
+        type(a3),
+        a3.seconds,
+        a3.days,
+        a3.total_seconds()
+    ))
+    '''
+    type(a)=<class 'datetime.timedelta'>
+    a.seconds()=36000
+    a.days()=2
+    a.total_seconds()=208800.0
+    '''
+
+    b1 = datetime(2019, 10, 13, 10, 16)
+    print(b1 + timedelta(days=2, minutes=30))
+    b2 = datetime(2019, 12, 12)
+    b3 = b2 - b1
+    print(b3.days)
+
+    today = datetime.today()
+    now = datetime.now()
+    print('today={}, type={}\n now={}, type={}'.format(
+        today,
+        type(today),
+        now,
+        type(now)
+    ))
+    '''
+    today=2020-01-02 14:19:40.525397, type=<class 'datetime.datetime'>
+    now=2020-01-02 14:20:00.251524, type=<class 'datetime.datetime'>
+    '''
+    print('weekday=', b1.weekday())   # 星期几 取值是[0, 6]
+
+    # 字符串转日期
+    text = '2019-09-20'
+    d1 = datetime.strptime(text, '%Y-%m-%d')
+    print('d1={}, type={}'.format(d1, type(d1)))
+    # 方法2
+    year_, month_, day_ = text.split('-')
+    d2 = datetime(int(year_), int(month_), int(day_))
+
+    # 日期转字符串
+    t = datetime.strftime(d1, '%Y %m %d %H:%M:%S')
+    print('t={} type={}'.format(t, type(t)))
+
+    # 回归本月第一天
+    d = date.today().replace(day=1)  
+    print('first date of month={}, type={}'.format(d, type(d)))
+    # 统计本月有多少天
+    # 返回值是一个元组，第一个元素是这个月第一天是星期几，第二个元素是这个月的天数
+    _, days_in_month = calendar.monthrange(d.year, d.month)
+    # 打印日历
+    print(calendar.prcal(2019))
+
+    # ***********************  dateutil库
+    c1 = datetime(2019, 10, 18)
+    print(c1 + relativedelta(months=+4))
+    print(c1 + relativedelta(months=-2))
+
+    print('next Tuesday=', c1 + relativedelta(weekday=1))   # 下一个星期二
+
+    # pytz (时区 timezone)
+    e = datetime(2012, 12, 21, 9, 30, 0)
+    # 时间本地化为芝加哥时间
+    loc_d = timezone('US/Central').localize(e)
+    # 本地化后的时间转换为其他时区的时间
+    h_d = loc_d.astimezone(timezone('Asia/Hong_Kong'))
+    print('l_d={}\nhd={}'.format(loc_d, h_d))  # hd=2012-12-21 23:30:00 +08:00   +08:00代表东八区
+
+    # 为了避免不必要的错误，一般的做法是先将日期转为utc时间(0时区的标准时间)，
+    # 所有时间操作完毕后再转为本地时间
+    utc_d = loc_d.astimezone(pytz.utc)
+    print('utcd=', utc_d)
+
+    # 打印pytz库中的时区代码
+    print(pytz.all_timezones)
+
+    # ***********************  time模块
+    print(dir(time))
+    t1 = time.time()  # 时间戳 float
+
+    # 时间结构
+    # time.struct_time(tm_year=2020, tm_mon=1, tm_mday=2, tm_hour=15, tm_min=0, tm_sec=16, tm_wday=3, tm_yday=2, tm_isdst=0)
+    t2 = time.localtime()   # struct_time
+
+    print('y={} m={} d={} h={} M={} S={} weekday={} nth_day_of_year={} 是否夏令时={}'.format(
+        t2.tm_year, t2.tm_mon, t2.tm_mday,
+        t2.tm_hour, t2.tm_min, t2.tm_sec,
+        t2.tm_wday, t2.tm_yday, t2.tm_isdst
+    ))
+
+    t3 = time.mktime(t2)  # struct_time 转 时间戳
+
+    t33 = time.strftime("%Y-%m-%d %X", time.localtime(t1))  # 时间戳 转 格式化时间
+
+    t4 = time.strftime("%Y-%m-%d %X", t2)  # struct_time 转 字符串时间
+
+    t5 = time.strptime('2011-05-05 16:37:06', '%Y-%m-%d %X')  # 字符串时间转struct_time
+
+    t6 = time.ctime(time.time())  # 时间戳转可读字符串时间，如 Tue Feb 17 10:00:18 2013
+
+    print('t1={}\nt2={}\nt3={}\nt4={}\nt5={}\nt6={}'.format(
+        t1, t2, t3, t4, t5, t6
+    ))
+```
+
 ## 类的自定义属性和方法
 
-* 私有属性（静态属性、普通属性）、私有方法：
+* 私有属性（静态属性、普通属性）、私有方法：  
+  格式：在私有属性/方法名称前加双下划线。  
+  权限：一般在当前类内部被调用，不能被外部对象或者继承类调用。  
 
-  格式：在私有属性/方法名称前加双下划线。
-
-  权限：一般在当前类内部被调用，不能被外部对象或者继承类调用。
-
-* 但是python的私有是伪私有，可以通过"对象._类名__属性名"被调用，但是绝对不允许，
-
-  原因是：类在创建时,如果遇到了私有成员(包括私有静态字段,私有普通字段,私有方法)它会将其保存在内存时自动在前面加上_类名。
+* 但是python的私有是伪私有，可以通过"对象._类名__属性名"被调用，但是绝对不允许，  
+  原因是：类在创建时，如果遇到了私有成员(包括私有静态字段，私有普通字段，私有方法)它会将其保存在内存时自动在前面加上_类名。
 
 **代码示例：**
 
@@ -1224,25 +1304,18 @@ if __name__ == "__main__":
 
 ## 类的内置属性和方法
 
-* python内置方法：系统自动创建
+* python魔法函数：内置的以双下划线开头并以双下划线结尾的函数（不能自己定义）。
 
-  `__dict__`: 以字典的形式显示实例自定义属性
-
-  `__class__`: 实例所在类
-
-  `__init__ `和 `__del__`: 构造和析构
-
-  `__new__`: 在`__init__`之前调用, 用于生成实例对象，`__init__`主要是作初始化工作。
-
-  `__doc__`: 类文档
-
-  `__str__`:  实例字符串表示，可读性，调用print时触发
-
-  `__gt__`(self, other)：比较函数，self是否大于other对象，类似的还有ge/lt/le/eq
-
-  `__getattribute__`：属性访问拦截器，访问属性时被调用
-
-  `__dir__`：返回属性和方法列表，调用dir(Obj)是触发，常用于显示类的方法属性列表
+  `__dict__`: 以字典的形式显示实例自定义属性；  
+  `__class__`: 实例所在类  
+  `__init__ `和 `__del__`: 构造和析构    
+  `__new__`: 在`__init__`之前调用, 用于生成实例对象，`__init__`主要是作初始化工作  
+  `__doc__`: 类文档  
+  `__str__`:  用于格式化输出，当执行print(obj)时，会自动调用  
+  `__repr__ `: 用于在控制台输出，当直接调用实例时，会自动执行  
+  `__gt__`(self, other)：比较函数，self是否大于other对象，类似的还有ge/lt/le/eq  
+  `__getattribute__`：属性访问拦截器，访问属性时被调用  
+  `__dir__`：返回属性和方法列表，调用dir(Obj)是触发，常用于显示类的方法属性列表  
 
 **代码示例：**
 
@@ -1342,11 +1415,9 @@ print('{:x}'.format(a))
 
 ## 内建函数locals/globals
 
-* locals() 和 globals() 是python 的内建函数，他们提供了字典形式访问局部变量和全局变量的方式。
-
-  locals() 返回当前局部变量的深拷贝，修改locals() 中变量值对原变量本身没有影响。
-
-  globals() 返回全局变量的字典，修改其中的内容，值会真正的发生改变。
+* locals() 和 globals() 是python 的内建函数，他们提供了字典形式访问局部变量和全局变量的方式。  
+  * locals() 返回当前局部变量的深拷贝，修改locals() 中变量值对原变量本身没有影响。  
+  * globals() 返回全局变量的字典，修改其中的内容，值会真正的发生改变。  
 
 **代码示例：**
 
@@ -1360,10 +1431,20 @@ def test(**args):
     a = "local hello world"
     print('locals()={}'.format(locals()))
     print('globals()={}'.format(globals()))
+    '''
+    locals()={'args': {'name': 'cbj', 'age': 20}, 'a': 'local hello world'}
+    globals()={'__name__': '__main__',
+        'ga': 'hello world', 
+        'test': <function test at 0x0000000002F13EE8>, 
+        'd': {'name': 'cbj', 'age': 20}}
+    '''
 
     # 通过词典访问并修改局部变量，不生效
     locals()['a'] = "change local hello world"
     print('after change locals()={}'.format(locals()))
+    '''
+    after change locals()={'args': {'name': 'cbj', 'age': 20}, 'a': 'local hello world'}
+    '''
 
 
 if __name__ == "__main__":
@@ -1374,6 +1455,12 @@ if __name__ == "__main__":
     # 通过词典访问并修改全局变量，生效
     globals()['ga'] = "change hello world"
     print('after globals()={}'.format(globals()))
+    '''
+    after globals()={'__name__': '__main__',
+        'ga': 'change hello world',               ### 改变了
+        'test': <function test at 0x0000000002F13EE8>,
+        'd': {'name': 'cbj', 'age': 20}}
+    '''
 ```
 
 ## json串和字典互转
@@ -1381,16 +1468,11 @@ if __name__ == "__main__":
 * json是字符串，长得像字典，需要转换为字典才可以通过key、value来取值。
 
 * **四个函数**（技巧：带s的都是和字符串相关的，不带s的都是和文件对象相关的）
-
-      loads -> json串转字典
-
-      dumps -> 字典转字符串
-
-      load -> 将.json文件转字典
-
-      dump -> 字典转.json文件
-
-      (后边两个可以等价于字典和字符串互转后，字符串写入或者读取文件)
+  * loads -> json字符串转字典（loads->载入内存词典对象）  
+  * dumps -> 字典转字符串  
+  * load -> 将.json文件转字典
+  * dump -> 字典转.json文件
+    (后边两个可以等价于字典和字符串互转后，字符串写入或者读取文件)
 
 **代码示例：**
 
@@ -1445,22 +1527,20 @@ python中的*和**
 
 * **用在参数(实参、形参)前边：**
 
-       * 会把接收到的参数存入一个元组 （另一种描述：表示函数能接受任意数量的位置参数）
-
-         ** 会把接收到的参数存入一个字典（另一种描述：表示函数能接受任意数量的关键字参数）
+  * 会把接收到的参数存入一个元组 （另一种描述：表示函数能接受任意数量的位置参数）  
+  ** 会把接收到的参数存入一个字典（另一种描述：表示函数能接受任意数量的关键字参数）  
 
 * **用作运算符号**
 
-       * 乘法
-
-         ** 平方
+  * 乘法  
+  ** 平方  
 
 **代码示例：**
 
 ```python
 # -*- coding: utf-8 -*-
 
-def pringParam(x, *y, **z):
+def printParam(x, *y, **z):
     print('x={}, type(x)={}'.format(x, type(x)))
     print('y={}, type(y)={}'.format(y, type(y)))
     print('z={}, type(z)={}'.format(z, type(z)))
@@ -1468,7 +1548,7 @@ def pringParam(x, *y, **z):
 
 if __name__ == "__main__":
     # 普通变量、列表、字典 同时传
-    pringParam(3, 4, name='cbj', age=20)
+    printParam(3, 4, name='cbj', age=20)
     '''
     输出：
     x=3, type(x)=<class 'int'>
@@ -1476,7 +1556,7 @@ if __name__ == "__main__":
     z={'name': 'cbj', 'age': 20}, type(z)=<class 'dict'>
     '''
 
-    pringParam(3, 1, 3, 4)
+    printParam(3, 1, 3, 4)
     '''
     输出：
     x=3, type(x)=<class 'int'>
@@ -1487,7 +1567,7 @@ if __name__ == "__main__":
     a1 = 123
     a2 = [1, 2, 3, 4, 5]
     a3 = {'name': 'alam', 'age': 12}
-    pringParam(a1, a2, a3)
+    printParam(a1, a2, a3)
     '''
     输出：
     a1 a2 a3都被看作普通变量传入
@@ -1496,8 +1576,8 @@ if __name__ == "__main__":
     z={}, type(z)=<class 'dict'>
     '''
 
-    # 这个才是符合预期的， 实参和形参都要加 * 和 **
-    pringParam(a1, *a2, **a3)
+    # 这个才是符合预期的， 实参和形参都要加 * 和 **（实参这里有把list和dict展开的意思...）
+    printParam(a1, *a2, **a3)
     '''
     输出：
     x=123, type(x)=<class 'int'>
@@ -1510,9 +1590,8 @@ if __name__ == "__main__":
 
 * **lambda表达式(匿名函数)**
 
-      格式:     参数:表达式
-
-      说明：冒号前边是参数，参数可以是0个或多个，多个时用逗号隔开，冒号后边是返回值，返回一个函数对象。
+  格式：lambda 参数:表达式  
+  说明：冒号前边是参数，参数可以是0个或多个，多个时用逗号隔开，冒号后边是返回值，返回一个函数对象。
 
 * 函数和lambda表达式的关系：
 
@@ -1545,21 +1624,25 @@ if __name__ == '__main__':
     a = [(1, 2), (4, -1), (9, 10), (13, -3)]
     a.sort(key=lambda x: x[1])
     print('sort -> type={}, ret={}'.format(type(a), a))
+    # 输出：sort -> type=<class 'list'>, ret=[(13, -3), (4, -1), (1, 2), (9, 10)]
 
     # 元素映射：map返回的是迭代器(不要和dict混淆)，需要转list再打印
     b = map(lambda x: (x[0]+x[1]), a)
     print('map -> type={}, list(ret)={}'.format(type(b), list(b)))
+    # 输出：map -> type=<class 'map'>, list(ret)=[3, 3, 19, 10]
 
     # 过滤：
     c = filter(lambda x: x[1] > 0, a)
     print('filter -> type={}, list(ret)={}'.format(type(c), list(c)))
+    # 输出： filter -> type=<class 'filter'>, list(ret)=[(1, 2), (9, 10)]
 
     d = reduce(lambda x, y: x + y, [1, 2, 3, 4, 5])
     print('reduce -> type={} ret={}'.format(type(d), d))
+    # 输出：reduce -> type=<class 'int'> ret=15
 
     # for...in...if...表达式
-    print([x[0]+x[1] for x in a])      # -> map
-    print([x for x in a if x[1] > 0])  # -> filter
+    print([x[0]+x[1] for x in a])      # -> 实现map功能
+    print([x for x in a if x[1] > 0])  # -> 实现filter功能
 
     # 三元运算符（处理简单的if...else...）
     if 1 == 1:
@@ -1571,13 +1654,11 @@ if __name__ == '__main__':
     print('data={}'.format(data))
 ```
 
-
-
 ## 回调函数
 
 * **回调函数定义**
 
-      	回调函数就是一个通过函数指针调用的函数。把函数指针（地址）作为参数传递给另一个函数，当这个指针被用来调用其所指向的函数时，我们就说这是回调函数。回调函数不是由该函数的实现方直接调用，而是在特定的事件或条件发生时由另外的一方调用的。
+  回调函数就是一个通过函数指针调用的函数。把函数指针（地址）作为参数传递给另一个函数，当这个指针被用来调用其所指向的函数时，我们就说这是回调函数。回调函数不是由该函数的实现方直接调用，而是在特定的事件或条件发生时由另外的一方调用的。
 
 **代码示例：**
 
@@ -1674,102 +1755,50 @@ if __name__ == '__main__':
     exit(0)
 ```
 
-## 协程
-
-* **协程的定义：**
-
-  协程，又称微线程， 纤程。
-
-  线程是系统级别的，它们是由操作系统调度；协程是程序级别的，由程序员根据需要自己调度。
-
-  我们把一个线程（coroutineTest）中的一个个函数（A和B）叫做子程序，那么子程序（A）在执行过程中可以中断去执行别的子程序（B）；别的子程序（B）也可以中断回来继续执行之前的子程序（A），这就是协程。
-
-* **python使用生成器yield中断机制实现协程：**
-
-  生成器、yield关键字、next()、send()函数
-
-  next()、send()函数作用类似，区别是send()可以传参数，这个参数可以被yeild接收，c.next()和c.send(None)作用一样。
-
-**代码示例：**
-
-```python
-# -*- coding: utf-8 -*-
-
-# 理解 生成器、yield关键字、next()、send()函数 运行
-import time
-
-def task_1():
-    while True:
-        print("task 1 is runing...")
-        time.sleep(0.1)
-        yield
-
-def task_2():
-    while True:
-        print("task 2 is runing...")
-        time.sleep(0.1)
-        yield
-
-def main():
-    t1 = task_1()     # 生成器（可迭代对象），调用next()时，遇到yeild返回
-    t2 = task_2()
-
-    # 先让t1执行一会儿，t1遇到yeild的时候，会返回位置T1，
-    # 然后next(t2)会运行t2,t2遇到yeild时，会再次切换到t1中，
-    # 这样 t1/t2/t1/t2...交替执行，最终实现了多任务...协程
-    # greenlet是对yeild的封装，实现功能和此函数类似。
-    # gevent
-    while True:
-        next(t1)         # 位置T1
-        next(t2)         # 位置T2
-```
-
 ## 闭包与装饰器
 
 * 闭包
 
-  函数内的属性都是有生命周期的，函数执行完毕，生命周期结束。
-
+  函数内的属性都是有生命周期的，函数执行完毕，生命周期结束。  
   闭包的本质就是一个函数嵌套另一个函数，内部函数通过返回值，延长了生命周期。
 
-  ```python
-  def fun1():
-  	def fun2():
-  		print("hello")
-  ```
+    ```python
+    def fun1():
+        def fun2():
+            print("hello")
+    ```
 
   上边的内部函数fun2生命周期随着fun1执行完毕就结束了，外部不能调用fun2，但是可以通过返回值使得外部继续调用它，如下。
 
-  ```python
-  def fun1():
-  	def fun2():
-  		print("hello")
-  	return fun2     # 返回函数对象，fun1生命周期结束了，但是fun2作用域没有结束
-  	
-  var = fun1()
-  del var              # 手动结束其生命周期
-  ```
+    ```python
+    def fun1():
+        def fun2():
+            print("hello")
+        return fun2     # 返回函数对象，fun1生命周期结束了，但是fun2作用域没有结束
+
+    var = fun1()
+    del var              # 手动结束其生命周期
+    ```
 
   另外，闭包的内层函数私有化了变量，完成了数据封装，类似于面向对象。
 
-  ```python
-  def fun1(obj):
-      print("fun1:", obj)
-      def fun2():
-      	obj[0] += 10
-      	print("fun2:", obj)
-      return fun2             # 通过返回值，将fun2以及func1的变量生命保存下来
-  
-  lst = [1, 2, 3]
-  var = fun1(lst)     # 执行函数，返回fun2(并没有执行fun2)，保存lst生命   -> fun1: [1, 2, 3]
-  var()               # 调用fun2()  -> fun2: [11, 2, 3]
-  var()               # 调用fun2()  -> fun2: [21, 2, 3]	
-  ```
+    ```python
+    def fun1(obj):
+        print("fun1:", obj)
+        def fun2():
+            obj[0] += 10
+            print("fun2:", obj)
+        return fun2             # 通过返回值，将fun2以及func1的变量生命保存下来
+
+    lst = [1, 2, 3]
+    var = fun1(lst)     # 执行函数，返回fun2(并没有执行fun2)，保存lst生命   -> fun1: [1, 2, 3]
+    var()               # 调用fun2()  -> fun2: [11, 2, 3]
+    var()               # 调用fun2()  -> fun2: [21, 2, 3]	
+    ```
 
 * 装饰器
 
-  装饰器是闭包的一个应用。
-
+  装饰器是闭包的一个应用。  
   装饰器可以在不改变原有函数功能的前提下，增加新功能。通过@修饰。
 
   ```python
@@ -1866,20 +1895,13 @@ def main():
 
 4. **文件打开模式**
 
-       r - 只读
-
-       w - 只写
-
-       a - 追加
-
-       x - 文件不存在时才能写入
-
-       r+/w+/a+ - 读写
-
-       t - 文本文件
-
-       b - 二进制文件
-
+       r - 只读  
+       w - 只写  
+       a - 追加  
+       x - 文件不存在时才能写入  
+       r+/w+/a+ - 读写  
+       t - 文本文件  
+       b - 二进制文件  
        说明：默认是二进制b方式， 'r+t' 可以表示以文本可读可写方式打开
 
 **代码示例：**
@@ -2098,6 +2120,7 @@ if __name__ == "__main__":
 (?:abc)    # 表示找到这样abc这样一组，但是不记录。
 a(?=bbb)   # 表示a后边必须紧跟三个b。
 (?<=bbb)a  # 表示a前边必须有三个b。
+# 说明 [ab|c]表示a、b、|、c四个单个字符组成的字符集；(ab|c)表示两组ab或者c；
 ```
 
 {}一般用来表示匹配的长度。
@@ -2107,37 +2130,56 @@ a(?=bbb)   # 表示a后边必须紧跟三个b。
 [0-9]{0,9}  # 表示长度为0到9的数字字符串。
 ```
 
-## 字符编码
+# 并发编程
 
-* ascII/unicode/utf-8 http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html
-  * ascii码：规定了128个字符的编码（内存中用一个byte的后边7bit表示），表示英文够用，中文不够用。
-  * unicode：是一个符号集，规定了符号的二进制码(世界统一),但是没有规定二进制码该如何存储。
-  * utf8是互联网上使用广泛的一种unicode实现方式。它是一种变长编码，可以用1-4个字节表示一个符号，比如英文字母用1个字节表示，utf8和ascii码是相同的；比如汉字就需要用3个字节表示。
+## 协程
 
-## 小结：python3数据类型
+* **协程的定义：**
 
-* 数值类型（参考 test_numeric.py）
+  协程，又称微线程， 纤程。  
+  线程是系统级别的，它们是由操作系统调度；协程是程序级别的，由程序员根据需要自己调度。  
+  我们把一个线程（coroutineTest）中的一个个函数（A和B）叫做子程序，那么子程序（A）在执行过程中可以中断去执行别的子程序（B）；别的子程序（B）也可以中断回来继续执行之前的子程序（A），这就是协程。
 
-  * 整数（Integer）：python3中的整型只有一种 long 类型
-  * 浮点数（Float）
-  * 复数（Complex）
-  * 分数（Fraction）：有理数。
-  * 布尔类型（Boolean）： True/False本质上是1/0。
+* **python使用生成器yield中断机制实现协程：**
 
-* 字符串（参考 test_str1.py/test_str2.py/test_str3.py）
+  生成器、yield关键字、next()、send()函数  
+  next()、send()函数作用类似，区别是send()可以传参数，这个参数可以被yeild接收，c.next()和c.send(None)作用一样。
 
-  * str
-  * bytes
+**代码示例：**
 
-* 容器类型（参考 test_container.py）
+```python
+# -*- coding: utf-8 -*-
 
-  * 列表（list）
-  * 元组（tuple）
-  * 集合（set）
-  * 词典（dict）
-    说明：字符串也可以看作是字符的集合。
+# 理解 生成器、yield关键字、next()、send()函数 运行
+import time
 
-# gunicore和gevent
+def task_1():
+    while True:
+        print("task 1 is runing...")
+        time.sleep(0.1)
+        yield
+
+def task_2():
+    while True:
+        print("task 2 is runing...")
+        time.sleep(0.1)
+        yield
+
+def main():
+    t1 = task_1()     # 生成器（特殊的生成器），调用next()时，遇到yeild返回
+    t2 = task_2()
+
+    # 先让t1执行一会儿，t1遇到yeild的时候，会返回位置T1，
+    # 然后next(t2)会运行t2,t2遇到yeild时，会再次切换到t1中，
+    # 这样 t1/t2/t1/t2...交替执行，最终实现了多任务...协程
+    # greenlet是对yeild的封装，实现功能和此函数类似。
+    # gevent
+    while True:
+        next(t1)         # 位置T1
+        next(t2)         # 位置T2
+```
+
+## gunicore和gevent
 
 ```python
 # encoding: utf-8
@@ -2163,7 +2205,8 @@ g1.join()   # 等待g1执行完毕
 g2.join()
 g3.join()   # 此处可以简写成 gevent.joinall([g1, g2, g3])
 
-输出：
+'''
+使用gevent.sleep(0.5)，输出结果（真正的并发）：
 (<Greenlet at 0xcf1af0: f(5)>, 0)
 (<Greenlet at 0xcf1f50: f(5)>, 0)
 (<Greenlet at 0xcf1eb0: f(5)>, 0)
@@ -2179,6 +2222,24 @@ g3.join()   # 此处可以简写成 gevent.joinall([g1, g2, g3])
 (<Greenlet at 0xcf1af0: f(5)>, 4)
 (<Greenlet at 0xcf1f50: f(5)>, 4)
 (<Greenlet at 0xcf1eb0: f(5)>, 4)
+
+使用time.sleep(0.5)，输出结果（顺序执行）：
+(<Greenlet at 0x102daf0: f(5)>, 0)
+(<Greenlet at 0x102daf0: f(5)>, 1)
+(<Greenlet at 0x102daf0: f(5)>, 2)
+(<Greenlet at 0x102daf0: f(5)>, 3)
+(<Greenlet at 0x102daf0: f(5)>, 4)
+(<Greenlet at 0x102df50: f(5)>, 0)
+(<Greenlet at 0x102df50: f(5)>, 1)
+(<Greenlet at 0x102df50: f(5)>, 2)
+(<Greenlet at 0x102df50: f(5)>, 3)
+(<Greenlet at 0x102df50: f(5)>, 4)
+(<Greenlet at 0x102deb0: f(5)>, 0)
+(<Greenlet at 0x102deb0: f(5)>, 1)
+(<Greenlet at 0x102deb0: f(5)>, 2)
+(<Greenlet at 0x102deb0: f(5)>, 3)
+(<Greenlet at 0x102deb0: f(5)>, 4)
+'''
 ```
 
 ```python
@@ -2186,7 +2247,8 @@ from  gevent import monkey
 monkey.patch_all()           #  打补丁
 ```
 
-代码中定义这一行，就能将程序中的耗时操作的代码，转换为gevent中自己实现的模块。从而不用重构就可以实现真正的多并发（协程）。比如上边的time.sleep(0.5)就可以使用了。
+加入上边这两行，就能将程序中的耗时操作的代码，转换为gevent中自己实现的模块。
+从而不用重构就可以实现真正的多并发（协程）。比如上边的time.sleep(0.5)就可以使用了。
 
 * gunicorn
 
@@ -2218,4 +2280,49 @@ monkey.patch_all()           #  打补丁
   gunicorn -k gevent --daemon --max-requests=300 --conf=conf/server_cfg.py bin.myapp:app
   ```
 
-  
+## python多线程
+
+​        Python是一种解释型语言，而对于python主流也是官方的解释器CPython（用C语言实现的）来说，每一个进程都会持有一个**全局解释锁**GIL（Global Interpreter Lock）。一个进程运行python代码时，同一时刻只能有一个线程获得这个GIL锁，如果该进程内的其他线程想要运行时，就必**须要等待当前线程阻塞的时候释放全局解释锁，而不能多个线程同时运行在CPU**。正因如此，python**多线程**运用的场合主要为IO密集型程序，如果是计算密集型程序，需要使用python**多进程**。
+
+计算密集型程序（线程不会因为等待IO或者其他资源而阻塞），使用多线程（threading）并不能提高单线程执行程序的效率，如下例（和单线程执行耗时基本一样）：
+
+参考链接： https://www.jianshu.com/p/f32e499749fb
+
+```python
+import time
+import threading
+
+# 创建3个线程各运行 100000 次乘法
+def multiply_op(n):
+    for i in range(100000):
+        n *= 2
+
+a = 1
+b = 1
+c = 1
+
+begin = time.time()
+
+# 创建3个线程分别对a，b，c运行100000次乘法
+t1 = threading.Thread(target=multiply_op, args=(a,))
+t2 = threading.Thread(target=multiply_op, args=(b,))
+t3 = threading.Thread(target=multiply_op, args=(c,))
+
+# 启动三个线程
+t1.start()
+t2.start()
+t3.start()
+
+# 等待三个线程运行结束
+t1.join()
+t2.join()
+t3.join()
+
+end = time.time()
+
+print("共消耗时间 %.2f 秒" % (end - begin))
+```
+
+# 网站
+
+  面试题 https://www.jianshu.com/p/7b5d01cb4faf

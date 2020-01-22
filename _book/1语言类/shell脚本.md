@@ -1,12 +1,28 @@
 [TOC]
 
+# 内容提要
+
+* 数据类型
+  * 字符串
+  * 日期时间
+  * 数组
+  * 文件
+* 函数
+  * 算数运算
+  * 逻辑控制 case...in、if...else、for/while/until
+  * 常用命令 
+    tee/read/IFS/find/xargs/cut/tr/
+    sort/uniq/split/tree/expect/
+    head/tail/egrep/sed/awk/
+    paste/shift/tput/stty
+
 # 字符串
 
 ## 单引号和双引号
 
 * 区别
 
-  * 单引号就是将所有字符作为普通字符
+  * 单引号就是将所有字符作为普通字符（原样输出）
   * 双引号会保留特殊字符的特殊含义
 
   ```shell
@@ -38,27 +54,37 @@ printf "%5s %-10s %-8.2f\n" 1 Sarath 80.3456
 
 * 字符串的比较最好用双括号，不会出错
 
-  [[ $str1 == $str2 ]] 等价于 [[ $str1 = $str2 ]] (注意=两边的空格，没有空格就是赋值了) <br>
-  [[ $str1 != $str2 ]]  <br>
-  [[ $str1 > $str2 ]]  <br>
-  [[ $str1 < $str2 ]]  <br>
-  [[ -z $str1 ]] --字符串空返回真  <br>
-  [[ -n $str1 ]] --字符串非空返回真  <br>
+  [[ $str1 == $str2 ]] 等价于 [[ $str1 = $str2 ]] (注意=两边的空格，没有空格就是赋值了)  
+  [[ $str1 != $str2 ]]  
+  [[ $str1 > $str2 ]]  
+  [[ $str1 < $str2 ]]   
+  [[ -z $str1 ]] --字符串空返回真   
+  [[ -n $str1 ]] --字符串非空返回真   
+
+## 其他字符串操作
+
+   ```shell
+   var="abcdef"
+   echo ${#var}     # 字符串长度 6
+   echo ${var:1:3}  # 提取子串 bcd
+   ```
 
 ## 通配符与正则
 
-* 通配符适用的地方：shell命令行或者shell脚本中  
+* 正则和通配符的使用场景
 
-* 正则表达式适用的地方：字符串处理时，一般有一般正则和Perl正则。
+  通配符一般只用于**文件名**匹配，如find，ls，cp，mv等。
+
+  正则表达式是用来匹配**字符串**的，针对文件内容的文本过滤大都用正则表达式，如grep，awk，sed等。
 
   ```shell
   # 通配符的含义：
   * ---代表 0 个或者多个任意字符。（正则中的 .* 代表任意字符，*代表任意次）
   ? ---匹配任意单个字符。（正则中的 .? 代表0或者1个任意字符，?代表0次或1次）  
-  [] ---匹配括号内的1个字符。（和正则中的[]类似）  
-  {} ---匹配花括号中的任意一个字符串，如{abc,xyz,123}  
-  [!] ---匹配 不在中括号内的一个字符 （和正则中的 [^]作用相似，都是反向选择）  
-  当要把以上的* ,?,[ ]当成参数或者字符串处理时，就要限制shell不能当成通配符。这时的处理方法是：加单引号或者用\ （反斜杠转义）
+  [] ---匹配括号内的任意一个字符，如[a,b,c]。（正则中的[]表示单个字符组成的字符集）  
+  {} ---匹配花括号中的任意一个字符串，如{abc,xyz,123} （正则中的 ( ) 表示分组，如 (abc|de) 表示abc或者de， 正则中的{n}，表示前边的模式匹配n次）
+  [!] ---匹配不在中括号内的一个字符 （和正则中的 [^]作用相似，都是反向选择）  
+  当要把以上的* ? [ ]这些字符当成参数或者字符串处理时，需要\（反斜杠）转义。
   ```
 
 # 日期时间
@@ -69,15 +95,20 @@ printf "%5s %-10s %-8.2f\n" 1 Sarath 80.3456
 
   ```shell
   # 时间格式转换
-  date +%s         #时间戳
-  date +%F         #日期（%Y-%m-%d）
-  date +%H:%M:%S      #时间
+  date +%s         # 时间戳
+  date +%F         # 日期（%Y-%m-%d）
+  date +%H:%M:%S   # 时间
+  date "+%F %X"    # 2020-01-02 05:28:23 PM
 
   date -d '@1561974846'  +%Y-%m-%d            # 时间戳转可读日期
   date -d 'Thu Jul  4 15:29:10 CST 2019' +'%F %H:%M:%S'
   date -d 'Thu Jul  4 15:29:10 CST 2019' +%s  # 日期转时间戳
 
-  # 时间同步
+  # ntpdate时间同步。强制性的将系统时间设置为ntp服务器时间。
+  # ntpdate加cron的组合进行时间同步可能会造成时间的跳跃，对一些依赖时间的程序和服务会造成影响。
+  # ntpd更好些，它在修正时间的同时，修正cpu tick。
+  # 理想的做法为，在开机的时候，使用ntpdate强制同步时间，在其他时候使用ntpd服务来同步时间。
+  # ntpd有一个自我保护设置: 如果本机与上源时间相差太大, ntpd不运行。
   /usr/sbin/ntpdate -s time-b.nist.gov
   ```
 
@@ -91,24 +122,27 @@ printf "%5s %-10s %-8.2f\n" 1 Sarath 80.3456
 # 普通数组
 
 arr=(test1 test2 test3)  
-arr[0]="test1"  
-arr[2]="test2"  
-arr[3]="test3"  
-echo ${arr[0]}
+arr[3]=test4
+echo ${arr[0]} ${arr[3]}
 
 for a in ${arr[@]};do  
-echo $a;
+    echo $a;
 done  
 
-for index in seq ${#arr[@]};do
-echo ${arr[$[ $index - 1 ]]};
+for index in `seq ${#arr[@]}`;do
+    echo ${arr[$[ $index - 1 ]]};
 done
 
 # 关联数组
+# PS1修改命令行提示符
+# 字典定义前必须先声明 declare -A dict
+# 删除变量 unset var
+# 设置变量为只读 readonly var（设置为只读的变量不能通过unset命令删除）
 [baijie.cai@spider-xk-001 ~]$ PS1="test> "  
+test> declare -A arr1
 test> arr1=(["name"]=cc ["age"]=18)     --- 赋值  
-test> arr1["name"]=cc  
-test> arr1["age"]=18  
+test> arr1["name1"]=cbj  
+test> arr1["age1"]=18  
 test> echo ${#arr1[@]}  --- 数组长度  
 2  
 test> echo ${arr1[@]}   --- value（@和*效果一样）  
@@ -135,7 +169,6 @@ age: 18
 -x -> 文件可执行  
 -w -> 文件可写  
 -r -> 文件可读  
-  
 
 ## 文件读写
 
@@ -191,7 +224,7 @@ echo "456abcdefg" > a.txt   # 覆盖写
 # 查找名字重复的文件：  
 > find . -type f | xargs -I {} basename {} | sort | uniq -c | awk '{if($1>1){print $0}}'  
 
-# 锁定文件（文件不能删除，不能更改，不能移动）  
+# 锁定文件（文件不能删除，不能更改，不能移动）        i-我
 > sudo chattr +i filename
 # 如果需要使文件恢复可写状态，撤销不可修改属性即可：  
 > sudo chattr -i filename  
@@ -226,13 +259,14 @@ echo "456abcdefg" > a.txt   # 覆盖写
 > od sales.brief
 
 # 删除文件中的空白行(五种方法)
-> cat a.txt | grep -v '^s'
+> cat a.txt | grep -v '^$'
 > cat a.txt | tr -s '\n'            -s压缩多个连续的字符为一个
 > cat a.txt | sed '/^$/d'
 > cat a.txt | awk 'if(length($0)!=0){print $0}'
 > cat a.txt | awk 'if($0!=""){print $0}'
 
-# 词频统计（awk tr grep sort）
+# 词频统计（awk tr grep sort） 
+# awk变量操作要和shell区分出来，变量前没有$
 > cat a.txt | egrep -o '\b[[:alpha:]]+\b' | awk '{count[$0]++}END{for(i in count){print i,count[i]}}' | sort -nrk 2
 ```
 
@@ -257,7 +291,7 @@ result=(( no * 10 ));
 result=`expr $no + 100`
 
 # 方法5
-bc-更强大，支持浮点数计算,其他只支持整数运算
+bc-更强大，支持浮点数计算，其他只支持整数运算。
 echo "12.3/2" | bc  
 echo "scale=2;12.3/2" | bc  -> 保留两位小数  
 echo "scale=2;sqrt(8)" | bc  -> 开方  
@@ -266,6 +300,10 @@ echo "2^10" | bc  -> 乘方
 # bc-支持进制转换（2/10/16）
 # ibase输入进制，obase输出进制，默认是10进制
 echo "ibase=10;obase=2;1024" | bc  
+
+# 乘法与幂运算
+echo $((2**3))        # 2的3次幂 = 8， bc计算器是 2^3
+echo $((2*3))         # 6
 ```
 
 # 逻辑控制
@@ -350,8 +388,9 @@ count=0
 while [ $count -lt 5 ];do
     echo $count
     let count++
-    # count=$((${count}+1))
-    # count=$[${count}+1]
+    # ((count--))
+    # count=$((count+1))    # 注意shell的赋值等号左右不能有空格！！！
+    # count=$[count+1]
     # count=`expr $count + 1`
     # count=`echo "$count+1" | bc`  #$先进行变量替换，再进行命令替换``
 done
@@ -370,7 +409,7 @@ done
 # case：遍历序列
 
 #!/bin/bash
-for i in seq 10;do echo $i; done
+for i in `seq 10`;do echo $i; done
 for i in {0..10};do echo $i; done
 for i in {a..z};do echo $i; done
 for ((i=0;i<10;i++));do echo $i; done
@@ -402,20 +441,122 @@ fi
 
 # 常用命令
 
+## shell中的各种括号
+
+* 单小括号 ( )
+  * 子shell。括号中的命令会新开一个子shell顺序执行，多个命令用分号隔开(cmd1;cmd2;cmd3)。
+  * 命令替换。等同于``。
+    ```shell
+    for i in $(seq 0 4);do echo $i;done
+    for i in `seq 0 4``;do echo $i;done
+    ```
+  * 初始化数组。如 array = (a b c d)。
+* 双小括号 (( ))
+  * 整数计算。
+    如 a=5; ((a++)); echo $a -> 输出6。 echo $((a+10))  -> 输出16
+  * 算数比较。是[ ]的比较表达式的加强版，支持多个表达式用分号隔开，支持大于号小于号、移位、与或非等逻辑符号。
+    for((i=0;i<5;i++))  等价于：for i in `seq 0 4`` 或者 for i in {0..4}
+    if (($i<5)) 等价于：if [ $i -lt 5 ] (说明：(( ))不需要再将表达式里面的大小于符号转义)。
+* 单中括号 [ ]
+  * test命令的另一种形式，用于测试表达式（字符串比较，算术比较，文件测试等）。
+    * 必须在左括号的右侧和右括号的左侧各加一个空格，否则会报错。
+    * 字符串比较可以使用==和!=，整数比较只能使用-eq，-gt这种形式。
+    * 无论是字符串比较还是整数比较都不支持直接写大于号小于号。
+    * [ ]中的逻辑与和逻辑或使用-a 和-o 表示。
+  * 正则中的字符集，数值中的下标索引等。
+* 双中括号 [[ ]]
+  * [[ ]]比[ ]更通用。支持模式匹配，如：[[ hello == hell? ]]，结果为真。
+  * &&、||、<和> 操作符能够正常存在于[[ ]]条件判断结构中，但是如果出现在[ ]结构中的话，会报错。
+    如：if [[ $a != 1 && $a != 2 ]] 等价于 if [ $a -ne 1 -a $a -ne 2 ]
+
+* 小结
+(( ))及[[ ]] 分别是[ ]的针对数学比较表达式和字符串表达式的加强版。  
+[[ ]]用于字符串表达式，增加模式匹配特效；  
+(( ))用于数学比较表达式，不需要再将表达式里面的大小于符号转义，还增加了以下符号：  
+加加减减：val++、var--、++var、--var   
+逻辑运算符：!、&&、||   
+位运算符：!、~、<<、>>、&、|   
+幂运算：**  
+
+```shell
+# 增强版书写更简洁，以后，字符串比较就用[[]]，数值比较就用(())。
+# 举例 区别字符串比较和数值比较
+i=0;while [[ $i<10 ]];do echo $i; let i++; done
+输出：0 1
+
+i=0;while ((i<10));do echo $i; let i++; done
+输出：0 1 2 3 4 5 6 7 8 9
+```
+
+
+* 四中模式匹配替换结构 ${ }
+
+  ```shell
+  :<<！
+  记忆方法：
+  # 是去掉左边(在键盘上#在$之左边)
+  % 是去掉右边(在键盘上%在$之右边)
+  #和%中的单一符号是最小匹配，两个相同符号是最大匹配。
+  !
+
+  # var=testcase  
+  # echo ${var%s*e}
+  testca
+  # echo ${var%%s*e}
+  te
+  # echo ${var#?e}
+  stcase
+  # echo ${var##?e}
+  stcase
+  # echo ${var##*e}
+  # echo ${var##*s}
+  e  
+  # echo ${var##test}
+  case
+  ```
+
+* 字符串提取与替换 ${ }
+
+  ```shell
+  :<<!
+  ${var:num} -- 提取第num个字符到末尾的所有字符。若num为正数，从左边0处开始；若num为负数，从右边开始提取字串，但必须使用在冒号后面加空格或一个数字或整个num加上括号，如${var: -2}、${var:1-3}或${var:(-2)}。
+  ${var:num1:num2} -- num1是位置，num2是长度。
+  ${var/pattern/pattern} -- 将var字符串的第一个匹配的pattern替换为另一个pattern。
+  !
+
+  # var=/home/centos
+  # echo ${var:5}
+  /centos
+  # echo ${var: -6}
+  centos
+  # echo ${var:(-6)}
+  centos
+  # echo ${var:1:4}
+  home
+  # echo ${var/o/h}
+  /hhme/centos
+  # echo ${var//o/h}       # 所有的o都换成h
+  /hhme/cenths
+  ```
+
 ## tee
 
-tee命令从stdin中读取，然后将输入数据重定向到stdout以及一个或多个文件中（-a表示追加）。  
+tee命令从stdin中读取，然后将输入数据重定向到stdout以及一个或多个文件中（-a表示追加方式）。  
 
 `cat a* | tee -a out.txt | cat –n`
 
 ## $? / $@ / $* / shift
 
-* $?表示shell脚本执行退出状态  
+* $0：Shell 的命令本身  
+* $1 到 $9：表示 Shell命令的第几个参数  
+* $?：显示最后一个shell命令的执行情况  
   * 0-成功  
   * 1-失败  
-* $@ $*用来表示shell的脚本参数  
-* $@代表参数列表"a1" "a2" "a3"  
-* $*代表参数列表"a1 a2 a3"  
+* $#：传递到脚本的参数个数  
+* $@ $*：用来表示shell的脚本参数  
+* $@：多个字符串参数列表"a1" "a2" "a3"  
+* $*：一个单字符串参数列表"a1 a2 a3"  
+* $$：脚本运行的当前进程 ID 号  
 * shift命令移动参数  
   可以将参数依次向左移动一个位置，让脚本能够使用$1来访问到每一个参数。  
 
@@ -423,7 +564,7 @@ tee命令从stdin中读取，然后将输入数据重定向到stdout以及一个
     # 功能：打印所有参数  
     #!/bin/bash
 
-    for i in seq $#  
+    for i in `seq $#`
     do  
         echo $i": "$1  
         shift  
@@ -435,8 +576,8 @@ tee命令从stdin中读取，然后将输入数据重定向到stdout以及一个
 ## tput / stty
 
 * 终端处理工具  
-  * tput:获取终端的行数、列数、终端名称、光标移动、设置背景色/前景色。  
-  * stty -echo禁止将命令发送到终端。    
+  * tput：获取终端的行数、列数、终端名称、光标移动、设置背景色/前景色。  
+  * stty -echo禁止将命令发送到终端。stty(set tty，tty代表终端设备)    
 
   ```shell
     # 功能：隐藏密码
@@ -464,16 +605,16 @@ tee命令从stdin中读取，然后将输入数据重定向到stdout以及一个
 
 ## read
 
-* **read**:从stdin接收输入保存到变量。
-  **-p**打印提示信息
-  **-s**静默
-  **-n** n个字符后结束接收
-  **-t** 2s超时后结束接收
-  **-d** 遇到自定义分隔符后结束接  
+* **read** ：从stdin接收输入保存到变量。
+  **-p** ：打印提示信息  
+  **-s** ：静默  
+  **-n** ：n个字符后结束接收  
+  **-t** ：2s超时后结束接收  
+  **-d** ：遇到自定义分隔符后结束接   
 
   ```shell
     read -p "Enter you name:" name
-    read -p "Enter your passwd" s passwd
+    read -p "Enter your passwd" -s passwd
     read -n 2 age
     read -t 2 info
     read -d ':' info
@@ -481,13 +622,18 @@ tee命令从stdin中读取，然后将输入数据重定向到stdout以及一个
 
 ## IFS
 
-* 读取CSV格式数据：
+  IFS：(Internal Field Seprator) ，内部域分隔符。举例：读取CSV格式数据。  
+
+  `echo "$IFS" | od -b`  
+  输出：0000000 040 011 012 012  
+        0000004  
+  直接输出IFS是看不到值的，转化为二进制就可以看到了，"040"是空格，"011"是Tab，"012"是换行符"\n" 。最后一个 012 是因为 echo 默认是会换行的。
 
   ```shell
     #!/bin/bash
 
-    OLDIFS=$IFS
-    IFS=','
+    OLDIFS=$IFS         # 保存原始值
+    IFS=','             # 改变IFS的值
 
     str="a1,a2,a3"
 
@@ -496,7 +642,7 @@ tee命令从stdin中读取，然后将输入数据重定向到stdout以及一个
         echo $item
     done
 
-    IFS=$OLDIFS
+    IFS=$OLDIFS        # 还原IFS的原始值
 
   ```
 
@@ -505,14 +651,15 @@ tee命令从stdin中读取，然后将输入数据重定向到stdout以及一个
 ```shell
 find /home/work -name '*.txt' -print
 
-find . ( -name '.cpp' -o -name '.py' )  # 或者
+find . -name '*.cpp' -and -name 'test1.???'  # 通配符文件操作
+输出：./test1.cpp
 
 find . -iregex '.*(.py|.sh)$'       # 正则匹配
 
 # -print0:   '\0'分隔查找结果
 #　-print:  '\n'分隔查找结果，默认可省略
 # -iname:  忽略名字大小写
-# -o/-or/-a/-and/!:  逻辑执行，通过( )把条件视为整体。
+# -o/-or/-a/-and/!:  逻辑执行
 # -type:  类型（目录d，文件f，符号链接l）
 # -regex/-iregex:  支持正则
 # -maxdepth:  查找的目录深度
@@ -524,6 +671,8 @@ find . -iregex '.*(.py|.sh)$'       # 正则匹配
 # find与-exec结合使用，\;转义是为了表明;是子命令的结束，不是find命令的结束。
 
 find /home/work/ilog/as -type f -mtime +3 -exec rm -rf {} \;
+# find命令的exec选项表示执行命令，{}是rm -rf命令的参数，也是find查找出来的结果；
+# \是为了转义分号，不让shell去解释,因为这个分号是给-exec用的。
 ```
 
 ## xargs
@@ -585,7 +734,11 @@ find /home/work/ilog/as -type f -mtime +3 -exec rm -rf {} \;
 
 ## tr
 
-* **tr的作用**：字符替换、字符删除、重复字符压缩。
+* **tr的作用**：(translate)，字符替换、字符删除、重复字符压缩。  
+  格式：tr [选项] [字符集合1] [字符集合2]
+  -c, -C, –complement 补集。  
+  -d, –delete 删除。  
+  -s, –squeeze-repeats 将重复出现字符串压缩为一个字符。  
 
   ```shell
   # 大写转小写：
@@ -597,13 +750,13 @@ find /home/work/ilog/as -type f -mtime +3 -exec rm -rf {} \;
   echo "542176" | tr '9876543210' '0-9'   #解密
 
   # 删除指定字符集中的字符：
-  echo "HELLO 123 LILI" | tr -d '0-9'
+  echo "HELLO 123 LILI" | tr -d '0-9'        # 删除字符集中的
 
   #　删除不在指定字符集中的字符：
   echo "HELLO 123 LILI" | tr -d -c '0-9\n'
 
   # 重复字符压缩：
-  echo "23hhhhhsdssss78" | tr -s 'a-z'
+  echo "23hhhhhsdssss78" | tr -s 'a-z'      # 压缩字符集中的
   # 重复字符压缩（删除文件中多余的空白行）：
   cat a.txt | tr -s '\n'
 
@@ -630,13 +783,13 @@ find /home/work/ilog/as -type f -mtime +3 -exec rm -rf {} \;
   md5sum是一个长度为32个字符的十六进制串。    
 
   生成MD5：md5sum a.txt > file.md5   
-  根据MD5文件核验数据完整性：md5sum -c file.md5   
+  根据MD5文件核验(check)数据完整性：md5sum -c file.md5   
   递归计算校验和：find . -type f -name '*.cpp' -print0 | xargs -0 md5sum > dir.md5  
 
 * **base64加密算法**（可以无损重构原始数据）  
 
   base64编码：echo "hello lili" | base64   
-  base64解码：echo "aGVsbG8gbGlsaQo=" | base64 -d  
+  base64解码(decode)：echo "aGVsbG8gbGlsaQo=" | base64 -d  
 
 ## sort
 
@@ -647,7 +800,7 @@ find /home/work/ilog/as -type f -mtime +3 -exec rm -rf {} \;
   # -n：按照数字序排序，否则按照字母表排序
   # -r: 逆序排序（从大到小）
   # -m：合并两个已经排序的文件
-  # -c/-C：核验文件是否有序
+  # -c/-C：核验文件是否有序(check)
   # -k:按照第几列排序（列间空格分开）
   # -bk 2.3,2.4：第2列中的第4~5个字符排序
   # -z：sort排序用\0作为终止符，配合xargs -0使用
@@ -666,8 +819,8 @@ find /home/work/ilog/as -type f -mtime +3 -exec rm -rf {} \;
 **uniq**（uniq只能作用于排序后的数据，和sort结合使用）  
 
 ```shell
-# -u：打印不重复的行（只出现过一次的）。
-# -c:统计各行在文件中出现过的次数。
+# -u：打印不重复的行（只出现过一次的，先排序）。
+# -c:统计各行在文件中出现过的次数（先排序）。
 # -z：生成由\0终止的输出，配合xargs -0使用。
 处理指定字符：
 # -s指定跳过前N个字符。skip
@@ -720,10 +873,10 @@ split分隔文件：
    # csplit：可以用指定的内容做为切割条件
    # /SERVER/：匹配分割行的起始。  
    # {整数}：指定分隔执行的次数，{*}直到文件结尾。  
-   # -s：静默  
+   # -s：静默(silence)  
    # -n：分割后文件名后缀数字个数  
-   # -f：文件名前缀  
-   # -b：后缀格式  
+   # -f：文件名前缀(front)  
+   # -b：文件名后缀格式(back)  
 
    # 以上输出文件：server01.log server02.log  
    ```
@@ -823,26 +976,39 @@ cat a.txt | tail -n +3        # 不打印前3行
 
 ## egrep / grep
 
-* -E可以使用扩展正则表达式。
-    -o:只输出匹配到的文本  
-    -c：统计匹配的文本行数  
-    -n：打印匹配字符串所在的行号  
-    -l：打印匹配模式所在的文件  
+* linux系统的文本搜索工具。
+  * grep参数：
+    -v：显示没有匹配的行  
+    -E：可以使用扩展正则表达式  
+    -o：只输出匹配到的文本  
     -i：忽略大小写  
-    -r：递归搜索  
-    -e：指定多个匹配模式  
-    -f:可以将多个模式定义在文件中。选项-f可以读取文件并使用其中的模式（一个模式一行）  
-    -P:支持perl正则表达式语法  
-    -q：静默  
-    -A：打印检索结果及后边n行（after）  
-    -B：打印检索结果及前边n行（before）  
+    -A：打印检索结果及后边n行（after）   
+    -B：打印检索结果及前边n行（before）   
     -C：打印检索结果及前后各n行  
+    --color=auto：匹配到的文本着色显示  
+    -q：静默  
+    -n：打印匹配字符串所在的行号  
+    -e：指定多个匹配模式  
+    -r：递归搜索  
+    -P:支持perl正则表达式语法  
+
+
+  * egrep和fgrep
+    egrep = grep -E (使用正则时，egrep更强大，是增强版)  
+    fgrep：不支持正则表达式搜索，能够很快的进行搜索。
 
   ```shell
+   # 找出/etc/passwd中的两位或三位数
+   grep "[0-9]\{2,3\}" /etc/passwd
+   # 显示/etc/rc.d/rc.sysinit文件中，至少以一个空白字符开头的且后面存非空白字符的行
+   grep "^[[:space:]]\+[^[:space:]]" /etc/rc.d/rc.sysinit
+   # 找出"netstat -tan"命令的结果中以'LISTEN'后跟n个空白字符结尾的行
+   netstat -tan | grep "LISTEN[[:space:]]*$"
+
    echo this is a line. | egrep -o "[a-z]+."
    echo "booking_chanel=32" | grep -Po "(?<=booking_chanel=)[0-9]+"
    echo this is a line of text | grep -o -e "this" -e "line"
-   grep "main()" . -r --include *.{c,cpp}         # 只搜索所有的.c/.cpp文件
+   grep "main()" . -r --include "*.cpp"         # 只搜索所有的.c/.cpp文件（可用通配符）
    grep "main()" . -r --exclude "README"           # 排除README文件
    grep "test" file* -lZ | xargs -0 rm
   ```
@@ -851,7 +1017,7 @@ cat a.txt | tail -n +3        # 不打印前3行
 
 * **按行切割：**  
 
-  xargs -d参数可以实现按行切割：  
+  xargs -d参数可以实现按行切割（把一行切割为多行）：  
   `echo -n "a1%a2%a3" | xargs -d '%'`  
   自定义IFS，然后for循环遍历。    
 
@@ -861,7 +1027,7 @@ cat a.txt | tail -n +3        # 不打印前3行
   -b：字节    
   -c：字符  
   -f：字段  
-  -d自定义分隔符  
+  -d：自定义分隔符  
     1,3 --第1列和第3列  
     1-3,6-9 --第1到3列和第6到9列  
   操作于文件名和标准输入流  
@@ -887,10 +1053,10 @@ cat a.txt | tail -n +3        # 不打印前3行
     sed -i 's/hello/HELLO/g' a.txt
     sed '/^$/d' a.txt
     echo "hello hello hello" | sed 's/hello/HELLO/2g'
-    echo "hello how are you" | sed 's/\w+/[&]/g'
-    echo "hello 222 are you" | sed 's/\b[0-9]{3}\b/how/'   # 正则中的\b:字母数字与非字母数字的边界。
-    echo "hello ABC" | sed 's/([a-z]+) ([A-Z]+)/\2 \1/'
-    name=Lily;echo 'hello n!' | sed "s/n/$name/"
+    echo "hello how are you" | sed 's/\w\+/[&]/g'
+    echo "hello 222 are you" | sed 's/\b[0-9]\{3\}\b/how/'   # 正则中的\b:字母数字与非字母数字的边界。
+    echo "hello ABC" | sed "s/\([a-z]\+\) \([A-Z]\+\)/\2 \1/"  # () {} + 都需要转义
+    name=Lily;echo 'hello n!' | sed "s/n/$name/"       # sed命令里边引用变量，需要用双引号  
   ```
 
 ## awk
@@ -922,10 +1088,11 @@ cat a.txt | tail -n +3        # 不打印前3行
     cat a.txt | awk '!/HELLO/'  
 
     # 统计词频：
-    cat a.txt | awk -F'\t' 'BEGIN{n=0;}{arr[1]=2}END{for(i=0;i< NR;i++){print $i}}'  
+    cat a.txt | awk '{arr[$0]++} END {for(i in arr){print i, arr[i]}}'
+    cat a.txt | sort | uniq -c 
 
     # 打印前2行：
-    seq 5 | awk 'NR< 3'   < ==> seq 5 | awk '{if(NR< 3){print $0}}'  
+    seq 5 | awk 'NR<3'   < ==> seq 5 | awk '{if(NR< 3){print $0}}'  
 
     # 打印3行到5行：
     seq 5 | awk 'NR==3,NR==5'  
@@ -942,7 +1109,7 @@ cat a.txt | tail -n +3        # 不打印前3行
     end
     cc3
 
-    $ awk '/part.*2/, /end/' a.txt  
+    $ awk '/part.*2/, /end/' a.txt  # 正则匹配
     partaa2  
     dd4  
     end
@@ -974,7 +1141,7 @@ cat a.txt | tail -n +3        # 不打印前3行
     3
     abc 123 456
 
-    $ out=`echo "12:34:56" | awk '{split($0,a,":");print a[1],a[2],a[3]}'`;echo out
+    $ out=`echo "12:34:56" | awk '{split($0, a, ":"); print a[1],a[2],a[3]}'`;echo $out
     12 34 56
 
     $ cat a.txt
@@ -982,15 +1149,15 @@ cat a.txt | tail -n +3        # 不打印前3行
     that is chen, not che
     this is chen ,and wang ,not wan che
 
-    $ cat a.txt | awk 'match(0, /.+is ([a-z]+).+not ([a-z]+)/, a){print a[1],a[2]}'   ####### 正则模式中括号中第n个就是a[n]
+    $ cat a.txt | awk 'match($0, /.+is ([a-z]+).+not ([a-z]+)/, a){print a[1],a[2]}'   ####### 正则模式中括号中第n个就是a[n]
     wang wan
     chen che
     chen wan
 
-    $ echo "2019-12-12 12:40" | awk 'sub(/-/, "--", 0)'    ######## 匹配第一个
+    $ echo "2019-12-12 12:40" | awk 'sub(/-/, "--", $0)'    ######## 匹配第一个
     2019--12-12 12:40
 
-    $ echo "2019-12-12 12:40" | awk 'gsub(/-/, "--", 0)'
+    $ echo "2019-12-12 12:40" | awk 'gsub(/-/, "--", $0)'
     2019--12--12 12:40
   ```
 
@@ -1029,7 +1196,7 @@ var="12345"; echo length=${#var}
 
 arr=(a b c); echo ${#arr[@]}  
 
-func param1 param2； echo $#  
+func param1 param2; echo $#  
 ```
 
 ## 重定向
@@ -1050,11 +1217,8 @@ func param1 param2； echo $#
 
   !/bin/bash  
   cat>log.txt <<EOF    
-
-  ...   
-
-  ...    
-
+    ...   
+    ...    
   EOF    
   ```
 
@@ -1077,7 +1241,7 @@ func param1 param2； echo $#
 
 ```shell
 # -n -> 不换行
-# -e -> 不对转义字符处理,原样打印
+# -e -> 保持特殊字符的特殊含义
 
 # 文本颜色：重置=0，黑色=30，红色=31，绿色=32，黄色=33，蓝色=34，洋红=35，青色=36，白色=37
 # 背景颜色：重置=0，黑色=40，红色=41，绿色=42，黄色=43，蓝色=44，洋红=45，青色=46，白色=47
@@ -1118,6 +1282,22 @@ mydb> ...
   echo $out
   ```
 
+## 函数和局部变量
+
+   ```shell
+    #!/bin/bash
+    a=13
+    function func(){     # shell函数定义中function和()是可选的
+        a=12
+        local a=19      # 定义的时候加local就是局部变量
+        a=1000          # 在局部定义了local，之后在局部用这个变量始终是局部的变量。
+        echo $a         # 对于同名的局部变量和全局变量的影响力：局部变量>全局变量。 100
+    }
+
+    func
+​    echo $a      # 12
+   ```
+
 ## 录制终端会话
 
 ```shell
@@ -1127,3 +1307,8 @@ script -t 2> timing.log -a output.session
 # 回放
 scriptreplay timing.log output.session
 ```
+
+# 网址
+
+* shell十三问
+  <https://www.cnblogs.com/rustling/p/9833174.html>

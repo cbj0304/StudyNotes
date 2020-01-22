@@ -5,11 +5,15 @@
 * c++标准库（c++ Standard Library）
 * STL标准模板库（Standard Template Llibrary）
 
-## 重要网站
+## 参考资料
 
-* <https://zh.cppreference.com/>
-* <http://www.cplusplus.com/>
-* <https://gcc.gnu.org/> (libstdc++)
+* 重要网站
+  * <https://zh.cppreference.com/>
+  * <http://www.cplusplus.com/>
+  * <https://gcc.gnu.org/> (libstdc++)
+
+* 参考书籍
+  * STL源码剖析(侯捷)
 
 ## STL六大部件
 
@@ -56,28 +60,29 @@
 
 * stl五种迭代器：
 
-  1. 输出迭代器（Output iterator）
+```mermaid
+graph TD
+A[输出迭代器 output_iterator]
+B[输入迭代器 input_iterator] --> |继承| C[前向迭代器 forward_iterator] --> |继承|D[双向迭代器 bidirectional_iterator] --> |继承| E[随机存取迭代器 random_access_iterato]
+```
 
-  2. 输入迭代器（Input iterator）
+  * **输出迭代器**（Output iterator）
+  * **输入迭代器**（Input iterator）
+  * **前向迭代器**（Forward iterator） --- 继承自输入迭代器  
+  * **双向迭代器**（Bidirectional iterator） --- 继承自前向迭代器  
+  * **随机存取迭代器**（Random access iterator） --- 继承自双向迭代器  
 
-  3. 前向迭代器（Forward iterator）
-
-  4. 双向迭代器（Bidirectional iterator）
-
-  5. 随机存取迭代器（Random access iterator）
-
-     **说明：** *3继承自2；4继承自3；5继承自4*
 
 ## stl使用的是堆内存还是栈内存？
 
-1. array定长数组，占用栈内存。
-2. 其他大部分容器:基础变量结构(类似一个头部信息)，会存放在栈上，大量的数据会存放在堆上(allocator调用new/delete操作符进行批量的内存分配)。
-   例如：vector内部会维护三个指针类型（64位系统上每个指针占8byte），分别指向目前使用空间的头部、尾部以及可用空间的尾部，所以`sizeof(vector<int>)=8*3=24byte`，但是实际存储的大量数据是通过new在堆上创建的，sizeof只会计算类中栈空间大小，也就是定义vector这个容器需要的空间大小，所以动态增加元素时，`sizeof(vector<int>)=24byte`。
-   **说明**：一个指针所占的字节数跟系统的寻址能力有关，16位系统，指针占2个字节；32位系统指针占4个字节；64位系统，指针占8个字节。
+1. array定长数组：占用栈内存。
+2. 其他大部分容器：基础变量结构(类似一个头部信息)，会存放在栈上，大量的数据会存放在堆上(allocator调用new/delete操作符进行批量的内存分配)。  
+   例如：vector内部会维护三个指针类型（64位系统上每个指针占8byte），分别指向目前使用空间的头部、尾部以及可用空间的尾部，所以`sizeof(vector<int>)=8*3=24byte`，但是实际存储的大量数据是通过new在堆上创建的，sizeof只会计算类中栈空间大小，也就是定义vector这个容器需要的空间大小，所以动态增加元素时，`sizeof(vector<int>)=24byte`。    
+   **说明**：一个指针所占的字节数跟系统的寻址能力有关，16位系统，指针占2个字节；32位系统指针占4个字节；64位系统，指针占8个字节（64位系统，int占4字节，指针占8字节）。
 
 ## STL各种容器、迭代器汇总
 
-* 容器类型占栈空间大小。
+* 容器类型占栈空间大小（sizeof() -- 一个对象被创建时，需要开辟栈空间的字节数）。
 
 * 容器的迭代器类型。
 
@@ -262,7 +267,7 @@
       short f();  // sizeof(f()) == sizeof(short)
 
   2. 结构体计算占用字节大小：
-      原则：结构体变量中每个成员的偏移量必须是成员大小的整数倍。（首元素偏移量是0）
+      原则：结构体变量中每个成员的偏移量必须是当前这个成员大小的整数倍。（首元素偏移量是0）
   */
 
   struct A {
@@ -284,7 +289,8 @@
       cout << "char=" << sizeof(char) << endl;       // char=1
       cout << "short=" << sizeof(short) << endl;     // short=2
       cout << "int=" << sizeof(int) << endl;         // int=4
-      cout << "long=" << sizeof(long) << endl;       // long=4
+      cout << "long=" << sizeof(long) << endl;       // long=8（32位系统long占4字节）
+      cout << "long=" << sizeof(long long) << endl;  // long long=8
       cout << "float=" << sizeof(float) << endl;     // float=4
       cout << "double=" << sizeof(double) << endl;   // double=8
       cout << "pointer=" << sizeof(int*) << endl;    // pointer=8
@@ -323,6 +329,24 @@
 
 using namespace std;
 
+// 函数指针
+void printItem(const int& item) {
+    cout << item << " ";
+}
+
+// 函数对象（仿函数，用struct比较方便，默认是public）
+struct printItem1 {
+    void operator() (const int& item) {
+        cout << item << " ";
+    }
+};
+
+// 函数模板（函数模板实例化后就如同一个函数指针一样用。printItem == printItem2<int>）
+template<typename T>
+void printItem2(const T& item) {
+    cout << item << " ";
+}
+
 int main()
 {
     // vector的那种遍历方法 ,支持随机访问迭代器的容器都可用类似的方法
@@ -340,8 +364,16 @@ int main()
     for (int i = 0; i < vi.size(); i++) { cout << vi[i] << " " << vi.at(i) << endl; }
 
     // 第四种: stl中for_each算法，此处匿名函数可以换成仿函数、函数指针、函数模板等
-    for_each(vi.begin(), vi.end(), [](const int& val)->void {cout << val << endl;});
-    for_each(vi.begin(), vi.end(), show_item<int>);
+    cout << endl << "function pointer...";
+    for_each(vi.begin(), vi.end(), printItem);      // 函数指针（函数名）
+    cout << endl << "function object...";
+    for_each(vi.begin(), vi.end(), printItem1());   // 函数对象（仿函数）
+    cout << endl << "function template...";
+    for_each(vi.begin(), vi.end(), printItem2<int>);    // 函数模板
+    cout << endl << "lambda expression...";
+    for_each(vi.begin(), vi.end(),
+        [](const int& item)->void {cout << item << " ";});   // 匿名函数
+
 
     // 第五种：copy到标准输出流
     // ostream_iterator (ostream_type& s, const char_type* delimiter);
@@ -361,9 +393,10 @@ int main()
 * list/forward_list -- 顺序容器，非连续空间
 * deque -- 顺序容器，分段连续空间(模拟连续空间)
 * stack/queue/priority_queue -- 容器适配器
-  * priority_queue底层是通过vector实现的一个大根堆；
+  * priority_queue底层是通过vector实现的一个大根堆(默认大根堆,大的元素优先出队)；
   * stack底层是deque，支持一端插入删除，也可以用list和vector实现；
   * queue底层是deque，支持一端插入，一端删除，也可以用list实现。
+  * 说明：以上是标准用法，其实只要保证合法操作，也可以用vector当做一个栈使用，这样既可以保证后进先出（push_back/pop_back），又可以进行顺序访问和遍历。-- 某些场景下有这个需求。
 * set/map/multiset/multimap -- 基于红黑树、key有序的关联容器
 * unordered_set/unordered_map/unordered_multiset/unordered_multimap  -- 基于hashtable，key无序的关联容器
 
@@ -422,19 +455,21 @@ int main()
       cout << "array.front()=" << c.front() << endl;
       cout << "array.back()=" << c.back() << endl;        // 获取首尾元素
       assert(c.at(5) == c[5]);                            // at()有越界检查的功能，[]没有越界检查，但是效率更高
-      
+
       cout << "array.size()=" << c.size() << endl;          // 元素个数
       cout << "array.max_size()=" << c.max_size() << endl;  // 最多能容纳的元素个数
       cout << "array.data()=" << c.data() << endl;          // 数组首地址，类似c数组的数组名
       assert(c.empty() == false);                           // 判空
 
       // ********** 算法
-      // 快速排序
-      qsort(c.data(), ASIZE, sizeof(long), compareLongs);
+      // 快速排序 qsort，头文件stdlib.h
+      // void qsort(void *base, int nelem, int width, int (*fcmp)(const void *,const void *)); 
+      qsort(c.data(), ASIZE, sizeof(long), compareLongs);  // sort是qsort改进版本，c++建议用sort
       for_each(c.begin(), c.end(), show_item<long>);
       cout << endl;
-      
-      // 二分查找
+
+      // 二分查找 bsearch，头文件stdlib.h
+      // void* bsearch(const void *key, const void *base, size_t nelem, size_t width, int (*comp)(const void *, const void *)); -- 自定义比较函数返回值是int
       long data = 17421;
       long* pItem = (long *)bsearch(&data, c.data(), ASIZE, sizeof(long), compareLongs);
       if (pItem != NULL) {
@@ -454,7 +489,6 @@ int main()
 * array内存结构
 
 <img src="../images/stl/array.jpg" height="400" width="650" />
-
 
 ## vector
 
@@ -484,10 +518,10 @@ int main()
     通过迭代器或者下标[]
   3. 在任意位置插入删除（需要大量移动元素，不如list高效）：
     insert()
-    erase()  // erase和insert配对，通过游标操作，彻底的擦除元素
-    remove() // 算法库中的remove是将指定元素移动到容器的尾部并不减少vector的size,
-    	       // vector需要用remove和erase配合使用彻底的擦除指定元素,
-    	       // 为什么这样？因为不同元素的删除方式不一样，不能做出通用性的删除动作。
+    erase()     // [!!! 擦除 !!!]erase和insert配对，通过游标操作，彻底的擦除元素
+    remove()    // [!!! 移动 !!!]算法库（注意vector并没有remove成员函数）中的remove是将指定元素移动到容器的尾部并不减少vector的size,
+    	        // vector需要用remove和erase配合使用彻底的擦除指定元素,
+    	       // 为什么这样？因为不同容器的删除方式不一样，不能做出通用性的删除动作。
 
   访问：
     随机访问迭代器可以访问任意位置的元素：
@@ -594,8 +628,8 @@ int main()
         pop_back()
         pop_front()
         insert()
-        erase()  // erase和insert配对，通过游标操作，彻底的擦除元素
-        remove() // list成员函数中的remove可以移除指定值的节点，并释放资源。
+        erase()  // erase和insert配对，通过游标操作，彻底的擦除元素（彻底删除，传指针参数 ）
+        remove() // list成员函数中的remove可以移除指定值的节点，并释放资源（彻底删除，传值参数）
            // vector没有remove成员函数，调用的是算法库中的remove，不会真正删除，见vector示例代码。
 
       访问：
@@ -616,9 +650,9 @@ int main()
         vector是一块连续的内存，支持下标随机访问，但是插入和删除操作会导致大量内存拷贝，效率较低。
         list是双向链表，只能顺序访问，不支持随机访问，但是任何位置插入或删除非常迅速。
         结论：
-    1. 如果需要高效的随机存取，不在乎插入删除效率，用vector；
-    2. 如果需要大量的插入删除，而不在乎随机存取，用list；
-    3. 如果既需要随机存取，又关系两端数据的插入删除，用deque；
+        1. 如果需要高效的随机存取，不在乎插入删除效率，用vector；
+        2. 如果需要大量的插入删除，而不在乎随机存取，用list；
+        3. 如果既需要随机存取，又涉及两端数据的插入删除，用deque；
     */
     int main() {
 
@@ -633,7 +667,7 @@ int main()
       c.push_back("you");
       c.push_front("me");       // 支持收尾插入
       c.emplace_front("hate");
-      c.emplace_back("like");   // push_back/push_front的右值引用版本（高效）
+      c.emplace_back("like");   // push_back/push_front的右值引用版本（高效）  emplace-安放
       c.insert(++begin(c), "inserter");  // 在第二个位置插入
       auto iit = c.begin();
       advance(iit, 5);
@@ -853,11 +887,12 @@ int main()
           容量：empty() / size()
 
   priority_queue和queue的区别和联系 
-      (1) 二者都定义在头文件#include<queue>中，都是先进先出(FIFO)的容器适配器，不提供迭代器，不提供遍历方法，不提供clear()接口。
+      (1) 二者都定义在头文件#include<queue>中，不提供迭代器，不提供遍历方法，不提供clear()接口。
+      (2) queue是一个先进先出的线性存储表，一端插入，一端删除；
       (2) priority_queue支持自定义数据的优先级，让优先级高的排在前面，优先出队；
       (3) priority_queue默认底层容器是vector实现的大顶堆heap；默认比较函数是 less<int>，降序排序;
           queue默认的底层容器是deque，也可以用list。
-      (4) priority_queue 通过 top() 函数来访问队首（堆顶）元素；queue可以通过front()和back()访问队首/队尾元素。
+      (4) priority_queue 只能通过 top() 函数来访问队首（堆顶）元素；queue可以通过front()和back()访问队首/队尾元素。
   */
 
   int main() {
@@ -873,7 +908,7 @@ int main()
       assert(c.back() == 400);        // 访问最后一个元素
 
       // 2. 适配器，优先级队列
-      priority_queue<int, vector<int>, greater<int>> q;       // 升序队列
+      priority_queue<int, vector<int>, greater<int>> q;       // 升序队列，小根堆
       for (int n : {3, 5, 7, 2, 1, 10}) {
           q.push(n);
       }
@@ -1013,7 +1048,7 @@ int main()
       pair<multiset<int>::iterator, multiset<int>::iterator> ret;
       ret = mc.equal_range(5);
       cout << *(ret.first) << endl;      // 第一个大于等于该元素的值
-      cout << *(ret.second) << endl;     // 第一个大于该元素的值
+      cout << *(ret.second) << endl;     // 第一个大于该元素的值  （类似左开右闭）
       for (auto it = ret.first; it != ret.second; it++) {
           cout << *it << endl;           // 遍历范围查询结果
       }
@@ -1065,6 +1100,17 @@ int main()
       (1) set基于红黑树实现，有自动排序的功能，查找/插入/删除 的时间复杂度o(logN);
       (2) unordered_set基于哈希表，查找/插入/删除 的时间复杂度o(1); 而代价是消耗比较多的内存，无自动排序功能。
       底层实现上，使用一个下标范围比较大的数组来存储元素，形成很多的桶，利用hash函数对key进行映射到不同区域进行保存。
+
+  5. 关联式容器使用时需要注意，如果key不存在，使用map[key]会有意想不到的结果。可以用以下方式：
+     方式1：if (m.count(key)>0) { do_something( m[key] ); }
+     方式2：it=m.find(key); if (it!=m.end()) {do_something( m[key] ); }
+     推荐使用方式2，因为方式1需要查两次，效率差。
+  6. mp.at("key") 会进行越界检查，如果不存在key会抛出异常（out_of_range）;
+     mp["key"] 没有越界检查-返回未定义的行为！！！如果不存在"key",会自动创建一个value为0的节点，这时候map的size+1了，同时返回0；
+
+  7. 容器有通用的泛型方法find(begin，end，target)查找目标，但是这个方法是适用于所有容器的遍历式查找，并不高效，查找要使用map类成员mp.find(key)。
+  8. 关联容器不可用算法库函数如lower_bound()，而其自带同名成员函数:如 myset.lower_bound( x )返回一个迭代器，若找不到返回end()迭代器。
+
   */
 
   int main() {
@@ -1230,6 +1276,7 @@ int main()
 ## tuple
 
 * tuple使用
+  元组容器：支持用户自定义元素的个数和类型。
 
   ```c++
   #include <tuple>
@@ -1250,7 +1297,14 @@ int main()
       assert(get<0>(c2) == "zs");
 
       tuple<string, int, char> c = {"cbj", 80, 'y'};    // 统一初始化列表
-      string s;
+
+      // 获取元组中元素数量 -- tuple_size<decltype(c)>::value
+      size_t num = tuple_size<decltype(c)>::value;
+      cout << "tuple size= " << num << endl;
+      // 获取指定index的元素的类型 -- tuple_element<0, decltype(c)>::type
+      cout << "tuple type= " << typeid(tuple_element<0, decltype(c)>::type).name() << endl;
+      tuple_element<0, decltype(c)>::type s;   // 等价于 string s;
+      // string s;
       int i;
       tie(s, i, std::ignore) = c;          // unpack elements (with ignore) 任何类型都可以用std::ignore占位
       assert(s == get<0>(c));
@@ -1299,10 +1353,6 @@ int main()
 }
 ```
 
-
-
-
-
 # 友元、模板、运算符重载
 
 * 友元分类（friend）
@@ -1349,9 +1399,14 @@ int main()
       后置++和后置--，增加一个伪参数int来标识
 
   5. 重载<< 和链式编程
-    函数返回值充当左值 需要返回一个引用
+    函数返回值是引用类型：左值引用（&）可以充当左值，执行链式操作（连续运用操作符号）。
+    函数返回值是值类型：返回的是拷贝的一个临时对象，是右值，不能执行链式操作。
 
-  6. 案例：自己实现复数类，并重载 + /- /<< /++ /-- 运算符
+  6. 如果待重载的运算符需要两个操作数：
+     成员函数情况下，只需要一个参数，因为this指针（类本身）就是一个操作数了；
+     友元函数情况下，需要两个参数代表两个操作数。
+
+  7. 案例：自己实现复数类，并重载 + /- /<< /++ /-- 运算符
   */
 
   class Complex {
@@ -1362,28 +1417,28 @@ int main()
           this->imag = im;
       }
       ~Complex(){ }
-    
+
       // 重载+运算符（成员函数）
       Complex operator+ (const Complex& other) {
           return Complex(this->real + other.real, this->imag + other.imag);
       }
-    
+
       // 重载+运算符（友元函数）
       friend Complex operator- (Complex &c1, Complex &c2);
-    
+
       // 重载<<运算符（友元函数）
       friend ostream& operator<< (ostream& out, Complex& c) {
           out << "< real=" << c.real << " imag=" << c.imag << " >";
           return out; 
       }
-    
+
       // 重载前置++运算符
       Complex& operator++ () {
           this->real++;
           this->imag++;
           return *this;
       }
-    
+
       // 重载后置++运算符 int标识
       Complex& operator++ (int) {
           Complex c(this->real, this->imag);
@@ -1408,13 +1463,13 @@ int main()
       Complex c1(2, 3), c2(2, 2);
       Complex c3 = c1 + c2;
       cout << "c3 =>" << c3 << endl;
-    
+
       c3++;
       cout << "c3++ =>" << c3 << endl;
-    
+
       ++c3;
       cout << "++c3 =>" << c3 << endl;
-    
+
       system("pause");
       return 0;
   }
@@ -1439,13 +1494,13 @@ int main()
       类模板和函数模板都必须定义在.h文件中，特例化版本必须与模板定义在同一个.h头文件中；
       模板的实例化类型确定是在编译期间；
       特化/偏特化 主要的用途都是对于特定的类型，指定特定的处理方式，
-      编译阶段确定如果是某个特化类型，就用特化的模板；如果都不是，就用最一般的模板。
+      编译阶段确定如果符合某个特化版本，就用特化的模板；如果都不是，就用最一般的模板。
       特例化本质上是我们顶替了编译器的工作，我们帮编译器做了类型推导，
       全特化本质上是一个实例，而偏特化本质上还是一个模板，只是原来模板的一个子集。
 
   2. 偏特化在STL中的应用：
       应用1：使迭代器既可以萃取出值类型，又可以包容原生指针
-          (1) 在每个迭代器中都定义了value_type值类型的类型成员，
+          (1) 在每个迭代器中都定义了一个类型别名 -- value_type，
           	这样直接通过迭代器的value_type类型成员就可以知道值类型。
           (2) 但是迭代器必须兼容原生态的指针，
           	而原生指针很难被重新定义(如在原生指针的类中添加value_type的值类型的类型成员),
@@ -1552,7 +1607,15 @@ int main()
          equal_range: 查找，返回一对iterator（lower_bound和upper_bound）。
          search: 查找一个子序列第一次出现的位置。
          search_n: 查找val出现n次的子序列。
-         binary_search: 在有序序列中查找value，找到返回true。
+         unique/unique_copy: 清除序列中重复元素，和remove类似，它也不能真正删除，将相同元素排到后边去。
+         lower_bound/ upper_bound/ binary_search:
+         1. 返回大于等于val的第一个元素的迭代器：
+         ForwardIterator lower_bound(ForwardIterator first, ForwardIterator last, const Tp& val);
+         2. 返回大于val的第一个元素的迭代器：
+         ForwardIterator upper_bound(ForwardIterator first, ForwardIterator last, const Tp& val);
+         2. 二分查找val是否存在：
+         bool binary_search(ForwardIterator first, ForwardIterator last, const Tp& val);
+         ！！！注意：unique、binary_search、lower_bound、upper_bound使用的前提都是先sort！！！
 
      ** 排序[algorithm]：
          sort: 升序排序
@@ -1571,10 +1634,16 @@ int main()
          replace_copy/replace_copy_if:同上，不过将结果拷贝到另一个容器。
          swap: 交换存储在两个容器中的元素。
          swap_range: 将指定范围内的元素与另一个序列元素值进行交换。
-         unique/unique_copy: 清除序列中重复元素，和remove类似，它也不能真正删除元素。
+         
 
      ** 排列组合[algorithm]：
          next_permutation:
+         // 获取下一个排列数，n个不同的字 符有 n! 种排列
+         // 下一个排列大于上一个排列时返回 true，如果上一个排列是序列中最大的，它返回 false，所以会生成字典序最小的排列。 
+         // 列出所有全排列：
+         // 方法一：先排序，在执行while循环；
+         // 方法二：for循环n!次调用次函数；
+
          prev_permutation:
 
      ** 数值算法[numeric]:
@@ -1651,13 +1720,7 @@ int main()
           // 自定义比较函数  param1<param2时返回true，则按照从小到大排序。
           sort(RandomAccessIterator first, RandomAccessIterator last, Compare comp);   
 
-      lower_bound/ upper_bound/ binary_search:
-          1. 返回大于等于val的第一个元素：
-          ForwardIterator lower_bound(ForwardIterator first, ForwardIterator last, const Tp& val);
-          2. 返回大于val的第一个元素：
-          ForwardIterator upper_bound(ForwardIterator first, ForwardIterator last, const Tp& val);
-          2. 二分查找val是否存在：
-          bool binary_search(ForwardIterator first, ForwardIterator last, const Tp& val);
+      
 
       函数适配器：binder1st/binder2nd/not1/bind
       ** 仿函数可以被适配的条件：
@@ -1690,148 +1753,171 @@ int main()
      */
 
      int myfun1(int x, int y) {
-     return x + 2 * y;
+        return x + 2 * y;
      }
 
      struct myfun2 {
-     int operator() (int x, int y) {
-       return x + 2 * y;
-     }
+        int operator() (int x, int y) {
+            return x + 2 * y;
+        }
      };
 
      struct predFun {
-     bool operator() (int a) {
-       return (a >= 100);
-     }
+        bool operator() (int a) {
+        return (a >= 100);
+        }
      };
 
      // 测试bind一个函数，函数对象类似，如 std::divides<double> my_divide;
      double my_divide(double x, double y) {
-     return x / y;
+        return x / y;
      }
 
      // 测试bind类的成员变量和成员函数
      struct MyPair {
-     double a, b;
-     double multiply() { return a * b; }
+        double a, b;
+        double multiply() { return a * b; }
      };
 
      int main() {
 
-     int init = 100;
-     int nums[] = {10, 20, 30};
-     // 累计
-     cout << accumulate(nums, nums+3, init) << endl;           // 累计（默认加法）100+10+20+30=160
-     cout << accumulate(nums, nums+3, init, minus<int>()) << endl;   // 累计，减法 100-10-20-30=40
-     // 自定义函数对象（仿函数）、函数指针
-     cout << accumulate(nums, nums+3, init, myfun1) << endl;  // init=myfun1(init, *it) 220
-     cout << accumulate(nums, nums+3, init, myfun2()) << endl;  // init=myfun2(init, *it) 220
+        int init = 100;
+        int nums[] = {10, 20, 30};
+        // 累计
+        cout << accumulate(nums, nums+3, init) << endl;           // 累计（默认加法）100+10+20+30=160
+        cout << accumulate(nums, nums+3, init, minus<int>()) << endl;   // 累计，减法 100-10-20-30=40
+        // 自定义函数对象（仿函数）、函数指针
+        cout << accumulate(nums, nums+3, init, myfun1) << endl;  // init=myfun1(init, *it) 220
+        cout << accumulate(nums, nums+3, init, myfun2()) << endl;  // init=myfun2(init, *it) 220
 
-     //replace/ replace_if/ replace_copy/ replace_copy_if
-     vector<int> vi {1, 120, -1, 30, -1, 35, 7};
-     replace(vi.begin(), vi.end(), -1, 100);
-     replace_if(vi.begin(), vi.end(), predFun(), 20);
+        //replace/ replace_if/ replace_copy/ replace_copy_if
+        vector<int> vi {1, 120, -1, 30, -1, 35, 7};
+        replace(vi.begin(), vi.end(), -1, 100);
+        replace_if(vi.begin(), vi.end(), predFun(), 20);
 
-     // count/ count_if
-     cout << count(vi.begin(), vi.end(), 20) << endl;
-     cout << count_if(vi.begin(), vi.end(), predFun()) << endl;
+        // count/ count_if
+        cout << count(vi.begin(), vi.end(), 20) << endl;
+        cout << count_if(vi.begin(), vi.end(), predFun()) << endl;
 
-     // find/ find_if
-     auto it = find_if(vi.begin(), vi.end(), predFun());
-     if (it != vi.end()) {
-       cout << "find it=>" << *it << endl;
-     }
+        // find/ find_if
+        auto it = find_if(vi.begin(), vi.end(), predFun());
+        if (it != vi.end()) {
+        cout << "find it=>" << *it << endl;
+        }
 
-     // sort
-     sort(vi.begin(), vi.end());        // 1 7 20 20 30 35
-     for_each(vi.begin(), vi.end(), show_item<int>); cout << endl;
+        // sort
+        sort(vi.begin(), vi.end());        // 1 7 20 20 30 35
+        for_each(vi.begin(), vi.end(), show_item<int>); cout << endl;
 
-     // lower_bound/ upper_bound/ binary_search
-     auto it_low = lower_bound(vi.begin(), vi.end(), 20);   // 指向第一个20的位置
-     auto it_upper = upper_bound(vi.begin(), vi.end(), 20);   // 指向第一个大于20的位置，也就是30所在的位置
-     size_t count1 = it_upper - it_low;              // 随机访问迭代器支持减法
-     size_t count2 = distance(it_low, it_upper);     // 可以计算任意两个迭代器之间的元素个数，计算结果和count1相同
-     cout << "counts of val=20 is: " << count1 << ", " << count2 << endl;
-     assert(binary_search(vi.begin(), vi.end(), 20) == true);
-     assert(binary_search(vi.begin(), vi.end(), 200) == false);
+        // lower_bound/ upper_bound/ binary_search
+        auto it_low = lower_bound(vi.begin(), vi.end(), 20);   // 指向第一个20的位置
+        auto it_upper = upper_bound(vi.begin(), vi.end(), 20);   // 指向第一个大于20的位置，也就是30所在的位置
+        size_t count1 = it_upper - it_low;              // 随机访问迭代器支持减法
+        size_t count2 = distance(it_low, it_upper);     // 可以计算任意两个迭代器之间的元素个数，计算结果和count1相同
+        cout << "counts of val=20 is: " << count1 << ", " << count2 << endl;
+        assert(binary_search(vi.begin(), vi.end(), 20) == true);
+        assert(binary_search(vi.begin(), vi.end(), 200) == false);
 
-     // bind2nd
-     // 允许把函数对象less<int>()的第二个参数绑定为40，
-     // 本来是二元函数x<y返回true，这里绑定后x<40返回true。
-     // bind2nd是一个函数适配器，是为了修饰仿函数，返回一个仿函数，且继承自unary_functon，还可以继续被适配；
-     // not1也是一个函数适配器，修饰完，返回的也还是一个仿函数。
-     size_t n = count_if(vi.begin(), vi.end(), not1(bind2nd(less<int>(), 20)));   // 不小于20，输出5
+        // bind2nd
+        // 允许把函数对象less<int>()的第二个参数绑定为40，
+        // 本来是二元函数x<y返回true，这里绑定后x<40返回true。
+        // bind2nd是一个函数适配器，是为了修饰仿函数，返回一个仿函数，且继承自unary_functon，还可以继续被适配；
+        // not1也是一个函数适配器，修饰完，返回的也还是一个仿函数。
+        size_t n = count_if(vi.begin(), vi.end(), not1(bind2nd(less<int>(), 20)));   // 不小于20，输出5
 
-     // bind：可以绑定函数、函数对象、成员函数、成员变量
-     // _1 _2 _3... 占位符, 占位：表示预留着，调用的时候通过参数传递。
-     using namespace std::placeholders;             // _1 _2 等占位符可见
+        // bind：可以绑定函数、函数对象、成员函数、成员变量
+        // _1 _2 _3... 占位符, 占位：表示预留着，调用的时候通过参数传递。
+        using namespace std::placeholders;             // _1 _2 等占位符可见
 
-     auto b1 = bind(less<int>(), _1, _2);          // 绑定函数名，参数1，参数2预留，通过实参传递
-     cout << b1(10, 12) << endl;
+        auto b1 = bind(less<int>(), _1, _2);          // 绑定函数名，参数1，参数2预留，通过实参传递
+        cout << b1(10, 12) << endl;
 
-     auto fn_five = bind(my_divide, 10, 2);         // 绑定函数名，参数1，参数2
-     cout << fn_five() << endl;
+        auto fn_five = bind(my_divide, 10, 2);         // 绑定函数名，参数1，参数2
+        cout << fn_five() << endl;
 
-     auto fn_half = bind(my_divide, _1, 2);         // 参数1预留，通过实参传递
-     cout << fn_half(10) << endl;
+        auto fn_half = bind(my_divide, _1, 2);         // 参数1预留，通过实参传递
+        cout << fn_half(10) << endl;
 
-     auto fn_invert = bind(my_divide, _2, _1);       // 预留参数1、参数2，通过实参传递，但位置颠倒
-     cout << fn_invert(2, 10) << endl;
+        auto fn_invert = bind(my_divide, _2, _1);       // 预留参数1、参数2，通过实参传递，但位置颠倒
+        cout << fn_invert(2, 10) << endl;
 
-     auto fn_toint = bind<int> (my_divide, _1, _2);  // 支持传一个模板参数，这个模板参数是函数返回值类型，
-     cout << fn_toint(10, 3) << endl;                // 不传的话，直接返回函数本来的类型。
+        auto fn_toint = bind<int> (my_divide, _1, _2);  // 支持传一个模板参数，这个模板参数是函数返回值类型，
+        cout << fn_toint(10, 3) << endl;                // 不传的话，直接返回函数本来的类型。
 
-     MyPair ten_two {10, 2};        // c++11后支持以统一初始化列表给成员对象赋值
+        MyPair ten_two {10, 2};        // c++11后支持以统一初始化列表给成员对象赋值
 
-     // 绑定成员函数和成员变量时，有一个参数，就是*this，类对象。
-     // 绑定类成员函数首地址，参数1(*this)预留，可通过实参传递。
-     // 注意类成员函数指针的语法： &类名::函数名
-     // 静态函数指针： int (*pFunA)(int, int) = &MyClass::FunA;  pFunA(1, 2);
-     // 普通成员函数指针：void (MyClass::*pFunB)() = &MyClass::FunB;  (obj->*pFunB)();
-     auto b_memfn = bind(&MyPair::multiply, _1);    
-     cout << b_memfn(ten_two) << endl;
+        // 绑定成员函数和成员变量时，有一个参数，就是*this，类对象。
+        // 绑定类成员函数首地址，参数1(*this)预留，可通过实参传递。
+        // 注意类成员函数指针的语法： &类名::函数名
+        // 静态函数指针： int (*pFunA)(int, int) = &MyClass::FunA;  pFunA(1, 2);
+        // 普通成员函数指针：void (MyClass::*pFunB)() = &MyClass::FunB;  (obj->*pFunB)();
+        auto b_memfn = bind(&MyPair::multiply, _1);    
+        cout << b_memfn(ten_two) << endl;
 
-     auto b_memdata = bind(&MyPair::a, ten_two);    // 绑定类成员变量首地址，参数1。调用时不需要传参数了
-     cout << b_memdata() << endl;
+        auto b_memdata = bind(&MyPair::a, ten_two);    // 绑定类成员变量首地址，参数1。调用时不需要传参数了
+        cout << b_memdata() << endl;
 
-     auto b_memdata2 = bind(&MyPair::a, _1);
-     cout << b_memdata2(ten_two) << endl;
+        auto b_memdata2 = bind(&MyPair::a, _1);
+        cout << b_memdata2(ten_two) << endl;
 
-     // count_if(vi.begin(), vi.end(), bind2nd(less<int>(), 20)) 改写为：
-     cout << count_if(vi.begin(), vi.end(), bind(less<int>(), _1, 20)) << endl;
+        // count_if(vi.begin(), vi.end(), bind2nd(less<int>(), 20)) 改写为：
+        cout << count_if(vi.begin(), vi.end(), bind(less<int>(), _1, 20)) << endl;
 
-     // heap（调用算法实现堆排序）
-     // 第一种方法：创建堆、堆排序
-     make_heap(vi.begin(), vi.end()); 
-     sort_heap(vi.begin(), vi.end());
-     copy(vi.begin(), vi.end(), ostream_iterator<int>(cout, " ")); cout << endl;
+        // heap（调用算法实现堆排序）
+        // 第一种方法：创建堆、堆排序
+        make_heap(vi.begin(), vi.end()); 
+        sort_heap(vi.begin(), vi.end());
+        copy(vi.begin(), vi.end(), ostream_iterator<int>(cout, " ")); cout << endl;
 
-     // 方法二：不停的创建堆，并弹出堆顶元素
-     while(vi.size() > 0) {
-       make_heap(vi.begin(), vi.end());   // 创建大根堆 first最大
-       pop_heap(vi.begin(), vi.end());    // first和last-1交换
-       cout << vi.back() << " " << endl;  // 弹出堆顶元素
-       vi.pop_back();
-     }
+        // 方法二：不停的创建堆，并弹出堆顶元素
+        while(vi.size() > 0) {
+            make_heap(vi.begin(), vi.end());   // 创建大根堆 first最大
+            pop_heap(vi.begin(), vi.end());    // first和last-1交换
+            cout << vi.back() << " " << endl;  // 弹出堆顶元素
+            vi.pop_back();
+        }
 
-     system("pause");
-     return 0;
+        // 获取下一个全排列 next_permutation:
+        // 获取下一个排列数，n个不同的字 符有 n! 种排列
+        // 下一个排列大于上一个排列时返回 true，如果上一个排列是序列中最大的，它返回 false，所以会生成字典序最小的排列。
+        // 列出所有全排列：
+        // 方法1：for循环n!次调用次函数；
+        // 方法2：先排序，在执行while循环；
+
+        int a[3] = {1, 3, 2};
+
+        // 方法1：
+        for (int i=0; i<6; i++) {
+            copy(a, a+3, ostream_iterator<int>(cout, " "));
+            next_permutation(a, a+3);
+            cout << endl;
+        }
+
+        // 方法2：
+        sort(a, a+3);
+        do {
+            copy(a, a+3, ostream_iterator<int>(cout, " "));  // 打印数组a
+            cout << endl;
+        } while(next_permutation(a, a+3));
+
+        system("pause");
+        return 0;
      }
      ```
 
 *    sort方法示例
 
      ```c++
-        #include <iostream>
-          #include <vector>
-          #include <string>
-          #include <algorithm>
-          #include <cstdlib>
+    #include <iostream>
+    #include <vector>
+    #include <string>
+    #include <algorithm>
+    #include <cstdlib>
 
-          using namespace std;
+    using namespace std;
 
-          /*
-          c++标准库的sort方法：
+    /*
+    c++标准库的sort方法：
      1. 使用：
          #include <algorithm>
          using namespace std;
@@ -1894,9 +1980,68 @@ int main()
          system("pause");
          return 0;
      }
-     ```
+    ```
+
+# 字符串流
+
+```c++
+#include <iostream>
+#include <sstream>
+#include <cstdlib>
+#include <string>
+
+using namespace std;
+
+/*
+字符串流的两个应用
+1. 类型转换
+2. 分隔字符串
+*/
+
+int main()
+{
+    // 类型转换
+    stringstream ss;
+    string s;
+    int data = 1234;
+    ss << data;          // 流入
+    ss >> s;             // 流出
+    cout << s << endl;           // 打印到标准输出验证   "1234"
+
+    // 清空字符串流
+    ss.str("");
+    // 或者 ss.clear();
+
+    // 分隔字符串
+    stringstream ss1;
+    ss1 << "100 seconds left";
+    int d;
+    string s1, s2;
+    ss1 >> d;        // 空白符分隔，流向变量d     100
+    ss1 >> s1;       // 流向变量s1               seconds
+    ss1 >> s2;       // 流向变量s2               left
+
+    // 打印验证
+    cout << "d=" << d << " s1=" << s1 << " s2=" << s2 << endl;
+
+    system("pause");
+    return 0;
+}
+```
+
 # 其他
 
 * B站学习视频  
   https://www.bilibili.com/video/av59131050  
   https://www.bilibili.com/video/av45108908（c++11新增容器）
+
+* 知识点汇总
+  std::map<int, Item> mymap;
+  赋值方式有两种：
+  * 通过下标： mymap[1] = a_item
+    通过下标插入时，先在map中查找有没有键为1的项，**有则更新**；没有则调用Item的默认构造函数(无参数)创建一个对象插入，插入完成后，在赋值为a_item的值。所以**使用下标赋值时，对象Item必须定义默认构造函数**，效率较低。  
+  * 通过insert方法： 
+    mymap.insert(std::pair<int, Item>(1, a_item))  
+    mymap.insert(std::make_pair(1, a_item))  
+    通过insert插入时，如果键已经存在，则插入失败，不会修改键对应的值（**有则失败**）；如果键不存在，则直接将对象插入。
+
