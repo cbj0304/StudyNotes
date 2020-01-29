@@ -1085,9 +1085,307 @@ int main() {
 }
 ```
 
-
-
 ## c++多线程
+
+* c++11线程池
+
+```c++
+// 参考链接： https://blog.csdn.net/u012234115/article/details/89856320
+
+/*
+线程池原理：
+预先创建指定数量的线程，将多个任务加入到任务队列。
+类似于生产者消费者，多个线程相当于消费者，一个任务队列充当生产者。
+当任务队列被塞入任务时，线程们就去竞争这些任务，但每次只有一个线程能够得到任务，
+该任务执行完成后，线程可以释放出来去承接下一个任务，这样保证多个任务可以并发地执行。
+
+线程池的作用：
+避免了在处理短时间任务时创建与销毁线程的代价，保证了线程的可复用性。
+*/
+
+#include <thread>
+#include <mutex>
+#include <atomic>
+#include <condition_variable>
+#include <functional>
+#include <vector>
+#include <queue>
+#include <iostream>
+
+class ThreadPool
+{
+public:
+    // 多态函数包装器，类似函数重载。
+    // std::function<int(int,int)> 声明了一个可调用对象（能够接收2个int类型参数且返回int类型）。
+    // 可调用对象：函数、lambda表达式、函数对象等。
+	using Task = std::function<void()>;
+
+	explicit ThreadPool(int num): _thread_num(num), _is_running(false) { }
+
+	~ThreadPool() {
+		if (_is_running)
+			stop();
+	}
+
+	void start() {
+		_is_running = true;
+
+		// start threads
+		for (int i = 0; i < _thread_num; i++)
+			_threads.emplace_back(std::thread(&ThreadPool::work, this)); // 参数1:可调用对象，参数2:参数
+	}
+
+	void stop() {
+		{
+			// stop thread pool, should notify all threads to wake
+			std::unique_lock<std::mutex> lk(_mtx);
+			_is_running = false;
+			_cond.notify_all(); // must do this to avoid thread block
+		}
+
+		// terminate every thread job
+		for (std::thread& t : _threads) {
+			if (t.joinable())
+				t.join();   // join 让主线程等待直到该子线程执行结束,线程对象执行了join后就不再joinable了，所以只能调用join一次
+		}
+	}
+
+	void appendTask(const Task& task) {
+		if (_is_running) {
+			std::unique_lock<std::mutex> lk(_mtx);
+			_tasks.push(task);
+			_cond.notify_one(); // wake a thread to to the task
+		}
+	}
+
+private:
+	void work() {
+		printf("begin work thread: %d\n", std::this_thread::get_id());
+
+		// every thread will compete to pick up task from the queue to do the task
+		while (_is_running) {
+			Task task;
+			{
+				std::unique_lock<std::mutex> lk(_mtx);
+				if (!_tasks.empty()) {
+					// if tasks not empty, 
+					// must finish the task whether thread pool is running or not
+					task = _tasks.front();
+					_tasks.pop(); // remove the task
+				} else if (_is_running && _tasks.empty())
+					_cond.wait(lk);
+			}
+
+			if (task)
+				task(); // do the task
+		}
+
+		printf("end work thread: %d\n", std::this_thread::get_id());
+	}
+
+public:
+	// disable copy and assign construct
+    // 拷贝构造函数和拷贝赋值操作被禁用 ，说明不能被拷贝，不能被拷贝赋值操作
+	ThreadPool(const ThreadPool&) = delete;
+	ThreadPool& operator=(const ThreadPool& other) = delete;
+
+private:
+    // 原子类型对象的主要特点就是从不同线程访问不会导致数据竞争
+	std::atomic_bool _is_running;  // thread pool manager status
+	std::mutex _mtx;               // 互斥对象 
+	std::condition_variable _cond;  // 条件变量允许我们通过通知进而实现线程同步
+	int _thread_num;
+	std::vector<std::thread> _threads;
+	std::queue<Task> _tasks;
+};
+
+void fun1() {
+	std::cout << "working in thread " << std::this_thread::get_id() << std::endl;
+}
+
+void fun2(int x) {
+	std::cout << "task " << x << " working in thread " << std::this_thread::get_id() << std::endl;
+}
+
+int main(int argc, char* argv[])
+{
+    // 创建一个有三个线程对象的线程池
+	ThreadPool thread_pool(3);
+	thread_pool.start();
+	std::this_thread::sleep_for(std::chrono::milliseconds(500));
+
+	for (int i = 0; i < 6; i++) {
+		//thread_pool.appendTask(fun1);
+		thread_pool.appendTask(std::bind(fun2, i));
+		std::this_thread::sleep_for(std::chrono::milliseconds(500));
+	}
+
+	thread_pool.stop();
+
+	getchar();
+	return 0;
+}
+```
+
+* 线程同步与互斥
+
+```c++
+
+/*
+
+参考 https://blog.csdn.net/faihung/article/details/88411839
+
+~~~ c++11线程同步与互斥
+    Mutex 系列类(四种)
+        std::mutex，最基本的 Mutex 类。
+        std::recursive_mutex，递归 Mutex 类。
+        std::time_mutex，定时 Mutex 类。
+        std::recursive_timed_mutex，定时递归 Mutex 类。
+
+    Lock 类（两种）
+        std::lock_guard，与 Mutex RAII 相关，方便线程对互斥量上锁。
+        std::unique_lock，与 Mutex RAII 相关，方便线程对互斥量上锁，但提供了更好的上锁和解锁控制。
+
+    互斥对象、线程安全锁：
+        mutex：头文件是<mutex>，mutex是用来保证线程同步的，防止不同的线程同时操作同一个共享数据。
+        但是使用mutex是不安全的，当一个线程在解锁之前异常退出了，那么其它被阻塞的线程就无法继续下去。
+        使用lock_guard则相对安全，它是基于作用域的，能够自解锁，当该对象创建时，它会像m.lock()一样获得互斥锁，
+        当生命周期结束时，它会自动析构(unlock)，不会因为某个线程异常退出而影响其他线程。
+        lock_guard和unique_lock的区别：unique_lock是通用互斥包装器，允许延迟锁定、锁定的有时限尝试、递归锁定、所有权转移和与条件变量一同使用。
+        unique_lock比lock_guard使用更加灵活，功能更加强大。但是使用unique_lock需要付出更多的时间、性能成本。
+
+~~~ c线程同步与互斥：
+    参考 https://blog.csdn.net/guotianqing/article/details/80559865
+1. 为什么多线程操作一个变量会出现不一致的问题？
+    程序修改一个变量经过三个步骤：从内存单元读入寄存器；在寄存器中对变量操作；把新值写回内存单元；
+    不能预期以上三个步骤在一个总线周期内完成。
+2. 互斥量
+    互斥量(mutex)就是一把锁。当一个线程要访问一个共享变量时，先用锁把变量锁住，然后再操作，操作完了之后再释放掉锁，完成。
+    #include <pthread.h>
+    int pthread_mutex_init(pthread_mutex_t *restrict mutex, const pthread_mutexattr_t *restrict attr);
+    int pthread_mutex_destroy(pthread_mutex_t *mutex);
+    int pthread_mutex_tlock(pthread_mutex_t *mutex);
+    int pthread_mutex_trylock(pthread_mutex_t *mutex);   // 尝试加锁，成功返回0
+    int pthread_mutex_unlock(pthreadd_mutex_t *mutex);
+3. 多个资源存在竞争关系时如何避免死锁？
+    可以使用pthread_mutex_timedlock函数，该函数允许线程阻塞特定时间，如果加锁失败就会返回ETIMEDOUT。
+4. 读写锁
+    读写锁与互斥量类似，但它允许更高的并行性。
+    互斥量只有两种状态：锁住和未锁住，且一次只有一个线程可以对它加锁。
+    读写锁可以有三种状态：读模式下加锁状态、写模式下加锁状态和不加锁状态。一次只有一个线程可以占有写模式的读写锁，但多个线程可以同时占有读模式的读写锁。
+    读写锁非常适合于对数据结构读的次数远远大于写的情况。
+    #include <pthread.h>
+
+    int pthread_rwlock_init(pthread_rwlock_t *restrict rwlock, const pthread_rwlockattr_t *restrict attr);
+    int pthread_rwlock_destroy(pthread_rwlock_t *rwlock);
+
+    int pthread_rwlock_rdlock(pthread_rwlock_t *rwlock);
+    int pthread_rwlock_wrlock(pthread_rwlock_t *rwlock);
+    int pthread_rwlock_unlock(pthread_rwlock_t *rwlock);
+
+    int pthread_rwlock_tryrdlock(pthread_rwlock_t *rwlock);
+    int pthread_rwlock_trywrlock(pthread_rwlock_t *rwlock);
+5. 条件变量
+    条件变量是线程的一种同步机制。
+    条件本身是由互斥量保护的。线程在改变条件状态之前必须产生锁住互斥量，其他线程在获得互斥量之前不会到这种改变，因为互斥量必须在锁定以后才能计算条件。
+    #include <pthread.h>
+
+    int pthread_cond_init(pthread_cond_t *restrict cond, const pthread_condattr_t *restrict attr);
+    int pthreead_cond_destroy(pthread_cond_t *cond);
+
+    int pthread_cond_wait(pthread_cond_t *restrict cond, pthread_mutex_t *restrict mutex);
+6.  自旋锁
+    与互斥量类似，但它不是通过休眠使进程阻塞，而是在获取锁之前一直处于忙等阻塞状态。
+
+*/
+#include <iostream>       // std::cout
+#include <thread>         // std::thread
+#include <mutex>          // std::mutex
+#include <cstdlib>
+    
+volatile int counter(0); // non-atomic counter
+std::mutex mtx;           // locks access to counter
+
+// 原生态mutex版本
+void thread_fun1() {
+    if (mtx.try_lock()) {   // only increase if currently not locked:
+        ++counter;
+        mtx.unlock();
+    }
+}
+
+// std::lock_guard版本
+void thread_fun2() {
+    std::lock_guard<std::mutex> mutxg(mtx); // only increase if currently not locked:
+    ++counter;
+}
+
+int main (int argc, const char* argv[]) {
+    std::thread threads[10];
+    for (int i=0; i<10; ++i)
+        // threads[i] = std::thread(thread_fun1);
+        threads[i] = std::thread(thread_fun2);
+
+    for (auto& th : threads) th.join();
+    std::cout << counter << " successful increases of the counter.\n";
+
+    system("pause");
+    return 0;
+}
+```
+
+* c++11的原子数据类型 -- std::atomic
+
+```c++
+/*
+c++11的原子数据类型 -- std::atomic
+什么是原子数据类型？
+从功能上看，原子数据类型不会发生数据竞争，能直接用在多线程中而不必我们用户对其进行添加互斥资源锁的类型。
+从实现上，大家可以理解为这些原子类型内部自己加了锁。
+std::atomic对int, char, bool等数据结构进行原子性封装，在多线程环境中，对std::atomic对象的访问不会造成竞争-冒险。利用std::atomic可实现数据结构的无锁设计。
+std::atomic对象的值的读取和写入可使用load和store实现。
+*/
+
+#include <thread>
+#include <atomic>
+#include <iostream>
+#include <list>
+#include <cstdlib>
+
+using namespace std;
+
+// 定义int原子数据类型
+std::atomic_int iCount(0);
+
+void threadfun1() {
+    for(int i =0; i< 1000; i++) {
+        printf("iCount:%d\r\n",  iCount++);   // atomic<int>支持++和--的原子操作。
+    }
+}
+void threadfun2() {
+    for(int i =0; i< 1000; i++) {
+        printf("iCount:%d\r\n",  iCount--);   // atomic<int>支持++和--的原子操作。
+    }
+}
+
+int main() {
+    std::list<thread> lstThread;
+    for (int i=0; i< 10; i++) {
+        lstThread.push_back(thread(threadfun1));
+    }
+    for (int i=0; i< 10; i++) {
+        lstThread.push_back(thread(threadfun2));
+    }
+
+    for (auto& th: lstThread) {
+        th.join();
+    }
+
+    int x = iCount.load(memory_order_relaxed);
+    cout << "finally iCount: " << x << endl;         // 输出 0
+    system("pause");
+}
+```
 
 # 内存分配
 
