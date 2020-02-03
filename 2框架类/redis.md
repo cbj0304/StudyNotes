@@ -2,7 +2,7 @@
 
 ## 网络模型
 
-* 单线程
+* 单线程  
   单线程指的是**网络请求模块**使用了一个线程，其他模块用了多个线程。
   用单线程的原因：CPU不是Redis的瓶颈。
 
@@ -12,15 +12,15 @@
   * 采用单线程，避免了不必要的上下文切换和竞争条件。
   * IO多路复用，非阻塞IO（epoll+reactor文件事件处理器）。
 
-* 一次完成的网络请求
+* 一次完整的网络请求  
   文件事件的处理器：基于reactor模式开发了自己的网络事件处理器。
 
   * **第一步：listen**
     在initServer()中，服务器根据配置中配置的ip/port等参数，创建监听的server_socket。
     server_socket的AE_READABLE事件绑定处理器acceptTcpHandler后,添加到事件循环epoll。
-    
+
     默认init的时候创建了1000个监听socket。
-    
+
   * **第二步：accept**
     有client连接(connect)到来，epoll的AE_READABLE事件被触发，acceptTcpHandler被调用。
     acceptTcpHandler封装了socket.h/accept函数，接收client请求，得到客户端套接字socket_1，
@@ -28,7 +28,7 @@
   
 * **第三步：read**
     client请求到来，会触发socket_1上的READABLE事件，readQueryFromClient事件处理器被触发，readQueryFromClient函数封装了socket.h/read函数，处理client的请求，解析请求参数，得到响应结果，并将socket_1的AE_WRITABLE事件关联命令回复处理器sendReplyToClient，添加到事件循环epoll。
-    
+
   * **第四步：write**
     client准备好读取响应时，会触发socket_1上的WRITABLE事件，sendReplyToClient事件处理器被调用。sendReplyToClient封装了socket.h/write函数，此处理器负责将服务器执行命令的回复通过套接字返回给客户端。当命令回复发送完毕后，服务器会解除sendReplyToClient和socket_1的AE_WRITABLE事件的关联。
   

@@ -291,12 +291,12 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.4" data-path="../2框架类/IO多路复用.html">
+        <li class="chapter " data-level="1.4.4" data-path="../2框架类/epoll_reactor.html">
             
-                <a href="../2框架类/IO多路复用.html">
+                <a href="../2框架类/epoll_reactor.html">
             
                     
-                    IO多路复用
+                    epoll_reactor
             
                 </a>
             
@@ -1303,6 +1303,105 @@ d. &#x8981;&#x5220;&#x9664;&#x7684;&#x7ED3;&#x70B9;&#x6709;&#x5DE6;&#x3001;&#x53
     }
 }
 
+<span class="hljs-comment">// &#x67E5;&#x627E;&#x6570;&#x4E2D;&#x662F;&#x5426;&#x5B58;&#x5728;&#x67D0;&#x4E2A;val</span>
+<span class="hljs-comment">// &#x4E09;&#x79CD;&#x65B9;&#x6CD5;&#xFF1A; &#x9012;&#x5F52;&#x3001;BFS&#x3001;DFS</span>
+
+<span class="hljs-comment">// 1. &#x9012;&#x5F52;  -- &#x67E5;&#x627E;&#x6570;&#x4E2D;&#x662F;&#x5426;&#x5B58;&#x5728;&#x67D0;&#x4E2A;val</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">findPath1</span><span class="hljs-params">(BiNode* root, <span class="hljs-keyword">int</span> data, <span class="hljs-keyword">bool</span> &amp;finish)</span> </span>{
+    <span class="hljs-comment">// &#x4EFB;&#x4F55;&#x4E00;&#x6761;&#x8DEF;&#x5F84;&#x4E0B;finish&#x4E3A;true&#x4E86;&#xFF0C;&#x8BF4;&#x660E;&#x5DF2;&#x627E;&#x5230;&#xFF0C;&#x4E4B;&#x540E;&#x7684;&#x6240;&#x6709;&#x8DEF;&#x5F84;&#x5168;&#x90E8;&#x76F4;&#x63A5;return</span>
+    <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">nullptr</span> || finish == <span class="hljs-literal">true</span>) {
+        <span class="hljs-keyword">return</span>;
+    }
+
+    <span class="hljs-keyword">if</span> (root-&gt;val == data) {
+        finish = <span class="hljs-literal">true</span>;
+        <span class="hljs-keyword">return</span>;
+    }
+
+    findPath1(root-&gt;left, data, finish);
+    findPath1(root-&gt;right, data, finish);
+}
+
+<span class="hljs-comment">// 2. &#x5E7F;&#x5EA6;&#x4F18;&#x5148;&#x904D;&#x5386;BFS -- &#x67E5;&#x627E;&#x6570;&#x4E2D;&#x662F;&#x5426;&#x5B58;&#x5728;&#x67D0;&#x4E2A;val</span>
+<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">findPath2</span><span class="hljs-params">(BiNode* root, <span class="hljs-keyword">int</span> data)</span> </span>{
+    <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">nullptr</span>) {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    }
+    <span class="hljs-built_in">queue</span>&lt;BiNode*&gt; _queue;
+    _queue.push(root);
+
+    <span class="hljs-keyword">while</span> (!_queue.empty()) {
+        BiNode* node = _queue.front();
+        <span class="hljs-keyword">if</span> (node-&gt;val == data) {
+            <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;find...&quot;</span> &lt;&lt; node-&gt;val &lt;&lt; <span class="hljs-built_in">endl</span>;
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        }
+        <span class="hljs-built_in">cout</span> &lt;&lt; node-&gt;val &lt;&lt;  <span class="hljs-string">&quot; &quot;</span>;
+        _queue.pop();
+        <span class="hljs-keyword">if</span> (node-&gt;left) {
+            _queue.push(node-&gt;left);
+        }
+        <span class="hljs-keyword">if</span> (node-&gt;right) {
+            _queue.push(node-&gt;right);
+        }
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+}
+
+<span class="hljs-comment">// 3. &#x6DF1;&#x5EA6;&#x4F18;&#x5148;&#x904D;&#x5386;DFS -- &#x67E5;&#x627E;&#x6570;&#x4E2D;&#x662F;&#x5426;&#x5B58;&#x5728;&#x67D0;&#x4E2A;val</span>
+<span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">findPath3</span><span class="hljs-params">(BiNode* root, <span class="hljs-keyword">int</span> data)</span> </span>{
+    <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">nullptr</span>) {
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+    }
+    <span class="hljs-built_in">stack</span>&lt;BiNode*&gt; _stack;
+    _stack.push(root);
+
+    <span class="hljs-keyword">while</span> (!_stack.empty()) {
+        BiNode* node = _stack.top();
+        <span class="hljs-keyword">if</span> (node-&gt;val == data) {
+            <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;find val...&quot;</span> &lt;&lt; node-&gt;val &lt;&lt; <span class="hljs-built_in">endl</span>;
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        }
+        <span class="hljs-built_in">cout</span> &lt;&lt; node-&gt;val &lt;&lt; <span class="hljs-string">&quot; &quot;</span>;
+        _stack.pop();
+        <span class="hljs-keyword">if</span> (node-&gt;left) {
+            _stack.push(node-&gt;left);
+        }
+        <span class="hljs-keyword">if</span> (node-&gt;right) {
+            _stack.push(node-&gt;right);
+        }
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; 
+}
+
+<span class="hljs-comment">// &#x4E8C;&#x53C9;&#x6811;&#x539F;&#x5730;&#x8F6C;&#x94FE;&#x8868; leetcode-114</span>
+<span class="hljs-comment">// &#x95EE;&#x9898;&#x7684;&#x672C;&#x8D28;&#x5C31;&#x662F;&#x5C06;&#x6240;&#x6709;&#x8282;&#x70B9;&#x7684;&#x5DE6;&#x5B69;&#x5B50;&#x7F6E;&#x4E3A;&#x7A7A;</span>
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Tree2List</span><span class="hljs-params">(BiNode* root)</span> </span>{
+    <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">nullptr</span> || (root-&gt;left == <span class="hljs-literal">nullptr</span> &amp;&amp; root-&gt;right == <span class="hljs-literal">nullptr</span>)) {
+        <span class="hljs-keyword">return</span>;
+    }
+    <span class="hljs-keyword">if</span> (root-&gt;left == <span class="hljs-literal">nullptr</span> &amp;&amp; root-&gt;right != <span class="hljs-literal">nullptr</span>) {
+        <span class="hljs-comment">// &#x5982;&#x679C;&#x6CA1;&#x6709;&#x5DE6;&#x5B69;&#x5B50;&#xFF0C;&#x76F4;&#x63A5;&#x9012;&#x5F52;&#x5904;&#x7406;&#x4E0B;&#x4E00;&#x4E2A;&#x8282;&#x70B9;</span>
+        Tree2List(root-&gt;right);
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (root-&gt;left != <span class="hljs-literal">nullptr</span> &amp;&amp; root-&gt;right == <span class="hljs-literal">nullptr</span>) {
+        <span class="hljs-comment">// &#x5982;&#x679C;&#x6709;&#x5DE6;&#x5B69;&#x5B50;&#xFF0C;&#x6CA1;&#x6709;&#x53F3;&#x5B69;&#x5B50;&#xFF0C;&#x5C06;&#x5DE6;&#x8282;&#x70B9;&#x7F6E;&#x7A7A;&#xFF0C;&#x7136;&#x540E;&#x9012;&#x5F52;&#x5904;&#x7406;&#x4E0B;&#x4E00;&#x4E2A;&#x8282;&#x70B9;</span>
+        root-&gt;right = root-&gt;left;
+        root-&gt;left = <span class="hljs-literal">nullptr</span>;
+        Tree2List(root-&gt;right);
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-comment">// &#x6839;&#x65E2;&#x6709;&#x5DE6;&#x5B69;&#x5B50;&#xFF0C;&#x53C8;&#x6709;&#x53F3;&#x5B69;&#x5B50;&#xFF0C;&#x904D;&#x5386;&#x5230;&#x6839;&#x5DE6;&#x8282;&#x70B9;&#x7684;&#x6700;&#x53F3;&#x8FB9;&#x90A3;&#x4E2A;&#x8282;&#x70B9;node</span>
+        <span class="hljs-comment">// &#x5C06;&#x6839;&#x7684;&#x5DE6;&#x5B69;&#x5B50;&#x7F6E;&#x7A7A;&#xFF0C;&#x5C06;&#x6839;&#x7684;&#x53F3;&#x8282;&#x70B9;&#x6302;&#x5230;node&#x5904;&#xFF0C;&#x9012;&#x5F52;&#x5904;&#x7406;&#x4E0B;&#x4E00;&#x4E2A;&#x8282;&#x70B9;</span>
+        BiNode* node = root-&gt;left;
+        <span class="hljs-keyword">while</span> (node-&gt;right) {
+            node = node-&gt;right;
+        }
+        node-&gt;right = root-&gt;right;
+        root-&gt;right = root-&gt;left;
+        root-&gt;left = <span class="hljs-literal">nullptr</span>;
+        Tree2List(root-&gt;right);
+    }
+}
+
 <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> 
 </span>{
     BiNode *root = <span class="hljs-literal">nullptr</span>;
@@ -1366,7 +1465,7 @@ d. &#x8981;&#x5220;&#x9664;&#x7684;&#x7ED3;&#x70B9;&#x6709;&#x5DE6;&#x3001;&#x53
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"数据结构_树","level":"1.5.3","depth":2,"next":{"title":"数据结构_图","level":"1.5.4","depth":2,"path":"3算法类/数据结构_图.md","ref":"./3算法类/数据结构_图.md","articles":[]},"previous":{"title":"数据结构_链表","level":"1.5.2","depth":2,"path":"3算法类/数据结构_链表.md","ref":"./3算法类/数据结构_链表.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"3算法类/数据结构_树.md","mtime":"2020-01-19T10:18:49.338Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-22T09:20:08.417Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"数据结构_树","level":"1.5.3","depth":2,"next":{"title":"数据结构_图","level":"1.5.4","depth":2,"path":"3算法类/数据结构_图.md","ref":"./3算法类/数据结构_图.md","articles":[]},"previous":{"title":"数据结构_链表","level":"1.5.2","depth":2,"path":"3算法类/数据结构_链表.md","ref":"./3算法类/数据结构_链表.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"3算法类/数据结构_树.md","mtime":"2020-01-28T09:04:45.975Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-03T03:06:49.268Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

@@ -291,12 +291,12 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.4" data-path="../2框架类/IO多路复用.html">
+        <li class="chapter " data-level="1.4.4" data-path="../2框架类/epoll_reactor.html">
             
-                <a href="../2框架类/IO多路复用.html">
+                <a href="../2框架类/epoll_reactor.html">
             
                     
-                    IO多路复用
+                    epoll_reactor
             
                 </a>
             
@@ -787,6 +787,92 @@ graph = {
 <span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&quot;__main__&quot;</span>:
     DFS(<span class="hljs-string">&quot;A&quot;</span>)
 </code></pre>
+<ul>
+<li>c++&#x4EE3;&#x7801;&#x5B9E;&#x73B0;</li>
+</ul>
+<pre><code class="lang-c++">  <span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+  <span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstdlib&gt;</span></span>
+  <span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span>
+  <span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;map&gt;</span></span>
+  <span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;set&gt;</span></span>
+  <span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;queue&gt;</span></span>
+  <span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stack&gt;</span></span>
+
+  <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">BFS</span><span class="hljs-params">(<span class="hljs-built_in">map</span>&lt;<span class="hljs-keyword">char</span>, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">char</span>&gt;&gt; &amp; graph)</span> </span>{
+      <span class="hljs-keyword">if</span> (graph.size() == <span class="hljs-number">0</span>) {
+          <span class="hljs-keyword">return</span>;
+      }
+      <span class="hljs-built_in">set</span>&lt;<span class="hljs-keyword">char</span>&gt; visited;
+      <span class="hljs-built_in">queue</span>&lt;<span class="hljs-keyword">char</span>&gt; _queue;
+      <span class="hljs-keyword">auto</span> it = graph.begin();
+      <span class="hljs-keyword">char</span> cur_node = it-&gt;first;
+      _queue.push(cur_node);
+
+      <span class="hljs-keyword">while</span> (!_queue.empty()) {
+          cur_node = _queue.front();
+          <span class="hljs-keyword">if</span> (visited.find(cur_node) == visited.end()) {
+              <span class="hljs-built_in">cout</span> &lt;&lt; cur_node &lt;&lt; <span class="hljs-string">&quot; &quot;</span>;
+              visited.insert(cur_node);
+          }
+          _queue.pop();
+
+          <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;graph[cur_node].size();i++) {
+              <span class="hljs-comment">// &#x672A;&#x8BBF;&#x95EE;&#x8FC7;&#x5C31;&#x52A0;&#x5165;&#x961F;&#x5217;.queue&#x91CC;&#x8FB9;&#x7684;&#x4E00;&#x5B9A;&#x90FD;&#x662F;&#x672A;&#x8BBF;&#x95EE;&#x7684;</span>
+              <span class="hljs-keyword">if</span> (visited.find(graph[cur_node][i]) == visited.end()) {
+                  _queue.push(graph[cur_node][i]);
+              }
+          }
+      }
+  }
+
+  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">DFS</span><span class="hljs-params">(<span class="hljs-built_in">map</span>&lt;<span class="hljs-keyword">char</span>, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">char</span>&gt;&gt; &amp; graph)</span> </span>{
+      <span class="hljs-keyword">if</span> (graph.size() == <span class="hljs-number">0</span>) {
+          <span class="hljs-keyword">return</span>;
+      }
+      <span class="hljs-built_in">set</span>&lt;<span class="hljs-keyword">char</span>&gt; visited;
+      <span class="hljs-keyword">auto</span> it = graph.begin();
+      <span class="hljs-keyword">char</span> cur_node = it-&gt;first;
+      <span class="hljs-built_in">stack</span>&lt;<span class="hljs-keyword">char</span>&gt; _stack;
+      _stack.push(cur_node);
+
+      <span class="hljs-keyword">while</span> (!_stack.empty()) {
+          cur_node = _stack.top();
+          <span class="hljs-keyword">if</span> (visited.find(cur_node) == visited.end()) {
+              <span class="hljs-built_in">cout</span> &lt;&lt; cur_node &lt;&lt; <span class="hljs-string">&quot; &quot;</span>;
+              visited.insert(cur_node);
+          }
+          _stack.pop();
+
+          <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;graph[cur_node].size();i++) {
+              <span class="hljs-keyword">if</span> (visited.find(graph[cur_node][i]) == visited.end()) {
+                  _stack.push(graph[cur_node][i]);
+              }
+          }
+      }
+  }
+
+  <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+      <span class="hljs-built_in">map</span>&lt;<span class="hljs-keyword">char</span>, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">char</span>&gt;&gt; v = {
+          {<span class="hljs-string">&apos;A&apos;</span>,{<span class="hljs-string">&apos;B&apos;</span>, <span class="hljs-string">&apos;F&apos;</span>}},
+          {<span class="hljs-string">&apos;B&apos;</span>,{<span class="hljs-string">&apos;A&apos;</span>, <span class="hljs-string">&apos;C&apos;</span>, <span class="hljs-string">&apos;I&apos;</span>, <span class="hljs-string">&apos;G&apos;</span>}},
+          {<span class="hljs-string">&apos;C&apos;</span>,{<span class="hljs-string">&apos;B&apos;</span>, <span class="hljs-string">&apos;D&apos;</span>, <span class="hljs-string">&apos;I&apos;</span>}},
+          {<span class="hljs-string">&apos;D&apos;</span>,{<span class="hljs-string">&apos;C&apos;</span>, <span class="hljs-string">&apos;E&apos;</span>, <span class="hljs-string">&apos;H&apos;</span>, <span class="hljs-string">&apos;I&apos;</span>}},
+          {<span class="hljs-string">&apos;E&apos;</span>,{<span class="hljs-string">&apos;D&apos;</span>, <span class="hljs-string">&apos;F&apos;</span>, <span class="hljs-string">&apos;H&apos;</span>}},
+          {<span class="hljs-string">&apos;F&apos;</span>,{<span class="hljs-string">&apos;A&apos;</span>, <span class="hljs-string">&apos;E&apos;</span>, <span class="hljs-string">&apos;G&apos;</span>}},
+          {<span class="hljs-string">&apos;G&apos;</span>,{<span class="hljs-string">&apos;B&apos;</span>, <span class="hljs-string">&apos;D&apos;</span>, <span class="hljs-string">&apos;F&apos;</span>, <span class="hljs-string">&apos;H&apos;</span>}},
+          {<span class="hljs-string">&apos;H&apos;</span>,{<span class="hljs-string">&apos;D&apos;</span>, <span class="hljs-string">&apos;E&apos;</span>, <span class="hljs-string">&apos;G&apos;</span>}},
+          {<span class="hljs-string">&apos;I&apos;</span>,{<span class="hljs-string">&apos;B&apos;</span>, <span class="hljs-string">&apos;C&apos;</span>, <span class="hljs-string">&apos;D&apos;</span>}}
+      };
+      <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;BFS...&quot;</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+      BFS(v);
+      <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;DFS...&quot;</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+      DFS(v);
+      system(<span class="hljs-string">&quot;pause&quot;</span>);
+      <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+  }
+</code></pre>
 <p>&#x200B;</p>
 </li>
 </ul>
@@ -857,7 +943,7 @@ Dijkstra&#x7684;&#x5927;&#x81F4;&#x601D;&#x60F3;&#x5C31;&#x662F;&#xFF0C;&#x6839;
 
 &#x57FA;&#x7840;&#x77E5;&#x8BC6;&#xFF1A;
 python&#x4F18;&#x5148;&#x7EA7;&#x961F;&#x5217;&#xFF1A;
-&#x548C;c++&#x4E2D;stl&#x7C7B;&#x4F3C;&#xFF0C;&#x901A;&#x8FC7;&#x5806;&#x5B9E;&#x73B0;&#x4F18;&#x5148;&#x7EA7;&#x961F;&#x5217;&#xFF0C;&#x5F15;&#x5165;&#x6A21;&#x5757; import heapq
+&#x548C;c++&#x4E2D;stl-priority_queue&#x7C7B;&#x4F3C;&#xFF0C;&#x901A;&#x8FC7;&#x5806;&#x5B9E;&#x73B0;&#x4F18;&#x5148;&#x7EA7;&#x961F;&#x5217;&#xFF0C;&#x5F15;&#x5165;&#x6A21;&#x5757; import heapq
 
 priorityQueue = []  # &#x81EA;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;list&#xFF0C;&#x628A;list&#x8F6C;&#x4E3A;&#x5806;&#x7ED3;&#x6784;
 heapq.heappush(priorityQueue, (weight, node))  # &#x63D2;&#x5165;&#x4E00;&#x4E2A;&#x5143;&#x7EC4;&#xFF0C;&#x6743;&#x91CD;&#x503C;/&#x8282;&#x70B9;
@@ -934,7 +1020,100 @@ graph = {
     <span class="hljs-comment"># F &lt;- D &lt;-B &lt;- C &lt;- A &lt;- None</span>
     <span class="hljs-comment"># &#x8DEF;&#x5F84;&#x503C; = 1 + 3 + 4 + 10 = 18</span>
 </code></pre>
-<p>&#x200B;</p>
+<ul>
+<li>c++&#x4EE3;&#x7801;&#x5B9E;&#x73B0;</li>
+</ul>
+<pre><code class="lang-c++">  <span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+  <span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstdlib&gt;</span></span>
+  <span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;map&gt;</span></span>
+  <span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;queue&gt;</span></span>
+  <span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;set&gt;</span></span>
+
+  <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+
+  <span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> MAX_PATH = <span class="hljs-number">10000</span>;
+
+  <span class="hljs-keyword">struct</span> my_greater {
+      <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">operator</span><span class="hljs-params">()</span> <span class="hljs-params">(pair&lt;<span class="hljs-keyword">char</span>, <span class="hljs-keyword">int</span>&gt;&amp; left, pair&lt;<span class="hljs-keyword">char</span>, <span class="hljs-keyword">int</span>&gt;&amp; right)</span> </span>{
+          <span class="hljs-keyword">return</span> left.second &gt; right.second;
+      }
+  };
+
+  <span class="hljs-comment">// &#x8BA1;&#x7B97;&#x6709;&#x6743;&#x56FE;&#x7684;&#x6700;&#x77ED;&#x8DEF;&#x5F84;</span>
+  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">BFS_minPath</span><span class="hljs-params">(<span class="hljs-built_in">map</span>&lt;<span class="hljs-keyword">char</span>, <span class="hljs-built_in">map</span>&lt;<span class="hljs-keyword">char</span>, <span class="hljs-keyword">int</span>&gt;&gt; &amp; graph)</span> </span>{
+      <span class="hljs-keyword">if</span> (graph.size() == <span class="hljs-number">0</span>) {
+          <span class="hljs-keyword">return</span>;
+      }
+
+      <span class="hljs-keyword">int</span> size = graph.size();
+      <span class="hljs-built_in">map</span>&lt;<span class="hljs-keyword">char</span>, <span class="hljs-keyword">char</span>&gt; _parent;  <span class="hljs-comment">// &#x8BB0;&#x5F55;&#x8282;&#x70B9;&#x7684;&#x7236;&#x8282;&#x70B9;&#xFF0C;&#x7528;&#x4E8E;&#x56DE;&#x6EAF;</span>
+      <span class="hljs-built_in">map</span>&lt;<span class="hljs-keyword">char</span>, <span class="hljs-keyword">int</span>&gt; _minPath;         <span class="hljs-comment">// &#x8BB0;&#x5F55;&#x5230;&#x8FBE;&#x8BE5;&#x9876;&#x70B9;&#x7684;&#x6700;&#x77ED;&#x8DEF;&#x5F84;</span>
+      <span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> it=graph.begin(); it != graph.end(); it++) {
+          _minPath.insert(make_pair(it-&gt;first, MAX_PATH));
+          _parent.insert(make_pair(it-&gt;first, <span class="hljs-string">&apos;0&apos;</span>));
+      }
+
+      <span class="hljs-keyword">auto</span> it = graph.begin();
+      priority_queue&lt;pair&lt;<span class="hljs-keyword">char</span>, <span class="hljs-keyword">int</span>&gt;, <span class="hljs-built_in">vector</span>&lt;pair&lt;<span class="hljs-keyword">char</span>, <span class="hljs-keyword">int</span>&gt;&gt;, my_greater&gt; _queue;
+      _queue.push(make_pair(it-&gt;first, <span class="hljs-number">0</span>));
+      _parent[it-&gt;first] = <span class="hljs-string">&apos;0&apos;</span>;
+      _minPath[it-&gt;first] = <span class="hljs-number">0</span>;
+
+      <span class="hljs-built_in">set</span>&lt;<span class="hljs-keyword">char</span>&gt; visited;
+
+      <span class="hljs-keyword">while</span> (!_queue.empty()) {
+          pair&lt;<span class="hljs-keyword">char</span>, <span class="hljs-keyword">int</span>&gt; info = _queue.top();
+          <span class="hljs-keyword">int</span> dist = info.second;
+          <span class="hljs-keyword">int</span> node = info.first;  
+
+          <span class="hljs-keyword">if</span> (visited.find(node) == visited.end()) {
+              <span class="hljs-comment">// &#x672A;&#x8BBF;&#x95EE;&#x8FC7;</span>
+              visited.insert(node);
+          }
+          _queue.pop();
+
+          <span class="hljs-built_in">map</span>&lt;<span class="hljs-keyword">char</span>, <span class="hljs-keyword">int</span>&gt; child_nodes = graph[node];
+          <span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> it=child_nodes.begin(); it != child_nodes.end(); it++) {
+              <span class="hljs-keyword">char</span> child_node = it-&gt;first;
+              <span class="hljs-keyword">int</span> child_dist = it-&gt;second;
+              <span class="hljs-keyword">if</span> (visited.find(child_node) != visited.end()) {
+                  <span class="hljs-keyword">continue</span>;
+              }
+
+              <span class="hljs-keyword">if</span> (dist + child_dist &lt; _minPath[child_node]) {
+                  _minPath[child_node] = dist + child_dist;
+                  _parent[child_node] = node;
+              }
+              _queue.push(make_pair(child_node, _minPath[child_node]));
+          }
+      }
+
+      <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;parent...&quot;</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+      <span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> it = _parent.begin(); it != _parent.end(); it++) {
+          <span class="hljs-built_in">cout</span> &lt;&lt; it-&gt;first &lt;&lt; <span class="hljs-string">&quot;, &quot;</span> &lt;&lt; it-&gt;second &lt;&lt; <span class="hljs-built_in">endl</span>;
+      }
+      <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-built_in">endl</span> &lt;&lt; <span class="hljs-string">&quot;minPath...&quot;</span> &lt;&lt; <span class="hljs-built_in">endl</span>;
+      <span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> it = _minPath.begin(); it != _minPath.end(); it++) {
+          <span class="hljs-built_in">cout</span> &lt;&lt; it-&gt;first &lt;&lt; <span class="hljs-string">&quot;, &quot;</span> &lt;&lt; it-&gt;second &lt;&lt; <span class="hljs-built_in">endl</span>;
+      }
+  }
+
+  <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>{
+      <span class="hljs-built_in">map</span>&lt;<span class="hljs-keyword">char</span>, <span class="hljs-built_in">map</span>&lt;<span class="hljs-keyword">char</span>, <span class="hljs-keyword">int</span>&gt;&gt; graph = {
+          {<span class="hljs-string">&apos;A&apos;</span>,{ {<span class="hljs-string">&apos;B&apos;</span>,<span class="hljs-number">5</span>}, {<span class="hljs-string">&apos;C&apos;</span>,<span class="hljs-number">1</span>} } },
+          {<span class="hljs-string">&apos;B&apos;</span>,{ {<span class="hljs-string">&apos;A&apos;</span>,<span class="hljs-number">5</span>}, {<span class="hljs-string">&apos;C&apos;</span>,<span class="hljs-number">2</span>}, {<span class="hljs-string">&apos;D&apos;</span>,<span class="hljs-number">1</span>} } },
+          {<span class="hljs-string">&apos;C&apos;</span>,{ {<span class="hljs-string">&apos;A&apos;</span>,<span class="hljs-number">1</span>}, {<span class="hljs-string">&apos;B&apos;</span>,<span class="hljs-number">2</span>}, {<span class="hljs-string">&apos;D&apos;</span>,<span class="hljs-number">4</span>}, {<span class="hljs-string">&apos;E&apos;</span>,<span class="hljs-number">8</span>} } },
+          {<span class="hljs-string">&apos;D&apos;</span>,{ {<span class="hljs-string">&apos;B&apos;</span>,<span class="hljs-number">1</span>}, {<span class="hljs-string">&apos;C&apos;</span>,<span class="hljs-number">4</span>}, {<span class="hljs-string">&apos;E&apos;</span>,<span class="hljs-number">3</span>}, {<span class="hljs-string">&apos;F&apos;</span>,<span class="hljs-number">6</span>} } },
+          {<span class="hljs-string">&apos;E&apos;</span>,{ {<span class="hljs-string">&apos;C&apos;</span>,<span class="hljs-number">8</span>}, {<span class="hljs-string">&apos;D&apos;</span>,<span class="hljs-number">3</span>} } },
+          {<span class="hljs-string">&apos;F&apos;</span>,{ {<span class="hljs-string">&apos;D&apos;</span>,<span class="hljs-number">6</span>} } }
+      };
+
+      BFS_minPath(graph);
+
+      system(<span class="hljs-string">&quot;pause&quot;</span>);
+      <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; 
+  }
+</code></pre>
 </li>
 </ul>
 
@@ -980,7 +1159,7 @@ graph = {
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"数据结构_图","level":"1.5.4","depth":2,"next":{"title":"数据结构堆栈_队列","level":"1.5.5","depth":2,"path":"3算法类/数据结构_堆_栈_队列.md","ref":"./3算法类/数据结构_堆_栈_队列.md","articles":[]},"previous":{"title":"数据结构_树","level":"1.5.3","depth":2,"path":"3算法类/数据结构_树.md","ref":"./3算法类/数据结构_树.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"3算法类/数据结构_图.md","mtime":"2019-11-21T08:10:05.391Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-01-22T09:20:08.417Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"数据结构_图","level":"1.5.4","depth":2,"next":{"title":"数据结构堆栈_队列","level":"1.5.5","depth":2,"path":"3算法类/数据结构_堆_栈_队列.md","ref":"./3算法类/数据结构_堆_栈_队列.md","articles":[]},"previous":{"title":"数据结构_树","level":"1.5.3","depth":2,"path":"3算法类/数据结构_树.md","ref":"./3算法类/数据结构_树.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"3算法类/数据结构_图.md","mtime":"2020-02-03T03:06:45.054Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-03T03:06:49.268Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

@@ -390,7 +390,7 @@ $ gdb -c core.123         # 查看core文件出错点的函数调用
 * **backtrace(简写为bt)**：查看函数调用的栈帧。
 * **info(简写为i)**：查看变量值。
 * info(i) watchpoints：查询当前观察点。
-* info(i)  locals：查看局部变量的值。
+* info(i) locals：查看局部变量的值。
 * info(i) breakpoints：查看断点信息。
 * **print(简写为p)**：打印出变量的值（(gdb) p sum）。
 * **continue(简写为c)**：命令运行到程序结束（如果有断点会停止在断点处）。
@@ -403,3 +403,23 @@ $ gdb -c core.123         # 查看core文件出错点的函数调用
 * **run(r)**：设置断点后从头进行调试。
 * watch：设置观察点。断点是当程序执行到某一代码行时中断，而观察点是当程序访问某个存储单元时中断。(gdb) watch input[4]
 * gdb -tui：启动gdb，并且分屏显示源代码。
+
+* gdb调试多线程
+  * ps -aux (或者ps -ef) 查看进程；ps -Lf 5324   查看进程中的所有线程 （或者 top -H -p 进程id）
+  * gdb -p 进程号 ： 调试正在运行的进程
+  * info thread ：查看有多少线程，线程编号、线程id
+  * thread 线程编号（简写t 线程编号）： 切换到具体的线程
+  * 在线程中设置断点
+  * set scheduler-locking off ：让所有的线程运行，gdb调试状态下只有当前线程运行，所以先要让所有线程都运行起来。
+  * continue ： 等待程序停在断点处。
+  * info ： 查看现场，变量等。
+
+## 使用dmesg和addr2line分析程序core原因
+
+   如果程序挂掉但是没有生成core文件，
+   通过dmesg命令可以看到程序挂掉的时间和出问题的内存地址，
+   通过addr2line命令可以将内存地址转换为文件的行号，从而定位问题。
+
+
+ 
+
