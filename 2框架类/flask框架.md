@@ -1,13 +1,10 @@
 [toc]
 
-
-
 # Flask知识点
 
-<br/>
 ## 为什么要用web框架
-web框架提供 稳定性、安全性、高并发性的支持，避免重复造轮子, 专注于核心业务逻辑的处理, 提高工作效率。
-<br/>
+web框架提供 稳定性、安全性、高并发性的支持，避免重复造轮子, 专注于核心业务逻辑的处理, 提高工作效率。  
+
 ## flask简介
 
 * flask是一个轻量级的web开发框架。自带的核心功能：路由模块、模板引擎。
@@ -15,7 +12,6 @@ web框架提供 稳定性、安全性、高并发性的支持，避免重复造�
 * flask中文文档：https://dormousehole.readthedocs.io/en/latest/
 * 推荐测试工具：安装软件postman，模拟收发http请求。
 
-<br/>
 ## 配置python+flask开发环境
 
 * 安装虚拟环境
@@ -30,57 +26,86 @@ pip install flask (flask安装到虚拟环境文件夹中)
 * 虚拟环境中依赖包及版本号生成至文件中：pip freeze > requirements.txt
 * 按照文件中的依赖包依次下载并安装：pip install -r requirements.txt
 
-<br/>
-##jinja2模板引擎
+
+## jinja2模板引擎
 
 * jinja2模板引擎是flask内置的模板语言，用于把一些变量数据动态传入网页模板中。
+
 * jinja2 语法
+
  * 注释
-		{# 这是一行注释 #}
+		
+	```jinja2
+	{# 这是一行注释 #}
+	```
+	
  * 变量代码块   
-		str {{ var }}  
-		list {{ my_list }}  {{ my_list.2 }}  {{ my_list[2] }}  
-		dict {{my_dict }} {{ my_dict['name'] }}  {{my_dict.name}}
+		
+	```jinja2
+	str {{ var }}  
+	list {{ my_list }}  {{ my_list.2 }}  {{ my_list[2] }}  
+	dict {{my_dict }} {{ my_dict['name'] }}  {{my_dict.name}}
+	```
+	
  * 控制代码块
-		{% if flag %} ... {% endif %}
-		{% for v in varlist %} ... {% endfor %}
+		
+	```jinja2
+	{% if flag %} ... {% endif %}
+	{% for v in varlist %} ... {% endfor %}
+	```
+	
  * 内置过滤器（通过管道符后跟过滤器，可以链式操作）
    * 字符串操作
-		    禁止转义 {{ '<em>hello</em>' | safe }}
-		    首字母转大写 {{ 'hello' | capitalize }}
-		    转小写 {{ 'HELLO' | lower }}
-		    转大写 {{ 'hello' | upper }}
-		    每个单词的首字母转大写 {{ 'hello' | title }}
-		    字符串反转 {{ 'olleh' | reverse }}
-		    格式化输出 {{ '%s is %d' | format('name',17) }}
-		    去掉html标签  {{ '<em>hello</em>' | striptags }}
-		    字符串截断  {{ 'hello every one' | truncate(9)}}
-    * 列表操作
-		    取第一个元素 {{ [1, 2, 3, 5] | first }}
-		    取最后一个元素 {{ [1, 2, 3, 4] | last }}
-		    获取列表长度 {{ [1, 2, 3, 4] | length }}
-		    列表求和 {{ [1, 2, 3, 4] | sum }}
-		    列表排序  {{ [3, 7, 2, 1] | sort }}
+     
+```jinja2
+     禁止转义 {{ '<em>hello</em>' | safe }}
+	  首字母转大写 {{ 'hello' | capitalize }}
+	  转小写 {{ 'HELLO' | lower }}
+	  转大写 {{ 'hello' | upper }}
+	  每个单词的首字母转大写 {{ 'hello' | title }}
+	  字符串反转 {{ 'olleh' | reverse }}
+	  格式化输出 {{ '%s is %d' | format('name',17) }}
+	  去掉html标签  {{ '<em>hello</em>' | striptags }}
+	  字符串截断  {{ 'hello every one' | truncate(9)}}
+	  ```
+	  
+	 * 列表操作
+		 
+		   ```jinja2
+		取第一个元素 {{ [1, 2, 3, 5] | first }}
+		取最后一个元素 {{ [1, 2, 3, 4] | last }}
+		获取列表长度 {{ [1, 2, 3, 4] | length }}
+		列表求和 {{ [1, 2, 3, 4] | sum }}
+		列表排序  {{ [3, 7, 2, 1] | sort }}
+		   ```
+		
+		
+	
 * 表单
-表单是html页面中负责数据采集的部件，通过表单把用户输入的数据提交给服务器。
-包括三部分：标签、域、按钮，举例：
-		<form method="post">
-		    <label>用户名：</label><input type="text" name="username" /><br />
-		    <label>密码：</label><input type="text" name="password" /><br />
-		    <label>确认密码：</label><input type="text" name="password2" /><br />
-		    <input type="submit" value="提交" /><br />
-		</form>
+  表单是html页面中负责数据采集的部件，通过表单把用户输入的数据提交给服务器。
+  包括三部分：标签、域、按钮，举例：
 
-<br/>
-##其他
+  ```html
+  		<form method="post">
+  		    <label>用户名：</label><input type="text" name="username" /><br />
+  		    <label>密码：</label><input type="text" name="password" /><br />
+  		    <label>确认密码：</label><input type="text" name="password2" /><br />
+  		    <input type="submit" value="提交" /><br />
+  		</form>
+  ```
+
+## 其他
 
 ### vscode生成html模板文件
+
 * 文件->新建文件->右下角点击'纯文本',选择文件类型为html->命令提示框输入英文的i，会自动补全一个html模板页面。
 
 ### B站学习视频
+
 * https://www.bilibili.com/video/av19817183
 
 # Flask实战案例
+
 * 简单的Falsk项目构建：
  * 目录结构：
    * **static文件夹**：用于存放静态文件，如js,css，img等。
@@ -89,12 +114,10 @@ pip install flask (flask安装到虚拟环境文件夹中)
    * **视图文件**,如view.py。
    * 其他第三方文件和依赖...
 
-
-
-
-<br/>
 ## 案例1：jinja2模板语言
->jinja2模板引擎(见上"jinja2模板引擎"说明)
+
+jinja2模板引擎(见上"jinja2模板引擎"说明)
+
 * 注释
 * 变量代码块
 * 控制代码块
@@ -102,54 +125,53 @@ pip install flask (flask安装到虚拟环境文件夹中)
 
 **视图文件**
 
-* <pre class="prettyprint">
-	# -*- coding: utf-8 -*-
-	from flask import Flask
-	from flask import render_template
-	from flask import request
-	
-	# 创建flask应用程序实例
-	# 需要传入__name__,作用是为了确定资源所在的路径
-	app = Flask(__name__)
-	
-	# 定义路由与视图函数
-	# Flask定义路由是通过装饰器实现的
-	@app.route('/helloworld')
-	def hello_world():
-	    return 'hello world!'
-	
-	# 通过methods参数指明请求类型，默认是get请求
-	@app.route('/deal_request', methods=['GET', 'POST'])
-	def deal_request():
-	    if request.method == 'GET':
-	        # get通过request.args.get("param_name","")形式获取参数值
-	        get_q = request.args.get('q', '')
-	        return render_template('result.html', result=get_q)
-	    elif request.method == 'POST':
-	        # post通过request.form["param_name"]形式获取参数值
-	        post_q = request.form['q']
-	        return render_template('result.html', result=post_q)
-	
-	# <>定义路由的参数, 并在视图函数括号内填入参数名
-	# 参数类型默认是str, 限定类型，如int: float:
-	@app.route('/orders/<int:order_id>')
-	def get_order_id(order_id):
-	    return 'order={}'.format(order_id)
-	
-	@app.route('/')
-	def test_data():
-	    # 通过键值对的方式传入参数
-	    mystr = "https://www.python.org"
-	    mylist = [3, 7, 2, 1, 5]
-	    mydict = {"name": "cbj", "age": 18}
-	    return render_template('jinja2_tp.html', mystr=mystr, mylist=mylist, mydict=mydict)
-	
-	# 启动程序
-	if __name__ == '__main__':
-	    app.run(host='127.0.0.1', port=8080, debug=False)
-</pre>
+```python
+# -*- coding: utf-8 -*-
+from flask import Flask
+from flask import render_template
+from flask import request
 
-<br/>
+# 创建flask应用程序实例
+# 需要传入__name__,作用是为了确定资源所在的路径
+app = Flask(__name__)
+
+# 定义路由与视图函数
+# Flask定义路由是通过装饰器实现的
+@app.route('/helloworld')
+def hello_world():
+    return 'hello world!'
+
+# 通过methods参数指明请求类型，默认是get请求
+@app.route('/deal_request', methods=['GET', 'POST'])
+def deal_request():
+    if request.method == 'GET':
+        # get通过request.args.get("param_name","")形式获取参数值
+        get_q = request.args.get('q', '')
+        return render_template('result.html', result=get_q)
+    elif request.method == 'POST':
+        # post通过request.form["param_name"]形式获取参数值
+        post_q = request.form['q']
+        return render_template('result.html', result=post_q)
+
+# <>定义路由的参数, 并在视图函数括号内填入参数名
+# 参数类型默认是str, 限定类型，如int: float:
+@app.route('/orders/<int:order_id>')
+def get_order_id(order_id):
+    return 'order={}'.format(order_id)
+
+@app.route('/')
+def test_data():
+    # 通过键值对的方式传入参数
+    mystr = "https://www.python.org"
+    mylist = [3, 7, 2, 1, 5]
+    mydict = {"name": "cbj", "age": 18}
+    return render_template('jinja2_tp.html', mystr=mystr, mylist=mylist, mydict=mydict)
+
+# 启动程序
+if __name__ == '__main__':
+    app.run(host='127.0.0.1', port=8080, debug=False)
+```
+
 **模板文件(jinja2_tp.html)**
 
 ***
@@ -188,18 +210,13 @@ pip install flask (flask安装到虚拟环境文件夹中)
 			</html>
 ***
 
-<br/>
+
 ## 案例2：原生form表单
-> 原生form表单操作：
+
+原生form表单操作：
 * 表单
     表单是html页面中负责数据采集的部件，通过表单把用户输入的数据提交给服务器。
-    包括三部分：标签、域、按钮，举例：
-	    <form method="post">
-	        <label>用户名：</label><input type="text" name="username" /><br />
-	        <label>密码：</label><input type="text" name="password" /><br />
-	        <label>确认密码：</label><input type="text" name="password2" /><br />
-	        <input type="submit" value="提交" /><br />
-	    </form>
+    包括三部分：标签、域、按钮。
 * vscode生成html模板文件：
     文件->新建文件->右下角点击'纯文本',选择文件类型为html->命令提示框输入英文的i，会自动补全一个html模板页面。
 * flash - 给模板传递消息
@@ -209,43 +226,41 @@ pip install flask (flask安装到虚拟环境文件夹中)
     实现一个基础的表单（参考：form_demo.py）
     使用Flask-WTF实现表单（参考：wtf_demo.py）
 
-<br/>
 **视图文件**
 
-* <pre class="prettyprint">
-	# -*- coding: utf-8 -*-
-	from flask import Flask, render_template, request, flash
-	
-	# 创建flask应用程序实例
-	# 需要传入__name__,作用是为了确定资源所在的路径
-	app = Flask(__name__)
-	app.secret_key = "cbjtestform"
-	
-	# 定义路由与视图函数
-	# Flask定义路由是通过装饰器实现的
-	# 实现简单的登录处理
-	@app.route('/', methods=['POST', 'GET'])
-	def hello_world():
-	    if request.method == 'POST':
-	        username = request.form.get('username')
-	        password = request.form.get('password')
-	        password2 = request.form.get('password2')
-	        if not all([username, password, password2]):
-	            # print("参数不完整")
-	            flash("参数不完整")
-	        elif password != password2:
-	            # print("密码输入有误")
-	            flash("密码输入有误")
-	        else:
-	            return "success"
-	    return render_template('form_tp.html')
-	
-	# 启动程序
-	if __name__ == '__main__':
-	    app.run(host='127.0.0.1', port=8080, debug=False)
-</pre>
+ ```python
+# -*- coding: utf-8 -*-
+from flask import Flask, render_template, request, flash
 
-<br/>
+# 创建flask应用程序实例
+# 需要传入__name__,作用是为了确定资源所在的路径
+app = Flask(__name__)
+app.secret_key = "cbjtestform"
+
+# 定义路由与视图函数
+# Flask定义路由是通过装饰器实现的
+# 实现简单的登录处理
+@app.route('/', methods=['POST', 'GET'])
+def hello_world():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+        password2 = request.form.get('password2')
+        if not all([username, password, password2]):
+            # print("参数不完整")
+            flash("参数不完整")
+        elif password != password2:
+            # print("密码输入有误")
+            flash("密码输入有误")
+        else:
+            return "success"
+    return render_template('form_tp.html')
+
+# 启动程序
+if __name__ == '__main__':
+    app.run(host='127.0.0.1', port=8080, debug=False)
+ ```
+
 **模板文件(form_tp.html)**
 
 ***
@@ -272,9 +287,9 @@ pip install flask (flask安装到虚拟环境文件夹中)
 			</html>
 ***
 
-<br/>
 ## 案例3：Flask-WTF表单
->* flask-WTF:
+
+* flask-WTF:
     flask_wtf是对wtforms组件的封装，是flask框架的表单验证模块，可以很方便生成表单，
     也可以当做json数据交互的验证工具，支持热插拔。
 <br/>
@@ -326,64 +341,62 @@ pip install flask (flask安装到虚拟环境文件夹中)
  * 在模板的表单标签下添加csrf token： {{ form.csrf_token }}
  CSRF（Cross Site Request Forgery, 跨站域请求伪造）是一种网络的攻击方式
 
-<br/>
 **视图文件**
 
-* <pre class="prettyprint">
-	# -*- coding: utf-8 -*-
-	from flask import Flask, render_template, request, flash
-	from flask_wtf import FlaskForm
-	from wtforms import StringField, PasswordField, SubmitField
-	from wtforms.validators import DataRequired, EqualTo
-	
-	# 创建flask应用程序实例
-	# 需要传入__name__,作用是为了确定资源所在的路径
-	app = Flask(__name__)
-	app.secret_key = "cbjtestform"
-	
-	# 自定义表单类
-	class LoginForm(FlaskForm):
-	    username = StringField(label='用户名', validators=[DataRequired()])     # '用户名' 是label, validators验证函数列表
-	    password = PasswordField('密码', validators=[DataRequired()])
-	    password2 = PasswordField('确认密码', validators=[DataRequired(), EqualTo('password', '密码输入不一致')])
-	    submit = SubmitField('提交')
-	
-	@app.route('/', methods=['GET', 'POST'])
-	def login():
-	    login_form = LoginForm()
-	
-	    # 1.判断请求方式
-	    if request.method == 'POST':
-	        # 2.参数获取
-	        username = request.form.get('username')
-	        password = request.form.get('password')
-	        password2 = request.form.get('password2')
-	        # 或者直接从表单对象取数据
-	        password_2 = login_form.password2.data
-	    
-	        # 3.参数验证
-	        # 我们没有 CSRF token
-	        if login_form.validate_on_submit():  # 提交时进行参数校验
-	            print('name={} pswd={} pawd2={} pswd2={}'.format(
-	                username, password, password2, password_2))
-	            return "success"
-	        else:
-	            flash('参数有误')
-	    
-	    return render_template('wtf_tp.html', form=login_form)
-	
-	# 定义路由与视图函数
-	# Flask定义路由是通过装饰器实现的
-	@app.route('/helloworld')
-	def hello_world():
-	    return 'hello world!'
-	
-	# 启动程序
-	if __name__ == '__main__':
-	    app.run(host='127.0.0.1', port=8080, debug=False)
-</pre>
+```python
+# -*- coding: utf-8 -*-
+from flask import Flask, render_template, request, flash
+from flask_wtf import FlaskForm
+from wtforms import StringField, PasswordField, SubmitField
+from wtforms.validators import DataRequired, EqualTo
 
-<br/>
+# 创建flask应用程序实例
+# 需要传入__name__,作用是为了确定资源所在的路径
+app = Flask(__name__)
+app.secret_key = "cbjtestform"
+
+# 自定义表单类
+class LoginForm(FlaskForm):
+    username = StringField(label='用户名', validators=[DataRequired()])     # '用户名' 是label, validators验证函数列表
+    password = PasswordField('密码', validators=[DataRequired()])
+    password2 = PasswordField('确认密码', validators=[DataRequired(), EqualTo('password', '密码输入不一致')])
+    submit = SubmitField('提交')
+
+@app.route('/', methods=['GET', 'POST'])
+def login():
+    login_form = LoginForm()
+
+    # 1.判断请求方式
+    if request.method == 'POST':
+        # 2.参数获取
+        username = request.form.get('username')
+        password = request.form.get('password')
+        password2 = request.form.get('password2')
+        # 或者直接从表单对象取数据
+        password_2 = login_form.password2.data
+    
+        # 3.参数验证
+        # 我们没有 CSRF token
+        if login_form.validate_on_submit():  # 提交时进行参数校验
+            print('name={} pswd={} pawd2={} pswd2={}'.format(
+                username, password, password2, password_2))
+            return "success"
+        else:
+            flash('参数有误')
+    
+    return render_template('wtf_tp.html', form=login_form)
+
+# 定义路由与视图函数
+# Flask定义路由是通过装饰器实现的
+@app.route('/helloworld')
+def hello_world():
+    return 'hello world!'
+
+# 启动程序
+if __name__ == '__main__':
+    app.run(host='127.0.0.1', port=8080, debug=False)
+```
+
 **模板文件(wtf_tp.html)**
 
 ***
@@ -413,22 +426,23 @@ pip install flask (flask安装到虚拟环境文件夹中)
 			</html>
 ***
 
-<br/>
+
 ## 案例4：Flask-SQLAlchmey数据库操作
->* Flask-SQLAlchmey
+
+* Flask-SQLAlchmey
 Flask-SQLAlchmey是一个操作关系型数据库的flask扩展，
 让开发者不用直接和sql语句打交道，而是通过python对象来操作数据库。
-Flask-SQLAlchmey中，数据库使用url指定，而且程序使用的数据库必须保存到flask配置对象的FLASKALCHEMY_DATABASE_URI键中
-<br/>
+Flask-SQLAlchmey中，数据库使用url指定，而且程序使用的数据库必须保存到flask配置对象的FLASKALCHEMY_DATABASE_URI键中  
+
 * 安装flask扩展：
 pip install flask-sqlalchemy
 如果连接的是mysql数据库，还需要安装mysqldb：
-pip install flask-mysqldb
-<br/>
+pip install flask-mysqldb  
+
 * 创建数据库模型
 sqlalchemy数据类型和python、mysql数据类型的对应关系：
 
->| 类型名 | Python类型 | 数据库类型 |
+| 类型名 | Python类型 | 数据库类型 |
 | :------: | :------: | :------: |
 | Integer | int 整数(4字节) | INT |
 | SmallInteger | int 整数(2字节) | SMALLINT |
@@ -443,7 +457,8 @@ sqlalchemy数据类型和python、mysql数据类型的对应关系：
 | DateTime | datetime.datetime | DATETIME |
 | Enum | str | ENUM |
 | LargeBinary | str | VARBINARY |
->* 查询操作
+
+* 查询操作
   * 常用查询过滤器（写条件的）
     filter()
     filter_by()
@@ -460,165 +475,168 @@ sqlalchemy数据类型和python、mysql数据类型的对应关系：
     count()
     paginate() 返回一个paginate对象，它包含指定范围的结果
 
-<br/>
 **视图文件**
 
-* <pre class="prettyprint">
-	# -*- coding: utf-8 -*-
-	from flask import Flask
-	from flask_sqlalchemy import SQLAlchemy
-	
-	# 创建flask应用程序实例
-	# 需要传入__name__,作用是为了确定资源所在的路径
-	app = Flask(__name__)
-	# 配置数据库地址
-	app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://spider:spider2013@10.160.81.11:3306/mytest'
-	# 跟踪数据库的修改，不建议开启，未来版本中会被移除
-	app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-	# 创建数据库对象实例
-	db = SQLAlchemy(app)
-	
-	'''
-	一对多关系的两张表：
-	    角色
-	        - 角色id
-	        - 角色名称（管理员、普通用户）
-	    用户
-	        - 用户id、用户名、邮箱、密码
-	        - 角色id（外键，关联角色表的角色id）
-	'''
-	
-	# 数据库模型
-	class Role(db.Model):
-	    # 定义表名
-	    __tablename__ = 'roles'
-	
-	    # 定义字段
-	    id = db.Column(db.Integer, primary_key=True)
-	    name = db.Column(db.String(16), unique=True)
-	    
-	    # 也可以在这里定义
-	    # myuser = db.relationship('User', backref='myroles')
-	    
-	    # 支持可读字符串打印
-	    def __repr__(self):
-	        return '<Role: {} {}>'.format(self.name, self.id)
-	
-	class User(db.Model):
-	    __tablename__ = 'users'
-	
-	    id = db.Column(db.Integer, primary_key=True)
-	    name = db.Column(db.String(16), unique=True)
-	    email = db.Column(db.String(32), unique=True)
-	    password = db.Column(db.String(32))
-	    role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))  # 关联外键（多对一）
-	    # User希望有一个role属性，但是这个属性的定义需要在另一个模型中定义，反向引用
-	    
-	    # 添加关系引用
-	    # db.relationship('Post'): 正向关联
-	    # backref='myuser': 反向引用
-	    # 技巧：在(多对一)多的一方定义外键，关系引用可以在任一方定义（一方即可）
-	    # users表中的记录通过myroles查找关联的roles表中的值
-	    # roles表中的记录通过myusers查询关联的user表中的值
-	    # myroles是给自己用的，myuser是给对方Role用的
-	    myroles = db.relationship('Role', backref='myuser')
-	    
-	    def __repr__(self):
-	        return '<User: name={} id={} email={} pswd={} rid={}>'.format(
-	            self.name, self.id, self.email, self.password, self.role_id)
-	
-	# 定义路由与视图函数
-	# Flask定义路由是通过装饰器实现的
-	@app.route('/helloworld')
-	def hello_world():
-	    return 'hello world!'
-	
-	# 启动程序
-	if __name__ == '__main__':
-	    # 删除所有继承自db.Model的表
-	    db.drop_all()
-	    # 创建所有继承自db.Model的表
-	    db.create_all()
-	
-	    '''
-	    (1) 测试增删改查
-	        数据库的增删改，需要通过会话：
-	        db.session.add(role)
-	        db.session.add_all([user1, user2, ...])
-	        db.session.commit()
-	        db.session.rollback()
-	        db.session.delete(user)
-	    '''
-	    
-	    # 插入数据
-	    ro1 = Role(name='admin')
-	    db.session.add(ro1)
-	    db.session.commit()
-	    ro2 = Role(name='user')
-	    db.session.add(ro2)
-	    db.session.commit()
-	    
-	    us1 = User(name='jzs1', email='jzs1@163.com', password='ps3456', role_id=ro1.id)
-	    us2 = User(name='azs2', email='azs2@163.com', password='12as35', role_id=ro2.id)
-	    us3 = User(name='szs3', email='szs3@163.com', password='166556', role_id=ro2.id)
-	    us4 = User(name='dzs4', email='dzs4@163.com', password='154rg6', role_id=ro1.id)
-	    us5 = User(name='rzs5', email='rzs5@163.com', password='245886', role_id=ro1.id)
-	    us6 = User(name='tzs6', email='tzs6@163.com', password='123aa6', role_id=ro2.id)
-	    db.session.add_all([us1, us2, us3, us4, us5, us6])
-	    db.session.commit()
-	    
-	    # 修改数据
-	    us3.name = 'baijie'
-	    db.session.commit()        # 修改了某个字段，只需要commit即可，不需要再add了
-	    
-	    # 删除数据
-	    db.session.delete(us5)
-	    db.session.commit()
-	    
-	    # 显示数据库内容
-	    print("User---", User.query.all())
-	    
-	    # 查询操作
-	    # 1.查询所有用户
-	    User.query.all()
-	    # 2.查询有多少个用户
-	    User.query.count()
-	    # 3.查询第一个用户
-	    User.query.first()
-	    # 4.查询id为4的用户
-	    User.query.get(4)  # 主键为4
-	    User.query.filter_by(id=4).first()     # filter_by(属性=val)
-	    User.query.filter(User.id == 4).first()  # filter(对象.属性==val) 功能更强大，可以实现更多查询，如比较运算符
-	    
-	    '''
-	    (2) 测试关联关系
-	        User表和Role表是一对多的关系，User表通过外键role_id和Role表关联
-	        如果想通过User对象询用户的角色信息，或者通过Role对象查询角色对应的多个用户的信息，
-	        需要两表建立关联(user查role)和反向引用(role查user)：
-	        db.relationship('User', backref='role') -> User是另一侧对象实例(模型)，role为自定义的反向引用的别名
-	    '''
-	    # 删除表
-	    db.drop_all()
-	    # 创建表
-	    db.create_all()
-	    # 测试关联关系
-	    role = Role(name='admin')
-	    db.session.add(role)
-	    db.session.commit()
-	    user1 = User(name='sz', role_id=role.id)
-	    user2 = User(name='ls', role_id=role.id)
-	    db.session.add_all([user1, user2])
-	    db.session.commit()
-	    print("role.users--", role.myuser)   # 查询role这条记录对应的user表的信息
-	    print("user1.roles--", user1.myroles)  # 查询user1这一行对应的roles表的信息
-	    print("user1={}, user1.roles.name={}".format(user1, user1.myroles.name))
-	    
-	    app.run(host='127.0.0.1', port=8080, debug=False)
-</pre>
+```python
+# -*- coding: utf-8 -*-
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
 
-<br/>
+# 创建flask应用程序实例, 需要传入__name__,作用是为了确定资源所在的路径
+app = Flask(__name__)
+# 配置数据库地址
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://spider:spider2013@10.160.81.11:3306/mytest'
+# 跟踪数据库的修改，不建议开启，未来版本中会被移除
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# 创建数据库对象实例
+db = SQLAlchemy(app)
+
+'''
+一对多关系的两张表：
+    角色
+        - 角色id
+        - 角色名称（管理员、普通用户）
+    用户
+        - 用户id、用户名、邮箱、密码
+        - 角色id（外键，关联角色表的角色id）
+'''
+
+# 数据库模型
+class Role(db.Model):
+    # 定义表名
+    __tablename__ = 'roles'
+
+    # 定义字段
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(16), unique=True)
+    
+    '''
+    这里也可以在这里定义
+    myuser = db.relationship('User', backref='myroles')
+    '''
+    
+    # 支持可读字符串打印
+    def __repr__(self):
+        return '<Role: {} {}>'.format(self.name, self.id)
+
+class User(db.Model):
+    __tablename__ = 'users'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(16), unique=True)
+    email = db.Column(db.String(32), unique=True)
+    password = db.Column(db.String(32))
+    role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))  # 关联外键（多对一）
+    # User希望有一个role属性，但是这个属性的定义需要在另一个模型中定义，反向引用
+    
+    '''
+    添加关系引用
+    db.relationship('Post'): 正向关联
+    backref='myuser': 反向引用
+    技巧：在(多对一)多的一方定义外键，关系引用可以在任一方定义（一方即可）
+    users表中的记录通过myroles查找关联的roles表中的值
+    roles表中的记录通过myusers查询关联的user表中的值
+    myroles是给自己用的，myuser是给对方Role用的
+    '''
+    myroles = db.relationship('Role', backref='myuser')
+    
+    def __repr__(self):
+        return '<User: name={} id={} email={} pswd={} rid={}>'.format(
+            self.name, self.id, self.email, self.password, self.role_id)
+
+'''
+定义路由与视图函数
+Flask定义路由是通过装饰器实现的
+'''
+@app.route('/helloworld')
+def hello_world():
+    return 'hello world!'
+
+# 启动程序
+if __name__ == '__main__':
+    # 删除所有继承自db.Model的表
+    db.drop_all()
+    # 创建所有继承自db.Model的表
+    db.create_all()
+
+    '''
+    (1) 测试增删改查
+        数据库的增删改，需要通过会话：
+        db.session.add(role)
+        db.session.add_all([user1, user2, ...])
+        db.session.commit()
+        db.session.rollback()
+        db.session.delete(user)
+    '''
+
+    # 插入数据
+    ro1 = Role(name='admin')
+    db.session.add(ro1)
+    db.session.commit()
+    ro2 = Role(name='user')
+    db.session.add(ro2)
+    db.session.commit()
+
+    us1 = User(name='jzs1', email='jzs1@163.com', password='ps3456', role_id=ro1.id)
+    us2 = User(name='azs2', email='azs2@163.com', password='12as35', role_id=ro2.id)
+    us3 = User(name='szs3', email='szs3@163.com', password='166556', role_id=ro2.id)
+    us4 = User(name='dzs4', email='dzs4@163.com', password='154rg6', role_id=ro1.id)
+    us5 = User(name='rzs5', email='rzs5@163.com', password='245886', role_id=ro1.id)
+    us6 = User(name='tzs6', email='tzs6@163.com', password='123aa6', role_id=ro2.id)
+    db.session.add_all([us1, us2, us3, us4, us5, us6])
+    db.session.commit()
+    
+    # 修改数据
+    us3.name = 'baijie'
+    db.session.commit()        # 修改了某个字段，只需要commit即可，不需要再add了
+    
+    # 删除数据
+    db.session.delete(us5)
+    db.session.commit()
+    
+    # 显示数据库内容
+    print("User---", User.query.all())
+    
+    # 查询操作
+    # 1.查询所有用户
+    User.query.all()
+    # 2.查询有多少个用户
+    User.query.count()
+    # 3.查询第一个用户
+    User.query.first()
+    # 4.查询id为4的用户
+    User.query.get(4)  # 主键为4
+    User.query.filter_by(id=4).first()     # filter_by(属性=val)
+    User.query.filter(User.id == 4).first()  # filter(对象.属性==val) 功能更强大，可以实现更多查询，如比较运算符
+    
+    '''
+    (2) 测试关联关系
+        User表和Role表是一对多的关系，User表通过外键role_id和Role表关联
+        如果想通过User对象询用户的角色信息，或者通过Role对象查询角色对应的多个用户的信息，
+        需要两表建立关联(user查role)和反向引用(role查user)：
+        db.relationship('User', backref='role') -> User是另一侧对象实例(模型)，role为自定义的反向引用的别名
+    '''
+    # 删除表
+    db.drop_all()
+    # 创建表
+    db.create_all()
+    # 测试关联关系
+    role = Role(name='admin')
+    db.session.add(role)
+    db.session.commit()
+    user1 = User(name='sz', role_id=role.id)
+    user2 = User(name='ls', role_id=role.id)
+    db.session.add_all([user1, user2])
+    db.session.commit()
+    print("role.users--", role.myuser)   # 查询role这条记录对应的user表的信息
+    print("user1.roles--", user1.myroles)  # 查询user1这一行对应的roles表的信息
+    print("user1={}, user1.roles.name={}".format(user1, user1.myroles.name))
+    app.run(host='127.0.0.1', port=8080, debug=False)
+```
+
 ## 案例5：图书管理系统
->1. 配置数据库
+
+1. 配置数据库
   * 导入SQLAlchemy扩展
   * 创建db对象
   * 在终端创建数据库(db对象只是增删表，以及增删改查操作,需先行创建database)
@@ -647,178 +665,176 @@ sqlalchemy数据类型和python、mysql数据类型的对应关系：
     5. 如果作者不存在，则添加作者和书籍
     6. 验证不通过提示错误
 
-<br/>
 **视图文件**
 
-* <pre class="prettyprint">
-	# -*- coding: utf-8 -*-
-	from flask import Flask, render_template, request, redirect, url_for, flash
-	from flask_sqlalchemy import SQLAlchemy
-	from flask_wtf import FlaskForm
-	from wtforms import StringField, SubmitField
-	from wtforms.validators import DataRequired
-	
-	# 创建flask应用程序实例
-	# 需要传入__name__,作用是为了确定资源所在的路径
-	app = Flask(__name__)
-	app.secret_key = 'test'
-	# 配置数据库地址（mysql://user:passwd@ip:port/database）
-	app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://spider:spider2013@10.160.81.11:3306/mytest'
-	# 跟踪数据库的修改，不建议开启，未来版本中会被移除
-	app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-	# 创建数据库对象实例
-	db = SQLAlchemy(app)
-	
-	# 作者模型：字段->id，name              一
-	# 书籍模型：字段->id，name，author_id   多
-	class Author(db.Model):
-	    # 表名
-	    __tablename__ = 'authors'
-	
-	    # 字段
-	    id = db.Column(db.Integer, primary_key=True)
-	    name = db.Column(db.String(48), unique=True)
-	    
-	    # 支持打印
-	    def __repr__(self):
-	        return '<Author> id={}, name={}'.format(self.id, self.name)
-	    
-	    # 一对多关系(books和author是自定义的名字，Book是另一个模型的类名)
-	    books = db.relationship('Book', backref='author')
-	
-	class Book(db.Model):
-	    __tablename__ = 'books'
-	    id = db.Column(db.Integer, primary_key=True)
-	    name = db.Column(db.String(48), unique=True)
-	    author_id = db.Column(db.Integer, db.ForeignKey('authors.id'))
-	
-	class AddForm(FlaskForm):
-	    author_name = StringField(label='作者', validators=[DataRequired()])
-	    book_name = StringField(label='书籍', validators=[DataRequired()])
-	    submit = SubmitField('添加')
-	
-	# 定义路由与视图函数
-	# Flask定义路由是通过装饰器实现的
-	@app.route('/', methods=['GET', 'POST'])
-	def show_page():
-	
-	    add_form = AddForm()
-	    # 提交时进行表单参数验证   
-	    if not add_form.validate_on_submit():
-	        if request.method == 'POST':
-	            flash('参数不完整！')
-	    else:
-	        author_name = add_form.author_name.data
-	        book_name = add_form.book_name.data
-	        print('222', author_name, book_name)
-	        # 判断作者和书籍是否存在
-	        author = Author.query.filter_by(name='author_name').first()
-	        if author:
-	            # 作者存在，如果书籍存在提示已存在，如果书籍不存在，插入书籍
-	            book = Book.query.filter_by(name=book_name).first()
-	            if book:
-	                flash('书籍已存在！')
-	            else:
-	                new_book = Book(name=book_name, author_id=author.id)
-	                try:
-	                    db.session.add(new_book)
-	                    db.session.commit()
-	                except Exception as e:
-	                    flash('插入书籍失败')
-	                    db.session.rollback()
-	        else:
-	            # 作者不存在，如果书籍存在提示已存在，如果书籍不存在，插入作者和书籍
-	            book = Book.query.filter_by(name=book_name).first()
-	            if book:
-	                flash('书籍已存在！')
-	            else:
-	                try:
-	                    new_author = Author(name=author_name)
-	                    new_book = Book(name=book_name)
-	                    print("111", new_author, new_book)
-	                    new_author.books.append(new_book)
-	                    db.session.add_all([new_author, new_book])
-	                    db.session.commit()       # 添加作者和书籍
-	                except Exception as e:
-	                    flash('插入作者和书籍失败')
-	                    db.session.rollback()
-	    
-	    # 查询数据
-	    authors = Author.query.all()
-	    print(authors)
-	    
-	    # 渲染到页面
-	    return render_template('booklist.html', authors=authors, form=add_form)
-	
-	# 删除书籍，删除完毕， 更新数据库后重定向到显示面展示
-	@app.route('/delete_book/<int:book_id>')
-	def delete_book(book_id):
-	    try:
-	        # 根据传过来的book_id 查询到book对象进行删除
-	        book = Book.query.get(book_id)
-	        # 删除数据
-	        db.session.delete(book)
-	        db.session.commit()
-	        flash('删除成功')
-	    except BaseException as e:
-	        print(e)
-	        flash('数据库操作失败')
-	        db.session.rollback()
-	
-	    return redirect(url_for('show_page'))
-	
-	# 删除作者，删除完毕更新数据库，并重定向到显示页面
-	@app.route('/delete_author/<int:author_id>')
-	def delete_author(author_id):
-	    try:
-	        # 根据传过来的author_id 查询到author对象
-	        author = Author.query.get(author_id)
-	        # 查询作者名下的书籍模型
-	        books = author.books
-	        # 遍历删除
-	        for book in books:
-	            db.session.delete(book)
-	        # 删除数据
-	        db.session.delete(author)
-	        db.session.commit()
-	        flash('删除成功')
-	    except BaseException as e:
-	        print(e)
-	        flash('数据库操作失败')
-	        db.session.rollback()
-	
-	    return redirect(url_for('show_page'))
-	
-	# 启动程序
-	if __name__ == '__main__':
-	    # 删除所有继承自db.Model的表
-	    db.drop_all()
-	    # 创建所有继承自db.Model的表
-	    db.create_all()
-	
-	    # 生成作者数据
-	    au1 = Author(name='金庸')
-	    au2 = Author(name='古龙')
-	    au3 = Author(name='梁羽生')
-	    db.session.add_all([au1, au2, au3])  # 把数据提交给用户会话
-	    db.session.commit()                  # 提交会话
-	    
-	    # 生成书籍数据
-	    bk1 = Book(name='《神雕侠侣》', author_id=au1.id)
-	    bk2 = Book(name='《天龙八部》', author_id=au1.id)
-	    bk3 = Book(name='《鹿鼎记》', author_id=au1.id)
-	    bk4 = Book(name='《浣花洗剑录》', author_id=au2.id)
-	    bk5 = Book(name='《多情剑客无情剑》', author_id=au2.id)
-	    bk6 = Book(name='《七剑下天山》', author_id=au3.id)
-	    bk7 = Book(name='《白发魔女传》', author_id=au3.id)
-	    
-	    db.session.add_all([bk1, bk2, bk3, bk4, bk5, bk6, bk7])
-	    db.session.commit()
-	    
-	    app.run(host='127.0.0.1', port=8080, debug=False)
-</pre>
+```python
+# -*- coding: utf-8 -*-
+from flask import Flask, render_template, request, redirect, url_for, flash
+from flask_sqlalchemy import SQLAlchemy
+from flask_wtf import FlaskForm
+from wtforms import StringField, SubmitField
+from wtforms.validators import DataRequired
 
-<br/>
+# 创建flask应用程序实例
+# 需要传入__name__,作用是为了确定资源所在的路径
+app = Flask(__name__)
+app.secret_key = 'test'
+# 配置数据库地址（mysql://user:passwd@ip:port/database）
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://spider:spider2013@10.160.81.11:3306/mytest'
+# 跟踪数据库的修改，不建议开启，未来版本中会被移除
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# 创建数据库对象实例
+db = SQLAlchemy(app)
+
+# 作者模型：字段->id，name              一
+# 书籍模型：字段->id，name，author_id   多
+class Author(db.Model):
+    # 表名
+    __tablename__ = 'authors'
+
+    # 字段
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(48), unique=True)
+    
+    # 支持打印
+    def __repr__(self):
+        return '<Author> id={}, name={}'.format(self.id, self.name)
+    
+    # 一对多关系(books和author是自定义的名字，Book是另一个模型的类名)
+    books = db.relationship('Book', backref='author')
+
+class Book(db.Model):
+    __tablename__ = 'books'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(48), unique=True)
+    author_id = db.Column(db.Integer, db.ForeignKey('authors.id'))
+
+class AddForm(FlaskForm):
+    author_name = StringField(label='作者', validators=[DataRequired()])
+    book_name = StringField(label='书籍', validators=[DataRequired()])
+    submit = SubmitField('添加')
+
+# 定义路由与视图函数
+# Flask定义路由是通过装饰器实现的
+@app.route('/', methods=['GET', 'POST'])
+def show_page():
+
+    add_form = AddForm()
+    # 提交时进行表单参数验证   
+    if not add_form.validate_on_submit():
+        if request.method == 'POST':
+            flash('参数不完整！')
+    else:
+        author_name = add_form.author_name.data
+        book_name = add_form.book_name.data
+        print('222', author_name, book_name)
+        # 判断作者和书籍是否存在
+        author = Author.query.filter_by(name='author_name').first()
+        if author:
+            # 作者存在，如果书籍存在提示已存在，如果书籍不存在，插入书籍
+            book = Book.query.filter_by(name=book_name).first()
+            if book:
+                flash('书籍已存在！')
+            else:
+                new_book = Book(name=book_name, author_id=author.id)
+                try:
+                    db.session.add(new_book)
+                    db.session.commit()
+                except Exception as e:
+                    flash('插入书籍失败')
+                    db.session.rollback()
+        else:
+            # 作者不存在，如果书籍存在提示已存在，如果书籍不存在，插入作者和书籍
+            book = Book.query.filter_by(name=book_name).first()
+            if book:
+                flash('书籍已存在！')
+            else:
+                try:
+                    new_author = Author(name=author_name)
+                    new_book = Book(name=book_name)
+                    print("111", new_author, new_book)
+                    new_author.books.append(new_book)
+                    db.session.add_all([new_author, new_book])
+                    db.session.commit()       # 添加作者和书籍
+                except Exception as e:
+                    flash('插入作者和书籍失败')
+                    db.session.rollback()
+    
+    # 查询数据
+    authors = Author.query.all()
+    print(authors)
+    
+    # 渲染到页面
+    return render_template('booklist.html', authors=authors, form=add_form)
+
+# 删除书籍，删除完毕， 更新数据库后重定向到显示面展示
+@app.route('/delete_book/<int:book_id>')
+def delete_book(book_id):
+    try:
+        # 根据传过来的book_id 查询到book对象进行删除
+        book = Book.query.get(book_id)
+        # 删除数据
+        db.session.delete(book)
+        db.session.commit()
+        flash('删除成功')
+    except BaseException as e:
+        print(e)
+        flash('数据库操作失败')
+        db.session.rollback()
+
+    return redirect(url_for('show_page'))
+
+# 删除作者，删除完毕更新数据库，并重定向到显示页面
+@app.route('/delete_author/<int:author_id>')
+def delete_author(author_id):
+    try:
+        # 根据传过来的author_id 查询到author对象
+        author = Author.query.get(author_id)
+        # 查询作者名下的书籍模型
+        books = author.books
+        # 遍历删除
+        for book in books:
+            db.session.delete(book)
+        # 删除数据
+        db.session.delete(author)
+        db.session.commit()
+        flash('删除成功')
+    except BaseException as e:
+        print(e)
+        flash('数据库操作失败')
+        db.session.rollback()
+
+    return redirect(url_for('show_page'))
+
+# 启动程序
+if __name__ == '__main__':
+    # 删除所有继承自db.Model的表
+    db.drop_all()
+    # 创建所有继承自db.Model的表
+    db.create_all()
+
+    # 生成作者数据
+    au1 = Author(name='金庸')
+    au2 = Author(name='古龙')
+    au3 = Author(name='梁羽生')
+    db.session.add_all([au1, au2, au3])  # 把数据提交给用户会话
+    db.session.commit()                  # 提交会话
+    
+    # 生成书籍数据
+    bk1 = Book(name='《神雕侠侣》', author_id=au1.id)
+    bk2 = Book(name='《天龙八部》', author_id=au1.id)
+    bk3 = Book(name='《鹿鼎记》', author_id=au1.id)
+    bk4 = Book(name='《浣花洗剑录》', author_id=au2.id)
+    bk5 = Book(name='《多情剑客无情剑》', author_id=au2.id)
+    bk6 = Book(name='《七剑下天山》', author_id=au3.id)
+    bk7 = Book(name='《白发魔女传》', author_id=au3.id)
+    
+    db.session.add_all([bk1, bk2, bk3, bk4, bk5, bk6, bk7])
+    db.session.commit()
+    
+    app.run(host='127.0.0.1', port=8080, debug=False)
+```
+
 **模板文件(booklist.html)**
 
 ***

@@ -1814,15 +1814,14 @@ if __name__ == '__main__':
   def echoHello():
       print("hello")
   
-  # 装饰器echoHelloName，将下边函数作为参数（返回一个闭包函数对象），再执行一次函数调用,下边调用等价于：
-  #   echoHelloName(echoHello)()
-  #  等价于 var = echoHelloName(echoHello);  var();
+  '''装饰器echoHelloName，将下边函数作为参数（返回一个闭包函数对象），再执行一次函数调用,
+  下边调用等价于：echoHelloName(echoHello)()
+  等价于 var = echoHelloName(echoHello);  var();
   echoHello()    # 先输出world，再输出hello
-  ```
+  '''
 
-  带参数的装饰器需要两层封装。
+  '''带参数的装饰器需要两层封装。'''
 
-  ```python
   def arg_func(sex):
       def fun1(func):
           def fun2():
@@ -1842,20 +1841,19 @@ if __name__ == '__main__':
   def girl():
       print('好好工作')
   
-  # 被@装饰器修饰后，等价调用如下
-  # arg_func(sex='boy')()()  -> 返回fun1
-  # fun1(boy)()         -> 返回fun2
-  # fun2()
-  boy()         
-  # 输出 
-  # 我是boy
-  # 好好工作
+  ''' 被@装饰器修饰后，等价调用如下
+  arg_func(sex='boy')()()  -> 返回fun1
+  fun1(boy)()         -> 返回fun2
+  fun2()
+  boy()
+  输出 
+  我是boy
+  好好工作
+  '''
   girl()
-  ```
 
-  如果被装饰的函数带参数，闭包的内层函数直接私有化这些参数。
+  '''如果被装饰的函数带参数，闭包的内层函数直接私有化这些参数。'''
 
-  ```python
   def decfun(func):
       def dec_mysum(x, y):     # 装饰器内部函数直接私有化被修饰的函数的参数
           x = x * 10

@@ -3,15 +3,18 @@
 # scrapy框架学习笔记
 
 ## 网络爬虫及分类  
+
 * 爬虫是一个模拟人类请求网站信息并提取有价值数据的程序。  
 * 爬虫分类：  
   通用爬虫：爬取所有内容，如通用搜索引擎。  
   聚焦爬虫：面向特定需求的爬虫，只提取对自己有价值的信息。  
 
 ## python写爬虫程序的优势  
+
 　　代码简洁，开发效率高，支持的模块、框架多（http请求模块，xml/html解析模块、scrapy框架等等）。
 
 ## 环境搭建  
+
 * 安装python3  
 * 安装vscode  
 * 虚拟环境（virtualenv/virtualenvwrapper）  
@@ -152,7 +155,7 @@
   **$ scrapy startproject kuaidaili**
   工程目录：
 
-  <img src="https://github.com/cbj0304/StudyNotes/blob/master/images/scrapy/dir.jpg" height="300" width="150" />
+  <img src="../images/scrapy/dir.jpg" height="300" width="150" />
 
 * **第二步：写item.py文件，定义要提取的结构化数据**
 
@@ -294,8 +297,6 @@ class KuaidailiItem(scrapy.Item):
       imgurl = scrapy.Field()
       imgname = scrapy.Field()
   ```
-
-  ​
 
 * 爬虫类 **ImgsRename.py**
 
