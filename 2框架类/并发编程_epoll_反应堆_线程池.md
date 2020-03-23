@@ -338,11 +338,39 @@ libevent是一个c语言的，基于事件驱动的开源的网络库，封装�
 
 ## epoll
 
-## epoll + 边沿触发 + 阻塞IO
+libevent在linux系统上对网络高并发服务器实现的封装：  
+epoll边沿触发 + 非阻塞IO + reactor（回调机制-函数指针/结构体指针）。  
+回调的实现是通过给*ptr传值，实现上epoll_wait监听到的活跃的socket会主动调用ptr中设置的回调函数。 
 
-##  epoll + 边沿触发 + 非阻塞IO
+```c++ 
+struct epoll_event {
+			__uint32_t events; /* Epoll events */
+			epoll_data_t data; /* User data variable */
+		};
 
-## epoll + 边沿触发 + 非阻塞IO + 线程池模型
+
+typedef union epoll_data {
+			void *ptr;
+			int fd;
+			uint32_t u32;
+			uint64_t u64;
+		} epoll_data_t;
+
+// ptr指向myevent_s类型的指针。
+struct myevent_s {
+    int fd;                                                 //要监听的文件描述符
+    int events;                                             //对应的监听事件
+    void *arg;                                              //泛型参数
+    void (*call_back)(int fd, int events, void *arg);       //回调函数
+    int status;                                             //是否在监听:1->在红黑树上(监听), 0->不在(不监听)
+    char buf[BUFLEN];
+    int len;
+    long last_active;                                       //记录每次加入红黑树 g_efd 的时间值
+};
+
+
+```
+
 
 
 
